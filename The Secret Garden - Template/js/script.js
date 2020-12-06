@@ -24,7 +24,7 @@ $("#wateringcan").on("click", function () {
             drop(this)
         })
 });
-$('#wateringcan').css({
+$("#wateringcan").css({
     "z-index": "3"
 });
 
@@ -153,14 +153,14 @@ $("#basketfront").css({
 
 
 /* function used to bring the apples in front of the basket */
-$('.apple').parent().append($('.apple'));
+$(".apple").parent().append($(".apple"));
 
 //-----------------NET----------------------
 
 var prevX = 0;
 
 $(document).mousemove(function (e) {
-    $('#net').css({
+    $("#net").css({
         left: e.pageX,
         top: e.pageY
     });
@@ -171,7 +171,7 @@ $(document).mousemove(function (e) {
     }
     prevX = e.pageX;
 });
-$('#net').css({
+$("#net").css({
     "z-index": "3"
 });
 //----------------BUTTERFLY-----------------
@@ -186,7 +186,6 @@ function newPosition() {
     var maxTop = $(window).height() - $("#butterfly").height();
     var left = Math.floor(Math.random() * (maxLeft + 1))
     var top = Math.floor(Math.random() * (maxTop + 1))
-
     $("#butterfly").animate({
             left: left,
             top: top
