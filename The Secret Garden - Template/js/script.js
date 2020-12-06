@@ -177,42 +177,36 @@ $('#net').css({
 //----------------BUTTERFLY-----------------
 
 
-//move butterfly around all the time slowly
-$(document).ready(function () {
-    animateImage();
+$("#butterfly").animate("slow", function () {
+    newPosition(this)
 });
 
+function newPosition() {
+    var maxLeft = $(window).width() - $("#butterfly").width();
+    var maxTop = $(window).height() - $("#butterfly").height();
+    var left = Math.floor(Math.random() * (maxLeft + 1))
+    var top = Math.floor(Math.random() * (maxTop + 1))
 
-function makeNewPosition() {
-    //the butterfly does not move away from the window screen
-    var windowhHeight = $(window).height() - document.getElementById("butterfly").height;
-    var windowWidth = $(window).width() - document.getElementById("butterfly").width;
-    var newPositionHeight = Math.floor(Math.random() * windowhHeight);
-    var newPositionWidth = Math.floor(Math.random() * windowWidth);
-    return [newPositionHeight, newPositionWidth];
+    $("#butterfly").animate({
+            left: left,
+            top: top
+        }, 7000,
+        function () {
+            newPosition(this);
+        });
 }
 
-function animateImage() {
-    var newPosition = makeNewPosition();
-    $('#butterfly').animate({
-        top: newPosition[0],
-        left: newPosition[1]
-    }, {
-        duration: 3000,
-        step: function () {
-            animateImage();
-        }
-    });
-}
-
-//when hovering over butterfly, fly away quickly
-$("#butterfly").hover(function () {
-    $("#butterfly").stop();
-    var newPosition = makeNewPosition();
-    $('#butterfly').css({
-        top: newPosition[0],
-        left: newPosition[1]
-    });
+$("#butterfly").on("mouseenter", function () {
+    var maxLeft = $(window).width() - $("#butterfly").width();
+    var maxTop = $(window).height() - $("#butterfly").height();
+    var left = Math.floor(Math.random() * (maxLeft + 1))
+    var top = Math.floor(Math.random() * (maxTop + 1))
+    $("#butterfly").stop().animate({
+        left: left,
+        top: top
+    }, "fast", function () {
+        newPosition(this)
+    })
 });
 
 $('#butterfly').css({
