@@ -140,13 +140,21 @@ $('.apple').parent().append($('.apple'));
 
 //-----------------NET----------------------
 
-$(document).mousemove(function (event) {
-    $("#net").css({
-        left: event.pageX,
-        top: event.pageY
-    })
-});
+var prevX = 0;
 
+$(document).mousemove(function(e) {
+    $('#net').css({
+        left: e.pageX,
+        top: e.pageY
+    });
+    if(prevX < e.pageX){
+        $("#net").css("transform", "scaleX(-1)");
+    }
+    else{
+        $("#net").css("transform", "scaleX(1)");
+    }
+    prevX = e.pageX;
+});
 
 //----------------BUTTERFLY-----------------
 
