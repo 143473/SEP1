@@ -1,7 +1,62 @@
-//MAKE THE MAGIC HAPPEN
 /*globals $: false
-document: false*/
+   document: false
+   window: false*/
 
+//----------------WATERINGCAN-----------------
+$("#wateringcan").on("click", function () {
+    $("#wateringcan").toggleClass("rotate");
+    $(".waterdrop1").animate({
+            left: "+=1",
+        }, 1000,
+        function () {
+            drop(this)
+        })
+    $(".waterdrop2").animate({
+            left: "+=2",
+        }, 500,
+        function () {
+            drop(this)
+        })
+    $(".waterdrop3").animate({
+            left: "+=3",
+        }, 700,
+        function () {
+            drop(this)
+        })
+});
+
+//----------------WATERDROP-----------------
+function drop(idRef) {
+    if ($("#wateringcan").hasClass("rotate")) {
+        var waterdropY = $("#wateringcan").offset().top
+        var waterdropX = $("#wateringcan").offset().left
+        $(".waterdrop1").offset({
+            top: waterdropY + 100,
+            left: waterdropX + 20
+        })
+
+        $(".waterdrop2").offset({
+            top: waterdropY + 110,
+            left: waterdropX + 30
+        })
+
+        $(".waterdrop3").offset({
+            top: waterdropY + 120,
+            left: waterdropX + 40
+        })
+
+        $(idRef).show().animate({
+                "top": "+=500"
+            }, 1000,
+            function () {
+                drop(idRef)
+            });
+    }
+}
+
+
+
+//----------------APPLETREE-----------------
 /* The function used for the random apple location in the tree crown*/
 $(document).ready(function () {
     $(".apple").each(function () {
@@ -82,3 +137,53 @@ $("#basketfront").css({
 
 /* function used to bring the apples in front of the basket */
 $('.apple').parent().append($('.apple'));
+
+//-----------------NET----------------------
+
+$(document).mousemove(function (event) {
+    $("#net").css({
+        left: event.pageX,
+        top: event.pageY
+    })
+});
+
+
+//----------------BUTTERFLY-----------------
+
+
+//move butterfly around all the time slowly
+$(document).ready(function(){
+    animateImage();
+});
+
+
+function makeNewPosition(){
+    //the butterfly does not move away from the window screen
+    var windowhHeight = $(window).height() - document.getElementById("butterfly").height;
+    var windowWidth = $(window).width() - document.getElementById("butterfly").width;
+    var newPositionHeight = Math.floor(Math.random() * windowhHeight);
+    var newPositionWidth = Math.floor(Math.random() * windowWidth);
+    return [newPositionHeight,newPositionWidth];
+}
+
+function animateImage(){
+    var newPosition = makeNewPosition();
+    $('#butterfly').animate({
+        top: newPosition[0],
+        left: newPosition[1]
+    }, {
+        duration: 3000,
+        step: function (){
+      animateImage();}
+    });
+}
+
+//when hovering over butterfly, fly away quickly
+$("#butterfly").hover(function() {
+    $("#butterfly").stop();
+    var newPosition = makeNewPosition();
+    $('#butterfly').css({
+        top: newPosition[0],
+        left: newPosition[1]
+    });
+});

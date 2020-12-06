@@ -3,12 +3,13 @@ body {
     height: 100%;
 }
 
-
 #butterfly {
     height: 200px;
     width: auto;
     position: absolute;
+    z-index: 2;
 }
+
 
 #wateringcan {
     width: 200px;
@@ -17,16 +18,32 @@ body {
     left: 40%;
 }
 
+.rotate {
+    transform: rotate(-45deg);
+}
 
-.waterdrop {
+.waterdrop1 {
     width: 20px;
+    position: relative;
+    display: none;
+}
+
+.waterdrop2 {
+    width: 20px;
+    position: relative;
+    display: none;
+}
+
+.waterdrop3 {
+    width: 20px;
+    position: relative;
+    display: none;
 }
 
 #net {
     height: 600px;
     width: auto;
     position: absolute;
-
 }
 
 .apple {
@@ -39,7 +56,6 @@ body {
     position: fixed;
     bottom: 20px;
     left: 50%;
-
 }
 
 .basket {
@@ -47,7 +63,6 @@ body {
     position: fixed;
     bottom: 20px;
     left: 20%;
-
 }
 
 
