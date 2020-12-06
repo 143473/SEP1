@@ -1,11 +1,21 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
+
+/**
+ * An adapter to the employees file, making it easy to retrieve and store information.
+ * @author Claudiu Cordunianu
+ * @version 1.0
+ */
 
 public class EmployeesAdapter
 {
   private MyFileIO mfio;
   private String fileName;
+
+  /**
+   * 1-argument constructor setting the file name.
+   * @param fileName the name and path of the file where employees will be saved and retrieved
+   */
 
   public EmployeesAdapter(String fileName)
   {
@@ -13,14 +23,18 @@ public class EmployeesAdapter
     mfio = new MyFileIO();
   }
 
-  // Use the MyFileIO class to retrieve an EmployeesList object with all Employees
+  /**
+   * Uses the MyFileIO class to retrieve an EmployeesList object with all employees.
+   * @return a EmployeesList object with all stored employees.
+   */
+
   public EmployeesList getAllEmployees()
   {
     EmployeesList employees = new EmployeesList();
 
     try
     {
-      employees = (EmployeesList) mfio.readObjectFromFile(fileName);
+      employees = (EmployeesList)mfio.readObjectFromFile(fileName);
     }
     catch (FileNotFoundException e)
     {
@@ -37,7 +51,11 @@ public class EmployeesAdapter
     return employees;
   }
 
-  // Use the MyFileIO class to save all Employees in the EmployeesList object
+  /**
+   * Use the MyFileIO class to save some employees.
+   * @param employees the list of employees that will be saved
+   */
+
   public void saveEmployees(EmployeesList employees)
   {
     try

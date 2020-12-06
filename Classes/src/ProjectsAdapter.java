@@ -1,10 +1,21 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+/**
+ * An adapter to the projects file, making it easy to retrieve and store information.
+ * @author Claudiu Cordunianu
+ * @version 1.0
+ */
+
 public class ProjectsAdapter
 {
   private MyFileIO mfio;
   private String fileName;
+
+  /**
+   * 1-argument constructor setting the file name.
+   * @param fileName the name and path of the file where projects will be saved and retrieved
+   */
 
   public ProjectsAdapter(String fileName)
   {
@@ -12,7 +23,11 @@ public class ProjectsAdapter
     mfio = new MyFileIO();
   }
 
-  // Use the MyFileIO class to retrieve a ProjectsList object with all Projects
+  /**
+   * Uses the MyFileIO class to retrieve a ProjectsList object with all Projects.
+   * @return a ProjectsList object with all stored projects
+   */
+
   public ProjectsList getAllProjects()
   {
     ProjectsList projects = new ProjectsList();
@@ -36,7 +51,11 @@ public class ProjectsAdapter
     return projects;
   }
 
-  // Use the MyFileIO class to save all Employees in the EmployeesList object
+  /**
+   * Use the MyFileIO class to save some projects.
+   * @param projects the list of projects that will be saved
+   */
+
   public void saveProjects(ProjectsList projects)
   {
     try

@@ -1,10 +1,21 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+/**
+ * An adapter to the AssignedTasks file, making it easy to retrieve and store information.
+ * @author Claudiu Cordunianu
+ * @version 1.0
+ */
+
 public class AssignedTasksAdapter
 {
   private MyFileIO mfio;
   private String fileName;
+
+  /**
+   * 1-argument constructor setting the file name.
+   * @param fileName the name and path of the file where AssignedTasks will be saved and retrieved
+   */
 
   public AssignedTasksAdapter(String fileName)
   {
@@ -12,7 +23,11 @@ public class AssignedTasksAdapter
     mfio = new MyFileIO();
   }
 
-  // Use the MyFileIO class to retrieve a AssignedTasksList object with all AssignedTasks
+  /**
+   * Uses the MyFileIO class to retrieve an AssignedTasksList object with all AssignedTasks.
+   * @return an AssignedTasksList object with all stored assignedTasks
+   */
+
   public AssignedTasksList getAllAssignedTasks()
   {
     AssignedTasksList assignedTasks = new AssignedTasksList();
@@ -35,6 +50,12 @@ public class AssignedTasksAdapter
     }
     return assignedTasks;
   }
+
+  /**
+   * Use the MyFileIO class to retrieve all assignedTasks for a given date.
+   * @param date the date to retrieve the assignedTasks for
+   * @return an AssignedTasksList object with assignedTasks for the given date
+   */
 
   public AssignedTasksList getAllTasksOnDate (MyDate date)
   {
@@ -67,6 +88,11 @@ public class AssignedTasksAdapter
     return tasksOnDate;
   }
 
+  /**
+   * Use the MyFileIO class to retrieve all assignedTasks for a given employee.
+   * @param employee the employee to retrieve the assignedTasks for
+   * @return an AssignedTasksList object with assignedTasks for the given employee
+   */
   public AssignedTasksList getAllTasksOnEmployee (AssignedEmployee employee)
   {
     AssignedTasksList tasksOnEmployee = new AssignedTasksList();
@@ -98,7 +124,11 @@ public class AssignedTasksAdapter
     return tasksOnEmployee;
   }
 
-  // Use the MyFileIO class to save all AssignedTasks in the AssignedTasksList object
+  /**
+   * Use the MyFileIO class to save some assignedTasks.
+   * @param assignedTasks the list of assignedTasks that will be saved
+   */
+
   public void saveAssignedTasks(AssignedTasksList assignedTasks)
   {
     try
