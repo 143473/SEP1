@@ -187,3 +187,46 @@ $("#butterfly").hover(function() {
         left: newPosition[1]
     });
 });
+
+//Bartosz's part
+/*
+function swapImages() {
+    var $active = $('#daynnight .active');
+    var $next = ($('#daynnight .active').next().length > 0) ? $('#daynnight .active').next() : $('#daynnight img:first');
+    $active.fadeOut(function () {
+        $active.removeClass('active');
+        $next.fadeIn().addClass('active');
+    });
+}
+
+
+
+
+
+
+var t = 0;
+
+function moveit() {
+    t += 0.0025;
+
+    var r = $(window).width() / 2;
+    var xcenter = ($(window).width() / 2);
+    var ycenter = $(window).height();
+    var newLeft = Math.floor(xcenter + (r * Math.cos(t)));
+    var newTop = Math.floor(ycenter + (r * Math.sin(t)));
+
+    $('#daynnight .active').animate({
+        top: newTop,
+        left: newLeft,
+    }, 1, function () {
+        moveit();
+    });
+}
+
+
+$(document).ready(function () {
+    moveit();
+    setInterval('swapImages()', 22000);
+    $('#night').animate({'opacity':0.8}, 2000);
+});
+*/
