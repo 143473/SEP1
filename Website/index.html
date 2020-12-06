@@ -1,0 +1,197 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <title>Home page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Markéta Lapčíková">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <link rel="stylesheet" href="style.css?v=3">
+    
+    <link href="css/basic.css?v=2" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Fjalla+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <!--BS src-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+</head>
+
+<body>
+    <!--NAVIGATION-->
+    <header>
+        <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+            <a class="navbar-brand" href="index.html">
+                <img src="img/logo.png" alt="Logo" style="width:100px;">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.html">Home page</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="development_team.html">Development team</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="current_projects.html">Current projects</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+	</header>
+      <main>
+        <div class="grid_container"><!--the whole main (about us, contact, events, news)-->
+            <!--ABOUT US, CONTACT-->
+            <div class="main_content">
+                <div id="demo" class="carousel slide" data-ride="carousel">
+
+                  <!-- Indicators -->
+                  <ul class="carousel-indicators">
+                    <li data-target="#demo" data-slide-to="0" class="active"></li>
+                    <li data-target="#demo" data-slide-to="1"></li>
+                    <li data-target="#demo" data-slide-to="2"></li>
+                    <li data-target="#demo" data-slide-to="3"></li>
+                  </ul>
+
+                  <!-- The slideshow -->
+                  <div class="carousel-inner">
+                    <div class="carousel-item active">
+                      <img src="img/hus1.jpg" alt="Hus1">
+                    </div>
+                    <div class="carousel-item">
+                      <img src="img/hus2.jpg" alt="Hus2">
+                    </div>
+                    <div class="carousel-item">
+                      <img src="img/hus3.jpg" alt="Hus3">
+                    </div>
+                      <div class="carousel-item">
+                      <img src="img/hus4.jpg" alt="hus4">
+                    </div>
+                  </div>
+
+                  <!-- Left and right controls -->
+                  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                  </a>
+                  <a class="carousel-control-next" href="#demo" data-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                  </a>
+
+                </div>
+                <div class="main_content_section">
+                    <h4>About us</h4>
+                    <p>ColourIT is a small software company founded in 2007 in Copenhagen by Mr. Colour Turquoise who is in the head of the company until these days. Colour IT is a small company developing and implementing IT systems mostly for private customers.</p>
+                </div>
+             
+                <div class="main_content_section">
+                    <h4>Contact</h4>
+                    <div class="grid_container_section">
+                        <div class="min_content_section_contact grid_section_contact1">
+                            <p>Tel.: <a href="tel:123456789">+45 123 456 78</a></p>
+                            <p>Mail: <a href="mailto:in@colourit.com">in@colourit.com</a></p>
+                        </div>
+                        <div class="grid_section_map">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5473.910065415643!2d10.176245231894253!3d56.1935718170825!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x464c3e29f591712d%3A0xda44fe4e1acb318d!2sHedeager%202%2C%208200%20Aarhus%2C%20D%C3%A1nsko!5e0!3m2!1scs!2sus!4v1603221773845!5m2!1scs!2sus"></iframe>
+                        </div>
+                        <div class="min_content_section_contact grid_section_contact2">
+                            <p>Hedeager 2</p>
+                            <p>Aarhus N</p>
+                            <p>8200</p>
+                            <p>Denmark</p>                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            
+            
+            <!--NEWS-->
+            <div class="main_news">
+                <h2>ColourIT news</h2>
+                <div class="main_new">
+                    <h4>This is very new new</h4>
+                    <p class="main_new_text">During reading this very new new, a few more seconds pass.</p>
+                </div>
+                <div class="main_new">
+                    <h4>This is second very new new</h4>
+                    <p class="main_new_text">During reading this very second new new, a few more seconds than when you were reading very new new pass.</p>
+                </div>
+            </div>
+            
+            
+            <!--EVENTS-->
+            <div class="main_event1">
+                <img src="img/event1.jpg" alt="People jumping">
+                <div class="event_text">
+                    <h3>Jumping in the air</h3>
+                    <p>On this very cool event everybody was jumping into the air and then we took a photo. </p>  
+                </div>
+            </div>
+            <div class="main_event2">
+                <img src="img/event2.jpg" alt="">
+                <div class="event_text">
+                    <h3>Run of colours</h3>
+                    <p>The employees of ColourIT went for Run of colours and they had lot of fun. Start jogging and join us too!</p>
+                    
+                </div>
+            </div>
+            <div class="main_event3">
+                <img src="img/event3.jpg" alt="People playing bowling">
+                <div class="event_text">
+                    <h3>Bowling</h3>
+                    <p>Here, people are playing bowling and they look very friendly and supportive. The relationships between our employees are awesome!</p>
+                </div>
+            </div>
+            <div class="main_event4">
+                <img src="img/event4.jpeg" alt="Garry giving blood">
+                <div class="event_text">
+                    <h3>Blood donation</h3>
+                    <p>Garry who is in the picture went to donate blood to local hospital together with another 4 of his cooworkers. Garry is a good person. Be like Garry.</p>
+                </div> 
+            </div>
+          </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container pt-5 border-bottom">
+            <div class="row">
+                <div class="col-md-9 col-sm-12">
+                    
+                    <div class="col-md-4 col-sm-6 col-6 p-0 float-left mb-3">
+                        <ul class="list-group">
+                            <li class="list-group-item bg-transparent border-0 p-0 mb-2">
+                                Mail: <a href="mailto:in@colourit.com">in@colourit.com</a>
+                            </li>
+                            <li class="list-group-item bg-transparent border-0 p-0 mb-2">
+                                Telephone: <a href="tel:004512345678">+45 123 456 78</a>
+                            </li>
+                            <li class="list-group-item bg-transparent border-0 p-0 mb-2">
+                                &copy; 2020 ColourIT. All Rights Reserved
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-6 mb-6 p-0 float-left">
+                        <a href="https://www.facebook.com/" class="fa fa-facebook"></a>
+                        <a href="https://twitter.com/?lang=cs" class="fa fa-twitter"></a>
+                        <a href="https://www.instagram.com/" class="fa fa-instagram"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer -->	
+      
+</body>
+</html>
