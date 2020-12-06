@@ -24,6 +24,9 @@ $("#wateringcan").on("click", function () {
             drop(this)
         })
 });
+$('#wateringcan').css({
+    "z-index": "3"
+});
 
 //----------------WATERDROP-----------------
 function drop(idRef) {
@@ -70,6 +73,10 @@ $(document).ready(function () {
             bottom: treeYRandLocation
         });
     });
+    $(".apple").css({
+        "z-index": "3"
+    })
+
 });
 
 /* variable used in the next 3 functions */
@@ -93,6 +100,9 @@ $("#apple1").on("click", function () {
         top: $("#basketfront").offset().top,
         left: Math.floor(Math.random() * ($("#basketfront").width() - 50)) + basketLeft
     }, "slow", "linear");
+    $("#apple1").css({
+        "z-index": "1"
+    });
 });
 $("#apple2").on("click", function () {
     for (var x = 1; x <= 3; x++) {
@@ -110,6 +120,9 @@ $("#apple2").on("click", function () {
         top: $("#basketfront").offset().top,
         left: Math.floor(Math.random() * ($("#basketfront").width() - 50)) + basketLeft
     }, "slow", "linear");
+    $("#apple2").css({
+        "z-index": "1"
+    });
 });
 $("#apple3").on("click", function () {
     for (var x = 1; x <= 3; x++) {
@@ -127,13 +140,17 @@ $("#apple3").on("click", function () {
         top: $("#basketfront").offset().top,
         left: Math.floor(Math.random() * ($("#basketfront").width() - 50)) + basketLeft
     }, "slow", "linear");
+    $("#apple3").css({
+        "z-index": "1"
+    });
 });
 
 /* function needed to bring the front of the basket upfront, otherwise the apples will be placed in front of the basket */
 
 $("#basketfront").css({
-    "z-index": "1"
+    "z-index": "2"
 });
+
 
 /* function used to bring the apples in front of the basket */
 $('.apple').parent().append($('.apple'));
@@ -142,52 +159,54 @@ $('.apple').parent().append($('.apple'));
 
 var prevX = 0;
 
-$(document).mousemove(function(e) {
+$(document).mousemove(function (e) {
     $('#net').css({
         left: e.pageX,
         top: e.pageY
     });
-    if(prevX < e.pageX){
+    if (prevX < e.pageX) {
         $("#net").css("transform", "scaleX(-1)");
-    }
-    else{
+    } else {
         $("#net").css("transform", "scaleX(1)");
     }
     prevX = e.pageX;
 });
-
+$('#net').css({
+    "z-index": "3"
+});
 //----------------BUTTERFLY-----------------
 
 
 //move butterfly around all the time slowly
-$(document).ready(function(){
+$(document).ready(function () {
     animateImage();
 });
 
 
-function makeNewPosition(){
+function makeNewPosition() {
     //the butterfly does not move away from the window screen
     var windowhHeight = $(window).height() - document.getElementById("butterfly").height;
     var windowWidth = $(window).width() - document.getElementById("butterfly").width;
     var newPositionHeight = Math.floor(Math.random() * windowhHeight);
     var newPositionWidth = Math.floor(Math.random() * windowWidth);
-    return [newPositionHeight,newPositionWidth];
+    return [newPositionHeight, newPositionWidth];
 }
 
-function animateImage(){
+function animateImage() {
     var newPosition = makeNewPosition();
     $('#butterfly').animate({
         top: newPosition[0],
         left: newPosition[1]
     }, {
         duration: 3000,
-        step: function (){
-      animateImage();}
+        step: function () {
+            animateImage();
+        }
     });
 }
 
 //when hovering over butterfly, fly away quickly
-$("#butterfly").hover(function() {
+$("#butterfly").hover(function () {
     $("#butterfly").stop();
     var newPosition = makeNewPosition();
     $('#butterfly').css({
@@ -196,45 +215,6 @@ $("#butterfly").hover(function() {
     });
 });
 
-//Bartosz's part
-/*
-function swapImages() {
-    var $active = $('#daynnight .active');
-    var $next = ($('#daynnight .active').next().length > 0) ? $('#daynnight .active').next() : $('#daynnight img:first');
-    $active.fadeOut(function () {
-        $active.removeClass('active');
-        $next.fadeIn().addClass('active');
-    });
-}
-
-
-
-
-
-
-var t = 0;
-
-function moveit() {
-    t += 0.0025;
-
-    var r = $(window).width() / 2;
-    var xcenter = ($(window).width() / 2);
-    var ycenter = $(window).height();
-    var newLeft = Math.floor(xcenter + (r * Math.cos(t)));
-    var newTop = Math.floor(ycenter + (r * Math.sin(t)));
-
-    $('#daynnight .active').animate({
-        top: newTop,
-        left: newLeft,
-    }, 1, function () {
-        moveit();
-    });
-}
-
-
-$(document).ready(function () {
-    moveit();
-    setInterval('swapImages()', 22000);
-    $('#night').animate({'opacity':0.8}, 2000);
+$('#butterfly').css({
+    "z-index": "4"
 });
-*/
