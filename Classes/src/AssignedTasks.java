@@ -5,7 +5,7 @@
  */
 public class AssignedTasks extends Task{
     private double spentTime;
-    private Mydate date;
+    private MyDate date;
     private AssignedEmployee assignedEmployee;
 
     /**
@@ -16,7 +16,7 @@ public class AssignedTasks extends Task{
      * @param assignedEmployee
      * @param date
      */
-    public AssignedTasks(String name, String description, AssignedEmployee responsibleEmployee, AssignedEmployee assignedEmployee, Mydate date){
+    public AssignedTasks(String name, String description, AssignedEmployee responsibleEmployee, AssignedEmployee assignedEmployee, MyDate date){
         super(name, description, responsibleEmployee);
         spentTime = 0;
         this.assignedEmployee = assignedEmployee;
