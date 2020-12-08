@@ -28,13 +28,13 @@ public class ProjectsAdapter
    * @return a ProjectsList object with all stored projects
    */
 
-  public ProjectsList getAllProjects()
+  public ProjectList getAllProjects()
   {
-    ProjectsList projects = new ProjectsList();
+    ProjectList projects = new ProjectList();
 
     try
     {
-      projects = (ProjectsList) mfio.readObjectFromFile(fileName);
+      projects = (ProjectList) mfio.readObjectFromFile(fileName);
     }
     catch (FileNotFoundException e)
     {

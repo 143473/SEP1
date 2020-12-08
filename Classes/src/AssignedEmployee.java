@@ -5,34 +5,38 @@
  */
 
 public class AssignedEmployee extends Employee{
-    private EmployeeStatus status;
+    private String status;
+    private int statusNumber;
 
     /**
      * 4-argument constructor setting first and last name, date of birth and status of the employee
      * @param firstName first name(s) of the employee
      * @param lastName last name(s) of the employee
      * @param dateOfBirth date of birth of the employee
-     * @param status the status of employee in this project
+     * @param statusNumber the status number of employee in this project
      */
-    public AssignedEmployee(String firstName, String lastName, MyDate dateOfBirth, EmployeeStatus status){
+    public AssignedEmployee(String firstName, String lastName, MyDate dateOfBirth, int statusNumber){
         super(firstName, lastName, dateOfBirth);
-        this.status = status;
+        EmployeeStatus employeeStatus = new EmployeeStatus();
+        this.status = employeeStatus.chooseStatus(statusNumber);
+        this.statusNumber = statusNumber;
+    }
+
+    /**
+     * Sets status of the employee in case of the change
+     * @param index the index of new employee status
+     */
+    public void setStatus(int index){
+        EmployeeStatus employeeStatus = new EmployeeStatus();
+        this.status = employeeStatus.chooseStatus(index);
     }
 
     /**
      * Gets the employee status of the employee
      * @return the status of the employee
      */
-    public EmployeeStatus getEmployeeStatus() {
+    public String getEmployeeStatus() {
         return status;
-    }
-
-    /**
-     * Sets the employee status of the employee
-     * @param status the status of the employee in this project
-     */
-    public void setEmployeeStatus(EmployeeStatus status) {
-        this.status = status;
     }
 
     /**
@@ -40,6 +44,6 @@ public class AssignedEmployee extends Employee{
      * @return the copy of this assigned employee
      */
     public AssignedEmployee copy(){
-        return new AssignedEmployee(getFirstName(), getLastName(), getDateOfBirth(), status);
+        return new AssignedEmployee(getFirstName(), getLastName(), getDateOfBirth(), statusNumber);
     }
 }

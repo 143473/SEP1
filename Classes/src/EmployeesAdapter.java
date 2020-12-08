@@ -28,13 +28,13 @@ public class EmployeesAdapter
    * @return a EmployeesList object with all stored employees.
    */
 
-  public EmployeesList getAllEmployees()
+  public EmployeeList getAllEmployees()
   {
-    EmployeesList employees = new EmployeesList();
+    EmployeeList employees = new EmployeeList();
 
     try
     {
-      employees = (EmployeesList)mfio.readObjectFromFile(fileName);
+      employees = (EmployeeList)mfio.readObjectFromFile(fileName);
     }
     catch (FileNotFoundException e)
     {
@@ -56,7 +56,7 @@ public class EmployeesAdapter
    * @param employees the list of employees that will be saved
    */
 
-  public void saveEmployees(EmployeesList employees)
+  public void saveEmployees(EmployeeList employees)
   {
     try
     {

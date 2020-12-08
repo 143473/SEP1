@@ -8,7 +8,7 @@ import java.util.Objects;
  */
 
 public class Employee {
-    private String firstName, lastName;
+    private String firstName, lastName, status;
     private MyDate dateOfBirth;
     private ArrayList<Project> projects;
 
@@ -64,6 +64,8 @@ public class Employee {
     public ArrayList<Project> getProjectsWorkedOn(){
         return null;
     }
+
+
 
     /**
      * Sets first name(s) of the employee in case of change
