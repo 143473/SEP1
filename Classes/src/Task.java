@@ -6,6 +6,7 @@ public class Task
   private String name;
   private String description;
   private double estimatedTime;
+  private AssignedEmployee responsibleEmployee;
 
   /**
    * Four-Argument Constructor
@@ -18,7 +19,7 @@ public class Task
     this.name = name;
     this.description = description;
     this.estimatedTime = estimatedTime;
-    responsibleEmployee = new AssignedEmployee();
+    this.responsibleEmployee = responsibleEmployee;
   }
 
   /**
