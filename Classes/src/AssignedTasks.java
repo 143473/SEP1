@@ -16,12 +16,14 @@ public class AssignedTasks extends Task{
      * @param assignedEmployee the assigned employee
      * @param date the date the task was worked on
      */
+
     public AssignedTasks(String name, String description, AssignedEmployee responsibleEmployee, AssignedEmployee assignedEmployee, MyDate date){
         super(name, description, responsibleEmployee);
         spentTime = 0;
         this.assignedEmployee = assignedEmployee;
         this.date = date;
     }
+
     /**
      * Gets the employee's date working on the task.
      * @return the date the task was worked on
@@ -29,6 +31,7 @@ public class AssignedTasks extends Task{
     public MyDate getDate(){
         return date.copy();
     }
+
     /**
      * Gets the employee assigned to the task.
      * @return the employee assigned to the task
@@ -36,6 +39,7 @@ public class AssignedTasks extends Task{
     public AssignedEmployee getAssignedEmployee(){
         return assignedEmployee.copy();
     }
+
     /**
      * Sets the employee's time spent.
      * @param spentTime what the employee's time spent is
@@ -43,6 +47,7 @@ public class AssignedTasks extends Task{
     public void setSpentTime(double spentTime){
         this.spentTime = spentTime;
     }
+
     /**
      * Gets the employee's time spent working.
      * @return the student's time spent working
