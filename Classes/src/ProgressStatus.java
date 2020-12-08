@@ -1,5 +1,10 @@
+/**
+ * An class containing the array of possible project statuses
+ * @author Marketa Lapcikova
+ * @version 1.0
+ */
 
-public abstract class ProgressStatus {
+public class ProgressStatus {
   private String[] statuses = new String[]{ "Not started", "Started", "Ended", "Approved", "Rejected"};
   private String chosenStatus;
 
