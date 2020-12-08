@@ -63,7 +63,8 @@ public class CreateProjectGUI2 extends Application
     gridPane.addRow(1, searchByName,searchField,search);
 
     employeesTable = new TableView();
-    defaultSelectionModel = employeesTable.getSelectionModel();
+    employeesTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+    employeesTable.getSelectionModel().setCellSelectionEnabled(true);
     employeesTable.setPrefHeight(290);
     employeesTable.setTableMenuButtonVisible(false);
 
