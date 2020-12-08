@@ -16,8 +16,8 @@ public class AssignedTasks extends Task{
      * @param assignedEmployee the assigned employee
      * @param date the date the task was worked on
      */
-    public AssignedTasks(String name, String description, AssignedEmployee responsibleEmployee, AssignedEmployee assignedEmployee, MyDate date){
-        super(name, description, responsibleEmployee);
+    public AssignedTasks(String name, String description, double estimatedTime, AssignedEmployee responsibleEmployee, AssignedEmployee assignedEmployee, MyDate date){
+        super(name, description, estimatedTime, responsibleEmployee);
         spentTime = 0;
         this.assignedEmployee = assignedEmployee;
         this.date = date;
