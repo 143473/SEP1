@@ -10,11 +10,11 @@ public class AssignedTasks extends Task{
 
     /**
      * Three-argument constructor.
-     * @param name the student's first name
-     * @param description the student's last name
-     * @param responsibleEmployee the student's country
-     * @param assignedEmployee
-     * @param date
+     * @param name the employee's first name
+     * @param description the employee's last name
+     * @param responsibleEmployee the responsible employee
+     * @param assignedEmployee the assigned employee
+     * @param date the date the task was worked on
      */
     public AssignedTasks(String name, String description, AssignedEmployee responsibleEmployee, AssignedEmployee assignedEmployee, MyDate date){
         super(name, description, responsibleEmployee);
