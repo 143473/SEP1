@@ -32,8 +32,6 @@ public class CreateProjectGUI2 extends Application
   private ComboBox statusBox;
 
   private TableView employeesTable;
-  private TableView.TableViewSelectionModel defaultSelectionModel;
-  private TableColumn selectColumn;
   private TableColumn firstNameColumn;
   private TableColumn lastNameColumn;
   private TableColumn birthdayColumn;
@@ -81,15 +79,7 @@ public class CreateProjectGUI2 extends Application
     birthdayColumn.setCellFactory(new PropertyValueFactory<String, String>("Birthday"));
     birthdayColumn.setPrefWidth(300);
 
-    selectColumn = new TableColumn("Select");
-    selectColumn.setCellFactory(new PropertyValueFactory<String, String>("select"));
-    selectColumn.setPrefWidth(100);
-
-    selectColumn.setCellValueFactory(new PropertyValueFactory<String, Boolean>("select"));
-
-
-    employeesTable.getColumns().addAll(selectColumn, firstNameColumn, lastNameColumn, birthdayColumn);
-
+    employeesTable.getColumns().addAll(firstNameColumn, lastNameColumn, birthdayColumn);
 
     continueButton = new Button("Continue");
     goBack = new Button("Go back");
