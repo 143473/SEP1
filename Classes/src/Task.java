@@ -6,9 +6,9 @@ public class Task
   private String name;
   private String description;
   private double estimatedTime;
+  private AssignedEmployee responsibleEmployee;
   private ProgressStatus status;
   private MyDate deadline;
-  private double spentTime;
   /**
    * Four-Argument Constructor
    * @param name
@@ -20,16 +20,7 @@ public class Task
     this.name = name;
     this.description = description;
     this.estimatedTime = estimatedTime;
-    responsibleEmployee = new AssignedEmployee();
-    spentTime = 0;
-  }
-
-  /**
-   * Gets time spent on that task
-   * @return
-   */
-  public double getSpentTime(){
-  return spentTime;
+    this.responsibleEmployee = responsibleEmployee;
   }
 
   /**
