@@ -6,8 +6,9 @@ public class Task
   private String name;
   private String description;
   private double estimatedTime;
-  private AssignedEmployee responsibleEmployee;
-
+  private ProgressStatus status;
+  private MyDate deadline;
+  private double spentTime;
   /**
    * Four-Argument Constructor
    * @param name
@@ -19,7 +20,8 @@ public class Task
     this.name = name;
     this.description = description;
     this.estimatedTime = estimatedTime;
-    this.responsibleEmployee = responsibleEmployee;
+    responsibleEmployee = new AssignedEmployee();
+    spentTime = 0;
   }
 
   /**
@@ -27,7 +29,7 @@ public class Task
    * @return
    */
   public double getSpentTime(){
-
+  return spentTime;
   }
 
   /**
@@ -53,7 +55,7 @@ public class Task
    * @param deadline
    */
   public void setDeadline(MyDate deadline){
-
+  this.deadline = deadline;
   }
 
   /**
@@ -61,7 +63,7 @@ public class Task
    * @return
    */
   public MyDate getDeadline(){
-
+  return deadline;
   }
 
   /**
@@ -78,7 +80,7 @@ public class Task
    * @param employee
    */
   public void setResponsibleEmployee(AssignedEmployee employee){
-
+  setResponsibleEmployee(employee);
   }
 
   /**
@@ -86,7 +88,7 @@ public class Task
    * @return
    */
   public AssignedEmployee getResponsibleEmployee(){
-
+  return getResponsibleEmployee();
   }
 
   /**
@@ -94,7 +96,7 @@ public class Task
    * @param progressStatus
    */
   public void setProgressStatus(ProgressStatus progressStatus){
-
+  this.status = progressStatus;
   }
 
   /**
@@ -102,7 +104,7 @@ public class Task
    * @return
    */
   public ProgressStatus getProgressStatus(){
-
+  return status;
   }
 
   /**
@@ -118,6 +120,6 @@ public class Task
    * @return
    */
   public Task copy(){
-    return new Task();
+    return new Task(name, description, estimatedTime,responsibleEmployee);
   }
 }

@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * A class that creates a Project with a name and a description
  * @author Bartosz Ochedzan
@@ -7,6 +9,9 @@ public class Project
 {
   private String name;
   private String description;
+  private ProgressStatus status;
+  private ArrayList<Requirement> requirements;
+  private ArrayList<AssignedEmployee> assignedEmployees;
 
   /**
    * Two-argument constructor.
@@ -67,7 +72,7 @@ public class Project
    * @return List of all assigned employees to the project
    */
   public ArrayList<AssignedEmployee> getEmployees(){
-  return assignedEmployee.get();
+
 }
 
   /**
@@ -75,7 +80,7 @@ public class Project
    * @return project status
    */
   public ProgressStatus getProgressStatus(){
-    return progresStatus.copy();
+    return status;
   }
 
   /**
@@ -83,7 +88,7 @@ public class Project
    * @param status what progress staus change to
    */
   public void setProgressStatus(ProgressStatus status){
-
+  this.status = status;
   }
 
   /**
@@ -91,7 +96,7 @@ public class Project
    * @param teamMember desired team member
    */
   public void addTeamMember(AssignedEmployee teamMember){
-    teamMember = new AssignedEmployee();
+    this.assignedEmployees.add(teamMember);
   }
 
   /**
@@ -99,7 +104,7 @@ public class Project
    * @param teamMember desired team member
    */
   public void removeTeamMember(AssignedEmployee teamMember){
-
+  this.assignedEmployees.remove(teamMember);
   }
 
   /**
@@ -107,7 +112,7 @@ public class Project
    * @param requirement requirement that is about to be added to the project
    */
   public void addRequirement(Requirement requirement){
-    requirement = new Requirement();
+    this.requirements.add(requirement);
   }
 
   /**
@@ -115,6 +120,6 @@ public class Project
    * @param requirement requirement that is about to be removed from the project
    */
   public void removeRequirement(Requirement requirement){
-
+  this.requirements.remove(requirement);
   }
 }
