@@ -9,6 +9,7 @@ public class Task
   private AssignedEmployee responsibleEmployee;
   private ProgressStatus status;
   private MyDate deadline;
+
   /**
    * Four-Argument Constructor
    * @param name
