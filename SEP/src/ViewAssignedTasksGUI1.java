@@ -22,6 +22,7 @@ public class ViewAssignedTasksGUI1 {
     private Button searchButton;
 
     private TableView allAssignedTasksTable;
+    private TableView.TableViewSelectionModel defaultSelectionModel;
     private TableColumn nameColumn;
     private TableColumn birthdayColumn;
 
