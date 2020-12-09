@@ -136,10 +136,18 @@ public class AddANewEmployeeGUI{
                     }
                     if(allValuesCorrect == true){
                         EmployeeList employeeList = employeeAdapter.getAllEmployees();
-                        employeeList.addEmployee(new Employee(nameField.getText(), lastNameField.getText(), dateOfBirth));
-                        employeeAdapter.saveEmployees(employeeList);
-                        JOptionPane.showMessageDialog(null, "New employee was successfully added!",
-                                "Message", JOptionPane.INFORMATION_MESSAGE);
+                        Employee newEmployee = new Employee(nameField.getText(), lastNameField.getText(), dateOfBirth);
+                        if(!employeeList.containsEmployee(newEmployee)){
+                            employeeList.addEmployee(newEmployee);
+                            employeeAdapter.saveEmployees(employeeList);
+                            JOptionPane.showMessageDialog(null, "New employee was successfully added!",
+                                    "Message", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(null, "This employee is already in the list!",
+                                    "Duplicate employee", JOptionPane.ERROR_MESSAGE);
+                        }
+
                     }
                 }
             }
