@@ -1,7 +1,6 @@
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -9,7 +8,7 @@ import javafx.scene.text.FontWeight;
 
 public class ProjectOverviewGUI
 {
-  private FlowPane mainPane;
+  private VBox mainPane;
   private Button add;
   private Button manage;
   private TextField search;
@@ -44,12 +43,12 @@ public class ProjectOverviewGUI
     projects.setPrefHeight(300);
     projects.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-    VBox vbox = new VBox(20);
-    vbox.setPadding(new Insets(25, 25, 25, 25));;
-    vbox.getChildren().addAll(hb, hb2, projects);
+    mainPane = new VBox(20);
+    mainPane.setPadding(new Insets(25, 25, 25, 25));;
+    mainPane.getChildren().addAll(hb, hb2, projects);
   }
 
-  public FlowPane getMainPane()
+  public VBox getMainPane()
   {
     return mainPane;
   }

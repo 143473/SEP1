@@ -11,7 +11,7 @@ public class LoadInitialEmployeesData {
         String[] employeesArray = null;
         try
         {
-            employeesArray = mtfio.readArrayFromFile("students.txt");
+            employeesArray = mtfio.readArrayFromFile("employees.txt");
 
             for(int i = 0; i<employeesArray.length; i++)
             {

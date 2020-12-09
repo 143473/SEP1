@@ -1,4 +1,3 @@
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
@@ -14,8 +13,6 @@ import javafx.scene.text.Font;
  */
 public class CreateProjectGUI2
 {
-  private Scene scene;
-
   private GridPane gridPane;
   private VBox mainPane;
   private HBox hBoxPaneButton;
@@ -40,7 +37,6 @@ public class CreateProjectGUI2
 
 
   public CreateProjectGUI2()
-
   {
     title = new Label("Create a new project");
     Font titleFont = new Font(30);
