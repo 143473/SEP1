@@ -37,6 +37,7 @@ public class EmployeeList implements Serializable {
     public int size(){
         return employeeList.size();
     }
+
     public Employee get(int index){
         return employeeList.get(index);
     }
