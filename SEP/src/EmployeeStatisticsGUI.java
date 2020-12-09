@@ -11,6 +11,8 @@ import javafx.scene.text.Font;
 import javafx.scene.control.TableView.TableViewSelectionModel;
 
 public class EmployeeStatisticsGUI{
+    private EmployeeAdapter employeeAdapter;
+
     private VBox mainPane;
     private HBox topPane;
 
@@ -25,7 +27,7 @@ public class EmployeeStatisticsGUI{
     private TableViewSelectionModel<Employee> defaultSelectionModel;
     private TableColumn<Employee, String> firstNameColumn;
     private TableColumn<Employee, String> lastNameColumn;
-    private TableColumn<Employee, String> birthdayColumn;
+    private TableColumn<Employee, MyDate> birthdayColumn;
     /*private TableColumn expectedColumn;
     private TableColumn actualColumn;
     private TableColumn productivityColumn;
@@ -33,8 +35,8 @@ public class EmployeeStatisticsGUI{
     private TableColumn projectsColumn;
 */
 
-    public EmployeeStatisticsGUI(){
-
+    public EmployeeStatisticsGUI(EmployeeAdapter employeeAdapter){
+        this.employeeAdapter = employeeAdapter;
 
 
         titleLabel = new Label("Employee statistics");
@@ -65,8 +67,8 @@ public class EmployeeStatisticsGUI{
         lastNameColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("lastName"));
         lastNameColumn.setPrefWidth(165);
 
-        birthdayColumn = new TableColumn<Employee, String>("Birthday");
-        lastNameColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("dateOfBirth"));
+        birthdayColumn = new TableColumn<Employee, MyDate>("Birthday");
+        birthdayColumn.setCellValueFactory(new PropertyValueFactory<Employee, MyDate>("dateOfBirth"));
         birthdayColumn.setPrefWidth(165);
 
         /*
@@ -90,6 +92,7 @@ public class EmployeeStatisticsGUI{
         firstNameColumn.setReorderable(false);
         lastNameColumn.setReorderable(false);
         birthdayColumn.setReorderable(false);
+        birthdayColumn.setSortable(false);
         /*
         expectedColumn.setReorderable(false);
         actualColumn.setReorderable(false);
@@ -115,7 +118,17 @@ public class EmployeeStatisticsGUI{
         mainPane = new VBox(10);
         mainPane.getChildren().addAll(topPane, allEmployeesTable);
     }
+    private void initializeTable(){
+        allEmployeesTable.getItems().clear();
+        EmployeeList employees = employeeAdapter.getAllEmployees();
+
+        for (int i = 0; i < employees.size(); i++) {
+            allEmployeesTable.getItems().add(employees.get(i));
+        }
+    }
+
     public VBox getMainPane(){
+        initializeTable();
         return mainPane;
     }
 }
