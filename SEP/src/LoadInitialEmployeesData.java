@@ -5,7 +5,7 @@ public class LoadInitialEmployeesData {
 
     public static void main(String[] args)
     {
-        StudentList students = new StudentList();
+        EmployeeList employees = new EmployeeList();
 
         MyTextFileIO mtfio = new MyTextFileIO();
         String[] studentArray = null;
