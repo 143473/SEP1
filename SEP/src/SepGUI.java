@@ -68,7 +68,7 @@ public class SepGUI extends Application
     employeeAdapter = new EmployeeAdapter("employees.bin");
 
     employeeStatisticsGUI = new EmployeeStatisticsGUI(employeeAdapter);
-    addANewEmployeeGUI = new AddANewEmployeeGUI();
+    addANewEmployeeGUI = new AddANewEmployeeGUI(employeeAdapter);
     editRemoveEmployeeGUI = new EditRemoveEmployeeGUI(employeeAdapter);
 
     assignTasksGUI1 = new AssignTasksGUI1();

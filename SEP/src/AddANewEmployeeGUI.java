@@ -1,4 +1,6 @@
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -8,7 +10,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import javax.swing.*;
+
 public class AddANewEmployeeGUI{
+    private EmployeeAdapter employeeAdapter;
+
     private VBox mainPane;
 
     private Label titleLabel;
@@ -29,7 +35,12 @@ public class AddANewEmployeeGUI{
 
     private Button addButton;
 
-    public AddANewEmployeeGUI() {
+    private MyActionListener listener;
+
+    public AddANewEmployeeGUI(EmployeeAdapter employeeAdapter) {
+        this.employeeAdapter = employeeAdapter;
+
+        listener = new MyActionListener();
 
         mainPane = new VBox();
 
@@ -71,6 +82,7 @@ public class AddANewEmployeeGUI{
         informationPane.setVgap(10);
 
         addButton = new Button("Add");
+        addButton.setOnAction(listener);
 
 
         mainPane.getChildren().addAll(titleLabel, informationPane, addButton);
@@ -78,5 +90,43 @@ public class AddANewEmployeeGUI{
     public VBox getMainPane(){
         return mainPane;
     }
+
+    private class MyActionListener implements EventHandler<ActionEvent> {
+        public void handle(ActionEvent e) {
+            if(e.getSource() == addButton){
+                boolean allValuesCorrect = true;
+                MyDate dateOfBirth = new MyDate(Integer.parseInt(dayField.getText()), Integer.parseInt(monthField.getText()), Integer.parseInt(yearField.getText()));
+                if(nameField.getText() == null /*|| nameField.getText().trim().isEmpty()*/){
+                    JOptionPane.showMessageDialog(null, "First name cannot be empty!",
+                            "Invalid input", JOptionPane.ERROR_MESSAGE);
+                    allValuesCorrect = false;
+                }
+                else if(lastNameField.getText() == null /*|| nameField.getText().trim().isEmpty()*/){
+                    JOptionPane.showMessageDialog(null, "Last name cannot be empty!",
+                            "Invalid input", JOptionPane.ERROR_MESSAGE);
+                    allValuesCorrect = false;
+                }
+                else if(!dateOfBirth.is15Years()){
+                    JOptionPane.showMessageDialog(null, "Employee has to be at least 15 years old!",
+                            "Invalid input", JOptionPane.ERROR_MESSAGE);
+                    allValuesCorrect = false;
+                }
+                else if(!dateOfBirth.isValidDate()){
+                    JOptionPane.showMessageDialog(null, "Entered date is not valid!",
+                            "Invalid input", JOptionPane.ERROR_MESSAGE);
+                    allValuesCorrect = false;
+                }
+                if(allValuesCorrect == true){
+                    EmployeeList employeeList = employeeAdapter.getAllEmployees();
+                    employeeList.addEmployee(new Employee(nameField.getText(), lastNameField.getText(), dateOfBirth));
+                    employeeAdapter.saveEmployees(employeeList);
+                    JOptionPane.showMessageDialog(null, "New employee was successfully added!",
+                            "Message", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        }
+    }
+
+
 
 }
