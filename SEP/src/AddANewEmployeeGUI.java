@@ -112,8 +112,17 @@ public class AddANewEmployeeGUI{
                     allValuesCorrect = false;
                 }
                 else{
-
-                    //check if he entered numbers for date of birth
+                    try {
+                        int temporary = Integer.parseInt(dayField.getText());
+                        temporary = Integer.parseInt(monthField.getText());
+                        temporary = Integer.parseInt(yearField.getText());
+                    } catch (NumberFormatException nfe) {
+                        JOptionPane.showMessageDialog(null, "Values in date of birth have to be numbers!",
+                                "Invalid input", JOptionPane.ERROR_MESSAGE);
+                        allValuesCorrect = false;
+                    }
+                }
+                if(allValuesCorrect == true){
                     dateOfBirth = new MyDate(Integer.parseInt(dayField.getText().replaceFirst("^0+(?!$)", "")), Integer.parseInt(monthField.getText().replaceFirst("^0+(?!$)", "")), Integer.parseInt(yearField.getText().replaceFirst("^0+(?!$)", "")));
                     if(!dateOfBirth.is15Years()){
                         JOptionPane.showMessageDialog(null, "Employee has to be at least 15 years old!",
@@ -126,8 +135,6 @@ public class AddANewEmployeeGUI{
                         allValuesCorrect = false;
                     }
                     if(allValuesCorrect == true){
-
-                        //saves but deletes everyone else
                         EmployeeList employeeList = employeeAdapter.getAllEmployees();
                         employeeList.addEmployee(new Employee(nameField.getText(), lastNameField.getText(), dateOfBirth));
                         employeeAdapter.saveEmployees(employeeList);
