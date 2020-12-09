@@ -8,3 +8,14 @@ Mickey,Mouse,18,11,1928
 Johnny,Depp,9,06,1963
 Bill,Gates,28,10,1955
 Sej,Tankian,21,08,1967
+Michael,Jackson,29,08,1958
+Steve,Jobs,24,02,1955
+Stevie,Wonder,13,05,1950
+Elena Alexandra,Apostoleanu,16,10,1986
+Paul,Walker,12,09,1973
+Marina Ann,Hantzis,14,03,1988
+Sheldon,Cooper,26,02,1980
+Dexter,O'Reilly,01,02,1971
+Tyrion,Lannister,11,06,273
+Anthony Edward,Stark,29,05,1970
+Jack,The Ripper,13,10,1888
