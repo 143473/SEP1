@@ -37,6 +37,11 @@ public class AssignedTasksList {
         return assignedTasks.size();
     }
 
+    /**
+     * Gets a AssignedTask object position index from the list.
+     * @param index the position n the list of the AssignedTask object
+     * @return the AssignedTask object at position index if one exists, else null
+     */
     public AssignedTasks get(int index){
         if(index < assignedTasks.size()){
             return assignedTasks.get(index);
