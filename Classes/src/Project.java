@@ -65,7 +65,7 @@ public class Project
    * @return true if contains, false if not
    */
   public boolean isAssignedTask(){
-
+return false;
   }
 
   /**

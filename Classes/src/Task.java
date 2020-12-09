@@ -74,7 +74,7 @@ public class Task
    * @return
    */
   public boolean isPastDeadline(MyDate deadline){
-
+  return false;
   }
 
   /**
@@ -122,6 +122,6 @@ public class Task
    * @return
    */
   public Task copy(){
-    return new Task(name, description, estimatedTime,getResponsibleEmployee());
+    return new Task(name, description,deadline, estimatedTime,getResponsibleEmployee());
   }
 }

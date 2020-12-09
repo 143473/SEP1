@@ -25,7 +25,7 @@ public class Requirement
     this.importance = importance;
     responsibleEmployee = new AssignedEmployee(
         responsibleEmployee.getFirstName(), responsibleEmployee.getLastName(),responsibleEmployee.getDateOfBirth(),responsibleEmployee.getStatus());
-    deadline = new MyDate();
+    deadline = new MyDate(9,12,2020);
   }
 
   /**
@@ -39,7 +39,7 @@ public class Requirement
   {
     this.estimatedTime = estimatedTime;
     responsibleEmployee = new AssignedEmployee(responsibleEmployee.getFirstName(),responsibleEmployee.getLastName(),responsibleEmployee.getDateOfBirth(),responsibleEmployee.getStatus());
-    deadline = new MyDate();
+    deadline = new MyDate(9,12,2020);
     importance = 0;
   }
 
@@ -80,7 +80,7 @@ public class Requirement
    */
   public boolean isAssignedTask()
   {
-
+  return false;
   }
 
   /**
@@ -131,7 +131,7 @@ public class Requirement
    */
   public boolean isPastDeadline(MyDate deadline)
   {
-
+  return false;
   }
 
   /**
