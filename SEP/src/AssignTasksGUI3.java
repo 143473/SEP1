@@ -10,7 +10,7 @@ import javafx.stage.Stage;
  * @author Timothy Engkar
  * @version 1.0
  */
-public class AssignTasksGUI3 extends Application {
+public class AssignTasksGUI3 {
     private VBox mainPane;
     private HBox topPane;
 

@@ -12,7 +12,7 @@ import javafx.stage.Stage;
  * @author Timothy Engkar
  * @version 1.0
  */
-public class ViewAssignedTasksGUI2 extends Application {
+public class ViewAssignedTasksGUI2 {
     private VBox mainPane;
     private HBox topPane;
     private HBox hBoxPaneButton;

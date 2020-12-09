@@ -6,7 +6,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-public class ReportTasksGUI2 extends Application {
+public class ReportTasksGUI2 {
     private VBox mainPane;
     private HBox topPane;
     private HBox hBoxPaneButton;
