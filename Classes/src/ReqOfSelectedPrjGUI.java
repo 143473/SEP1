@@ -49,8 +49,8 @@ public class ReqOfSelectedPrjGUI extends Application
     idCol.setCellValueFactory(new PropertyValueFactory("id"));
     TableColumn nameCol = new TableColumn("Name");
     nameCol.setCellValueFactory(new PropertyValueFactory("name"));
-    TableColumn eeeCol = new TableColumn("???");
-    eeeCol.setCellValueFactory(new PropertyValueFactory("???"));
+    TableColumn userStoryCol = new TableColumn("User Story");
+    userStoryCol.setCellValueFactory(new PropertyValueFactory("userstory"));
     TableColumn estimationCol = new TableColumn("Estimation");
     estimationCol.setCellValueFactory(new PropertyValueFactory("estimation"));
     TableColumn deadlineCol = new TableColumn("Deadline");
@@ -64,7 +64,7 @@ public class ReqOfSelectedPrjGUI extends Application
     TableColumn responsibleCol = new TableColumn("Responsible Team Member");
     responsibleCol.setCellValueFactory(new PropertyValueFactory("responsibleteammember"));
 
-    table.getColumns().setAll(idCol, nameCol,eeeCol,estimationCol,deadlineCol,statusCol,totalhrsCol,teammembersCol,responsibleCol);
+    table.getColumns().setAll(idCol, nameCol,userStoryCol,estimationCol,deadlineCol,statusCol,totalhrsCol,teammembersCol,responsibleCol);
     table.setPrefWidth(450);
     table.setPrefHeight(300);
     table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
