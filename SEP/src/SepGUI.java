@@ -21,6 +21,10 @@ public class SepGUI extends Application
   private AddANewEmployeeGUI addANewEmployeeGUI;
   private EditRemoveEmployeeGUI editRemoveEmployeeGUI;
 
+  private AssignTasksGUI1 assignTasksGUI1;
+  private ReportTasksGUI1 reportTasksGUI1;
+  private ViewAssignedTasksGUI1 viewAssignedTasksGUI1;
+
   private VBox mainPane;
   private StackPane stackPane;
   private VBox vBox;
@@ -34,8 +38,10 @@ public class SepGUI extends Application
   private Menu projectsMenu;
   private Menu employeesMenu;
   private Menu assignedTasksMenu;
-  private Menu exitMenu;
+  private Menu fileMenu;
 
+  private MenuItem exitMenuItem;
+  private MenuItem homeMenuItem;
   private MenuItem createProject;
   private MenuItem projectsOverview;
   private MenuItem addEmployeeMenuItem;
@@ -44,7 +50,7 @@ public class SepGUI extends Application
   private MenuItem assignMenuItem;
   private MenuItem reportMenuItem;
   private MenuItem viewTasksMenuItem;
-  private MenuItem exitMenuItem;
+
 
   private MyActionListener listener;
 
@@ -58,6 +64,10 @@ public class SepGUI extends Application
     addANewEmployeeGUI = new AddANewEmployeeGUI();
     editRemoveEmployeeGUI = new EditRemoveEmployeeGUI();
 
+    assignTasksGUI1 = new AssignTasksGUI1();
+    reportTasksGUI1 = new ReportTasksGUI1();
+    viewAssignedTasksGUI1 = new ViewAssignedTasksGUI1();
+
     addEmployeeMenuItem = new MenuItem("Add a new employee");
     addEmployeeMenuItem.setOnAction(listener);
     employeesStatisticsMenuItem = new MenuItem("Employees Statistics");
@@ -65,28 +75,36 @@ public class SepGUI extends Application
     editRemoveMenuItem = new MenuItem("Edit/Remove Employee");
     editRemoveMenuItem.setOnAction(listener);
     assignMenuItem = new MenuItem("Assign Tasks");
+    assignMenuItem.setOnAction(listener);
     reportMenuItem = new MenuItem("Report Tasks");
+    reportMenuItem.setOnAction(listener);
     viewTasksMenuItem = new MenuItem("View Tasks");
+    viewTasksMenuItem.setOnAction(listener);
     createProject = new MenuItem("Create Project");
     createProject.setOnAction(listener);
     projectsOverview = new MenuItem("Projects Overview");
+    homeMenuItem = new MenuItem("Home");
+    homeMenuItem.setOnAction(listener);
     exitMenuItem = new MenuItem("Exit");
+    exitMenuItem.setOnAction(listener);
 
+    fileMenu = new Menu("File");
     projectsMenu = new Menu("Projects");
     employeesMenu = new Menu("Employees");
     assignedTasksMenu = new Menu("AssignedTasks");
-    exitMenu = new Menu("Exit");
 
-    projectsMenu.getItems().addAll(createProject, projectsOverview, exitMenuItem);
+    fileMenu.getItems().addAll(homeMenuItem,exitMenuItem);
+    projectsMenu.getItems().addAll(createProject, projectsOverview);
     employeesMenu.getItems()
         .addAll(employeesStatisticsMenuItem, addEmployeeMenuItem,
             editRemoveMenuItem);
     assignedTasksMenu.getItems()
         .addAll(assignMenuItem, reportMenuItem, viewTasksMenuItem);
 
+
     menuBar = new MenuBar();
     menuBar.getMenus()
-        .addAll(projectsMenu, employeesMenu, assignedTasksMenu, exitMenu);
+        .addAll(fileMenu, projectsMenu, employeesMenu, assignedTasksMenu);
 
     Font fontSize = new Font("Courier New", 60);
     companyName = new Label("ColourIT");
@@ -116,8 +134,13 @@ public class SepGUI extends Application
 
     public void handle(ActionEvent e)
     {
+      if (e.getSource() == homeMenuItem)
+      {
+        stackPane.getChildren().clear();
+        stackPane.getChildren().add(vBox);
+      }
       //PROJECTS
-      if (e.getSource() == createProject)
+      else if (e.getSource() == createProject)
       {
         stackPane.getChildren().clear();
         stackPane.getChildren().add(createProjectGUI1.getMainPane());
@@ -142,7 +165,21 @@ public class SepGUI extends Application
 
 
       //ASSIGNED TASKS
-
+      else if(e.getSource() == assignMenuItem)
+      {
+        stackPane.getChildren().clear();
+        stackPane.getChildren().add(assignTasksGUI1.getMainPane());
+      }
+      else if(e.getSource() == reportMenuItem)
+      {
+        stackPane.getChildren().clear();
+        stackPane.getChildren().add(reportTasksGUI1.getMainPane());
+      }
+      else if(e.getSource() == viewTasksMenuItem)
+      {
+        stackPane.getChildren().clear();
+        stackPane.getChildren().add(viewAssignedTasksGUI1.getMainPane());
+      }
 
       //EXIT
       else if (e.getSource() == exitMenuItem)
