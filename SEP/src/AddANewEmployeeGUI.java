@@ -95,33 +95,45 @@ public class AddANewEmployeeGUI{
         public void handle(ActionEvent e) {
             if(e.getSource() == addButton){
                 boolean allValuesCorrect = true;
-                MyDate dateOfBirth = new MyDate(Integer.parseInt(dayField.getText()), Integer.parseInt(monthField.getText()), Integer.parseInt(yearField.getText()));
-                if(nameField.getText() == null /*|| nameField.getText().trim().isEmpty()*/){
+                MyDate dateOfBirth;
+                if(nameField.getText() == null || nameField.getText().trim().isEmpty()){
                     JOptionPane.showMessageDialog(null, "First name cannot be empty!",
                             "Invalid input", JOptionPane.ERROR_MESSAGE);
                     allValuesCorrect = false;
                 }
-                else if(lastNameField.getText() == null /*|| nameField.getText().trim().isEmpty()*/){
+                else if(lastNameField.getText() == null || lastNameField.getText().trim().isEmpty()){
                     JOptionPane.showMessageDialog(null, "Last name cannot be empty!",
                             "Invalid input", JOptionPane.ERROR_MESSAGE);
                     allValuesCorrect = false;
                 }
-                else if(!dateOfBirth.is15Years()){
-                    JOptionPane.showMessageDialog(null, "Employee has to be at least 15 years old!",
+                else if(dayField.getText().isEmpty() || monthField.getText().isEmpty() || yearField.getText().isEmpty()){
+                    JOptionPane.showMessageDialog(null, "Date of birth cannot be empty!",
                             "Invalid input", JOptionPane.ERROR_MESSAGE);
                     allValuesCorrect = false;
                 }
-                else if(!dateOfBirth.isValidDate()){
-                    JOptionPane.showMessageDialog(null, "Entered date is not valid!",
-                            "Invalid input", JOptionPane.ERROR_MESSAGE);
-                    allValuesCorrect = false;
-                }
-                if(allValuesCorrect == true){
-                    EmployeeList employeeList = employeeAdapter.getAllEmployees();
-                    employeeList.addEmployee(new Employee(nameField.getText(), lastNameField.getText(), dateOfBirth));
-                    employeeAdapter.saveEmployees(employeeList);
-                    JOptionPane.showMessageDialog(null, "New employee was successfully added!",
-                            "Message", JOptionPane.INFORMATION_MESSAGE);
+                else{
+
+                    //check if he entered numbers for date of birth
+                    dateOfBirth = new MyDate(Integer.parseInt(dayField.getText().replaceFirst("^0+(?!$)", "")), Integer.parseInt(monthField.getText().replaceFirst("^0+(?!$)", "")), Integer.parseInt(yearField.getText().replaceFirst("^0+(?!$)", "")));
+                    if(!dateOfBirth.is15Years()){
+                        JOptionPane.showMessageDialog(null, "Employee has to be at least 15 years old!",
+                                "Invalid input", JOptionPane.ERROR_MESSAGE);
+                        allValuesCorrect = false;
+                    }
+                    else if(!dateOfBirth.isValidDate()){
+                        JOptionPane.showMessageDialog(null, "Entered date is not valid!",
+                                "Invalid input", JOptionPane.ERROR_MESSAGE);
+                        allValuesCorrect = false;
+                    }
+                    if(allValuesCorrect == true){
+
+                        //saves but deletes everyone else
+                        EmployeeList employeeList = employeeAdapter.getAllEmployees();
+                        employeeList.addEmployee(new Employee(nameField.getText(), lastNameField.getText(), dateOfBirth));
+                        employeeAdapter.saveEmployees(employeeList);
+                        JOptionPane.showMessageDialog(null, "New employee was successfully added!",
+                                "Message", JOptionPane.INFORMATION_MESSAGE);
+                    }
                 }
             }
         }
