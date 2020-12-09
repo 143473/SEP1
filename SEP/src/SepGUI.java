@@ -17,6 +17,10 @@ public class SepGUI extends Application
 
   private CreateProjectGUI1 createProjectGUI1;
 
+  private EmployeeStatisticsGUI employeeStatisticsGUI;
+  private AddANewEmployeeGUI addANewEmployeeGUI;
+  private EditRemoveEmployeeGUI editRemoveEmployeeGUI;
+
   private VBox mainPane;
   private StackPane stackPane;
   private VBox vBox;
@@ -50,9 +54,16 @@ public class SepGUI extends Application
     listener = new MyActionListener();
     createProjectGUI1 = new CreateProjectGUI1();
 
+    employeeStatisticsGUI = new EmployeeStatisticsGUI();
+    addANewEmployeeGUI = new AddANewEmployeeGUI();
+    editRemoveEmployeeGUI = new EditRemoveEmployeeGUI();
+
     addEmployeeMenuItem = new MenuItem("Add a new employee");
+    addEmployeeMenuItem.setOnAction(listener);
     employeesStatisticsMenuItem = new MenuItem("Employees Statistics");
+    employeesStatisticsMenuItem.setOnAction(listener);
     editRemoveMenuItem = new MenuItem("Edit/Remove Employee");
+    editRemoveMenuItem.setOnAction(listener);
     assignMenuItem = new MenuItem("Assign Tasks");
     reportMenuItem = new MenuItem("Report Tasks");
     viewTasksMenuItem = new MenuItem("View Tasks");
@@ -105,16 +116,40 @@ public class SepGUI extends Application
 
     public void handle(ActionEvent e)
     {
+      //PROJECTS
       if (e.getSource() == createProject)
       {
         stackPane.getChildren().clear();
         stackPane.getChildren().add(createProjectGUI1.getMainPane());
       }
+
+      //EMPLOYEES
+      else if(e.getSource() == employeesStatisticsMenuItem)
+      {
+        stackPane.getChildren().clear();
+        stackPane.getChildren().add(employeeStatisticsGUI.getMainPane());
+      }
+      else if(e.getSource() == addEmployeeMenuItem)
+      {
+        stackPane.getChildren().clear();
+        stackPane.getChildren().add(addANewEmployeeGUI.getMainPane());
+      }
+      else if(e.getSource() == editRemoveMenuItem)
+      {
+        stackPane.getChildren().clear();
+        stackPane.getChildren().add(editRemoveEmployeeGUI.getMainPane());
+      }
+
+
+      //ASSIGNED TASKS
+
+
+      //EXIT
       else if (e.getSource() == exitMenuItem)
       {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
-            "Do you really want to exit the program?",
-            ButtonType.YES, ButtonType.NO);
+                "Do you really want to exit the program?",
+                ButtonType.YES, ButtonType.NO);
         alert.setTitle("Exit");
         alert.setHeaderText(null);
 
@@ -125,6 +160,7 @@ public class SepGUI extends Application
           System.exit(0);
         }
       }
+
     }
   }
 }

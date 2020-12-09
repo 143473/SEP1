@@ -9,7 +9,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.scene.text.Font;
 
-public class EmployeeStatisticsGUI extends Application {
+public class EmployeeStatisticsGUI{
     private VBox mainPane;
     private HBox topPane;
 
@@ -32,9 +32,7 @@ public class EmployeeStatisticsGUI extends Application {
     private TableColumn projectsColumn;
 
 
-    public void start(Stage window){
-        window.setTitle("Employee Statistics");
-
+    public EmployeeStatisticsGUI(){
         titleLabel = new Label("Employee statistics");
         titleLabel.setFont(new Font("Cambria", 32));
 
@@ -98,13 +96,8 @@ public class EmployeeStatisticsGUI extends Application {
 
         mainPane = new VBox(10);
         mainPane.getChildren().addAll(topPane, allEmployeesTable);
-
-        Scene scene = new Scene(mainPane, 1000, 390);
-
-        window.setScene(scene);
-        window.setResizable(false);
-        window.show();
-
     }
-
+    public VBox getMainPane(){
+        return mainPane;
+    }
 }
