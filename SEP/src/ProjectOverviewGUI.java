@@ -1,19 +1,23 @@
+import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
 
 public class ProjectOverviewGUI
 {
-  private VBox mainPane;
   private Button add;
   private Button manage;
   private TextField search;
   private Label title;
   private TableView projects;
+  private VBox mainPane;
 
   public ProjectOverviewGUI(){
 
@@ -46,8 +50,9 @@ public class ProjectOverviewGUI
     mainPane = new VBox(20);
     mainPane.setPadding(new Insets(25, 25, 25, 25));;
     mainPane.getChildren().addAll(hb, hb2, projects);
-  }
 
+
+  }
   public VBox getMainPane()
   {
     return mainPane;

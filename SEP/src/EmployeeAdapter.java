@@ -71,4 +71,20 @@ public class EmployeeAdapter
       System.out.println("IO Error writing to file");
     }
   }
+
+  public EmployeeList getEmployeesByName(String searchingFor){
+    EmployeeList allEmployees = getAllEmployees();
+    EmployeeList resultEmployees = new EmployeeList();
+
+    searchingFor = searchingFor.toLowerCase();
+    for (int i = 0; i < allEmployees.size(); i++) {
+      String fullName = (allEmployees.get(i).getFirstName()+" "+allEmployees.get(i).getLastName()).toLowerCase();
+      if(fullName.contains(searchingFor)){
+        resultEmployees.addEmployee(allEmployees.get(i));
+      }
+    }
+    return resultEmployees;
+  }
+
+
 }

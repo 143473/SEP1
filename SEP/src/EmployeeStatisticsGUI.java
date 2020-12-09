@@ -1,4 +1,6 @@
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -35,9 +37,12 @@ public class EmployeeStatisticsGUI{
     private TableColumn projectsColumn;
 */
 
+    private MyActionListener listener;
+
     public EmployeeStatisticsGUI(EmployeeAdapter employeeAdapter){
         this.employeeAdapter = employeeAdapter;
 
+        listener = new MyActionListener();
 
         titleLabel = new Label("Employee statistics");
         titleLabel.setFont(new Font("Cambria", 32));
@@ -46,6 +51,7 @@ public class EmployeeStatisticsGUI{
         searchField = new TextField();
         searchField.setPromptText("Bob");
         searchButton = new Button("Search");
+        searchButton.setOnAction(listener);
 
         searchPane = new HBox(8);
         searchPane.getChildren().addAll(searchLabel, searchField, searchButton);
@@ -130,5 +136,18 @@ public class EmployeeStatisticsGUI{
     public VBox getMainPane(){
         initializeTable();
         return mainPane;
+    }
+
+    private class MyActionListener implements EventHandler<ActionEvent> {
+        public void handle(ActionEvent e) {
+            if(e.getSource() == searchButton){
+                String searchingFor = searchField.getText();
+                allEmployeesTable.getItems().clear();
+                EmployeeList chosenEmployees = employeeAdapter.getEmployeesByName(searchingFor);
+                for (int i = 0; i < chosenEmployees.size(); i++) {
+                    allEmployeesTable.getItems().add(chosenEmployees.get(i));
+                }
+            }
+        }
     }
 }

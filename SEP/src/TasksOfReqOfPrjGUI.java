@@ -11,10 +11,10 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
-public class TasksOfReqOfPrjGUI extends Application
+public class TasksOfReqOfPrjGUI
 {
-  private Scene scene;
-  private FlowPane mainPane;
+
+  private VBox mainPane;
   private Button add;
   private Button manage;
   private TextField search;
@@ -25,8 +25,7 @@ public class TasksOfReqOfPrjGUI extends Application
   private Label tasks;
   private TableView table;
 
-  public void start(Stage window){
-    window.setTitle("Project Overview");
+  public TasksOfReqOfPrjGUI(){
 
     add = new Button("ADD");
     manage = new Button("MANAGE");
@@ -73,13 +72,15 @@ public class TasksOfReqOfPrjGUI extends Application
     table.setPrefHeight(300);
     table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-    VBox vbox = new VBox(20);
-    vbox.setPadding(new Insets(25, 25, 25, 25));;
-    vbox.getChildren().addAll(hb11, hb2, table);
+    mainPane = new VBox(20);
+    mainPane.setPadding(new Insets(25, 25, 25, 25));;
+    mainPane.getChildren().addAll(hb11, hb2, table);
 
-    Scene scene = new Scene(vbox, 500, 475); // w x h
-    window.setScene(scene);
-    window.show();
+
+  }
+  public VBox getMainPane()
+  {
+    return mainPane;
   }
 }
 

@@ -10,9 +10,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
-public class ManageProjectGUI extends Application
+public class ManageProjectGUI
 {
-  private Scene scene;
+
   private Label title;
   private TextField name;
   private TextField description;
@@ -31,8 +31,8 @@ public class ManageProjectGUI extends Application
   private Label scrummaster;
   private Label projectowner;
   private Label projectcreator;
-  public void start(Stage window){
-    window.setTitle("Manage Project");
+  private VBox mainPane;
+  public ManageProjectGUI(){
 
     title = new Label("Manage Project");
     title.setFont(Font.font("Calibri", FontWeight.BOLD, 20));
@@ -71,14 +71,16 @@ public class ManageProjectGUI extends Application
     vbox2.getChildren().addAll(projects, save,cancel,remove);
     HBox hbox = new HBox(vboxlabels,vbox, vbox2);
 
-    VBox vbox3 = new VBox(20);
-    vbox3.setSpacing(10);
-    vbox3.setPadding(new Insets(25, 25, 25, 25));;
-    vbox3.getChildren().addAll(title,hbox);
+    mainPane = new VBox(20);
+    mainPane.setSpacing(10);
+    mainPane.setPadding(new Insets(25, 25, 25, 25));;
+    mainPane.getChildren().addAll(title,hbox);
 
-    Scene scene = new Scene(vbox3, 500, 475); // w x h
-    window.setScene(scene);
-    window.show();
 
+
+  }
+  public VBox getMainPane()
+  {
+    return mainPane;
   }
 }
