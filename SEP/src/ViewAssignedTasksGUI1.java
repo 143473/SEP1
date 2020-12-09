@@ -1,11 +1,8 @@
-import javafx.application.Application;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import javafx.stage.Stage;
 
 /**
  * @author Timothy Engkar
@@ -27,8 +24,7 @@ public class ViewAssignedTasksGUI1 {
     private TableColumn birthdayColumn;
 
 
-    public void start(Stage window){
-        window.setTitle("View Assigned Tasks");
+    public ViewAssignedTasksGUI1(){
 
         titleLabel = new Label("View Assigned Tasks");
         titleLabel.setFont(new Font("Cambria", 30));

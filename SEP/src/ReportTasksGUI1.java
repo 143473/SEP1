@@ -1,11 +1,8 @@
-import javafx.application.Application;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import javafx.stage.Stage;
 
 public class ReportTasksGUI1 {
     private VBox mainPane;
@@ -24,8 +21,8 @@ public class ReportTasksGUI1 {
     private TableColumn birthdayColumn;
 
 
-    public void start(Stage window){
-        window.setTitle("Report Tasks");
+    public ReportTasksGUI1()
+    {
 
         titleLabel = new Label("Report Tasks");
         titleLabel.setFont(new Font("Cambria", 32));

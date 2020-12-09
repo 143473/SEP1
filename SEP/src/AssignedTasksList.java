@@ -28,4 +28,19 @@ public class AssignedTasksList {
     public void removeAssignedTask(AssignedTasks assignedTasks){
         this.assignedTasks.remove(assignedTasks);
     }
+
+    /**
+     * Gets how many AssignedTasks objects are in the list
+     * @return the number of AssignedTasks objects in the list
+     */
+    public int size(){
+        return assignedTasks.size();
+    }
+
+    public AssignedTasks get(int index){
+        if(index < assignedTasks.size()){
+            return assignedTasks.get(index);
+        }
+        return null;
+    }
 }
