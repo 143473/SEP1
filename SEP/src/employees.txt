@@ -1,0 +1,10 @@
+Marketa,Lapcikova,14,11,2000
+Timothy Johan,Engkar,13,02,2003
+Bartosz Juliusz,Ochedzan,12,09,1998
+Claudiu Emanuel,Corduianu,09,01,1989
+Bob,Bobson,29,02,1996
+Adam,Adamson,24,12,1987
+Mickey,Mouse,18,11,1928
+Johnny,Depp,9,06,1963
+Bill,Gates,28,10,1955
+Sej,Tankian,21,08,1967
