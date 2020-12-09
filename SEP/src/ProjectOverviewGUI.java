@@ -10,18 +10,16 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
-public class ProjectOverviewGUI extends Application
+public class ProjectOverviewGUI
 {
-  private Scene scene;
-  private FlowPane mainPane;
   private Button add;
   private Button manage;
   private TextField search;
   private Label title;
   private TableView projects;
+  private VBox mainPane;
 
-  public void start(Stage window){
-    window.setTitle("Project Overview");
+  public ProjectOverviewGUI(){
 
     add = new Button("ADD");
     manage = new Button("MANAGE");
@@ -49,12 +47,14 @@ public class ProjectOverviewGUI extends Application
     projects.setPrefHeight(300);
     projects.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-    VBox vbox = new VBox(20);
-    vbox.setPadding(new Insets(25, 25, 25, 25));;
-    vbox.getChildren().addAll(hb, hb2, projects);
+    mainPane = new VBox(20);
+    mainPane.setPadding(new Insets(25, 25, 25, 25));;
+    mainPane.getChildren().addAll(hb, hb2, projects);
 
-    Scene scene = new Scene(vbox, 500, 475); // w x h
-    window.setScene(scene);
-    window.show();
+
+  }
+  public VBox getMainPane()
+  {
+    return mainPane;
   }
 }

@@ -12,16 +12,16 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
-public class ChangeTeamMembersGUI extends Application
+public class ChangeTeamMembersGUI
 {
-  private Scene scene;
+
   private Label title;
   private Button save;
   private Button cancel;
   private TableView teammembers;
+  private VBox mainPane;
 
-  public void start(Stage window){
-    window.setTitle("Change Team Members");
+  public ChangeTeamMembersGUI(){
 
     title = new Label("Team Members");
     title.setFont(Font.font("Calibri", FontWeight.BOLD, 20));
@@ -44,13 +44,15 @@ public class ChangeTeamMembersGUI extends Application
     hbox.setSpacing(50);
     hbox.getChildren().addAll(save,cancel);
 
-    VBox vbox3 = new VBox(20);
-    vbox3.setSpacing(10);
-    vbox3.setPadding(new Insets(25, 25, 25, 25));;
-    vbox3.getChildren().addAll(title,teammembers,hbox);
+    mainPane = new VBox(20);
+    mainPane.setSpacing(10);
+    mainPane.setPadding(new Insets(25, 25, 25, 25));;
+    mainPane.getChildren().addAll(title,teammembers,hbox);
 
-    Scene scene = new Scene(vbox3, 500, 475); // w x h
-    window.setScene(scene);
-    window.show();
+
+  }
+  public VBox getMainPane()
+  {
+    return mainPane;
   }
 }
