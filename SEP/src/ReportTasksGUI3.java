@@ -12,7 +12,7 @@ import javafx.stage.Stage;
  * @author Timothy Engkar
  * @version 1.0
  */
-public class ReportTasksGUI3 extends Application {
+public class ReportTasksGUI3 {
     private VBox mainPane;
     private HBox topPane;
 

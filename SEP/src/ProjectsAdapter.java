@@ -56,7 +56,7 @@ public class ProjectsAdapter
    * @param projects the list of projects that will be saved
    */
 
-  public void saveProjects(ProjectsList projects)
+  public void saveProjects(ProjectList projects)
   {
     try
     {
