@@ -8,7 +8,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-public class AddANewEmployeeGUI extends Application {
+public class AddANewEmployeeGUI{
     private VBox mainPane;
 
     private Label titleLabel;
@@ -29,8 +29,7 @@ public class AddANewEmployeeGUI extends Application {
 
     private Button addButton;
 
-    public void start(Stage window) {
-        window.setTitle("Add a new employee");
+    public AddANewEmployeeGUI() {
 
         mainPane = new VBox();
 
@@ -75,12 +74,9 @@ public class AddANewEmployeeGUI extends Application {
 
 
         mainPane.getChildren().addAll(titleLabel, informationPane, addButton);
-
-        Scene scene = new Scene(mainPane, 512, 390);
-
-        window.setScene(scene);
-        window.setResizable(false);
-        window.show();
+    }
+    public VBox getMainPane(){
+        return mainPane;
     }
 
 }

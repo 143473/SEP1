@@ -15,7 +15,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-public class EditRemoveEmployeeGUI extends Application {
+public class EditRemoveEmployeeGUI{
     private Label titleLabel;
 
     private VBox mainPane;
@@ -42,9 +42,7 @@ public class EditRemoveEmployeeGUI extends Application {
     private Button removeButton;
     private HBox buttonsPane;
 
-    public void start(Stage window) {
-        window.setTitle("Edit or Remove Employee");
-
+    public EditRemoveEmployeeGUI() {
         titleLabel = new Label("Edit or Remove Employee");
         titleLabel.setFont(new Font("Cambria", 32));
 
@@ -114,13 +112,9 @@ public class EditRemoveEmployeeGUI extends Application {
 
         mainPane = new VBox();
         mainPane.getChildren().addAll(titleLabel, employeePane, buttonsPane);
-
-
-        Scene scene = new Scene(mainPane, 512, 390);
-
-        window.setScene(scene);
-        window.setResizable(false);
-        window.show();
+    }
+    public VBox getMainPane(){
+        return mainPane;
     }
 
 }
