@@ -1,6 +1,4 @@
-import javafx.application.Application;
 import javafx.geometry.Insets;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.FlowPane;
@@ -8,11 +6,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.stage.Stage;
 
-public class ProjectOverviewGUI extends Application
+public class ProjectOverviewGUI
 {
-  private Scene scene;
   private FlowPane mainPane;
   private Button add;
   private Button manage;
@@ -20,8 +16,7 @@ public class ProjectOverviewGUI extends Application
   private Label title;
   private TableView projects;
 
-  public void start(Stage window){
-    window.setTitle("Project Overview");
+  public ProjectOverviewGUI(){
 
     add = new Button("ADD");
     manage = new Button("MANAGE");
@@ -52,9 +47,10 @@ public class ProjectOverviewGUI extends Application
     VBox vbox = new VBox(20);
     vbox.setPadding(new Insets(25, 25, 25, 25));;
     vbox.getChildren().addAll(hb, hb2, projects);
+  }
 
-    Scene scene = new Scene(vbox, 500, 475); // w x h
-    window.setScene(scene);
-    window.show();
+  public FlowPane getMainPane()
+  {
+    return mainPane;
   }
 }

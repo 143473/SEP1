@@ -7,6 +7,9 @@ Adam,Adamson,24,12,1987
 Mickey,Mouse,18,11,1928
 Johnny,Depp,9,06,1963
 Bill,Gates,28,10,1955
+<<<<<<< HEAD
+Sej,Tankian,21,08,1967
+=======
 Sej,Tankian,21,08,1967
 Michael,Jackson,29,08,1958
 Steve,Jobs,24,02,1955
@@ -19,3 +22,4 @@ Dexter,O'Reilly,01,02,1971
 Tyrion,Lannister,11,06,273
 Anthony Edward,Stark,29,05,1970
 Jack,The Ripper,13,10,1888
+>>>>>>> origin/main

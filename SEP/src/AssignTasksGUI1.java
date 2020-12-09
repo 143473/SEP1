@@ -1,10 +1,9 @@
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import javafx.stage.Stage;
 
 /**
  * @author Timothy Engkar
@@ -22,8 +21,7 @@ public class AssignTasksGUI1 {
     private TableColumn projectDescriptionColumn;
 
 
-    public void start(Stage window){
-        window.setTitle("Assign Tasks");
+    public AssignTasksGUI1(){
 
         titleLabel = new Label("Assign Tasks");
         titleLabel.setFont(new Font("Cambria", 32));
