@@ -12,7 +12,7 @@ import javafx.stage.Stage;
  * @author Timothy Engkar
  * @version 1.0
  */
-public class AssignTasksGUI5 extends Application {
+public class AssignTasksGUI5 {
     private VBox mainPane;
 
     private Label titleLabel;
