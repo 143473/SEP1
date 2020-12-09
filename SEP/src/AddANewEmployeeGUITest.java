@@ -1,6 +1,6 @@
 import javafx.application.Application;
 
-public class EmployeeStatisticsGUITest
+public class AddANewEmployeeGUITest
 {
     /**
      * Starts the program
@@ -8,6 +8,6 @@ public class EmployeeStatisticsGUITest
      */
     public static void main(String[] args)
     {
-        Application.launch(EmployeeStatisticsGUI.class);
+        Application.launch(AddANewEmployeeGUI.class);
     }
 }
