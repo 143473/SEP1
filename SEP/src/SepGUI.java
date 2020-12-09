@@ -15,6 +15,7 @@ import javafx.scene.text.Font;
 public class SepGUI extends Application
 {
   private EmployeeAdapter employeeAdapter;
+  private MyActionListener listener;
 
   private CreateProjectGUI1 createProjectGUI1;
   private ProjectOverviewGUI projectOverviewGUI;
@@ -55,7 +56,7 @@ public class SepGUI extends Application
   private MenuItem viewTasksMenuItem;
 
 
-  private MyActionListener listener;
+
 
   public void start(Stage window)
   {
@@ -68,7 +69,7 @@ public class SepGUI extends Application
 
     employeeStatisticsGUI = new EmployeeStatisticsGUI(employeeAdapter);
     addANewEmployeeGUI = new AddANewEmployeeGUI();
-    editRemoveEmployeeGUI = new EditRemoveEmployeeGUI();
+    editRemoveEmployeeGUI = new EditRemoveEmployeeGUI(employeeAdapter);
 
     assignTasksGUI1 = new AssignTasksGUI1();
     reportTasksGUI1 = new ReportTasksGUI1();

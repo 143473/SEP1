@@ -1,11 +1,10 @@
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
@@ -41,8 +40,14 @@ public class EditRemoveEmployeeGUI{
     private Button saveButton;
     private Button removeButton;
     private HBox buttonsPane;
+    private EmployeeAdapter employeeAdapter;
+    private MyActionListener listener;
+    private MyListListener listListener;
 
-    public EditRemoveEmployeeGUI() {
+    public EditRemoveEmployeeGUI(EmployeeAdapter employeeAdapter) {
+        this.employeeAdapter = employeeAdapter;
+        listener = new MyActionListener();
+        listListener = new MyListListener();
         titleLabel = new Label("Edit or Remove Employee");
         titleLabel.setFont(new Font("Cambria", 32));
 
@@ -86,12 +91,14 @@ public class EditRemoveEmployeeGUI{
         informationPane.addRow(2, birthdayLabel, birthdayPane);
 
 
-        studentBox = new ComboBox<String>();
-        studentBox.getItems().addAll(
-                "Employee 1",
-                "Employee 2",
-                "Employee 3"
-        );
+        studentListView = new ListView<Employee>();
+        studentListView.setPrefHeight(120);
+        studentListView.getSelectionModel().selectedItemProperty().addListener((listListener));
+
+        listPane = new FlowPane();
+        listPane.setAlignment(Pos.BASELINE_RIGHT);
+        listPane.setPrefWidth(200);
+        listPane.getChildren().add(studentListView);
 
 
         comboPane = new FlowPane();
@@ -112,6 +119,20 @@ public class EditRemoveEmployeeGUI{
 
         mainPane = new VBox();
         mainPane.getChildren().addAll(titleLabel, employeePane, buttonsPane);
+    }
+    private class MyListListener implements ChangeListener<Employee>
+    {
+        public void changed(ObservableValue<? extends Employee> student, Employee oldStudent, Employee newStudent)
+        {
+            Employee temp = studentBox.getSelectionModel().getSelectedItem();
+
+            if (temp != null)
+            {
+                firstNameField.setText(temp.getFirstName());
+                lastNameField.setText(temp.getLastName());
+                dayField.(temp.getDateOfBirth());
+            }
+        }
     }
     public VBox getMainPane(){
         return mainPane;
