@@ -34,8 +34,10 @@ public class SepGUI extends Application
   private Menu projectsMenu;
   private Menu employeesMenu;
   private Menu assignedTasksMenu;
-  private Menu exitMenu;
+  private Menu fileMenu;
 
+  private MenuItem exitMenuItem;
+  private MenuItem homeMenuItem;
   private MenuItem createProject;
   private MenuItem projectsOverview;
   private MenuItem addEmployeeMenuItem;
@@ -44,7 +46,7 @@ public class SepGUI extends Application
   private MenuItem assignMenuItem;
   private MenuItem reportMenuItem;
   private MenuItem viewTasksMenuItem;
-  private MenuItem exitMenuItem;
+
 
   private MyActionListener listener;
 
@@ -70,23 +72,28 @@ public class SepGUI extends Application
     createProject = new MenuItem("Create Project");
     createProject.setOnAction(listener);
     projectsOverview = new MenuItem("Projects Overview");
+    homeMenuItem = new MenuItem("Home");
+    homeMenuItem.setOnAction(listener);
     exitMenuItem = new MenuItem("Exit");
+    exitMenuItem.setOnAction(listener);
 
+    fileMenu = new Menu("File");
     projectsMenu = new Menu("Projects");
     employeesMenu = new Menu("Employees");
     assignedTasksMenu = new Menu("AssignedTasks");
-    exitMenu = new Menu("Exit");
 
-    projectsMenu.getItems().addAll(createProject, projectsOverview, exitMenuItem);
+    fileMenu.getItems().addAll(homeMenuItem,exitMenuItem);
+    projectsMenu.getItems().addAll(createProject, projectsOverview);
     employeesMenu.getItems()
         .addAll(employeesStatisticsMenuItem, addEmployeeMenuItem,
             editRemoveMenuItem);
     assignedTasksMenu.getItems()
         .addAll(assignMenuItem, reportMenuItem, viewTasksMenuItem);
 
+
     menuBar = new MenuBar();
     menuBar.getMenus()
-        .addAll(projectsMenu, employeesMenu, assignedTasksMenu, exitMenu);
+        .addAll(fileMenu, projectsMenu, employeesMenu, assignedTasksMenu);
 
     Font fontSize = new Font("Courier New", 60);
     companyName = new Label("ColourIT");
@@ -116,8 +123,13 @@ public class SepGUI extends Application
 
     public void handle(ActionEvent e)
     {
+      if (e.getSource() == homeMenuItem)
+      {
+        stackPane.getChildren().clear();
+        stackPane.getChildren().add(vBox);
+      }
       //PROJECTS
-      if (e.getSource() == createProject)
+      else if (e.getSource() == createProject)
       {
         stackPane.getChildren().clear();
         stackPane.getChildren().add(createProjectGUI1.getMainPane());
