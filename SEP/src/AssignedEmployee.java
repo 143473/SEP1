@@ -35,8 +35,16 @@ public class AssignedEmployee extends Employee{
      * Gets the employee status of the employee
      * @return the status of the employee
      */
-    public String getEmployeeStatus() {
+    public String getStatusString() {
         return status;
+    }
+
+    /**
+     * Gets the employee status of the employee
+     * @return the status of the employee
+     */
+    public int getStatusInt() {
+        return statusNumber;
     }
 
     /**

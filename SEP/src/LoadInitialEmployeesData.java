@@ -8,20 +8,25 @@ public class LoadInitialEmployeesData {
         EmployeeList employees = new EmployeeList();
 
         MyTextFileIO mtfio = new MyTextFileIO();
-        String[] studentArray = null;
+        String[] employeesArray = null;
         try
         {
-            studentArray = mtfio.readArrayFromFile("students.txt");
+            employeesArray = mtfio.readArrayFromFile("employees.txt");
 
-            for(int i = 0; i<studentArray.length; i++)
+            for(int i = 0; i<employeesArray.length; i++)
             {
-                String temp = studentArray[i];
+                String temp = employeesArray[i];
                 String[] tempArr = temp.split(",");
                 String firstName = tempArr[0];
                 String lastName = tempArr[1];
-                String country = tempArr[2];
+                String dayString = tempArr[2];
+                int day = Integer.parseInt(dayString);
+                String monthString = tempArr[3];
+                int month = Integer.parseInt(monthString);
+                String yearString = tempArr[4];
+                int year = Integer.parseInt(yearString);
 
-                students.add(new Student(firstName, lastName, country));
+                employees.addEmployee(new Employee(firstName, lastName, new MyDate(day, month, year)));
             }
         }
         catch (FileNotFoundException e)
@@ -33,7 +38,7 @@ public class LoadInitialEmployeesData {
 
         try
         {
-            mfio.writeToFile("students.bin", students);
+            mfio.writeToFile("employees.bin", employees);
         }
         catch (FileNotFoundException e)
         {

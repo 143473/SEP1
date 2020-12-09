@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -7,7 +8,7 @@ import java.util.Objects;
  * @version 1.0
  */
 
-public class Employee {
+public class Employee implements Serializable {
     private String firstName, lastName, status;
     private MyDate dateOfBirth;
     private ArrayList<Project> projects;

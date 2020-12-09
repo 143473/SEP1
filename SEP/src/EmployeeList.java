@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -5,7 +6,7 @@ import java.util.ArrayList;
  * @author Marketa Lapcikova
  * @version 1.0
  */
-public class EmployeeList {
+public class EmployeeList implements Serializable {
     private ArrayList<Employee> employeeList;
 
     /**
@@ -31,5 +32,12 @@ public class EmployeeList {
      */
     public void removeEmployee(Employee employee){
         employeeList.remove(employee);
+    }
+
+    public int size(){
+        return employeeList.size();
+    }
+    public Employee get(int index){
+        return employeeList.get(index);
     }
 }

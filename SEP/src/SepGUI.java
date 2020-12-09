@@ -14,8 +14,10 @@ import javafx.scene.text.Font;
 
 public class SepGUI extends Application
 {
+  private EmployeeAdapter employeeAdapter;
 
   private CreateProjectGUI1 createProjectGUI1;
+  private ProjectOverviewGUI projectOverviewGUI;
 
   private EmployeeStatisticsGUI employeeStatisticsGUI;
   private AddANewEmployeeGUI addANewEmployeeGUI;
@@ -60,8 +62,11 @@ public class SepGUI extends Application
     window.setTitle("Student File Adapter GUI 4");
     listener = new MyActionListener();
     createProjectGUI1 = new CreateProjectGUI1();
+    projectOverviewGUI = new ProjectOverviewGUI();
 
-    employeeStatisticsGUI = new EmployeeStatisticsGUI();
+    employeeAdapter = new EmployeeAdapter("employees.bin");
+
+    employeeStatisticsGUI = new EmployeeStatisticsGUI(employeeAdapter);
     addANewEmployeeGUI = new AddANewEmployeeGUI();
     editRemoveEmployeeGUI = new EditRemoveEmployeeGUI();
 
@@ -84,6 +89,7 @@ public class SepGUI extends Application
     createProject = new MenuItem("Create Project");
     createProject.setOnAction(listener);
     projectsOverview = new MenuItem("Projects Overview");
+    projectsOverview.setOnAction(listener);
     homeMenuItem = new MenuItem("Home");
     homeMenuItem.setOnAction(listener);
     exitMenuItem = new MenuItem("Exit");
@@ -135,6 +141,8 @@ public class SepGUI extends Application
 
     public void handle(ActionEvent e)
     {
+      EmployeeList employees = employeeAdapter.getAllEmployees();
+
       if (e.getSource() == homeMenuItem)
       {
         stackPane.getChildren().clear();
@@ -145,6 +153,11 @@ public class SepGUI extends Application
       {
         stackPane.getChildren().clear();
         stackPane.getChildren().add(createProjectGUI1.getMainPane());
+      }
+      else if (e.getSource() == projectsOverview)
+      {
+        stackPane.getChildren().clear();
+        stackPane.getChildren().add(projectOverviewGUI.getMainPane());
       }
 
       //EMPLOYEES

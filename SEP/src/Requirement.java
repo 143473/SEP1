@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Requirement
+public class Requirement implements Serializable
 {
   private int id;
   private double estimatedTime;
@@ -24,7 +25,7 @@ public class Requirement
     this.estimatedTime = estimatedTime;
     this.importance = importance;
     responsibleEmployee = new AssignedEmployee(
-        responsibleEmployee.getFirstName(), responsibleEmployee.getLastName(),responsibleEmployee.getDateOfBirth(),responsibleEmployee.getStatus());
+        responsibleEmployee.getFirstName(), responsibleEmployee.getLastName(),responsibleEmployee.getDateOfBirth(),responsibleEmployee.getStatusInt());
     deadline = new MyDate(9,12,2020);
   }
 
@@ -38,7 +39,7 @@ public class Requirement
   public Requirement(double estimatedTime, AssignedEmployee responsibleEmployee, MyDate deadline)
   {
     this.estimatedTime = estimatedTime;
-    responsibleEmployee = new AssignedEmployee(responsibleEmployee.getFirstName(),responsibleEmployee.getLastName(),responsibleEmployee.getDateOfBirth(),responsibleEmployee.getStatus());
+    responsibleEmployee = new AssignedEmployee(responsibleEmployee.getFirstName(),responsibleEmployee.getLastName(),responsibleEmployee.getDateOfBirth(),responsibleEmployee.getStatusInt());
     deadline = new MyDate(9,12,2020);
     importance = 0;
   }

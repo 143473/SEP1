@@ -1,9 +1,11 @@
+import java.io.Serializable;
+
 /**
  * A class representing the Date that can be used in multiple other classes.
  * @author Bartosz Ochedzan
  * @version 1.0
  */
-public class MyDate
+public class MyDate implements Serializable
 {
   private int day;
   private int month;

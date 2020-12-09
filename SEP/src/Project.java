@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -5,7 +6,7 @@ import java.util.ArrayList;
  * @author Bartosz Ochedzan
  * @version 1.0
  */
-public class Project
+public class Project implements Serializable
 {
   private String name;
   private String description;
