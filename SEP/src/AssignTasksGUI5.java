@@ -58,12 +58,10 @@ public class AssignTasksGUI5 extends Application {
         assignButton = new Button("Assign");
 
         mainPane.getChildren().addAll(titleLabel, informationPane, assignButton);
-
-        Scene scene = new Scene(mainPane, 512, 390);
-
-        window.setScene(scene);
-        window.setResizable(false);
-        window.show();
     }
 
+    public VBox getMainPane()
+    {
+        return mainPane;
+    }
 }

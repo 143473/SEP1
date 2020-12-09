@@ -51,11 +51,10 @@ public class ReportTasksGUI3 extends Application {
 
         mainPane = new VBox();
         mainPane.getChildren().addAll(titleLabel, informationPane, reportButton);
+    }
 
-        Scene scene = new Scene(mainPane, 512, 390);
-
-        window.setScene(scene);
-        window.setResizable(false);
-        window.show();
+    public VBox getMainPane()
+    {
+        return mainPane;
     }
 }

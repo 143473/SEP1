@@ -65,11 +65,10 @@ public class ReportTasksGUI2 extends Application {
 
         mainPane = new VBox(10);
         mainPane.getChildren().addAll(topPane, allAssignedTasksTable, hBoxPaneButton);
+    }
 
-        Scene scene = new Scene(mainPane, 1000, 390);
-
-        window.setScene(scene);
-        window.setResizable(false);
-        window.show();
+    public VBox getMainPane()
+    {
+        return mainPane;
     }
 }

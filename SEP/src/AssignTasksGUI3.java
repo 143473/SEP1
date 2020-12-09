@@ -49,11 +49,10 @@ public class AssignTasksGUI3 extends Application {
 
         mainPane = new VBox(10);
         mainPane.getChildren().addAll(topPane, tasksTable);
+    }
 
-        Scene scene = new Scene(mainPane, 1000, 390);
-
-        window.setScene(scene);
-        window.setResizable(false);
-        window.show();
+    public VBox getMainPane()
+    {
+        return mainPane;
     }
 }
