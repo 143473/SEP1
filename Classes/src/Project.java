@@ -12,6 +12,7 @@ public class Project
   private ProgressStatus status;
   private ArrayList<Requirement> requirements;
   private ArrayList<AssignedEmployee> assignedEmployees;
+  private ArrayList<AssignedEmployee> employeeList;
 
   /**
    * Two-argument constructor.
@@ -64,7 +65,7 @@ public class Project
    * @return true if contains, false if not
    */
   public boolean isAssignedTask(){
-
+return false;
   }
 
   /**
@@ -72,7 +73,7 @@ public class Project
    * @return List of all assigned employees to the project
    */
   public ArrayList<AssignedEmployee> getEmployees(){
-
+  return employeeList;
 }
 
   /**

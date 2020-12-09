@@ -9,6 +9,7 @@ public class Requirement
   private ArrayList<Task> tasks;
   private MyDate deadline;
   private double spentTime;
+  private ArrayList<AssignedEmployee> employeeList;
 
   /**
    * Four-argument constructor that also sets the importance of a requirement
@@ -22,8 +23,9 @@ public class Requirement
   {
     this.estimatedTime = estimatedTime;
     this.importance = importance;
-    responsibleEmployee = new AssignedEmployee();
-    deadline = new MyDate();
+    responsibleEmployee = new AssignedEmployee(
+        responsibleEmployee.getFirstName(), responsibleEmployee.getLastName(),responsibleEmployee.getDateOfBirth(),responsibleEmployee.getStatus());
+    deadline = new MyDate(9,12,2020);
   }
 
   /**
@@ -36,8 +38,8 @@ public class Requirement
   public Requirement(double estimatedTime, AssignedEmployee responsibleEmployee, MyDate deadline)
   {
     this.estimatedTime = estimatedTime;
-    responsibleEmployee = new AssignedEmployee();
-    deadline = new MyDate();
+    responsibleEmployee = new AssignedEmployee(responsibleEmployee.getFirstName(),responsibleEmployee.getLastName(),responsibleEmployee.getDateOfBirth(),responsibleEmployee.getStatus());
+    deadline = new MyDate(9,12,2020);
     importance = 0;
   }
 
@@ -78,7 +80,7 @@ public class Requirement
    */
   public boolean isAssignedTask()
   {
-
+  return false;
   }
 
   /**
@@ -129,7 +131,7 @@ public class Requirement
    */
   public boolean isPastDeadline(MyDate deadline)
   {
-
+  return false;
   }
 
   /**
@@ -199,7 +201,7 @@ public class Requirement
    */
   public ArrayList<AssignedEmployee> getWorkingMembers()
   {
-
+  return employeeList;
   }
 
   /**
@@ -209,7 +211,7 @@ public class Requirement
   public Requirement copy()
   {
     if(importance!=0){
-      return Requirement(estimatedTime, importance, responsibleEmployee, deadline);
-    }else return Requirement(estimatedTime, responsibleEmployee, deadline);
+      return new Requirement(estimatedTime, importance, getResponsibleEmployee(), deadline);
+    }else return new Requirement(estimatedTime, getResponsibleEmployee(), deadline);
   }
 }
