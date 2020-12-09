@@ -1,6 +1,8 @@
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -34,7 +36,7 @@ public class EditRemoveEmployeeGUI{
     private GridPane informationPane;
     private HBox employeePane;
 
-    private ComboBox<String> studentBox;
+    private ListView<Employee> studentListView;
     private FlowPane comboPane;
 
     private Button saveButton;
@@ -67,16 +69,16 @@ public class EditRemoveEmployeeGUI{
 
         dayField = new TextField();
         dayField.setPromptText("dd");
-        dayField.setMaxWidth(40);
-        monthField = new TextField();
+        dayField.setMaxWidth(140);
+       /* monthField = new TextField();
         monthField.setPromptText("mm");
         monthField.setMaxWidth(40);
         yearField = new TextField();
         yearField.setPromptText("yyyy");
-        yearField.setMaxWidth(60);
+        yearField.setMaxWidth(60);*/
 
         birthdayPane = new HBox(5);
-        birthdayPane.getChildren().addAll(dayField, monthField, yearField);
+        birthdayPane.getChildren().addAll(dayField);
 
         firstNameField = new TextField();
         firstNameField.setEditable(false);
@@ -95,20 +97,16 @@ public class EditRemoveEmployeeGUI{
         studentListView.setPrefHeight(120);
         studentListView.getSelectionModel().selectedItemProperty().addListener((listListener));
 
-        listPane = new FlowPane();
+        FlowPane listPane = new FlowPane();
         listPane.setAlignment(Pos.BASELINE_RIGHT);
         listPane.setPrefWidth(200);
         listPane.getChildren().add(studentListView);
 
 
-        comboPane = new FlowPane();
-        comboPane.setAlignment(Pos.BASELINE_RIGHT);
-        comboPane.setPrefWidth(200);
-        comboPane.getChildren().add(studentBox);
 
 
         employeePane = new HBox();
-        employeePane.getChildren().addAll(informationPane, comboPane);
+        employeePane.getChildren().addAll(informationPane, listPane);
 
 
         saveButton = new Button("Save");
@@ -120,17 +118,63 @@ public class EditRemoveEmployeeGUI{
         mainPane = new VBox();
         mainPane.getChildren().addAll(titleLabel, employeePane, buttonsPane);
     }
+    public void updateStudentListView()
+    {
+        int currentIndex = studentListView.getSelectionModel().getSelectedIndex();
+
+        studentListView.getItems().clear();
+
+        EmployeeList students = employeeAdapter.getAllEmployees();
+        for (int i = 0; i < students.size(); i++)
+        {
+            studentListView.getItems().add(students.get(i));
+        }
+
+        if (currentIndex == -1 && studentListView.getItems().size() > 0)
+        {
+            studentListView.getSelectionModel().select(0);
+        }
+        else
+        {
+            studentListView.getSelectionModel().select(currentIndex);
+        }
+    }
+    private class MyActionListener implements EventHandler<ActionEvent>
+    {
+        public void handle(ActionEvent e)
+        {
+            if (e.getSource() == saveButton)
+            {
+                String firstName = firstNameField.getText();
+                String lastName = lastNameField.getText();
+                String day = dayField.getText();
+
+
+
+                if (day.equals(""))
+                {
+                   day = "?";
+                }
+
+                employeeAdapter.changeCountry(firstName, lastName, day);
+                updateStudentListView();
+                dayField.setText("");
+
+
+            }
+        }
+    }
     private class MyListListener implements ChangeListener<Employee>
     {
         public void changed(ObservableValue<? extends Employee> student, Employee oldStudent, Employee newStudent)
         {
-            Employee temp = studentBox.getSelectionModel().getSelectedItem();
+            Employee temp = studentListView.getSelectionModel().getSelectedItem();
 
             if (temp != null)
             {
                 firstNameField.setText(temp.getFirstName());
                 lastNameField.setText(temp.getLastName());
-                dayField.(temp.getDateOfBirth());
+                dayField.setPromptText(temp.toString());
             }
         }
     }

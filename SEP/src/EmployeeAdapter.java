@@ -85,6 +85,21 @@ public class EmployeeAdapter
     }
     return resultEmployees;
   }
+  public void changeCountry(String firstName, String lastName, String birthday)
+  {
+    EmployeeList employees = getAllEmployees();
 
+    for (int i = 0; i < employees.size(); i++)
+    {
+      Employee student = employees.get(i);
+
+      if (student.getFirstName().equals(firstName) && student.getLastName().equals(lastName))
+      {
+        student.getDateOfBirth().toString();
+      }
+    }
+
+    saveEmployees(employees);
+  }
 
 }
