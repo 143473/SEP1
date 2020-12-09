@@ -21,7 +21,7 @@ public class Task
     this.name = name;
     this.description = description;
     this.estimatedTime = estimatedTime;
-    responsibleEmployee = new AssignedEmployee(responsibleEmployee.getFirstName(),responsibleEmployee.getLastName(),responsibleEmployee.getDateOfBirth(),responsibleEmployee.getStatus());
+    responsibleEmployee = new AssignedEmployee(responsibleEmployee.getFirstName(),responsibleEmployee.getLastName(),responsibleEmployee.getDateOfBirth(),responsibleEmployee.getStatusInt());
 
     spentTime = 0;
   }
