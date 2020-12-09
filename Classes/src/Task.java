@@ -6,10 +6,10 @@ public class Task
   private String name;
   private String description;
   private double estimatedTime;
-  private AssignedEmployee responsibleEmployee;
   private ProgressStatus status;
   private MyDate deadline;
-
+  private double spentTime;
+  private ArrayList<AssignedEmployee> employeeList;
   /**
    * Four-Argument Constructor
    * @param name
@@ -17,11 +17,21 @@ public class Task
    * @param estimatedTime
    * @param responsibleEmployee
    */
-  public Task(String name, String description, double estimatedTime, AssignedEmployee responsibleEmployee){
+  public Task(String name, String description,MyDate deadline, double estimatedTime, AssignedEmployee responsibleEmployee){
     this.name = name;
     this.description = description;
     this.estimatedTime = estimatedTime;
-    this.responsibleEmployee = responsibleEmployee;
+    responsibleEmployee = new AssignedEmployee(responsibleEmployee.getFirstName(),responsibleEmployee.getLastName(),responsibleEmployee.getDateOfBirth(),responsibleEmployee.getStatus());
+
+    spentTime = 0;
+  }
+
+  /**
+   * Gets time spent on that task
+   * @return
+   */
+  public double getSpentTime(){
+  return spentTime;
   }
 
   /**
@@ -104,7 +114,7 @@ public class Task
    * @return
    */
   public ArrayList<AssignedEmployee> getWorkingMembers(){
-
+  return employeeList;
 }
 
   /**
@@ -112,6 +122,6 @@ public class Task
    * @return
    */
   public Task copy(){
-    return new Task(name, description, estimatedTime,responsibleEmployee);
+    return new Task(name, description, estimatedTime,getResponsibleEmployee());
   }
 }
