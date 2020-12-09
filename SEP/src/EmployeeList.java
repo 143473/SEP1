@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -5,7 +6,7 @@ import java.util.ArrayList;
  * @author Marketa Lapcikova
  * @version 1.0
  */
-public class EmployeeList {
+public class EmployeeList implements Serializable {
     private ArrayList<Employee> employeeList;
 
     /**

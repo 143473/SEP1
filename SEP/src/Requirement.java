@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Requirement
+public class Requirement implements Serializable
 {
   private int id;
   private double estimatedTime;
