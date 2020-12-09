@@ -35,6 +35,7 @@ public class SepGUI extends Application
   private Image logo;
   private ImageView logoView;
 
+
   private Menu projectsMenu;
   private Menu employeesMenu;
   private Menu assignedTasksMenu;
