@@ -1,20 +1,15 @@
-import javafx.application.Application;
-import javafx.application.Application;
 import javafx.geometry.Insets;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.stage.Stage;
 
-public class ReqOfSelectedPrjGUI extends Application
+public class ReqOfSelectedPrjGUI
 {
-  private Scene scene;
-  private FlowPane mainPane;
+
+  private VBox mainPane;
   private Button add;
   private Button manage;
   private TextField search;
@@ -23,8 +18,7 @@ public class ReqOfSelectedPrjGUI extends Application
   private Label reqname;
   private TableView table;
 
-  public void start(Stage window){
-    window.setTitle("Project Overview");
+  public ReqOfSelectedPrjGUI(){
 
     add = new Button("ADD");
     manage = new Button("MANAGE");
@@ -69,12 +63,14 @@ public class ReqOfSelectedPrjGUI extends Application
     table.setPrefHeight(300);
     table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-    VBox vbox = new VBox(20);
-    vbox.setPadding(new Insets(25, 25, 25, 25));;
-    vbox.getChildren().addAll(hb11, hb2, table);
+    mainPane = new VBox(20);
+    mainPane.setPadding(new Insets(25, 25, 25, 25));;
+    mainPane.getChildren().addAll(hb11, hb2, table);
 
-    Scene scene = new Scene(vbox, 500, 475); // w x h
-    window.setScene(scene);
-    window.show();
+
+  }
+  public VBox getMainPane()
+  {
+    return mainPane;
   }
 }

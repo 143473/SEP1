@@ -11,9 +11,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
-public class ManageTaskGUI extends Application
+public class ManageTaskGUI
 {
-  private Scene scene;
   private Label title;
   private TextField name;
   private TextField estimation;
@@ -30,9 +29,9 @@ public class ManageTaskGUI extends Application
   private Button save;
   private Button cancel;
   private Button remove;
+  private VBox mainPane;
 
-  public void start(Stage window){
-    window.setTitle("Manage Requirement");
+  public ManageTaskGUI(){
 
     title = new Label("Manage Task");
     title.setFont(Font.font("Calibri", FontWeight.BOLD, 20));
@@ -70,12 +69,15 @@ public class ManageTaskGUI extends Application
     hbox.setSpacing(20);
     hbox.getChildren().addAll(vboxforlabels,vbox,vboxforbuttons);
 
-    VBox vbox3 = new VBox(20);
-    vbox3.setSpacing(10);
-    vbox3.setPadding(new Insets(25, 25, 25, 25));;
-    vbox3.getChildren().addAll(title,hbox);
+    mainPane = new VBox(20);
+    mainPane.setSpacing(10);
+    mainPane.setPadding(new Insets(25, 25, 25, 25));;
+    mainPane.getChildren().addAll(title,hbox);
 
-    Scene scene = new Scene(vbox3, 500, 475); // w x h
-    window.setScene(scene);
-    window.show();
-  }}
+
+  }
+  public VBox getMainPane()
+  {
+    return mainPane;
+  }
+}
