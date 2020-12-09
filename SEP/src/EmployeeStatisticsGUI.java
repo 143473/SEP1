@@ -8,6 +8,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.scene.text.Font;
+import javafx.scene.control.TableView.TableViewSelectionModel;
 
 public class EmployeeStatisticsGUI{
     private VBox mainPane;
@@ -20,19 +21,22 @@ public class EmployeeStatisticsGUI{
     private TextField searchField;
     private Button searchButton;
 
-    private TableView allEmployeesTable;
-    private TableView.TableViewSelectionModel defaultSelectionModel;
-    private TableColumn firstNameColumn;
-    private TableColumn lastNameColumn;
-    private TableColumn birthdayColumn;
-    private TableColumn expectedColumn;
+    private TableView<Employee> allEmployeesTable;
+    private TableViewSelectionModel<Employee> defaultSelectionModel;
+    private TableColumn<Employee, String> firstNameColumn;
+    private TableColumn<Employee, String> lastNameColumn;
+    private TableColumn<Employee, String> birthdayColumn;
+    /*private TableColumn expectedColumn;
     private TableColumn actualColumn;
     private TableColumn productivityColumn;
     private TableColumn coWorkersColumn;
     private TableColumn projectsColumn;
-
+*/
 
     public EmployeeStatisticsGUI(){
+
+
+
         titleLabel = new Label("Employee statistics");
         titleLabel.setFont(new Font("Cambria", 32));
 
@@ -48,19 +52,24 @@ public class EmployeeStatisticsGUI{
         topPane = new HBox(400);
         topPane.getChildren().addAll(titleLabel, searchPane);
 
-        allEmployeesTable = new TableView();
+        allEmployeesTable = new TableView<Employee>();
         allEmployeesTable.setPrefHeight(290);
+        defaultSelectionModel = allEmployeesTable.getSelectionModel();
         allEmployeesTable.setTableMenuButtonVisible(true);
 
-        firstNameColumn = new TableColumn("First Name");
+        firstNameColumn = new TableColumn<Employee, String>("First Name");
+        firstNameColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("firstName"));
         firstNameColumn.setPrefWidth(165);
 
-        lastNameColumn = new TableColumn("Last Name");
+        lastNameColumn = new TableColumn<Employee, String>("Last Name");
+        lastNameColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("lastName"));
         lastNameColumn.setPrefWidth(165);
 
-        birthdayColumn = new TableColumn("Birthday");
+        birthdayColumn = new TableColumn<Employee, String>("Birthday");
+        lastNameColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("dateOfBirth"));
         birthdayColumn.setPrefWidth(165);
 
+        /*
         expectedColumn = new TableColumn("Expected number of hours");
         expectedColumn.setPrefWidth(165);
 
@@ -76,24 +85,33 @@ public class EmployeeStatisticsGUI{
         projectsColumn = new TableColumn("Projects");
         projectsColumn.setPrefWidth(165);
 
+
+         */
         firstNameColumn.setReorderable(false);
         lastNameColumn.setReorderable(false);
         birthdayColumn.setReorderable(false);
+        /*
         expectedColumn.setReorderable(false);
         actualColumn.setReorderable(false);
         productivityColumn.setReorderable(false);
         coWorkersColumn.setReorderable(false);
         projectsColumn.setReorderable(false);
 
+
+         */
         allEmployeesTable.getColumns().add(firstNameColumn);
         allEmployeesTable.getColumns().add(lastNameColumn);
         allEmployeesTable.getColumns().add(birthdayColumn);
+
+        /*
         allEmployeesTable.getColumns().add(expectedColumn);
         allEmployeesTable.getColumns().add(actualColumn);
         allEmployeesTable.getColumns().add(productivityColumn);
         allEmployeesTable.getColumns().add(coWorkersColumn);
         allEmployeesTable.getColumns().add(projectsColumn);
 
+
+         */
         mainPane = new VBox(10);
         mainPane.getChildren().addAll(topPane, allEmployeesTable);
     }

@@ -14,6 +14,8 @@ import javafx.scene.text.Font;
 
 public class SepGUI extends Application
 {
+  private EmployeeAdapter employeeAdapter;
+
   private CreateProjectGUI1 createProjectGUI1;
   private ProjectOverviewGUI projectOverviewGUI;
 
@@ -61,6 +63,8 @@ public class SepGUI extends Application
     listener = new MyActionListener();
     createProjectGUI1 = new CreateProjectGUI1();
     projectOverviewGUI = new ProjectOverviewGUI();
+
+    employeeAdapter = new EmployeeAdapter("employees.bin");
 
     employeeStatisticsGUI = new EmployeeStatisticsGUI();
     addANewEmployeeGUI = new AddANewEmployeeGUI();
@@ -137,6 +141,8 @@ public class SepGUI extends Application
 
     public void handle(ActionEvent e)
     {
+      EmployeeList employees = employeeAdapter.getAllEmployees();
+
       if (e.getSource() == homeMenuItem)
       {
         stackPane.getChildren().clear();
