@@ -69,7 +69,7 @@ public class AssignedTasksAdapter
       {
         if (result.get(i).getDate().equals(date))
         {
-          tasksOnDate.add(result.get(i));
+          tasksOnDate.addAssignedTask(result.get(i));
         }
       }
     }
@@ -103,9 +103,9 @@ public class AssignedTasksAdapter
 
       for (int i = 0; i < result.size(); i++)
       {
-        if (result.get(i).getAssignedEmployee().equals(date))
+        if (result.get(i).getAssignedEmployee().equals(employee))
         {
-          tasksOnEmployee.add(result.get(i));
+          tasksOnEmployee.addAssignedTask(result.get(i));
         }
       }
     }
