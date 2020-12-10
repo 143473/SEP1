@@ -6,6 +6,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
@@ -14,11 +15,18 @@ import javafx.scene.text.Font;
 
 public class SepGUI extends Application
 {
-  private EmployeeAdapter employeeAdapter;
-  private MyActionListener listener;
+  private Stage parentStage;
+  private Stage newWindow;
+  private Scene scene;
 
   private CreateProjectGUI1 createProjectGUI1;
+  private CreateProjectGUI2 createProjectGUI2;
+  private CreateProjectGUI3 createProjectGUI3;
   private ProjectOverviewGUI projectOverviewGUI;
+  private ManageProjectGUI manageProjectGUI;
+  private ChangeTeamMembersGUI changeTeamMembersGUI;
+  private ManageRequirementGUI manageRequirementGUI;
+  private ManageTaskGUI manageTaskGUI;
 
   private EmployeeStatisticsGUI employeeStatisticsGUI;
   private AddANewEmployeeGUI addANewEmployeeGUI;
@@ -38,7 +46,6 @@ public class SepGUI extends Application
   private Image logo;
   private ImageView logoView;
 
-
   private Menu projectsMenu;
   private Menu employeesMenu;
   private Menu assignedTasksMenu;
@@ -55,17 +62,25 @@ public class SepGUI extends Application
   private MenuItem reportMenuItem;
   private MenuItem viewTasksMenuItem;
 
+  private MyActionListener listener;
 
-
-
-  public void start(Stage window)
+  public void start(Stage parentStage)
   {
-    window.setTitle("Student File Adapter GUI 4");
+    this.parentStage = parentStage;
+    parentStage.setTitle("Student File Adapter GUI 4");
     listener = new MyActionListener();
-    createProjectGUI1 = new CreateProjectGUI1();
-    projectOverviewGUI = new ProjectOverviewGUI();
+    EmployeeAdapter employeeAdapter = new EmployeeAdapter("employees.bin");
+    ProjectsAdapter projectsAdapter = new ProjectsAdapter("");
 
-    employeeAdapter = new EmployeeAdapter("employees.bin");
+    createProjectGUI1 = new CreateProjectGUI1(projectsAdapter);
+    createProjectGUI2 = new CreateProjectGUI2();
+    createProjectGUI3 = new CreateProjectGUI3();
+    projectOverviewGUI = new ProjectOverviewGUI();
+    manageProjectGUI = new ManageProjectGUI();
+    changeTeamMembersGUI = new ChangeTeamMembersGUI();
+    manageRequirementGUI = new ManageRequirementGUI();
+    manageTaskGUI = new ManageTaskGUI();
+
 
     employeeStatisticsGUI = new EmployeeStatisticsGUI(employeeAdapter);
     addANewEmployeeGUI = new AddANewEmployeeGUI(employeeAdapter);
@@ -101,14 +116,13 @@ public class SepGUI extends Application
     employeesMenu = new Menu("Employees");
     assignedTasksMenu = new Menu("AssignedTasks");
 
-    fileMenu.getItems().addAll(homeMenuItem,exitMenuItem);
+    fileMenu.getItems().addAll(homeMenuItem, exitMenuItem);
     projectsMenu.getItems().addAll(createProject, projectsOverview);
     employeesMenu.getItems()
         .addAll(employeesStatisticsMenuItem, addEmployeeMenuItem,
             editRemoveMenuItem);
     assignedTasksMenu.getItems()
         .addAll(assignMenuItem, reportMenuItem, viewTasksMenuItem);
-
 
     menuBar = new MenuBar();
     menuBar.getMenus()
@@ -130,89 +144,201 @@ public class SepGUI extends Application
 
     mainPane = new VBox();
     mainPane.getChildren().addAll(menuBar, stackPane);
-    Scene scene = new Scene(mainPane, 1000, 500);
+    scene = new Scene(mainPane, 1000, 500);
 
-    window.setScene(scene);
-    window.setResizable(false);
-    window.show();
+    parentStage.setScene(scene);
+    parentStage.setResizable(false);
+    parentStage.show();
+
+    // Pop -up window with full list of employees
+    // New window (Stage)
+    newWindow = new Stage();
+    newWindow.setTitle("Choose Employee");
+    scene = new Scene(createProjectGUI2.getNewWindowPane());
+    newWindow.setScene(scene);
+
+    // Specifies the modality for new window.
+    newWindow.initModality(Modality.WINDOW_MODAL);
+
+    // Specifies the owner Window (parent) for new window
+    newWindow.initOwner(parentStage);
+
+    // Set position of second window, related to primary window.
+    newWindow.setX(parentStage.getX() + 200);
+    newWindow.setY(parentStage.getY() + 100);
+
+
   }
 
   private class MyActionListener implements EventHandler<ActionEvent>
   {
-
     public void handle(ActionEvent e)
     {
-      EmployeeList employees = employeeAdapter.getAllEmployees();
+      createProjectGUI1.getButtonContinue().setOnAction(listener);
+      createProjectGUI2.getContinueButton().setOnAction(listener);
+      createProjectGUI2.getGoBackButton().setOnAction(listener);
+      createProjectGUI2.getAddTeamMember().setOnAction(listener);
+      createProjectGUI2.getAdd().setOnAction(listener);
+      createProjectGUI3.getFinishButton().setOnAction(listener);
+      createProjectGUI3.getGoBackButton().setOnAction(listener);
+      projectOverviewGUI.getAdd().setOnAction(listener);
+      projectOverviewGUI.getManage().setOnAction(listener);
+      manageProjectGUI.getManageTeamMembers().setOnAction(listener);
+      manageProjectGUI.getCancel().setOnAction(listener);
+      changeTeamMembersGUI.getCancel().setOnAction(listener);
+      changeTeamMembersGUI.getAddButton().setOnAction(listener);
 
       if (e.getSource() == homeMenuItem)
       {
         stackPane.getChildren().clear();
         stackPane.getChildren().add(vBox);
       }
+
       //PROJECTS
+      //Create Project
       else if (e.getSource() == createProject)
       {
         stackPane.getChildren().clear();
         stackPane.getChildren().add(createProjectGUI1.getMainPane());
       }
-      else if (e.getSource() == projectsOverview)
+      else if (e.getSource() == createProjectGUI1.getButtonContinue())
+        {
+          stackPane.getChildren().clear();
+          stackPane.getChildren().add(createProjectGUI2.getMainPane());
+        }
+      else if (e.getSource() == createProjectGUI2.getContinueButton())
+      {
+        stackPane.getChildren().clear();
+        stackPane.getChildren().add(createProjectGUI3.getMainPane());
+      }
+      else if (e.getSource() == createProjectGUI2.getGoBackButton())
+      {
+        stackPane.getChildren().clear();
+        stackPane.getChildren().add(createProjectGUI1.getMainPane());
+      }
+      //Pop-up Change Team Members
+      else if (e.getSource() == createProjectGUI2.getAddTeamMember())
+      {
+        newWindow.show();
+      }
+      else if (e.getSource() == createProjectGUI2.getAdd())
+      {
+        newWindow.close();
+      }
+      //Continue Create Project
+      else if (e.getSource() == createProjectGUI3.getFinishButton())
+      {
+        stackPane.getChildren().clear();
+        stackPane.getChildren().add(projectOverviewGUI.getMainPane());
+      }
+      else if (e.getSource() == createProjectGUI3.getGoBackButton())
+      {
+        stackPane.getChildren().clear();
+        stackPane.getChildren().add(createProjectGUI2.getMainPane());
+      }
+
+      //Projects Overview
+        else if (e.getSource() == projectsOverview)
+        {
+          stackPane.getChildren().clear();
+          stackPane.getChildren().add(projectOverviewGUI.getMainPane());
+        }
+        else if (e.getSource() == projectOverviewGUI.getAdd())
+      {
+        stackPane.getChildren().clear();
+        stackPane.getChildren().add(createProjectGUI1.getMainPane());
+      }
+
+        //Manage Projects
+        else if (e.getSource() == projectOverviewGUI.getManage())
+      {
+        stackPane.getChildren().clear();
+        stackPane.getChildren().add(manageProjectGUI.getMainPane());
+      }
+        else if(e.getSource() == manageProjectGUI.getCancel())
       {
         stackPane.getChildren().clear();
         stackPane.getChildren().add(projectOverviewGUI.getMainPane());
       }
 
-      //EMPLOYEES
-      else if(e.getSource() == employeesStatisticsMenuItem)
+        //Change Team Members - editing existing list of team-members
+        else if(e.getSource() == manageProjectGUI.getManageTeamMembers())
       {
         stackPane.getChildren().clear();
-        stackPane.getChildren().add(employeeStatisticsGUI.getMainPane());
+        stackPane.getChildren().add(changeTeamMembersGUI.getMainPane());
       }
-      else if(e.getSource() == addEmployeeMenuItem)
+        else if(e.getSource() == changeTeamMembersGUI.getCancel())
       {
         stackPane.getChildren().clear();
-        stackPane.getChildren().add(addANewEmployeeGUI.getMainPane());
+        stackPane.getChildren().add(manageProjectGUI.getMainPane());
       }
-      else if(e.getSource() == editRemoveMenuItem)
+        //Pop-up Change Team Members
+      else if (e.getSource() == changeTeamMembersGUI.getAddButton())
       {
-        stackPane.getChildren().clear();
-        stackPane.getChildren().add(editRemoveEmployeeGUI.getMainPane());
+        newWindow.show();
       }
-
-
-      //ASSIGNED TASKS
-      else if(e.getSource() == assignMenuItem)
+      else if (e.getSource() == createProjectGUI2.getAdd())
       {
-        stackPane.getChildren().clear();
-        stackPane.getChildren().add(assignTasksGUI1.getMainPane());
-      }
-      else if(e.getSource() == reportMenuItem)
-      {
-        stackPane.getChildren().clear();
-        stackPane.getChildren().add(reportTasksGUI1.getMainPane());
-      }
-      else if(e.getSource() == viewTasksMenuItem)
-      {
-        stackPane.getChildren().clear();
-        stackPane.getChildren().add(viewAssignedTasksGUI1.getMainPane());
+        newWindow.close();
       }
 
-      //EXIT
-      else if (e.getSource() == exitMenuItem)
-      {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
-                "Do you really want to exit the program?",
-                ButtonType.YES, ButtonType.NO);
-        alert.setTitle("Exit");
-        alert.setHeaderText(null);
+        //Manage Requirements
 
-        alert.showAndWait();
+        //Manage Tasks
 
-        if (alert.getResult() == ButtonType.YES)
+
+        //EMPLOYEES
+        else if (e.getSource() == employeesStatisticsMenuItem)
         {
-          System.exit(0);
+          stackPane.getChildren().clear();
+          stackPane.getChildren().add(employeeStatisticsGUI.getMainPane());
+        }
+        else if (e.getSource() == addEmployeeMenuItem)
+        {
+          stackPane.getChildren().clear();
+          stackPane.getChildren().add(addANewEmployeeGUI.getMainPane());
+        }
+        else if (e.getSource() == editRemoveMenuItem)
+        {
+          stackPane.getChildren().clear();
+          stackPane.getChildren().add(editRemoveEmployeeGUI.getMainPane());
+        }
+
+        //ASSIGNED TASKS
+        else if (e.getSource() == assignMenuItem)
+        {
+          stackPane.getChildren().clear();
+          stackPane.getChildren().add(assignTasksGUI1.getMainPane());
+        }
+        else if (e.getSource() == reportMenuItem)
+        {
+          stackPane.getChildren().clear();
+          stackPane.getChildren().add(reportTasksGUI1.getMainPane());
+        }
+        else if (e.getSource() == viewTasksMenuItem)
+        {
+          stackPane.getChildren().clear();
+          stackPane.getChildren().add(viewAssignedTasksGUI1.getMainPane());
+        }
+
+        //EXIT
+        else if (e.getSource() == exitMenuItem)
+        {
+          Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+              "Do you really want to exit the program?", ButtonType.YES,
+              ButtonType.NO);
+          alert.setTitle("Exit");
+          alert.setHeaderText(null);
+
+          alert.showAndWait();
+
+          if (alert.getResult() == ButtonType.YES)
+          {
+            System.exit(0);
+          }
         }
       }
-
     }
-  }
 }
+
+
