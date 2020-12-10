@@ -289,8 +289,10 @@ public class SepGUI extends Application
       }
       else if (e.getSource() == createProjectGUI2.getAdd())
       {
-        createProjectGUI2.callAdd();
-        newWindow.close();
+        if(createProjectGUI2.callAdd()){
+          newWindow.close();
+        }
+
       }
       //Continue Create Project
       else if (e.getSource() == createProjectGUI3.getFinishButton())
