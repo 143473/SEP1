@@ -95,7 +95,7 @@ public class EmployeeAdapter
 
       if (student.getFirstName().equals(firstName) && student.getLastName().equals(lastName))
       {
-        student.getDateOfBirth().toString();
+        student.getDateOfBirth().copy().toString();
       }
     }
 
