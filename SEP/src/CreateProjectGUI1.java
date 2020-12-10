@@ -72,12 +72,12 @@ public class CreateProjectGUI1
     public void handle(ActionEvent e) {
       if(e.getSource() == buttonContinue){
         boolean allValuesCorrect = true;
-        if(inputName.getText() == null || inputName.getText().trim().isEmpty()){
+        if(inputName.getText().equals("") || inputName.getText().trim().isEmpty()){
           JOptionPane.showMessageDialog(null, "Project name cannot be empty!",
                   "Invalid input", JOptionPane.ERROR_MESSAGE);
           allValuesCorrect = false;
         }
-        else if(inputDescription.getText() == null || inputDescription.getText().trim().isEmpty()){
+        else if(inputDescription.getText().equals("") || inputDescription.getText().trim().isEmpty()){
           JOptionPane.showMessageDialog(null, "Project description cannot be empty!",
                   "Invalid input", JOptionPane.ERROR_MESSAGE);
           allValuesCorrect = false;
