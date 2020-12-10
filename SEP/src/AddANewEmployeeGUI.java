@@ -1,6 +1,7 @@
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -118,18 +119,24 @@ public class AddANewEmployeeGUI{
                 boolean allValuesCorrect = true;
                 MyDate dateOfBirth;
                 if(nameField.getText() == null || nameField.getText().trim().isEmpty()){
-                    JOptionPane.showMessageDialog(null, "First name cannot be empty!",
-                            "Invalid input", JOptionPane.ERROR_MESSAGE);
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setHeaderText("Invalid input");
+                    alert.setContentText("First name cannot be empty!");
+                    alert.showAndWait();
                     allValuesCorrect = false;
                 }
                 else if(lastNameField.getText() == null || lastNameField.getText().trim().isEmpty()){
-                    JOptionPane.showMessageDialog(null, "Last name cannot be empty!",
-                            "Invalid input", JOptionPane.ERROR_MESSAGE);
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setHeaderText("Invalid input");
+                    alert.setContentText("Last name cannot be empty!");
+                    alert.showAndWait();
                     allValuesCorrect = false;
                 }
                 else if(dayField.getText().isEmpty() || monthField.getText().isEmpty() || yearField.getText().isEmpty()){
-                    JOptionPane.showMessageDialog(null, "Date of birth cannot be empty!",
-                            "Invalid input", JOptionPane.ERROR_MESSAGE);
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setHeaderText("Invalid input");
+                    alert.setContentText("Date of birth cannot be empty!");
+                    alert.showAndWait();
                     allValuesCorrect = false;
                 }
                 else{
@@ -138,21 +145,27 @@ public class AddANewEmployeeGUI{
                         temporary = Integer.parseInt(monthField.getText());
                         temporary = Integer.parseInt(yearField.getText());
                     } catch (NumberFormatException nfe) {
-                        JOptionPane.showMessageDialog(null, "Values in date of birth have to be numbers!",
-                                "Invalid input", JOptionPane.ERROR_MESSAGE);
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setHeaderText("Invalid input");
+                        alert.setContentText("Values in date of birth have to be numbers!");
+                        alert.showAndWait();
                         allValuesCorrect = false;
                     }
                 }
                 if(allValuesCorrect){
                     dateOfBirth = new MyDate(Integer.parseInt(dayField.getText().replaceFirst("^0+(?!$)", "")), Integer.parseInt(monthField.getText().replaceFirst("^0+(?!$)", "")), Integer.parseInt(yearField.getText().replaceFirst("^0+(?!$)", "")));
                     if(!dateOfBirth.is15Years()){
-                        JOptionPane.showMessageDialog(null, "Employee has to be at least 15 years old!",
-                                "Invalid input", JOptionPane.ERROR_MESSAGE);
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setHeaderText("Invalid input");
+                        alert.setContentText("Employee has to be at least 15 years old!");
+                        alert.showAndWait();
                         allValuesCorrect = false;
                     }
                     else if(!dateOfBirth.isValidDate()){
-                        JOptionPane.showMessageDialog(null, "Entered date is not valid!",
-                                "Invalid input", JOptionPane.ERROR_MESSAGE);
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setHeaderText("Invalid input");
+                        alert.setContentText("Entered date is not valid!");
+                        alert.showAndWait();
                         allValuesCorrect = false;
                     }
                     if(allValuesCorrect){
@@ -161,12 +174,16 @@ public class AddANewEmployeeGUI{
                         if(!employeeList.containsEmployee(newEmployee)){
                             employeeList.addEmployee(newEmployee);
                             employeeAdapter.saveEmployees(employeeList);
-                            JOptionPane.showMessageDialog(null, "New employee was successfully added!",
-                                    "Message", JOptionPane.INFORMATION_MESSAGE);
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setHeaderText("Message");
+                            alert.setContentText("New employee was successfully added!");
+                            alert.showAndWait();
                         }
                         else{
-                            JOptionPane.showMessageDialog(null, "This employee is already in the list!",
-                                    "Duplicate employee", JOptionPane.ERROR_MESSAGE);
+                            Alert alert = new Alert(Alert.AlertType.WARNING);
+                            alert.setHeaderText("Duplicate employee");
+                            alert.setContentText("This employee is already in the list!");
+                            alert.showAndWait();
                         }
 
                     }

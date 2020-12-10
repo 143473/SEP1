@@ -12,6 +12,7 @@ import javafx.scene.text.Font;
  * @version 1.0
  */
 public class ReportTasksGUI3 {
+    private ProjectList projectList;
     private VBox mainPane;
     private HBox topPane;
     private HBox bottomButtons;
@@ -57,6 +58,9 @@ public class ReportTasksGUI3 {
         mainPane.getChildren().addAll(titleLabel, informationPane, bottomButtons);
     }
 
+    public void setProjectList(ProjectList projectList){
+        this.projectList = projectList;
+    }
     public VBox getMainPane()
     {
         return mainPane;
