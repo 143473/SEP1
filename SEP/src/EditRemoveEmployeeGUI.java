@@ -16,6 +16,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import javax.swing.*;
+
 public class EditRemoveEmployeeGUI{
     private Label titleLabel;
 
@@ -70,12 +72,12 @@ public class EditRemoveEmployeeGUI{
         dayField = new TextField();
         dayField.setPromptText("dd");
         dayField.setMaxWidth(140);
-       /* monthField = new TextField();
+        monthField = new TextField();
         monthField.setPromptText("mm");
         monthField.setMaxWidth(40);
         yearField = new TextField();
         yearField.setPromptText("yyyy");
-        yearField.setMaxWidth(60);*/
+        yearField.setMaxWidth(60);
 
         birthdayPane = new HBox(5);
         birthdayPane.getChildren().addAll(dayField);
@@ -147,19 +149,15 @@ public class EditRemoveEmployeeGUI{
             {
                 String firstName = firstNameField.getText();
                 String lastName = lastNameField.getText();
-                String day = dayField.getText();
+                MyDate day = new MyDate(Integer.parseInt(dayField.getText()), Integer.parseInt(monthField.getText()), Integer.parseInt(yearField.getText()));
+                //employee's index in the EmployeeList
+                int index = studentListView.getSelectionModel().getSelectedIndex();
 
-
-
-                if (day.equals(""))
-                {
-                   day = "?";
-                }
-
-                employeeAdapter.changeCountry(firstName, lastName, day);
+                employeeAdapter.saveChangedEmployee(firstName, lastName, day, index);
                 updateStudentListView();
                 dayField.setText("");
-
+                JOptionPane.showMessageDialog(null, "Changes were saved successfully!",
+                        "Editing successful", JOptionPane.INFORMATION_MESSAGE);
 
             }
         }
