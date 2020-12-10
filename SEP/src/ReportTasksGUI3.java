@@ -15,6 +15,8 @@ public class ReportTasksGUI3 {
     private ProjectList projectList;
     private VBox mainPane;
     private HBox topPane;
+    private HBox bottomButtons;
+    private GridPane informationPane;
 
     private Label titleLabel;
     private Label numberOfHoursLabel;
@@ -23,7 +25,7 @@ public class ReportTasksGUI3 {
     private CheckBox finishedField;
 
     private Button reportButton;
-    private GridPane informationPane;
+    private Button goBackButton;
 
     public ReportTasksGUI3(){
 
@@ -47,9 +49,13 @@ public class ReportTasksGUI3 {
         informationPane.setVgap(10);
 
         reportButton = new Button("Report");
+        goBackButton = new Button("Go back");
 
-        mainPane = new VBox(5);
-        mainPane.getChildren().addAll(titleLabel, informationPane, reportButton);
+        bottomButtons = new HBox(5);
+        bottomButtons.getChildren().addAll(reportButton,goBackButton);
+
+        mainPane = new VBox(10);
+        mainPane.getChildren().addAll(titleLabel, informationPane, bottomButtons);
     }
 
     public void setProjectList(ProjectList projectList){
@@ -58,5 +64,10 @@ public class ReportTasksGUI3 {
     public VBox getMainPane()
     {
         return mainPane;
+    }
+
+    public Button getGoBackButton()
+    {
+        return goBackButton;
     }
 }

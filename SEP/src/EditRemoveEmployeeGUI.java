@@ -150,12 +150,16 @@ public class EditRemoveEmployeeGUI{
 
                         employeeAdapter.saveChangedEmployee(firstName, lastName, day, index);
                         initializeListView();
-                        JOptionPane.showMessageDialog(null, "Changes were saved successfully!",
-                                "Editing successful", JOptionPane.INFORMATION_MESSAGE);
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setHeaderText("Editing successful");
+                        alert.setContentText("Changes were saved successfully!");
+                        alert.showAndWait();
                 }
                 else{
-                    JOptionPane.showMessageDialog(null, "No employee was chosen!",
-                            "Editing unsuccessful", JOptionPane.ERROR_MESSAGE);
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setHeaderText("Editing unsuccessful");
+                    alert.setContentText("No employee was chosen!");
+                    alert.showAndWait();
                 }
 
             }
@@ -172,15 +176,19 @@ public class EditRemoveEmployeeGUI{
 
                     if (alert.getResult() == ButtonType.YES) {
                         employeeAdapter.deleteEmployee(index);
-                        JOptionPane.showMessageDialog(null, "Changes were saved successfully!",
-                                "Editing successful", JOptionPane.INFORMATION_MESSAGE);
+                        Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
+                        alert2.setHeaderText("Editing successful");
+                        alert2.setContentText("Changes were saved successfully!");
+                        alert2.showAndWait();
                         initializeListView();
                         //clear fields
                     }
                 }
                 else{
-                    JOptionPane.showMessageDialog(null, "No employee was chosen!",
-                            "Editing unsuccessful", JOptionPane.ERROR_MESSAGE);
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setHeaderText("Editing unsuccessful");
+                    alert.setContentText("No employee was chosen!");
+                    alert.showAndWait();
                 }
             }
         }
@@ -192,8 +200,6 @@ public class EditRemoveEmployeeGUI{
         for (int i = 0; i < employees.size(); i++) {
             employeeListView.getItems().add(employees.get(i));
         }
-        System.out.println("whatever");
-
     }
     public VBox getMainPane(){
         initializeListView();
