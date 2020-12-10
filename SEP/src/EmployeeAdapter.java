@@ -85,20 +85,17 @@ public class EmployeeAdapter
     }
     return resultEmployees;
   }
-  public void changeCountry(String firstName, String lastName, String birthday)
+  public void saveChangedEmployee(String firstName, String lastName, MyDate birthday, int indexInList)
   {
+    Employee changedEmployee = new Employee(firstName, lastName, birthday);
     EmployeeList employees = getAllEmployees();
 
-    for (int i = 0; i < employees.size(); i++)
-    {
-      Employee student = employees.get(i);
-
-      if (student.getFirstName().equals(firstName) && student.getLastName().equals(lastName))
-      {
-        student.getDateOfBirth().copy().toString();
+    for (int i = 0; i < employees.size(); i++) {
+      if(i == indexInList){
+        employees.removeEmployee(employees.get(i));
+        employees.addEmployee(changedEmployee);
       }
     }
-
     saveEmployees(employees);
   }
 
