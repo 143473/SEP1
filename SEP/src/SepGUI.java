@@ -85,7 +85,7 @@ public class SepGUI extends Application
     EmployeeAdapter employeeAdapter = new EmployeeAdapter("employees.bin");
     ProjectsAdapter projectsAdapter = new ProjectsAdapter("y");
 
-    createProjectGUI1 = new CreateProjectGUI1(projectsAdapter);
+    createProjectGUI1 = new CreateProjectGUI1(projectsAdapter, this);
     createProjectGUI2 = new CreateProjectGUI2(employeeAdapter);
     createProjectGUI3 = new CreateProjectGUI3();
     projectOverviewGUI = new ProjectOverviewGUI(projectsAdapter);
@@ -194,6 +194,9 @@ public class SepGUI extends Application
     newWindow.setY(parentStage.getY() + 100);
 
 
+  }
+  public CreateProjectGUI2 getCreateProjectGUI2(){
+    return createProjectGUI2;
   }
 
   private class MyActionListener implements EventHandler<ActionEvent>
