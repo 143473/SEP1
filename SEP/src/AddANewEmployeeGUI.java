@@ -11,6 +11,12 @@ import javafx.scene.text.Font;
 
 import javax.swing.*;
 
+/**
+ *  A class handling adding a new employee
+ *  * @author Marketa Lapcikova
+ *  * @version 1.0
+ */
+
 public class AddANewEmployeeGUI{
     private EmployeeAdapter employeeAdapter;
 
@@ -36,6 +42,10 @@ public class AddANewEmployeeGUI{
 
     private MyActionListener listener;
 
+    /**
+     *  1-argument constructor initializing all the parts of the GUI
+     * @param employeeAdapter adapter of this class
+     */
     public AddANewEmployeeGUI(EmployeeAdapter employeeAdapter) {
         this.employeeAdapter = employeeAdapter;
 
@@ -86,11 +96,23 @@ public class AddANewEmployeeGUI{
 
         mainPane.getChildren().addAll(titleLabel, informationPane, addButton);
     }
+
+    /**
+     * Gets the main pane of the class
+     * @return VBox main pane
+     */
     public VBox getMainPane(){
         return mainPane;
     }
 
+    /**
+     * Handles the actions in this class
+     */
     private class MyActionListener implements EventHandler<ActionEvent> {
+        /**
+         * Handles the actions of this class
+         * @param e event that happens
+         */
         public void handle(ActionEvent e) {
             if(e.getSource() == addButton){
                 boolean allValuesCorrect = true;

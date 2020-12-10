@@ -67,7 +67,6 @@ public class Employee implements Serializable {
     }
 
 
-
     /**
      * Sets first name(s) of the employee in case of change
      * @param firstName first name(s) of the employee
@@ -108,18 +107,29 @@ public class Employee implements Serializable {
         return dateOfBirth.copy();
     }
 
+    /**
+     * Gets the day of birth of the employee
+     * @return int day of birth of the employee
+     */
     public int getDayOfBirth(){
         return dateOfBirth.getDay();
     }
 
+    /**
+     * Gets the month of birth of the employee
+     * @return int month of birth of the employee
+     */
     public int getMonthOfBirth(){
         return dateOfBirth.getMonth();
     }
 
+    /**
+     * Gets the year of birth of the employee
+     * @return int year of birth of the employee
+     */
     public int getYearOfBirth(){
         return dateOfBirth.getYear();
     }
-
 
     /**
      * Compares the Employee with another object
@@ -136,6 +146,10 @@ public class Employee implements Serializable {
                 dateOfBirth.equals(other.dateOfBirth);
     }
 
+    /**
+     * Gets the employee information in the String format
+     * @return String information of the employee
+     */
     public String toString(){
         return firstName+" "+lastName+" ("+getDayOfBirth()+"/"+getMonthOfBirth()+"/"+getYearOfBirth()+")";
     }

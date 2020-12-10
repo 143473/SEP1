@@ -18,6 +18,11 @@ import javafx.stage.Stage;
 
 import javax.swing.*;
 
+/**
+ *  A class handling editing and removing employees
+ *  * @author Marketa Lapcikova
+ *  * @version 1.0
+ */
 public class EditRemoveEmployeeGUI{
     private Label titleLabel;
 
@@ -49,6 +54,10 @@ public class EditRemoveEmployeeGUI{
     private MyActionListener listener;
     private MyListListener listListener;
 
+    /**
+     *  1-argument constructor initializing all the parts of the GUI
+     * @param employeeAdapter adapter of this class
+     */
     public EditRemoveEmployeeGUI(EmployeeAdapter employeeAdapter) {
         this.employeeAdapter = employeeAdapter;
         listener = new MyActionListener();
@@ -120,6 +129,10 @@ public class EditRemoveEmployeeGUI{
         mainPane = new VBox();
         mainPane.getChildren().addAll(titleLabel, employeePane, buttonsPane);
     }
+
+    /**
+     * Handles the actions in this class
+     */
     private class MyActionListener implements EventHandler<ActionEvent>
     {
         public void handle(ActionEvent e)

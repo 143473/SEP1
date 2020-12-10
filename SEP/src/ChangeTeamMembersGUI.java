@@ -10,6 +10,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
+/**
+ *  A class handling changing the team members
+ *  * @author Marketa Lapcikova
+ *  * @version 1.0
+ */
 public class ChangeTeamMembersGUI {
 
   private VBox mainPane;
@@ -25,6 +30,9 @@ public class ChangeTeamMembersGUI {
   private TableColumn lastNameColumn;
   private TableColumn birthdayColumn;
 
+  /**
+   *  0-argument constructor initializing all the parts of the GUI
+   */
   public ChangeTeamMembersGUI()
   {
     title = new Label("Team Members");
@@ -58,16 +66,29 @@ public class ChangeTeamMembersGUI {
 
 
   }
+
+  /**
+   * Gets the main pane of the class
+   * @return VBox Main pane
+   */
   public VBox getMainPane()
   {
     return mainPane;
   }
 
+  /**
+   * Gets the button Cancel of type Button
+   * @return Button cancelButton
+   */
   public Button getCancel()
   {
     return cancelButton;
   }
 
+  /**
+   * Gets the button Add of type Button
+   * @return Button addButtons
+   */
   public Button getAddButton()
   {
     return addButton;

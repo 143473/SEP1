@@ -21,6 +21,13 @@ public class AssignedEmployee extends Employee{
         this.status = employeeStatus.chooseStatus(statusNumber);
         this.statusNumber = statusNumber;
     }
+
+    /**
+     * 3-argument constructor setting first and last name and date of birth of the employee
+     * @param firstName first name(s) of the employee
+     * @param lastName last name(s) of the employee
+     * @param dateOfBirth date of birth of the employee
+     */
     public AssignedEmployee(String firstName, String lastName, MyDate dateOfBirth){
         super(firstName, lastName, dateOfBirth);
         EmployeeStatus employeeStatus = new EmployeeStatus();
