@@ -144,9 +144,10 @@ public class CreateProjectGUI2 {
 
         if (alert.getResult() == ButtonType.YES) {
           teamMembersTable.getItems().remove(teamMembersTable.getSelectionModel().getSelectedItem());
-          JOptionPane
-                  .showMessageDialog(null, "Changes were saved successfully!",
-                          "Editing successful", JOptionPane.INFORMATION_MESSAGE);
+          Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
+          alert2.setHeaderText("Editing successful");
+          alert2.setContentText("Changes were saved successfully!");
+          alert2.showAndWait();
         }
       }
     }
