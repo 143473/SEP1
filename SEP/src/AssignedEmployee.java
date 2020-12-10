@@ -21,6 +21,12 @@ public class AssignedEmployee extends Employee{
         this.status = employeeStatus.chooseStatus(statusNumber);
         this.statusNumber = statusNumber;
     }
+    public AssignedEmployee(String firstName, String lastName, MyDate dateOfBirth){
+        super(firstName, lastName, dateOfBirth);
+        EmployeeStatus employeeStatus = new EmployeeStatus();
+        this.status = employeeStatus.chooseStatus(3);
+        this.statusNumber = 3;
+    }
 
     /**
      * Sets status of the employee in case of the change
