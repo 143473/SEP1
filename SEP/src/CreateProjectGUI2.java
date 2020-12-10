@@ -111,6 +111,14 @@ public class CreateProjectGUI2
     {
       Employee temp = employeeListView.getSelectionModel().getSelectedItem();
 
+      if(e.getSource() == searchButton){
+        String searchingFor = searchField.getText();
+        employeeListView.getItems().clear();
+        EmployeeList chosenEmployees = employeeAdapter.getEmployeesByName(searchingFor);
+        for (int i = 0; i < chosenEmployees.size(); i++) {
+          employeeListView.getItems().add(chosenEmployees.get(i));
+        }
+      }
     }
   }
 
@@ -123,8 +131,6 @@ public class CreateProjectGUI2
     {
       employeeListView.getItems().add(employees.get(i));
     }
-    System.out.println("ASS");
-
   }
 
   public VBox getMainPane()

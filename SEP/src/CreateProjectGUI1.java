@@ -68,6 +68,7 @@ public class CreateProjectGUI1
 
   private class MyActionListener implements EventHandler<ActionEvent> {
     public void handle(ActionEvent e) {
+      boolean canCreateAButton = false;
       if(e.getSource() == buttonContinue){
         boolean allValuesCorrect = true;
         if(inputName.getText() == null || inputName.getText().trim().isEmpty()){
@@ -75,33 +76,28 @@ public class CreateProjectGUI1
                   "Invalid input", JOptionPane.ERROR_MESSAGE);
           allValuesCorrect = false;
         }
-        else if(inputDescription.getText() == null || inputDescription.getText().trim().isEmpty()){
+        else if(inputDescription.getText() == null || inputDescription.getText().trim().isEmpty()) {
           JOptionPane.showMessageDialog(null, "Project description cannot be empty!",
                   "Invalid input", JOptionPane.ERROR_MESSAGE);
           allValuesCorrect = false;
         }
+        ProjectList projectList = projectsAdapter.getAllProjects();
+        Project newProject = new Project(inputName.getText(), inputDescription.getText());
+        if(projectList.containsProject(newProject)){
+          JOptionPane.showMessageDialog(null, "This project already exists!",
+                  "Duplicate employee", JOptionPane.ERROR_MESSAGE);
+          allValuesCorrect = false;
+        }
         if(allValuesCorrect == true){
-          ProjectList projectList = projectsAdapter.getAllProjects();
-          Project newProject = new Project(inputName.getText(), inputDescription.getText());
-          if(!projectList.containsProject(newProject)){
-            System.out.println("adding it");
-            projectList.addProject(newProject);
-            projectsAdapter.saveProjects(projectList);
-            JOptionPane.showMessageDialog(null, "New project was successfully added!",
-                    "Message", JOptionPane.INFORMATION_MESSAGE);
-          }
-          else{
-            System.out.println("not adding it");
-            JOptionPane.showMessageDialog(null, "This project already exists!",
-                    "Duplicate employee", JOptionPane.ERROR_MESSAGE);
-          }
+          canCreateAButton = true;
+
         }
       }
     }
   }
-
   public Button getButtonContinue()
   {
     return buttonContinue;
   }
+
 }
