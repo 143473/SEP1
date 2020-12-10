@@ -56,6 +56,12 @@ public class CreateProjectGUI2
 
     status = new Label("Project's status: ");
     statusBox = new ComboBox();
+    EmployeeStatus employeeStatus = new EmployeeStatus();
+    String[] statuses = employeeStatus.getStatuses();
+    for (int i = 0; i < statuses.length; i++) {
+      statusBox.getItems().add(statuses[i]);
+    }
+    statusBox.setValue(statuses[employeeStatus.getDefaultIndex()]);
     tableTitle = new Label("List of Team Members");
 
     searchByName = new Label("Search by name: ");
@@ -63,7 +69,7 @@ public class CreateProjectGUI2
     searchButton = new Button("Search");
 
     statusPane = new HBox(5);
-    statusPane.getChildren().addAll(status,statusBox);
+    statusPane.getChildren().addAll(status, statusBox);
 
     searchPane = new HBox(5);
     searchPane.getChildren().addAll(searchByName,searchField,searchButton);

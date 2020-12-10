@@ -6,6 +6,7 @@
 public class EmployeeStatus {
     private String[] statuses = new String[]{"Scrum Master", "Product Owner", "Project Creator", "Team Member"};
     private String chosenStatus;
+    private int defaultIndex = 3;
 
     /**
      * Chooses employee status from the array and returns it as String
@@ -17,5 +18,13 @@ public class EmployeeStatus {
             return statuses[index];
         }
         return null;
+    }
+
+    public String [] getStatuses(){
+        return statuses;
+    }
+
+    public int getDefaultIndex(){
+        return defaultIndex;
     }
 }
