@@ -111,25 +111,12 @@ public class EditRemoveEmployeeGUI{
         mainPane = new VBox();
         mainPane.getChildren().addAll(titleLabel, employeePane, buttonsPane);
     }
-    public void updateStudentListView()
-    {
-        int currentIndex = studentListView.getSelectionModel().getSelectedIndex();
-
+    private void initializeTable(){
         studentListView.getItems().clear();
+        EmployeeList employees = employeeAdapter.getAllEmployees();
 
-        EmployeeList students = employeeAdapter.getAllEmployees();
-        for (int i = 0; i < students.size(); i++)
-        {
-            studentListView.getItems().add(students.get(i));
-        }
-
-        if (currentIndex == -1 && studentListView.getItems().size() > 0)
-        {
-            studentListView.getSelectionModel().select(0);
-        }
-        else
-        {
-            studentListView.getSelectionModel().select(currentIndex);
+        for (int i = 0; i < employees.size(); i++) {
+            studentListView.getItems().add(employees.get(i));
         }
     }
     private class MyActionListener implements EventHandler<ActionEvent>
@@ -150,7 +137,6 @@ public class EditRemoveEmployeeGUI{
                 }
 
                 employeeAdapter.changeCountry(firstName, lastName, day);
-                updateStudentListView();
                 dayField.setText("");
 
 
@@ -167,11 +153,12 @@ public class EditRemoveEmployeeGUI{
             {
                 firstNameField.setText(temp.getFirstName());
                 lastNameField.setText(temp.getLastName());
-                dayField.setPromptText(temp.toString());
+                dayField.setText(temp.getDateOfBirth().toString());
             }
         }
     }
     public VBox getMainPane(){
+        initializeTable();
         return mainPane;
     }
 
