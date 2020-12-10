@@ -235,6 +235,7 @@ public class SepGUI extends Application
     reportTasksGUI1.getContinueButton().setOnAction(listener);
     reportTasksGUI2.getContinueButton().setOnAction(listener);
     reportTasksGUI3.getGoBackButton().setOnAction(listener);
+    reportTasksGUI3.getReportButton().setOnAction(listener);
 
     viewAssignedTasksGUI1.getContinueButton().setOnAction(listener);
     viewAssignedTasksGUI2.getGoBack().setOnAction(listener);
@@ -515,6 +516,11 @@ public class SepGUI extends Application
       {
         stackPane.getChildren().clear();
         stackPane.getChildren().add(reportTasksGUI3.getMainPane());
+      }
+      else if(e.getSource() == reportTasksGUI3.getReportButton())
+      {
+        stackPane.getChildren().clear();
+        stackPane.getChildren().add(reportTasksGUI2.getMainPane());
       }
       else if (e.getSource() == reportTasksGUI3.getGoBackButton())
       {
