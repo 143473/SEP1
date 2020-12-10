@@ -1,5 +1,7 @@
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
@@ -16,7 +18,8 @@ import javax.swing.*;
  * @author Claudiu Cordunianu, Timothy Engkar, Marketa Lapcikova
  * @version 1.0
  */
-public class CreateProjectGUI2 {
+public class CreateProjectGUI2
+{
   private EmployeeList employeeList;
 
   private SepGUI sepGUI;
@@ -24,6 +27,7 @@ public class CreateProjectGUI2 {
   private EmployeeAdapter employeeAdapter;
   private ProjectsAdapter projectsAdapter;
   private MyActionListener listener;
+  private MyListListener listListener;
 
   private VBox mainPane;
   private HBox hBoxPaneButton;
@@ -46,7 +50,6 @@ public class CreateProjectGUI2 {
   private ListView<Employee> employeeListView;
   private ListView<Employee> teamMembersTable;
 
-
   private Button continueButton;
   private Button goBackButton;
   private Button searchButton;
@@ -61,12 +64,15 @@ public class CreateProjectGUI2 {
    * @param sepGUI the main GUI
    */
   public CreateProjectGUI2(EmployeeAdapter employeeAdapter, ProjectsAdapter projectsAdapter, SepGUI sepGUI) {
+  public CreateProjectGUI2(EmployeeAdapter employeeAdapter, ProjectsAdapter projectsAdapter, SepGUI sepGUI)
+  {
     employeeList = new EmployeeList();
     this.sepGUI = sepGUI;
 
     this.employeeAdapter = employeeAdapter;
     this.projectsAdapter = projectsAdapter;
     listener = new MyActionListener();
+    listListener = new MyListListener();
 
     title = new Label("Create a new project");
     Font titleFont = new Font(30);
@@ -76,7 +82,8 @@ public class CreateProjectGUI2 {
     statusBox = new ComboBox();
     ProgressStatus progressStatus = new ProgressStatus();
     String[] statuses = progressStatus.getStatuses();
-    for (int i = 0; i < statuses.length; i++) {
+    for (int i = 0; i < statuses.length; i++)
+    {
       statusBox.getItems().add(statuses[i]);
     }
     statusBox.setValue(statuses[progressStatus.getDefaultIndex()]);
@@ -118,11 +125,17 @@ public class CreateProjectGUI2 {
     hBoxPaneButton.getChildren().addAll(continueButton, goBackButton);
 
     mainPane = new VBox(5);
-    mainPane.getChildren().addAll(title, statusPane, topButtonsPane, tableTitle, teamMembersTable, hBoxPaneButton);
+    mainPane.getChildren()
+        .addAll(title, statusPane, topButtonsPane, tableTitle, teamMembersTable,
+            hBoxPaneButton);
 
     newWindowPane = new VBox(searchPane, employeeListView, add);
   }
 
+  private class MyActionListener implements EventHandler<ActionEvent>
+  {
+    public void handle(ActionEvent e)
+    {
   /**
    * Listener to the actions
    */
@@ -134,34 +147,47 @@ public class CreateProjectGUI2 {
     public void handle(ActionEvent e) {
       Employee temp = employeeListView.getSelectionModel().getSelectedItem();
 
-      if (e.getSource() == searchButton) {
+      if (e.getSource() == searchButton)
+      {
         String searchingFor = searchField.getText();
         employeeListView.getItems().clear();
         EmployeeList chosenEmployees = employeeAdapter.getEmployeesByName(searchingFor);
-        for (int i = 0; i < chosenEmployees.size(); i++) {
+        for (int i = 0; i < chosenEmployees.size(); i++)
+        {
           employeeListView.getItems().add(chosenEmployees.get(i));
         }
       }
-      if (e.getSource() == removeButton) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
-                "Do you really want to delete team member " + teamMembersTable.getSelectionModel().getSelectedItem().toString()
-                        + ")?",
-                ButtonType.YES, ButtonType.NO);
-        alert.setTitle("Delete employee");
-        alert.setHeaderText(null);
+      if (e.getSource() == removeButton)
+      {
+        if (!(teamMembersTable.getSelectionModel().getSelectedItem() == null))
+        {
+          Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+              "Do you really want to delete team member " + teamMembersTable.getSelectionModel().getSelectedItem().toString()
+                  + ")?", ButtonType.YES, ButtonType.NO);
+          alert.setTitle("Delete employee");
+          alert.setHeaderText(null);
 
-        alert.showAndWait();
+          alert.showAndWait();
 
-        if (alert.getResult() == ButtonType.YES) {
-          teamMembersTable.getItems().remove(teamMembersTable.getSelectionModel().getSelectedItem());
-          Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
-          alert2.setHeaderText("Editing successful");
-          alert2.setContentText("Changes were saved successfully!");
-          alert2.showAndWait();
+          if (alert.getResult() == ButtonType.YES)
+          {
+            teamMembersTable.getItems().remove(teamMembersTable.getSelectionModel().getSelectedItem());
+            Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
+            alert2.setHeaderText("Editing successful");
+            alert2.setContentText("Changes were saved successfully!");
+            alert2.showAndWait();
+          }
+        }
+        else
+        {
+          Alert alert = new Alert(Alert.AlertType.WARNING);
+          alert.setHeaderText("Warning");
+          alert.setContentText("No employee was chosen!");
+          alert.showAndWait();
         }
       }
-    }
 
+    }
   }
 
   /**
@@ -183,10 +209,32 @@ public class CreateProjectGUI2 {
       employeeList.addEmployee(employeeAdded);
       employeeListView.getItems().remove(employeeAdded);
     }
+    public boolean callAdd()
+    {
+      boolean OK = true;
+      Employee employeeAdded = employeeListView.getSelectionModel().getSelectedItem();
+      if (employeeAdded == null)
+      {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setHeaderText("Warning");
+        alert.setContentText("No employee was chosen!");
+        alert.showAndWait();
+        OK = false;
+      }
+      if (OK)
+      {
+        teamMembersTable.getItems().add(employeeAdded);
+        employeeList.addEmployee(employeeAdded);
+        employeeListView.getItems().remove(employeeAdded);
+      }
 
-    return OK;
-  }
+      return OK;
+    }
 
+    public void setProjectList(ProjectList projectList)
+    {
+      this.projectList = projectList;
+    }
   /**
    *Sets the project list to the sent one
    * @param projectList projectList that needs to be set
@@ -195,6 +243,16 @@ public class CreateProjectGUI2 {
     this.projectList = projectList;
   }
 
+    public void initializeListView()
+    {
+      employeeListView.getItems().clear();
+      EmployeeList employees = employeeAdapter.getAllEmployees();
+      employeeListView.getItems().add(null);
+      for (int i = 0; i < employees.size(); i++)
+      {
+        employeeListView.getItems().add(employees.get(i));
+      }
+    }
   /**
    * Initializes list view to new values
    */
@@ -207,6 +265,15 @@ public class CreateProjectGUI2 {
     }
   }
 
+    /**
+     * Method for getting the second part of Create Project GUI, to be used in mainGUI
+     *
+     * @return Returns the main pane
+     */
+    public VBox getMainPane()
+    {
+      return mainPane;
+    }
   /**
    * Method for getting the second part of Create Project GUI, to be used in mainGUI
    * @return Returns the main pane
@@ -215,6 +282,15 @@ public class CreateProjectGUI2 {
     return mainPane;
   }
 
+    /**
+     * Method for getting the go back button of this class
+     *
+     * @return Returns the go back button
+     */
+    public Button getGoBackButton()
+    {
+      return goBackButton;
+    }
   /**
    * Method for getting the go back button of this class
    * @return Returns the go back button
@@ -223,6 +299,16 @@ public class CreateProjectGUI2 {
     return goBackButton;
   }
 
+    /**
+     * Method for getting the continue button of this class
+     *
+     * @return Returns the continue button
+     */
+
+    public Button getContinueButton()
+    {
+      return continueButton;
+    }
   /**
    * Method for getting the continue button of this class
    * @return Returns the continue button
@@ -238,7 +324,16 @@ public class CreateProjectGUI2 {
   public Button getAddTeamMember() {
     return addTeamMember;
   }
+    public Button getAddTeamMember()
+    {
+      return addTeamMember;
+    }
 
+    public VBox getNewWindowPane()
+    {
+      initializeListView();
+      return newWindowPane;
+    }
 
   /**
    * Initializes list view returns newWindowPane
@@ -249,6 +344,18 @@ public class CreateProjectGUI2 {
     return newWindowPane;
   }
 
+    private class MyListListener implements ChangeListener<Employee>
+    {
+      public void changed(ObservableValue<? extends Employee> employee, Employee oldEmployee, Employee newEmployee)
+      {
+
+      }
+    }
+
+    public Button getAdd()
+    {
+      return add;
+    }
   /**
    * Gets the Button add
    * @return Button add
@@ -276,8 +383,61 @@ public class CreateProjectGUI2 {
       AssignedEmployee assignedEmployee = new AssignedEmployee(employeeList.get(i).getFirstName(), employeeList.get(i).getLastName(), employeeList.get(i).getDateOfBirth());
       project.addTeamMember(assignedEmployee);
     }
+    public boolean callContinueButton()
+    {
+      boolean allValuesCorrect = true;
+      if (teamMembersTable.getItems().isEmpty())
+      {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setHeaderText("Warning");
+        alert.setContentText("No employees added to the project");
+        alert.showAndWait();
+        allValuesCorrect = false;
+      }
+      Project project = projectList.get(0);
+      project.setProgressStatus(statusBox.getSelectionModel().getSelectedIndex());
+      for (int i = 0; i < employeeList.size(); i++)
+      {
+        AssignedEmployee assignedEmployee = new AssignedEmployee(
+            employeeList.get(i).getFirstName(),
+            employeeList.get(i).getLastName(),
+            employeeList.get(i).getDateOfBirth());
+        project.addTeamMember(assignedEmployee);
+      }
 
-    return allValuesCorrect;
+      return allValuesCorrect;
+    }
+
+  public EmployeeList getEmployeeList()
+  {
+    return employeeList;
   }
 }
+
+/*
+  private class MyActionListener implements EventHandler<ActionEvent>
+  {
+    public void handle(ActionEvent e)
+    {
+      if (e.getSource() == addTeamMember)
+      {
+        // New window (Stage)
+        Stage newWindow = new Stage();
+        newWindow.setTitle("Choose Team Member");
+        scene = new Scene(newWindowPane);
+        newWindow.setScene(scene);
+
+        // Specifies the modality for new window.
+        newWindow.initModality(Modality.WINDOW_MODAL);
+
+        // Specifies the owner Window (parent) for new window
+        newWindow.initOwner(primaryStage);
+
+        // Set position of second window, related to primary window.
+        newWindow.setX(primaryStage.getX() + 200);
+        newWindow.setY(primaryStage.getY() + 100);
+
+
+}
+*/
 

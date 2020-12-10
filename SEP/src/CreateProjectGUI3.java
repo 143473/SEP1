@@ -14,6 +14,7 @@ import javafx.scene.text.Font;
  */
 public class CreateProjectGUI3
 {
+  private SepGUI sepGUI;
   private GridPane gridPane;
   private HBox hBoxPane;
   private VBox mainPane;
