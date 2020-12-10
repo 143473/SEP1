@@ -86,7 +86,7 @@ public class SepGUI extends Application
     ProjectsAdapter projectsAdapter = new ProjectsAdapter("y");
 
     createProjectGUI1 = new CreateProjectGUI1(projectsAdapter, this);
-    createProjectGUI2 = new CreateProjectGUI2(employeeAdapter);
+    createProjectGUI2 = new CreateProjectGUI2(employeeAdapter, projectsAdapter,this);
     createProjectGUI3 = new CreateProjectGUI3();
     projectOverviewGUI = new ProjectOverviewGUI(projectsAdapter);
     manageProjectGUI = new ManageProjectGUI(projectsAdapter);
@@ -270,8 +270,11 @@ public class SepGUI extends Application
         }
       else if (e.getSource() == createProjectGUI2.getContinueButton())
       {
-        stackPane.getChildren().clear();
-        stackPane.getChildren().add(createProjectGUI3.getMainPane());
+        if(createProjectGUI2.callContinueButton()){
+          stackPane.getChildren().clear();
+          stackPane.getChildren().add(createProjectGUI3.getMainPane());
+        }
+
       }
       else if (e.getSource() == createProjectGUI2.getGoBackButton())
       {

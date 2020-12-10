@@ -18,7 +18,12 @@ import javax.swing.*;
  */
 public class CreateProjectGUI2
 {
+  private EmployeeList employeeList;
+
+  private SepGUI sepGUI;
+  
   private EmployeeAdapter employeeAdapter;
+  private ProjectsAdapter projectsAdapter;
   private MyActionListener listener;
   private MyListListener listListener;
 
@@ -51,9 +56,13 @@ public class CreateProjectGUI2
   private Button add;
   private Button removeButton;
 
-  public CreateProjectGUI2(EmployeeAdapter employeeAdapter)
+  public CreateProjectGUI2(EmployeeAdapter employeeAdapter, ProjectsAdapter projectsAdapter, SepGUI sepGUI)
   {
+    employeeList = new EmployeeList();
+    this.sepGUI = sepGUI;
+    
     this.employeeAdapter = employeeAdapter;
+    this.projectsAdapter = projectsAdapter;
     listener = new MyActionListener();
     listListener = new MyListListener();
 
@@ -133,6 +142,7 @@ public class CreateProjectGUI2
     System.out.println("dfcvghjk");
     Employee employeeAdded = employeeListView.getSelectionModel().getSelectedItem();
     teamMembersTable.getItems().add(employeeAdded);
+    employeeList.addEmployee(employeeAdded);
     employeeListView.getItems().remove(employeeAdded);
 
   }
@@ -181,9 +191,6 @@ public class CreateProjectGUI2
   {
     public void changed(ObservableValue<? extends Employee> employee, Employee oldEmployee, Employee newEmployee)
     {
-
-
-
     }
   }
 
@@ -191,33 +198,24 @@ public class CreateProjectGUI2
   {
     return add;
   }
-}
-  /*private class MyActionListener implements EventHandler<ActionEvent>
-  {
-    public void handle(ActionEvent e)
-    {
-      if (e.getSource() == addTeamMember)
-      {
-        // New window (Stage)
-        Stage newWindow = new Stage();
-        newWindow.setTitle("Choose Team Member");
-        scene = new Scene(newWindowPane);
-        newWindow.setScene(scene);
 
-        // Specifies the modality for new window.
-        newWindow.initModality(Modality.WINDOW_MODAL);
 
-        // Specifies the owner Window (parent) for new window
-        newWindow.initOwner(primaryStage);
-
-        // Set position of second window, related to primary window.
-        newWindow.setX(primaryStage.getX() + 200);
-        newWindow.setY(primaryStage.getY() + 100);
-
-        newWindow.show();
-      }
+  public boolean callContinueButton(){
+    boolean allValuesCorrect = true;
+    if(teamMembersTable.getItems().isEmpty()){
+      Alert alert = new Alert(Alert.AlertType.WARNING);
+      alert.setHeaderText("Warning");
+      alert.setContentText("No employees added to the project");
+      alert.showAndWait();
+      allValuesCorrect = false;
     }
+    Project project = projectList.get(0);
+    project.setProgressStatus(statusBox.getSelectionModel().getSelectedIndex());
+    for (int i = 0; i < employeeList.size(); i++) {
+      AssignedEmployee assignedEmployee = new AssignedEmployee(employeeList.get(i).getFirstName(), employeeList.get(i).getLastName(), employeeList.get(i).getDateOfBirth());
+      project.addTeamMember(assignedEmployee);
+    }
+    
+    return allValuesCorrect;
   }
 }
-
-*/

@@ -77,4 +77,5 @@ public class ReportTasksGUI2 {
     {
         return continueButton;
     }
+
 }
