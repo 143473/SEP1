@@ -63,12 +63,12 @@ public class CreateProjectGUI2
 
     status = new Label("Project's status: ");
     statusBox = new ComboBox();
-    EmployeeStatus employeeStatus = new EmployeeStatus();
-    String[] statuses = employeeStatus.getStatuses();
+    ProgressStatus progressStatus = new ProgressStatus();
+    String[] statuses = progressStatus.getStatuses();
     for (int i = 0; i < statuses.length; i++) {
       statusBox.getItems().add(statuses[i]);
     }
-    statusBox.setValue(statuses[employeeStatus.getDefaultIndex()]);
+    statusBox.setValue(statuses[progressStatus.getDefaultIndex()]);
     tableTitle = new Label("List of Team Members");
 
     searchByName = new Label("Search by name: ");
