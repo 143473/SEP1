@@ -30,8 +30,12 @@ public class CreateProjectGUI1
 
   private Button buttonContinue;
 
+  private MyActionListener listener;
+
   public CreateProjectGUI1(ProjectsAdapter projectsAdapter) {
     this.projectsAdapter = projectsAdapter;
+
+    listener = new MyActionListener();
 
     title = new Label("Create a New Project");
     Font titleFont = new Font(30);
@@ -49,6 +53,7 @@ public class CreateProjectGUI1
     gridPane.addRow(1, projectDesc, inputDescription);
 
     buttonContinue = new Button("Continue");
+    buttonContinue.setOnAction(listener);
 
     mainPane = new VBox();
     mainPane.getChildren().addAll(title, gridPane, buttonContinue);
@@ -58,6 +63,7 @@ public class CreateProjectGUI1
   {
     return mainPane;
   }
+
   private class MyActionListener implements EventHandler<ActionEvent> {
     public void handle(ActionEvent e) {
       if(e.getSource() == buttonContinue){
