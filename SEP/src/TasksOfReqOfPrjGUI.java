@@ -34,8 +34,8 @@ public class TasksOfReqOfPrjGUI
 
   public TasksOfReqOfPrjGUI(){
 
-    add = new Button("ADD");
-    manage = new Button("MANAGE");
+    add = new Button("Add");
+    manage = new Button("Manage");
 
     projectLabel = new Label("Project:");
     projectLabel.setFont(Font.font("Calibri", FontWeight.BOLD, 20));

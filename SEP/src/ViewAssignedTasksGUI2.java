@@ -1,12 +1,9 @@
-import javafx.application.Application;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import javafx.stage.Stage;
 
 /**
  * @author Timothy Engkar
@@ -31,9 +28,7 @@ public class ViewAssignedTasksGUI2 {
 
     private Button goBack;
 
-
-    public void start(Stage window){
-        window.setTitle("View Assigned Tasks");
+    public ViewAssignedTasksGUI2(){
 
         titleLabel = new Label("Name - Birthday");
         titleLabel.setFont(new Font("Cambria", 32));
@@ -91,5 +86,10 @@ public class ViewAssignedTasksGUI2 {
     public VBox getMainPane()
     {
         return mainPane;
+    }
+
+    public Button getGoBack()
+    {
+        return goBack;
     }
 }

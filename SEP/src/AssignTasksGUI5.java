@@ -1,12 +1,11 @@
-import javafx.application.Application;
 import javafx.geometry.Insets;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import javafx.stage.Stage;
 
 /**
  * @author Timothy Engkar
@@ -27,10 +26,7 @@ public class AssignTasksGUI5 {
 
     private Button assignButton;
 
-    public void start(Stage window) {
-        window.setTitle("Assign Tasks");
-
-        mainPane = new VBox();
+    public AssignTasksGUI5(){
 
         titleLabel = new Label("Assign a task");
         titleLabel.setFont(new Font("Cambria", 32));
@@ -51,12 +47,14 @@ public class AssignTasksGUI5 {
         dayPane.getChildren().addAll(dayField, monthField, yearField);
 
         informationPane = new GridPane();
-        informationPane.add(dayLabel, 0, 2);
-        informationPane.add(dayPane, 1, 2);
+        informationPane.addRow(0,dayField,dayPane);
+        /*informationPane.add(dayLabel, 0, 2);
+        informationPane.add(dayPane, 1, 2);*/
         informationPane.setVgap(10);
 
         assignButton = new Button("Assign");
 
+        mainPane = new VBox(5);
         mainPane.getChildren().addAll(titleLabel, informationPane, assignButton);
     }
 

@@ -3,22 +3,26 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-public class ManageTaskGUI
+public class AddRequirementGUI
 {
+
   private Label title;
   private TextField name;
+  private TextField userstory;
   private TextField estimation;
   private TextField day;
   private TextField month;
   private TextField year;
   private ChoiceBox status;
   private ChoiceBox responsibleEmployee;
-  private Label taskname;
+  private Label reqname;
+  private Label userstorytxt;
   private Label estimatedT;
   private Label deadline;
   private Label statustxt;
@@ -28,50 +32,58 @@ public class ManageTaskGUI
   private Button remove;
   private VBox mainPane;
   private HBox bottomButtons;
+  private GridPane requirementForm;
+  private HBox datePane;
 
-  public ManageTaskGUI(){
+  public AddRequirementGUI(){
 
-    title = new Label("Manage Tasks");
+    title = new Label("Add Requirement");
     title.setFont(Font.font("Calibri", FontWeight.BOLD, 20));
     name = new TextField();
+    userstory = new TextField();
     estimation = new TextField();
+
     day = new TextField();
+    day.setPromptText("dd");
+    day.setMaxWidth(40);
     month = new TextField();
+    month.setPromptText("mm");
+    month.setMaxWidth(40);
     year = new TextField();
+    year.setPromptText("yyyy");
+    year.setMaxWidth(60);
+
+    datePane = new HBox(5);
+    datePane.getChildren().addAll(day,month,year);
+
     status = new ChoiceBox();
     responsibleEmployee = new ChoiceBox();
-    taskname = new Label("Name");
+    reqname = new Label("Name");
+    userstorytxt = new Label("User Story");
     estimatedT = new Label("Estimation");
     deadline = new Label("Deadline");
     statustxt = new Label("Status");
     responsibleEmp = new Label("Responsible Employee");
     save = new Button("Save");
     cancel = new Button("Cancel");
-    remove = new Button("Remove");
 
-    VBox vboxforlabels = new VBox();
-    vboxforlabels.setSpacing(20);
-    vboxforlabels.getChildren().addAll(taskname,estimatedT,deadline,statustxt,responsibleEmp);
-
-    HBox hboxfordate = new HBox();
-    hboxfordate.setSpacing(5);
-    hboxfordate.getChildren().addAll(day,month,year);
-
-    VBox vbox = new VBox();
-    vbox.setSpacing(10);
-    vbox.getChildren().addAll(name,estimation,hboxfordate,status,responsibleEmployee);
+    requirementForm = new GridPane();
+    requirementForm.setHgap(5);
+    requirementForm.setVgap(5);
+    requirementForm.addRow(0,reqname,name);
+    requirementForm.addRow(1,userstorytxt, userstory);
+    requirementForm.addRow(2,estimatedT,estimation);
+    requirementForm.addRow(3,deadline,datePane);
+    requirementForm.addRow(4,statustxt,status);
+    requirementForm.addRow(5,responsibleEmp,responsibleEmployee);
 
     bottomButtons = new HBox(5);
-    bottomButtons.getChildren().addAll(save,cancel,remove);
+    bottomButtons.getChildren().addAll(save,cancel);
 
-    HBox hbox = new HBox();
-    hbox.setSpacing(20);
-    hbox.getChildren().addAll(vboxforlabels,vbox);
 
-    mainPane = new VBox(20);
-    mainPane.setSpacing(10);
+    mainPane = new VBox(5);
     mainPane.setPadding(new Insets(25, 25, 25, 25));;
-    mainPane.getChildren().addAll(title,hbox,bottomButtons);
+    mainPane.getChildren().addAll(title,requirementForm,bottomButtons);
 
 
   }

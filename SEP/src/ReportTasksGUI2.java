@@ -1,10 +1,10 @@
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import javafx.stage.Stage;
 
 public class ReportTasksGUI2 {
     private VBox mainPane;
@@ -20,10 +20,10 @@ public class ReportTasksGUI2 {
     private TableColumn dateColumn;
 
     private Button goBack;
+    private Button continueButton;
 
 
-    public void start(Stage window){
-        window.setTitle("Report Tasks");
+    public ReportTasksGUI2(){
 
         titleLabel = new Label("Report Tasks");
         titleLabel.setFont(new Font("Cambria", 32));
@@ -59,9 +59,10 @@ public class ReportTasksGUI2 {
         allAssignedTasksTable.getColumns().add(dateColumn);
 
         goBack = new Button("Go Back");
+        continueButton = new Button("Continue");
 
         hBoxPaneButton = new HBox();
-        hBoxPaneButton.getChildren().addAll(goBack);
+        hBoxPaneButton.getChildren().addAll(continueButton, goBack);
 
         mainPane = new VBox(10);
         mainPane.getChildren().addAll(topPane, allAssignedTasksTable, hBoxPaneButton);
@@ -70,5 +71,10 @@ public class ReportTasksGUI2 {
     public VBox getMainPane()
     {
         return mainPane;
+    }
+
+    public Button getContinueButton()
+    {
+        return continueButton;
     }
 }

@@ -1,10 +1,10 @@
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import javafx.stage.Stage;
 
 /**
  * @author Timothy Engkar
@@ -21,14 +21,15 @@ public class AssignTasksGUI2 {
     private TableColumn requirementNameColumn;
     private TableColumn requirementDescriptionColumn;
 
+    private Button continueButton;
 
-    public void start(Stage window){
-        window.setTitle("Assign Tasks");
+
+    public AssignTasksGUI2(){
 
         titleLabel = new Label("Requirement Table");
         titleLabel.setFont(new Font("Cambria", 32));
 
-        topPane = new HBox(400);
+        topPane = new HBox(5);
         topPane.getChildren().addAll(titleLabel);
 
         requirementTable = new TableView();
@@ -47,12 +48,19 @@ public class AssignTasksGUI2 {
         requirementTable.getColumns().add(requirementNameColumn);
         requirementTable.getColumns().add(requirementDescriptionColumn);
 
+        continueButton = new Button("Continue");
+
         mainPane = new VBox(10);
-        mainPane.getChildren().addAll(topPane, requirementTable);
+        mainPane.getChildren().addAll(topPane, requirementTable, continueButton);
     }
 
     public VBox getMainPane()
     {
         return mainPane;
+    }
+
+    public Button getContinueButton()
+    {
+        return continueButton;
     }
 }

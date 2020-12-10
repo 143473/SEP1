@@ -1,5 +1,6 @@
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -52,6 +53,7 @@ public class CreateProjectGUI1
 
     mainPane = new VBox();
     mainPane.getChildren().addAll(title, gridPane, buttonContinue);
+    mainPane.setPadding(new Insets(25, 25, 25, 25));
 
   }
   public VBox getMainPane()

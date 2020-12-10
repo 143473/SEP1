@@ -29,9 +29,10 @@ public class ManageProjectGUI
   private Label projectowner;
   private Label projectcreator;
   private VBox mainPane;
+  private HBox bottomButtons;
   public ManageProjectGUI(){
 
-    title = new Label("Manage Project");
+    title = new Label("Manage Projects");
     title.setFont(Font.font("Calibri", FontWeight.BOLD, 20));
     projectname = new Label("Project name");
     projectdescription = new Label("Project description");
@@ -52,26 +53,32 @@ public class ManageProjectGUI
     projects = new TableView();
     TableColumn projectCol = new TableColumn("Project name");
     projectCol.setCellValueFactory(new PropertyValueFactory("projectname"));
-    VBox vboxlabels = new VBox();
+
+    VBox vboxlabels = new VBox(5);
     vboxlabels.setSpacing(20);
     vboxlabels.getChildren().addAll(projectname,projectdescription,statustxt, scrummaster,projectowner,projectcreator);
-    VBox vbox = new VBox();
+
+    VBox vbox = new VBox(5);
     vbox.setSpacing(10);
     vbox.getChildren().addAll(name, description,status, scrum,prjowner,prjcreator,manageteammembers);
     projects.getColumns().setAll(projectCol);
+
     projects.setPrefWidth(450);
     projects.setPrefHeight(300);
     projects.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-    VBox vbox2 = new VBox();
+
+    bottomButtons = new HBox(5);
+    bottomButtons.getChildren().addAll(save,remove, cancel);
+    VBox vbox2 = new VBox(5);
     vbox2.setSpacing(10);
-    vbox2.setAlignment(Pos.BOTTOM_RIGHT);
-    vbox2.getChildren().addAll(projects, save,cancel,remove);
+    vbox2.setAlignment(Pos.BOTTOM_LEFT);
+    vbox2.getChildren().addAll(projects);
     HBox hbox = new HBox(vboxlabels,vbox, vbox2);
 
     mainPane = new VBox(20);
     mainPane.setSpacing(10);
     mainPane.setPadding(new Insets(25, 25, 25, 25));;
-    mainPane.getChildren().addAll(title,hbox);
+    mainPane.getChildren().addAll(title,hbox,bottomButtons);
 
 
 

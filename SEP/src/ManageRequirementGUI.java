@@ -1,15 +1,13 @@
-import javafx.application.Application;
 import javafx.geometry.Insets;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.stage.Stage;
 
 public class ManageRequirementGUI
 {
@@ -33,16 +31,30 @@ public class ManageRequirementGUI
   private Button cancel;
   private Button remove;
   private VBox mainPane;
+  private HBox bottomButtons;
+  private GridPane requirementForm;
+  private HBox datePane;
   public ManageRequirementGUI(){
 
-  title = new Label("Manage Requirement");
+  title = new Label("Manage Requirements");
   title.setFont(Font.font("Calibri", FontWeight.BOLD, 20));
   name = new TextField();
   userstory = new TextField();
   estimation = new TextField();
+
   day = new TextField();
+  day.setPromptText("dd");
+  day.setMaxWidth(40);
   month = new TextField();
+  month.setPromptText("mm");
+  month.setMaxWidth(40);
   year = new TextField();
+  year.setPromptText("yyyy");
+  year.setMaxWidth(60);
+
+  datePane = new HBox(5);
+  datePane.getChildren().addAll(day,month,year);
+
   status = new ChoiceBox();
   responsibleEmployee = new ChoiceBox();
   reqname = new Label("Name");
@@ -55,33 +67,33 @@ public class ManageRequirementGUI
   cancel = new Button("Cancel");
   remove = new Button("Remove");
 
-  VBox vboxforlabels = new VBox();
-  vboxforlabels.setSpacing(20);
-  vboxforlabels.getChildren().addAll(reqname,userstorytxt,estimatedT,deadline,statustxt,responsibleEmp);
+  requirementForm = new GridPane();
+  requirementForm.setHgap(5);
+  requirementForm.setVgap(5);
+  requirementForm.addRow(0,reqname,name);
+  requirementForm.addRow(1,userstorytxt, userstory);
+  requirementForm.addRow(2,estimatedT,estimation);
+  requirementForm.addRow(3,deadline,datePane);
+  requirementForm.addRow(4,statustxt,status);
+  requirementForm.addRow(5,responsibleEmp,responsibleEmployee);
 
-    HBox hboxfordate = new HBox();
-    hboxfordate.setSpacing(5);
-    hboxfordate.getChildren().addAll(day,month,year);
+    bottomButtons = new HBox(5);
+    bottomButtons.getChildren().addAll(save,cancel,remove);
 
-    VBox vbox = new VBox();
-    vbox.setSpacing(10);
-    vbox.getChildren().addAll(name,userstory,estimation,hboxfordate,status,responsibleEmployee);
-    VBox vboxforbuttons = new VBox();
-    vboxforbuttons.getChildren().addAll(save,cancel,remove);
 
-    HBox hbox = new HBox();
-    hbox.setSpacing(20);
-    hbox.getChildren().addAll(vboxforlabels,vbox,vboxforbuttons);
-
-    mainPane = new VBox(20);
-    mainPane.setSpacing(10);
+    mainPane = new VBox(5);
     mainPane.setPadding(new Insets(25, 25, 25, 25));;
-    mainPane.getChildren().addAll(title,hbox);
+    mainPane.getChildren().addAll(title,requirementForm,bottomButtons);
 
 
 }
   public VBox getMainPane()
   {
     return mainPane;
+  }
+
+  public Button getCancel()
+  {
+    return cancel;
   }
 }

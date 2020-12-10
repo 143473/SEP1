@@ -1,3 +1,4 @@
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -14,17 +15,22 @@ public class AssignTasksGUI1 {
     private HBox topPane;
 
     private Label titleLabel;
+    private Label tableLabel;
 
     private TableView assignTasksTable;
     private TableView.TableViewSelectionModel defaultSelectionModel;
     private TableColumn projectNameColumn;
     private TableColumn projectDescriptionColumn;
 
+    private Button continueButton;
+
 
     public AssignTasksGUI1(){
 
         titleLabel = new Label("Assign Tasks");
         titleLabel.setFont(new Font("Cambria", 32));
+
+        tableLabel = new Label("Choose a project from the list");
 
         topPane = new HBox(400);
         topPane.getChildren().addAll(titleLabel);
@@ -45,12 +51,19 @@ public class AssignTasksGUI1 {
         assignTasksTable.getColumns().add(projectNameColumn);
         assignTasksTable.getColumns().add(projectDescriptionColumn);
 
-        mainPane = new VBox(10);
-        mainPane.getChildren().addAll(topPane, assignTasksTable);
+        continueButton = new Button("Continue");
+
+        mainPane = new VBox(5);
+        mainPane.getChildren().addAll(topPane, tableLabel,assignTasksTable,continueButton);
     }
 
     public VBox getMainPane()
     {
         return mainPane;
+    }
+
+    public Button getContinueButton()
+    {
+        return continueButton;
     }
 }

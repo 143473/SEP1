@@ -56,7 +56,7 @@ public class ProjectOverviewGUI
     topPane.getChildren().addAll(title,searchPane);
 
     topButtons = new HBox(5);
-    topButtons.getChildren().addAll(manage, add);
+    topButtons.getChildren().addAll(add, manage);
 
     nameCol = new TableColumn("Name");
     nameCol.setCellValueFactory(new PropertyValueFactory("name"));
