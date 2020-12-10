@@ -183,6 +183,7 @@ public class SepGUI extends Application
       manageProjectGUI.getManageTeamMembers().setOnAction(listener);
       manageProjectGUI.getCancel().setOnAction(listener);
       changeTeamMembersGUI.getCancel().setOnAction(listener);
+      changeTeamMembersGUI.getAddButton().setOnAction(listener);
 
       if (e.getSource() == homeMenuItem)
       {
@@ -257,7 +258,7 @@ public class SepGUI extends Application
         stackPane.getChildren().add(projectOverviewGUI.getMainPane());
       }
 
-        //Change Team Members
+        //Change Team Members - editing existing list of team-members
         else if(e.getSource() == manageProjectGUI.getManageTeamMembers())
       {
         stackPane.getChildren().clear();
@@ -267,6 +268,15 @@ public class SepGUI extends Application
       {
         stackPane.getChildren().clear();
         stackPane.getChildren().add(manageProjectGUI.getMainPane());
+      }
+        //Pop-up Change Team Members
+      else if (e.getSource() == changeTeamMembersGUI.getAddButton())
+      {
+        newWindow.show();
+      }
+      else if (e.getSource() == createProjectGUI2.getAdd())
+      {
+        newWindow.close();
       }
 
         //Manage Requirements
