@@ -285,6 +285,7 @@ public class SepGUI extends Application
       }
       else if (e.getSource() == createProjectGUI2.getAdd())
       {
+        createProjectGUI2.callAdd();
         newWindow.close();
       }
       //Continue Create Project
