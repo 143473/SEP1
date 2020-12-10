@@ -21,9 +21,21 @@ public class EmployeeList implements Serializable {
      * @param employee the employee to add to the list
      */
     public void addEmployee(Employee employee){
-        if(!employeeList.contains(employee)){
+        if(!containsEmployee(employee)){
             employeeList.add(employee);
         }
+    }
+
+    /**
+     * Checks if ArrayList of Employee objects contains specific employee
+     * @param employee the employee we are looking for
+     * @return true if the ArrayList does and false if does not contain the Employee object
+     */
+    public boolean containsEmployee(Employee employee){
+        if(employeeList.contains(employee)){
+            return true;
+        }
+        return false;
     }
 
     /**

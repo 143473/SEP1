@@ -1,20 +1,18 @@
-import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import javafx.stage.Stage;
 
 public class EditRemoveEmployeeGUI{
     private Label titleLabel;
@@ -52,7 +50,6 @@ public class EditRemoveEmployeeGUI{
         listListener = new MyListListener();
         titleLabel = new Label("Edit or Remove Employee");
         titleLabel.setFont(new Font("Cambria", 32));
-
 
         firstNameLabel = new Label("First name:");
         firstNameLabel.setPadding(new Insets(10, 0, 5, 10));
@@ -102,12 +99,8 @@ public class EditRemoveEmployeeGUI{
         listPane.setPrefWidth(200);
         listPane.getChildren().add(studentListView);
 
-
-
-
         employeePane = new HBox();
         employeePane.getChildren().addAll(informationPane, listPane);
-
 
         saveButton = new Button("Save");
         removeButton = new Button("Remove");

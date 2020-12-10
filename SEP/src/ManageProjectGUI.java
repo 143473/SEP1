@@ -1,14 +1,11 @@
-import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.stage.Stage;
 
 public class ManageProjectGUI
 {
@@ -82,5 +79,20 @@ public class ManageProjectGUI
   public VBox getMainPane()
   {
     return mainPane;
+  }
+
+  public Button getCancel()
+  {
+    return cancel;
+  }
+
+  public Button getSave()
+  {
+    return save;
+  }
+
+  public Button getManageTeamMembers()
+  {
+    return manageteammembers;
   }
 }
