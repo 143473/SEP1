@@ -18,6 +18,8 @@ public class ViewAssignedTasksGUI1 {
     private TextField searchField;
     private Button searchButton;
 
+    private Button continueButton;
+
     private TableView allAssignedTasksTable;
     private TableView.TableViewSelectionModel defaultSelectionModel;
     private TableColumn nameColumn;
@@ -56,12 +58,19 @@ public class ViewAssignedTasksGUI1 {
         allAssignedTasksTable.getColumns().add(nameColumn);
         allAssignedTasksTable.getColumns().add(birthdayColumn);
 
+        continueButton = new Button("Continue");
+
         mainPane = new VBox(10);
-        mainPane.getChildren().addAll(topPane, allAssignedTasksTable);
+        mainPane.getChildren().addAll(topPane, allAssignedTasksTable, continueButton);
     }
 
     public VBox getMainPane()
     {
         return mainPane;
+    }
+
+    public Button getContinueButton()
+    {
+        return continueButton;
     }
 }

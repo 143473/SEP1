@@ -1,12 +1,11 @@
-import javafx.application.Application;
-import javafx.geometry.Insets;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import javafx.stage.Stage;
 
 /**
  * @author Timothy Engkar
@@ -25,8 +24,7 @@ public class ReportTasksGUI3 {
     private Button reportButton;
     private GridPane informationPane;
 
-    public void start(Stage window){
-        window.setTitle("Report Tasks");
+    public ReportTasksGUI3(){
 
         titleLabel = new Label("Report a Tasks");
         titleLabel.setFont(new Font("Cambria", 32));
@@ -49,7 +47,7 @@ public class ReportTasksGUI3 {
 
         reportButton = new Button("Report");
 
-        mainPane = new VBox();
+        mainPane = new VBox(5);
         mainPane.getChildren().addAll(titleLabel, informationPane, reportButton);
     }
 

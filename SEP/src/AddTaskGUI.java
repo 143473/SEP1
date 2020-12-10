@@ -8,7 +8,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-public class ManageTaskGUI
+public class AddTaskGUI
 {
   private Label title;
   private TextField name;
@@ -29,9 +29,9 @@ public class ManageTaskGUI
   private VBox mainPane;
   private HBox bottomButtons;
 
-  public ManageTaskGUI(){
+  public AddTaskGUI(){
 
-    title = new Label("Manage Tasks");
+    title = new Label("Add Task");
     title.setFont(Font.font("Calibri", FontWeight.BOLD, 20));
     name = new TextField();
     estimation = new TextField();
@@ -47,7 +47,6 @@ public class ManageTaskGUI
     responsibleEmp = new Label("Responsible Employee");
     save = new Button("Save");
     cancel = new Button("Cancel");
-    remove = new Button("Remove");
 
     VBox vboxforlabels = new VBox();
     vboxforlabels.setSpacing(20);
@@ -62,7 +61,7 @@ public class ManageTaskGUI
     vbox.getChildren().addAll(name,estimation,hboxfordate,status,responsibleEmployee);
 
     bottomButtons = new HBox(5);
-    bottomButtons.getChildren().addAll(save,cancel,remove);
+    bottomButtons.getChildren().addAll(save,cancel);
 
     HBox hbox = new HBox();
     hbox.setSpacing(20);

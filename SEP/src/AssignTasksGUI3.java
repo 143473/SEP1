@@ -1,10 +1,10 @@
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import javafx.stage.Stage;
 
 /**
  * @author Timothy Engkar
@@ -21,9 +21,10 @@ public class AssignTasksGUI3 {
     private TableColumn taskNameColumn;
     private TableColumn taskDescriptionColumn;
 
+    private Button buttonContinue;
 
-    public void start(Stage window){
-        window.setTitle("Assign Tasks");
+
+    public AssignTasksGUI3(){
 
         titleLabel = new Label("Task Table");
         titleLabel.setFont(new Font("Cambria", 32));
@@ -47,12 +48,19 @@ public class AssignTasksGUI3 {
         tasksTable.getColumns().add(taskNameColumn);
         tasksTable.getColumns().add(taskDescriptionColumn);
 
+        buttonContinue = new Button("Continue");
+
         mainPane = new VBox(10);
-        mainPane.getChildren().addAll(topPane, tasksTable);
+        mainPane.getChildren().addAll(topPane, tasksTable,buttonContinue);
     }
 
     public VBox getMainPane()
     {
         return mainPane;
+    }
+
+    public Button getButtonContinue()
+    {
+        return buttonContinue;
     }
 }
