@@ -7,6 +7,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
 /**
+ * A GUI tab containing components for displaying a list of assigned employees.
  * @author Timothy Engkar
  * @version 1.0
  */
@@ -24,6 +25,9 @@ public class AssignTasksGUI4 {
     private Button buttonContinue;
     private Button goBackButton;
 
+    /**
+     * Constructor initializing the GUI components
+     */
     public AssignTasksGUI4(){
 
         titleLabel = new Label("View Assigned Tasks");

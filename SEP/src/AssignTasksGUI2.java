@@ -7,6 +7,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
 /**
+ * A GUI tab containing components for displaying a list of requirements.
  * @author Timothy Engkar
  * @version 1.0
  */
@@ -26,6 +27,9 @@ public class AssignTasksGUI2 {
     private Button goBackButton;
 
 
+    /**
+     * Constructor initializing the GUI components
+     */
     public AssignTasksGUI2(){
 
         titleLabel = new Label("Requirement Table");

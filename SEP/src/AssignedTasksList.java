@@ -14,6 +14,7 @@ public class AssignedTasksList {
     public AssignedTasksList(){
         assignedTasks = new ArrayList<AssignedTasks>();
     }
+
     /**
      * Adds an AssignedTask to the list.
      * @param assignedTasks the assignedTask to add to the list
@@ -21,6 +22,7 @@ public class AssignedTasksList {
     public void addAssignedTask(AssignedTasks assignedTasks){
         this.assignedTasks.add(assignedTasks);
     }
+
     /**
      * Removes a Student to the list.
      * @param assignedTasks the assignedTask to remove to the list

@@ -11,6 +11,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
 /**
+ * A GUI tab containing components for displaying a list of tasks.
  * @author Timothy Engkar
  * @version 1.0
  */
@@ -35,6 +36,9 @@ public class AssignTasksGUI5 {
 
     private ListView employeeListView;
 
+    /**
+     * Constructor initializing the GUI components
+     */
     public AssignTasksGUI5(){
 
         titleLabel = new Label("Assign a task");
