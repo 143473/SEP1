@@ -79,8 +79,8 @@ public class SepGUI extends Application
     createProjectGUI1 = new CreateProjectGUI1(projectsAdapter);
     createProjectGUI2 = new CreateProjectGUI2(employeeAdapter);
     createProjectGUI3 = new CreateProjectGUI3();
-    projectOverviewGUI = new ProjectOverviewGUI();
-    manageProjectGUI = new ManageProjectGUI();
+    projectOverviewGUI = new ProjectOverviewGUI(projectsAdapter);
+    manageProjectGUI = new ManageProjectGUI(projectsAdapter);
     changeTeamMembersGUI = new ChangeTeamMembersGUI();
     manageRequirementGUI = new ManageRequirementGUI();
     manageTaskGUI = new ManageTaskGUI();

@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 /**
  * A class representing the AssignedTask of the employee with a first name, last name and country.
  * @author Timothy Engkar
@@ -53,5 +55,16 @@ public class AssignedTasks extends Task{
      */
     public double getSpentTime() {
         return spentTime;
+    }
+
+    public boolean equals(Object obj) {
+        if (!(obj instanceof AssignedTasks)){
+            return false;
+        }
+        AssignedTasks other = (AssignedTasks) obj;
+        return super.equals(other) &&
+                spentTime == other.spentTime &&
+                date.equals(other.date) &&
+                assignedEmployee.equals(other.assignedEmployee);
     }
 }
