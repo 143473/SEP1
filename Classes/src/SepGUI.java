@@ -2,15 +2,15 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 
 public class SepGUI extends Application
@@ -25,12 +25,8 @@ public class SepGUI extends Application
   private ProjectOverviewGUI projectOverviewGUI;
   private ManageProjectGUI manageProjectGUI;
   private ChangeTeamMembersGUI changeTeamMembersGUI;
-  private ReqOfSelectedPrjGUI reqOfSelectedPrjGUI;
-  private TasksOfReqOfPrjGUI tasksOfReqOfPrjGUI;
   private ManageRequirementGUI manageRequirementGUI;
   private ManageTaskGUI manageTaskGUI;
-
-  private ProjectsAdapter projectsAdapter;
 
   private EmployeeStatisticsGUI employeeStatisticsGUI;
   private AddANewEmployeeGUI addANewEmployeeGUI;
@@ -74,18 +70,17 @@ public class SepGUI extends Application
     parentStage.setTitle("Student File Adapter GUI 4");
     listener = new MyActionListener();
     EmployeeAdapter employeeAdapter = new EmployeeAdapter("employees.bin");
-    ProjectsAdapter projectsAdapter = new ProjectsAdapter("y");
+    ProjectsAdapter projectsAdapter = new ProjectsAdapter("");
 
     createProjectGUI1 = new CreateProjectGUI1(projectsAdapter);
-    createProjectGUI2 = new CreateProjectGUI2(employeeAdapter);
+    createProjectGUI2 = new CreateProjectGUI2();
     createProjectGUI3 = new CreateProjectGUI3();
     projectOverviewGUI = new ProjectOverviewGUI();
     manageProjectGUI = new ManageProjectGUI();
     changeTeamMembersGUI = new ChangeTeamMembersGUI();
     manageRequirementGUI = new ManageRequirementGUI();
     manageTaskGUI = new ManageTaskGUI();
-    reqOfSelectedPrjGUI = new ReqOfSelectedPrjGUI();
-    tasksOfReqOfPrjGUI = new TasksOfReqOfPrjGUI();
+
 
     employeeStatisticsGUI = new EmployeeStatisticsGUI(employeeAdapter);
     addANewEmployeeGUI = new AddANewEmployeeGUI(employeeAdapter);
@@ -188,21 +183,10 @@ public class SepGUI extends Application
       createProjectGUI3.getGoBackButton().setOnAction(listener);
       projectOverviewGUI.getAdd().setOnAction(listener);
       projectOverviewGUI.getManage().setOnAction(listener);
-      projectOverviewGUI.getContinueButton().setOnAction(listener);
-      reqOfSelectedPrjGUI.getAdd().setOnAction(listener);
-      reqOfSelectedPrjGUI.getContinueButton().setOnAction(listener);
-      reqOfSelectedPrjGUI.getManage().setOnAction(listener);
-      reqOfSelectedPrjGUI.getGoBackButton().setOnAction(listener);
-      tasksOfReqOfPrjGUI.getGoBackButton().setOnAction(listener);
-      tasksOfReqOfPrjGUI.getAdd().setOnAction(listener);
-      tasksOfReqOfPrjGUI.getManage().setOnAction(listener);
       manageProjectGUI.getManageTeamMembers().setOnAction(listener);
       manageProjectGUI.getCancel().setOnAction(listener);
       changeTeamMembersGUI.getCancel().setOnAction(listener);
       changeTeamMembersGUI.getAddButton().setOnAction(listener);
-
-
-
 
       if (e.getSource() == homeMenuItem)
       {
@@ -297,40 +281,8 @@ public class SepGUI extends Application
       {
         newWindow.close();
       }
-      //List of requirements for the selected project
-      else if(e.getSource() == projectOverviewGUI.getContinueButton())
-      {
-        stackPane.getChildren().clear();
-        stackPane.getChildren().add(reqOfSelectedPrjGUI.getMainPane());
-      }
 
-      //List of tasks for the selected requirement
-      else if (e.getSource() == reqOfSelectedPrjGUI.getContinueButton())
-      {
-        stackPane.getChildren().clear();
-        stackPane.getChildren().add(tasksOfReqOfPrjGUI.getMainPane());
-      }
-      else if (e.getSource() == tasksOfReqOfPrjGUI.getGoBackButton())
-      {
-        stackPane.getChildren().clear();
-        stackPane.getChildren().add(reqOfSelectedPrjGUI.getMainPane());
-      }
-      else if(e.getSource() == reqOfSelectedPrjGUI.getGoBackButton())
-      {
-        stackPane.getChildren().clear();
-        stackPane.getChildren().add(projectOverviewGUI.getMainPane());
-      }
-
-      //add requirement
-      else if(e.getSource() == reqOfSelectedPrjGUI.getAdd())
-      {
-        
-      }
-      //manage requirements
-      else if(e.getSource() == reqOfSelectedPrjGUI.getManage())
-      {
-
-      }
+        //Manage Requirements
 
         //Manage Tasks
 
