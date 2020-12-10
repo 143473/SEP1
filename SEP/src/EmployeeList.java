@@ -46,11 +46,23 @@ public class EmployeeList implements Serializable {
         employeeList.remove(employee);
     }
 
+    /**
+     * Gets the size of the employeeList
+     * @return int the size of the employeeList
+     */
     public int size(){
         return employeeList.size();
     }
 
+    /**
+     * gets the Employee at this index
+     * @param index the index of the Employee in the EmployeeList
+     * @return the Employee object of this index
+     */
     public Employee get(int index){
-        return employeeList.get(index);
+        if(index < employeeList.size()){
+            return employeeList.get(index);
+        }
+        return null;
     }
 }

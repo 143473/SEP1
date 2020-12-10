@@ -12,7 +12,7 @@ import javax.swing.*;
 /**
  * The 1st part of the project creation user interface, that allows for
  * setting up the project name and project description.
- * @author Claudiu Cordunianu
+ * @author Claudiu Cordunianu, Timothy Engkar, Marketa Lapcikova
  * @version 1.0
  */
 public class CreateProjectGUI1
@@ -74,6 +74,10 @@ public class CreateProjectGUI1
     return mainPane;
   }
 
+  /**
+   * Checks all the fields necessary to continue for their values
+   * @return boolean if all the values are correct, true if they are, false otherwise
+   */
   public boolean callContinueButton(){
     if(inputName.getText().equals("") || inputName.getText().trim().isEmpty()){
       Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -108,6 +112,10 @@ public class CreateProjectGUI1
     return true;
   }
 
+  /**
+   *Gets the continue button
+   * @return Button of the continueButton
+   */
   public Button getButtonContinue()
   {
     return buttonContinue;

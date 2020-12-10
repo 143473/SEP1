@@ -1,8 +1,19 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+/**
+ *  A class for loading the initial data for employees
+ *  * @author Marketa Lapcikova
+ *  * @version 1.0
+ */
 public class LoadInitialEmployeesData {
 
+    /**
+     * Starts the program
+     * @param args comment line arguments
+     * @throws FileNotFoundException exception when file is not found
+     * @throws IOException exceptions happening during input or output
+     */
     public static void main(String[] args)
     {
         EmployeeList employees = new EmployeeList();

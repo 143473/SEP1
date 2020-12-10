@@ -131,10 +131,14 @@ public class EditRemoveEmployeeGUI{
     }
 
     /**
-     * Handles the actions in this class
+     * Listener to the actions
      */
     private class MyActionListener implements EventHandler<ActionEvent>
     {
+        /**
+         * Handles the actions in this class
+         * @param e the action that happened
+         */
         public void handle(ActionEvent e)
         {
             Employee temp = employeeListView.getSelectionModel().getSelectedItem();
@@ -198,6 +202,10 @@ public class EditRemoveEmployeeGUI{
             }
         }
     }
+
+    /**
+     * Initializes ListView, clears and puts new values in
+     */
     public void initializeListView(){
         employeeListView.getItems().clear();
         EmployeeList employees = employeeAdapter.getAllEmployees();
@@ -206,13 +214,27 @@ public class EditRemoveEmployeeGUI{
             employeeListView.getItems().add(employees.get(i));
         }
     }
+
+    /**
+     * Gets mainPane from the GUI and initializes the ListView
+     * @return VBox main Pane
+     */
     public VBox getMainPane(){
         initializeListView();
         return mainPane;
     }
 
+    /**
+     * List Listener to the changes
+     */
     private class MyListListener implements ChangeListener<Employee>
     {
+        /**
+         * Method what happens when any changes in the ListView occure
+         * @param employee employee object as the observable value
+         * @param oldEmployee Employee type previous employee who was being clicked at
+         * @param newEmployee Employee type new employee who was being clicked at
+         */
         public void changed(ObservableValue<? extends Employee> employee, Employee oldEmployee, Employee newEmployee)
         {
 
@@ -232,5 +254,4 @@ public class EditRemoveEmployeeGUI{
 
         }
     }
-
 }
