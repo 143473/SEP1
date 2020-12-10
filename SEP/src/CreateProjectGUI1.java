@@ -1,4 +1,5 @@
 import javafx.geometry.Insets;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -75,28 +76,33 @@ public class CreateProjectGUI1
 
   public boolean callContinueButton(){
     if(inputName.getText().equals("") || inputName.getText().trim().isEmpty()){
-      JOptionPane.showMessageDialog(null, "Project name cannot be empty!",
-              "Invalid input", JOptionPane.ERROR_MESSAGE);
+      Alert alert = new Alert(Alert.AlertType.WARNING);
+      alert.setHeaderText("Invalid input");
+      alert.setContentText("Project name cannot be empty!");
+      alert.showAndWait();
       return false;
     }
     else if(inputDescription.getText().equals("") || inputDescription.getText().trim().isEmpty()){
-      JOptionPane.showMessageDialog(null, "Project description cannot be empty!",
-              "Invalid input", JOptionPane.ERROR_MESSAGE);
+      Alert alert = new Alert(Alert.AlertType.WARNING);
+      alert.setHeaderText("Invalid input");
+      alert.setContentText("Project description cannot be empty!");
+      alert.showAndWait();
       return false;
     }
     else {
       ProjectList projectList = projectsAdapter.getAllProjects();
       Project newProject = new Project(inputName.getText(), inputDescription.getText());
       if(!projectList.containsProject(newProject)){
-        System.out.println("adding it");
         projectList.addProject(newProject);
         projectsAdapter.saveProjects(projectList);
         sepGUI.getCreateProjectGUI2().setProjectList(projectList);
       }
       else{
         System.out.println("not adding it");
-        JOptionPane.showMessageDialog(null, "This project already exists!",
-                "Duplicate employee", JOptionPane.ERROR_MESSAGE);
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setHeaderText("Duplicate project");
+        alert.setContentText("This project already exists!");
+        alert.showAndWait();
         return false;
       }
     }
