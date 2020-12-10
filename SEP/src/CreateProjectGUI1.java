@@ -1,5 +1,3 @@
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -33,6 +31,12 @@ public class CreateProjectGUI1
   private Button buttonContinue;
 
 
+  /**
+   * 2-argument constructor setting the file name.
+   * @param projectsAdapter
+   * @param sepGUI
+   */
+
   public CreateProjectGUI1(ProjectsAdapter projectsAdapter, SepGUI sepGUI) {
     this.projectsAdapter = projectsAdapter;
     this.sepGUI = sepGUI;
@@ -60,6 +64,10 @@ public class CreateProjectGUI1
     mainPane.setPadding(new Insets(25, 25, 25, 25));
 
   }
+  /**
+   * Method for getting the first part of Create Project GUI, to be used in mainGUI
+   * @return Returns the main pane
+   */
   public VBox getMainPane()
   {
     return mainPane;
