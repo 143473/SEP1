@@ -7,6 +7,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
 /**
+ * A GUI tab containing components for displaying a list of projects.
  * @author Timothy Engkar
  * @version 1.0
  */
@@ -24,7 +25,9 @@ public class AssignTasksGUI1 {
 
     private Button continueButton;
 
-
+    /**
+     * Constructor initializing the GUI components
+     */
     public AssignTasksGUI1(){
 
         titleLabel = new Label("Assign Tasks");

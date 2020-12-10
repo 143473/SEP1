@@ -57,6 +57,11 @@ public class AssignedTasks extends Task{
         return spentTime;
     }
 
+    /**
+     * Compares time spent, date and assigned employee.
+     * @param obj the object to compare with
+     * @return true if the given object is equal to this student
+     */
     public boolean equals(Object obj) {
         if (!(obj instanceof AssignedTasks)){
             return false;

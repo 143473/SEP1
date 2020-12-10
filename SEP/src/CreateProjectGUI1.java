@@ -32,13 +32,11 @@ public class CreateProjectGUI1
 
   private Button buttonContinue;
 
-  private MyActionListener listener;
 
   public CreateProjectGUI1(ProjectsAdapter projectsAdapter, SepGUI sepGUI) {
     this.projectsAdapter = projectsAdapter;
     this.sepGUI = sepGUI;
 
-    listener = new MyActionListener();
 
     title = new Label("Create a New Project");
     Font titleFont = new Font(30);
@@ -56,7 +54,6 @@ public class CreateProjectGUI1
     gridPane.addRow(1, projectDesc, inputDescription);
 
     buttonContinue = new Button("Continue");
-    buttonContinue.setOnAction(listener);
 
     mainPane = new VBox();
     mainPane.getChildren().addAll(title, gridPane, buttonContinue);
@@ -68,35 +65,31 @@ public class CreateProjectGUI1
     return mainPane;
   }
 
-  private class MyActionListener implements EventHandler<ActionEvent> {
-    public void handle(ActionEvent e) {
-      if(e.getSource() == buttonContinue){
-        boolean allValuesCorrect = true;
-        if(inputName.getText() == null || inputName.getText().trim().isEmpty()){
-          JOptionPane.showMessageDialog(null, "Project name cannot be empty!",
-                  "Invalid input", JOptionPane.ERROR_MESSAGE);
-          allValuesCorrect = false;
-        }
-        else if(inputDescription.getText() == null || inputDescription.getText().trim().isEmpty()){
-          JOptionPane.showMessageDialog(null, "Project description cannot be empty!",
-                  "Invalid input", JOptionPane.ERROR_MESSAGE);
-          allValuesCorrect = false;
-        }
-        if(allValuesCorrect == true){
-          ProjectList projectList = projectsAdapter.getAllProjects();
-          Project newProject = new Project(inputName.getText(), inputDescription.getText());
-          if(!projectList.containsProject(newProject)){
-            System.out.println("adding it");
-            projectList.addProject(newProject);
-            projectsAdapter.saveProjects(projectList);
-            sepGUI.getCreateProjectGUI2().setProjectList(projectList);
-          }
-          else{
-            System.out.println("not adding it");
-            JOptionPane.showMessageDialog(null, "This project already exists!",
-                    "Duplicate employee", JOptionPane.ERROR_MESSAGE);
-          }
-        }
+  public void callContinueButton(){
+    boolean allValuesCorrect = true;
+    if(inputName.getText().equals("") || inputName.getText().trim().isEmpty()){
+      JOptionPane.showMessageDialog(null, "Project name cannot be empty!",
+              "Invalid input", JOptionPane.ERROR_MESSAGE);
+      allValuesCorrect = false;
+    }
+    else if(inputDescription.getText().equals("") || inputDescription.getText().trim().isEmpty()){
+      JOptionPane.showMessageDialog(null, "Project description cannot be empty!",
+              "Invalid input", JOptionPane.ERROR_MESSAGE);
+      allValuesCorrect = false;
+    }
+    if(allValuesCorrect == true){
+      ProjectList projectList = projectsAdapter.getAllProjects();
+      Project newProject = new Project(inputName.getText(), inputDescription.getText());
+      if(!projectList.containsProject(newProject)){
+        System.out.println("adding it");
+        projectList.addProject(newProject);
+        projectsAdapter.saveProjects(projectList);
+        sepGUI.getCreateProjectGUI2().setProjectList(projectList);
+      }
+      else{
+        System.out.println("not adding it");
+        JOptionPane.showMessageDialog(null, "This project already exists!",
+                "Duplicate employee", JOptionPane.ERROR_MESSAGE);
       }
     }
   }

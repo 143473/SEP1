@@ -3,10 +3,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-
-import javax.swing.*;
 
 /**
  * The 2nd part of the project creation user interface, that allows for
@@ -16,17 +12,15 @@ import javax.swing.*;
  */
 public class CreateProjectGUI2
 {
-
   private EmployeeAdapter employeeAdapter;
-  private MyActionListener listener;
-  private MyListListener listListener;
-
   private VBox mainPane;
   private HBox hBoxPaneButton;
   private VBox newWindowPane;
   private HBox statusPane;
   private HBox searchPane;
   private HBox topButtonsPane;
+
+  private ProjectList projectList;
 
   private Label title;
   private Label status;
@@ -37,9 +31,14 @@ public class CreateProjectGUI2
 
   private ComboBox statusBox;
 
-  private ListView<Employee> employeeListView;
-  private ListView teamMembersTable;
-
+  private TableView<Employee> employeesTable;
+  private TableView teamMembersTable;
+  private TableColumn firstNameColumn;
+  private TableColumn lastNameColumn;
+  private TableColumn birthdayColumn;
+  private TableColumn<Employee, String> firstColumn;
+  private TableColumn<Employee, String> secondColumn;
+  private TableColumn<Employee, MyDate> thirdColumn;
 
   private Button continueButton;
   private Button goBackButton;
@@ -50,10 +49,7 @@ public class CreateProjectGUI2
 
   public CreateProjectGUI2(EmployeeAdapter employeeAdapter)
   {
-    this.employeeAdapter = employeeAdapter;
-    listener = new MyActionListener();
-    listListener = new MyListListener();
-
+  this.employeeAdapter = employeeAdapter;
     title = new Label("Create a new project");
     Font titleFont = new Font(30);
     title.setFont(titleFont);
@@ -67,20 +63,53 @@ public class CreateProjectGUI2
     searchButton = new Button("Search");
 
     statusPane = new HBox(5);
-    statusPane.getChildren().addAll(status, statusBox);
+    statusPane.getChildren().addAll(status,statusBox);
 
     searchPane = new HBox(5);
-    searchPane.getChildren().addAll(searchByName, searchField, searchButton);
+    searchPane.getChildren().addAll(searchByName,searchField,searchButton);
 
     /*gridPane = new GridPane();
     gridPane.addRow(0, status, statusBox);
     gridPane.addRow(1, searchByName, searchField, searchButton);*/
 
-    employeeListView = new ListView<Employee>();
-    employeeListView.setPrefHeight(120);
-    employeeListView.getSelectionModel().selectedItemProperty().addListener((listListener));
+    employeesTable = new TableView<Employee>();
+    employeesTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+    employeesTable.getSelectionModel().setCellSelectionEnabled(true);
+    employeesTable.setPrefHeight(290);
+    employeesTable.setTableMenuButtonVisible(false);
 
-    teamMembersTable = new ListView<AssignedEmployee>();
+    firstColumn = new TableColumn<Employee, String>("First Name");
+    firstColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("firstName"));
+
+    secondColumn = new TableColumn<Employee, String>("Last Name");
+    secondColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("lastName"));
+
+    thirdColumn = new TableColumn<Employee, MyDate>("Birthday");
+    thirdColumn.setCellValueFactory(new PropertyValueFactory<Employee, MyDate>("dateOfBirth"));
+
+    employeesTable.getColumns().add(firstColumn);
+    employeesTable.getColumns().add(secondColumn);
+    employeesTable.getColumns().add(thirdColumn);
+
+    firstColumn.setReorderable(false);
+    secondColumn.setReorderable(false);
+    thirdColumn.setReorderable(false);
+    thirdColumn.setSortable(false);
+
+
+    firstNameColumn = new TableColumn("First Name");
+    firstNameColumn.setCellFactory(new PropertyValueFactory<String, String>("First name"));
+
+
+    lastNameColumn = new TableColumn("Last Name");
+    lastNameColumn.setCellFactory(new PropertyValueFactory<String, String>("Last name"));
+
+
+    birthdayColumn = new TableColumn("Birthday");
+    birthdayColumn.setCellFactory(new PropertyValueFactory<String, String>("Birthday"));
+
+    teamMembersTable = new TableView();
+    teamMembersTable.getColumns().addAll(firstNameColumn, lastNameColumn, birthdayColumn);
 
     continueButton = new Button("Continue");
     goBackButton = new Button("Go back");
@@ -96,31 +125,19 @@ public class CreateProjectGUI2
     hBoxPaneButton.getChildren().addAll(continueButton, goBackButton);
 
     mainPane = new VBox(5);
-    mainPane.getChildren().addAll(title, statusPane, topButtonsPane, tableTitle, teamMembersTable, hBoxPaneButton);
+    mainPane.getChildren().addAll(title, statusPane,topButtonsPane,tableTitle, teamMembersTable, hBoxPaneButton);
 
-    newWindowPane = new VBox(searchPane, employeeListView, add);
+
+
+    newWindowPane = new VBox(searchPane, employeesTable, add);
   }
 
-  private class MyActionListener implements EventHandler<ActionEvent>
-  {
-    public void handle(ActionEvent e)
-    {
-      Employee temp = employeeListView.getSelectionModel().getSelectedItem();
-
-      if(e.getSource() == searchButton){
-        String searchingFor = searchField.getText();
-        employeeListView.getItems().clear();
-        EmployeeList chosenEmployees = employeeAdapter.getEmployeesByName(searchingFor);
-        for (int i = 0; i < chosenEmployees.size(); i++) {
-          employeeListView.getItems().add(chosenEmployees.get(i));
-        }
-      }
-    }
+  public void setProjectList(ProjectList projectList) {
+    this.projectList = projectList;
   }
 
-  public void initializeListView()
-  {
-    employeeListView.getItems().clear();
+  private void initializeTable(){
+    employeesTable.getItems().clear();
     EmployeeList employees = employeeAdapter.getAllEmployees();
     employeeListView.getItems().add(null);
     for (int i = 0; i < employees.size(); i++)
@@ -132,7 +149,6 @@ public class CreateProjectGUI2
       employeesTable.getItems().add(employees.get(i));
     }
   }
-
   public VBox getMainPane()
   {
     return mainPane;
@@ -155,25 +171,14 @@ public class CreateProjectGUI2
 
   public VBox getNewWindowPane()
   {
-    initializeListView();
+    initializeTable();
     return newWindowPane;
-  }
-
-  private class MyListListener implements ChangeListener<Employee>
-  {
-    public void changed(ObservableValue<? extends Employee> employee, Employee oldEmployee, Employee newEmployee)
-    {
-
-
-
-    }
   }
 
   public Button getAdd()
   {
     return add;
   }
-
 }
   /*private class MyActionListener implements EventHandler<ActionEvent>
   {
