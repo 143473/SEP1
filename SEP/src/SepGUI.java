@@ -87,7 +87,7 @@ public class SepGUI extends Application
 
     createProjectGUI1 = new CreateProjectGUI1(projectsAdapter, this);
     createProjectGUI2 = new CreateProjectGUI2(employeeAdapter, projectsAdapter,this);
-    createProjectGUI3 = new CreateProjectGUI3();
+    createProjectGUI3 = new CreateProjectGUI3(projectsAdapter);
     projectOverviewGUI = new ProjectOverviewGUI(projectsAdapter);
     manageProjectGUI = new ManageProjectGUI(projectsAdapter);
     changeTeamMembersGUI = new ChangeTeamMembersGUI();
@@ -240,6 +240,11 @@ public class SepGUI extends Application
   public CreateProjectGUI2 getCreateProjectGUI2(){
     return createProjectGUI2;
   }
+
+  public CreateProjectGUI3 getCreateProjectGUI3(){
+    return createProjectGUI3;
+  }
+
 
   private class MyActionListener implements EventHandler<ActionEvent>
   {

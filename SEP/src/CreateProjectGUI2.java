@@ -57,6 +57,7 @@ public class CreateProjectGUI2 {
 
   public CreateProjectGUI2(EmployeeAdapter employeeAdapter, ProjectsAdapter projectsAdapter, SepGUI sepGUI) {
     employeeList = new EmployeeList();
+    this.projectsAdapter = projectsAdapter;
     this.sepGUI = sepGUI;
 
     this.employeeAdapter = employeeAdapter;
@@ -177,6 +178,10 @@ public class CreateProjectGUI2 {
     this.projectList = projectList;
   }
 
+  public ProjectList getProjectList() {
+    return projectList;
+  }
+
   public void initializeListView() {
     employeeListView.getItems().clear();
     EmployeeList employees = employeeAdapter.getAllEmployees();
@@ -250,6 +255,7 @@ public class CreateProjectGUI2 {
     for (int i = 0; i < employeeList.size(); i++) {
       AssignedEmployee assignedEmployee = new AssignedEmployee(employeeList.get(i).getFirstName(), employeeList.get(i).getLastName(), employeeList.get(i).getDateOfBirth());
       project.addTeamMember(assignedEmployee);
+      sepGUI.getCreateProjectGUI3().setProjectList(projectList);
     }
 
     return allValuesCorrect;
