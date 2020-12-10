@@ -231,8 +231,12 @@ public class SepGUI extends Application
 
       assignTasksGUI1.getContinueButton().setOnAction(listener);
       assignTasksGUI2.getContinueButton().setOnAction(listener);
+      assignTasksGUI2.getGoBackButton().setOnAction(listener);
       assignTasksGUI3.getButtonContinue().setOnAction(listener);
+      assignTasksGUI3.getGoBackButton().setOnAction(listener);
       assignTasksGUI4.getButtonContinue().setOnAction(listener);
+      assignTasksGUI4.getGoBackButton().setOnAction(listener);
+      assignTasksGUI5.getGoBackButton().setOnAction(listener);
 
       reportTasksGUI1.getContinueButton().setOnAction(listener);
       reportTasksGUI2.getContinueButton().setOnAction(listener);
@@ -438,7 +442,28 @@ public class SepGUI extends Application
         stackPane.getChildren().clear();
         stackPane.getChildren().add(assignTasksGUI3.getMainPane());
       }
-        else if (e.getSource() == assignTasksGUI3.getButtonContinue())
+      else if (e.getSource() == assignTasksGUI2.getGoBackButton())
+      {
+        stackPane.getChildren().clear();
+        stackPane.getChildren().add(assignTasksGUI1.getMainPane());
+      }
+
+        else if (e.getSource() == assignTasksGUI3.getGoBackButton())
+      {
+        stackPane.getChildren().clear();
+        stackPane.getChildren().add(assignTasksGUI2.getMainPane());
+      }
+      else if (e.getSource() == assignTasksGUI3.getButtonContinue())
+      {
+        stackPane.getChildren().clear();
+        stackPane.getChildren().add(assignTasksGUI4.getMainPane());
+      }
+      else if (e.getSource() == assignTasksGUI4.getGoBackButton())
+      {
+        stackPane.getChildren().clear();
+        stackPane.getChildren().add(assignTasksGUI3.getMainPane());
+      }
+      else if (e.getSource() == assignTasksGUI3.getButtonContinue())
       {
         stackPane.getChildren().clear();
         stackPane.getChildren().add(assignTasksGUI4.getMainPane());
@@ -448,6 +473,12 @@ public class SepGUI extends Application
         stackPane.getChildren().clear();
         stackPane.getChildren().add(assignTasksGUI5.getMainPane());
       }
+      else if (e.getSource() == assignTasksGUI5.getGoBackButton())
+      {
+        stackPane.getChildren().clear();
+        stackPane.getChildren().add(assignTasksGUI4.getMainPane());
+      }
+
 
         //Report Task
         else if (e.getSource() == reportMenuItem)

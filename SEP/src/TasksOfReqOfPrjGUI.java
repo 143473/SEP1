@@ -55,7 +55,7 @@ public class TasksOfReqOfPrjGUI
 
     tableTitle = new Label("List of tasks");
 
-    searchLabel = new Label("Search for a project");
+    searchLabel = new Label("Search for a task: ");
     search = new TextField();
     searchButton = new Button("Search");
     searchPane = new HBox(5);

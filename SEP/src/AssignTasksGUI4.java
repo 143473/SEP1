@@ -13,6 +13,7 @@ import javafx.scene.text.Font;
 public class AssignTasksGUI4 {
     private VBox mainPane;
     private HBox topPane;
+    private HBox bottomButtons;
 
     private Label titleLabel;
 
@@ -21,6 +22,7 @@ public class AssignTasksGUI4 {
     private TableColumn birthdayColumn;
 
     private Button buttonContinue;
+    private Button goBackButton;
 
     public AssignTasksGUI4(){
 
@@ -47,9 +49,13 @@ public class AssignTasksGUI4 {
         allAssignedTasksTable.getColumns().add(birthdayColumn);
 
         buttonContinue = new Button("Continue");
+        goBackButton = new Button("Go back");
+
+        bottomButtons = new HBox(5);
+        bottomButtons.getChildren().addAll(buttonContinue, goBackButton);
 
         mainPane = new VBox(10);
-        mainPane.getChildren().addAll(topPane, allAssignedTasksTable, buttonContinue);
+        mainPane.getChildren().addAll(topPane, allAssignedTasksTable, bottomButtons);
     }
 
     public VBox getMainPane()
@@ -60,5 +66,10 @@ public class AssignTasksGUI4 {
     public Button getButtonContinue()
     {
         return buttonContinue;
+    }
+
+    public Button getGoBackButton()
+    {
+        return goBackButton;
     }
 }
