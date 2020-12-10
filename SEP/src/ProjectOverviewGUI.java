@@ -8,28 +8,49 @@ import javafx.scene.text.FontWeight;
 
 public class ProjectOverviewGUI
 {
-  private ProjectsAdapter projectsAdapter;
   private Button add;
   private Button manage;
+  private Button continueButton;
+  private Button searchButton;
+
   private TextField search;
+
   private Label title;
-  private TableView allProjectsTable;
+  private Label tableTitle;
+  private Label searchLabel;
+
+  private TableView projects;
+
   private VBox mainPane;
+  private HBox topPane;
+  private HBox searchPane;
+  private HBox topButtons;
 
   public ProjectOverviewGUI(){
 
-    add = new Button("ADD");
-    manage = new Button("MANAGE");
+    add = new Button("Add");
+    manage = new Button("Manage");
+    continueButton = new Button("Continue");
+
+    searchLabel = new Label("Search for a project");
     search = new TextField();
+    searchButton = new Button("Search");
+
     title = new Label("Project Overview");
+    tableTitle = new Label("Choose a project from the list");
+
     title.setFont(Font.font("Calibri", FontWeight.BOLD, 20));
-    allProjectsTable = new TableView();
-    HBox hb = new HBox();
-    hb.setSpacing(100);
-    hb.getChildren().addAll(title, search);
-    HBox hb2 = new HBox();
-    hb2.setSpacing(100);
-    hb2.getChildren().addAll(manage, add);
+    projects = new TableView();
+
+    searchPane = new HBox(5);
+    searchPane.getChildren().addAll(searchLabel,search,searchButton);
+
+    topPane = new HBox();
+    topPane.getChildren().addAll(title,searchPane);
+
+    topButtons = new HBox(5);
+    topButtons.getChildren().addAll(manage, add);
+
     TableColumn nameCol = new TableColumn("Name");
     nameCol.setCellValueFactory(new PropertyValueFactory("name"));
     TableColumn descriptionCol = new TableColumn("Description");
@@ -39,28 +60,19 @@ public class ProjectOverviewGUI
     TableColumn teamMemberCol = new TableColumn("Team Member");
     teamMemberCol.setCellValueFactory(new PropertyValueFactory("teammember"));
 
-    allProjectsTable.getColumns().setAll(nameCol, descriptionCol,statusCol,teamMemberCol);
-    allProjectsTable.setPrefWidth(450);
-    allProjectsTable.setPrefHeight(300);
-    allProjectsTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+    projects.getColumns().setAll(nameCol, descriptionCol,statusCol,teamMemberCol);
+    projects.setPrefWidth(450);
+    projects.setPrefHeight(300);
+    projects.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-    mainPane = new VBox(20);
-    mainPane.setPadding(new Insets(25, 25, 25, 25));;
-    mainPane.getChildren().addAll(hb, hb2, allProjectsTable);
+    mainPane = new VBox(5);
+    mainPane.setPadding(new Insets(25, 25, 25, 25));
+    mainPane.getChildren().addAll(title,topPane,topButtons,tableTitle, projects,continueButton);
 
 
   }
-  private void initializeTable(){
-    allProjectsTable.getItems().clear();
-    ProjectList projects = projectsAdapter.getAllProjects();
-
-    for (int i = 0; i < projects.size(); i++) {
-      allProjectsTable.getItems().add(projects.get(i));
-    }
-  }
-
-  public VBox getMainPane() {
-    initializeTable();
+  public VBox getMainPane()
+  {
     return mainPane;
   }
 
@@ -72,5 +84,10 @@ public class ProjectOverviewGUI
   public Button getAdd()
   {
     return add;
+  }
+
+  public Button getContinueButton()
+  {
+    return continueButton;
   }
 }

@@ -1,6 +1,7 @@
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -10,12 +11,25 @@ public class ReqOfSelectedPrjGUI
 {
 
   private VBox mainPane;
+  private HBox searchPane;
+  private HBox topButtons;
+  private GridPane projectNamePane;
+  private HBox bottomButtons;
+
   private Button add;
   private Button manage;
+  private Button searchButton;
+  private Button continueButton;
+  private Button goBackButton;
+
   private TextField search;
-  private Label projectname;
+
+  private Label projectLabel;
+  private Label projectName;
   private Label spacer;
-  private Label reqname;
+  private Label tableTitle;
+  private Label searchLabel;
+
   private TableView table;
 
   public ReqOfSelectedPrjGUI(){
@@ -23,22 +37,34 @@ public class ReqOfSelectedPrjGUI
     add = new Button("ADD");
     manage = new Button("MANAGE");
     search = new TextField();
-    projectname = new Label("Projectnamehere");
-    projectname.setFont(Font.font("Calibri", FontWeight.BOLD, 20));
+    projectLabel = new Label("Project:");
+    projectLabel.setFont(Font.font("Calibri", FontWeight.BOLD, 20));
     spacer = new Label("-");
+    projectName = new Label();
     spacer.setFont(Font.font("Calibri", FontWeight.BOLD, 20));
-    reqname = new Label("Reqnamehere");
-    reqname.setFont(Font.font("Calibri", FontWeight.BOLD, 20));
     table = new TableView();
-    HBox hb = new HBox();
-    hb.setSpacing(5);
-    hb.getChildren().addAll(projectname,spacer,reqname);
-    HBox hb11 = new HBox();
-    hb11.setSpacing(500);
-    hb11.getChildren().addAll(hb, search);
-    HBox hb2 = new HBox();
-    hb2.setSpacing(100);
-    hb2.getChildren().addAll(manage, add);
+
+    projectNamePane = new GridPane();
+    projectNamePane.setHgap(5);
+    projectNamePane.getChildren().addAll(projectLabel, projectName);
+
+    continueButton = new Button("Continue");
+    goBackButton = new Button("Go Back");
+
+    bottomButtons = new HBox(5);
+    bottomButtons.getChildren().addAll(continueButton, goBackButton);
+
+    tableTitle = new Label("Choose a requirement from the list");
+
+    searchLabel = new Label("Search for a requirement");
+    search = new TextField();
+    searchButton = new Button("Search");
+    searchPane = new HBox(5);
+    searchPane.getChildren().addAll(searchLabel,search,searchButton);
+
+    topButtons = new HBox(5);
+    topButtons.getChildren().addAll(add,manage);
+
     TableColumn idCol = new TableColumn("ID");
     idCol.setCellValueFactory(new PropertyValueFactory("id"));
     TableColumn nameCol = new TableColumn("Name");
@@ -63,14 +89,34 @@ public class ReqOfSelectedPrjGUI
     table.setPrefHeight(300);
     table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-    mainPane = new VBox(20);
-    mainPane.setPadding(new Insets(25, 25, 25, 25));;
-    mainPane.getChildren().addAll(hb11, hb2, table);
+    mainPane = new VBox(5);
+    mainPane.setPadding(new Insets(25, 25, 25, 25));
+    mainPane.getChildren().addAll(projectNamePane, searchPane,topButtons, tableTitle, table,bottomButtons);
 
 
   }
   public VBox getMainPane()
   {
     return mainPane;
+  }
+
+  public Button getContinueButton()
+  {
+    return continueButton;
+  }
+
+  public Button getAdd()
+  {
+    return add;
+  }
+
+  public Button getManage()
+  {
+    return manage;
+  }
+
+  public Button getGoBackButton()
+  {
+    return goBackButton;
   }
 }
