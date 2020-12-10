@@ -12,7 +12,7 @@ import javafx.scene.text.Font;
  */
 public class CreateProjectGUI2
 {
-
+  private EmployeeAdapter employeeAdapter;
   private VBox mainPane;
   private HBox hBoxPaneButton;
   private VBox newWindowPane;
@@ -29,14 +29,14 @@ public class CreateProjectGUI2
 
   private ComboBox statusBox;
 
-  private TableView employeesTable;
+  private TableView<Employee> employeesTable;
   private TableView teamMembersTable;
   private TableColumn firstNameColumn;
   private TableColumn lastNameColumn;
   private TableColumn birthdayColumn;
-  private TableColumn firstColumn;
-  private TableColumn secondColumn;
-  private TableColumn thirdColumn;
+  private TableColumn<Employee, String> firstColumn;
+  private TableColumn<Employee, String> secondColumn;
+  private TableColumn<Employee, MyDate> thirdColumn;
 
   private Button continueButton;
   private Button goBackButton;
@@ -45,9 +45,9 @@ public class CreateProjectGUI2
   private Button add;
   private Button removeButton;
 
-  public CreateProjectGUI2()
+  public CreateProjectGUI2(EmployeeAdapter employeeAdapter)
   {
-
+  this.employeeAdapter = employeeAdapter;
     title = new Label("Create a new project");
     Font titleFont = new Font(30);
     title.setFont(titleFont);
@@ -70,23 +70,24 @@ public class CreateProjectGUI2
     gridPane.addRow(0, status, statusBox);
     gridPane.addRow(1, searchByName, searchField, searchButton);*/
 
-    employeesTable = new TableView();
+    employeesTable = new TableView<Employee>();
     employeesTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     employeesTable.getSelectionModel().setCellSelectionEnabled(true);
     employeesTable.setPrefHeight(290);
     employeesTable.setTableMenuButtonVisible(false);
 
-    firstColumn = new TableColumn("First Name");
-    firstColumn.setCellFactory(new PropertyValueFactory<String, String>("First name"));
+    firstColumn = new TableColumn<Employee, String>("First Name");
+    firstColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("firstName"));
 
-    secondColumn = new TableColumn("Last Name");
-    secondColumn.setCellFactory(new PropertyValueFactory<String, String>("Last name"));
+    secondColumn = new TableColumn<Employee, String>("Last Name");
+    secondColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("lastname"));
 
-    thirdColumn = new TableColumn("Birthday");
-    thirdColumn.setCellFactory(new PropertyValueFactory<String, String>("Birthday"));
+    thirdColumn = new TableColumn<Employee, MyDate>("Birthday");
+    thirdColumn.setCellValueFactory(new PropertyValueFactory<Employee, MyDate>("birthday"));
 
-    employeesTable.getColumns().addAll(firstColumn, secondColumn, thirdColumn);
-
+    employeesTable.getColumns().add(firstColumn);
+    employeesTable.getColumns().add(secondColumn);
+    employeesTable.getColumns().add(thirdColumn);
 
     firstNameColumn = new TableColumn("First Name");
     firstNameColumn.setCellFactory(new PropertyValueFactory<String, String>("First name"));
@@ -116,13 +117,20 @@ public class CreateProjectGUI2
     hBoxPaneButton.getChildren().addAll(continueButton, goBackButton);
 
     mainPane = new VBox(5);
-    mainPane.getChildren().addAll(title, statusPane,topButtonsPane,tableTitle, employeesTable, hBoxPaneButton);
+    mainPane.getChildren().addAll(title, statusPane,topButtonsPane,tableTitle, teamMembersTable, hBoxPaneButton);
 
 
 
-    newWindowPane = new VBox(searchPane, teamMembersTable, add);
+    newWindowPane = new VBox(searchPane, employeesTable, add);
   }
+  private void initializeTable(){
+    employeesTable.getItems().clear();
+    EmployeeList employees = employeeAdapter.getAllEmployees();
 
+    for (int i = 0; i < employees.size(); i++) {
+      employeesTable.getItems().add(employees.get(i));
+    }
+  }
   public VBox getMainPane()
   {
     return mainPane;
@@ -145,6 +153,7 @@ public class CreateProjectGUI2
 
   public VBox getNewWindowPane()
   {
+    initializeTable();
     return newWindowPane;
   }
 
