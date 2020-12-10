@@ -72,20 +72,22 @@ public class CreateProjectGUI1
                   "Invalid input", JOptionPane.ERROR_MESSAGE);
           allValuesCorrect = false;
         }
-          if(allValuesCorrect == true){
-            ProjectList projectList = projectsAdapter.getAllProjects();
-            Project newProject = new Project(inputName.getText(), inputDescription.getText());
-            if(!projectList.containsProject(newProject)){
-              projectList.addProject(newProject);
-              projectsAdapter.saveProjects(projectList);
-              JOptionPane.showMessageDialog(null, "New project was successfully added!",
-                      "Message", JOptionPane.INFORMATION_MESSAGE);
-            }
-            else{
-              JOptionPane.showMessageDialog(null, "This project already exists!",
-                      "Duplicate employee", JOptionPane.ERROR_MESSAGE);
-            }
+        if(allValuesCorrect == true){
+          ProjectList projectList = projectsAdapter.getAllProjects();
+          Project newProject = new Project(inputName.getText(), inputDescription.getText());
+          if(!projectList.containsProject(newProject)){
+            System.out.println("adding it");
+            projectList.addProject(newProject);
+            projectsAdapter.saveProjects(projectList);
+            JOptionPane.showMessageDialog(null, "New project was successfully added!",
+                    "Message", JOptionPane.INFORMATION_MESSAGE);
           }
+          else{
+            System.out.println("not adding it");
+            JOptionPane.showMessageDialog(null, "This project already exists!",
+                    "Duplicate employee", JOptionPane.ERROR_MESSAGE);
+          }
+        }
       }
     }
   }
