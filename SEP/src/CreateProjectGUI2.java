@@ -139,12 +139,6 @@ public class CreateProjectGUI2
   private void initializeTable(){
     employeesTable.getItems().clear();
     EmployeeList employees = employeeAdapter.getAllEmployees();
-    employeeListView.getItems().add(null);
-    for (int i = 0; i < employees.size(); i++)
-    {
-      employeeListView.getItems().add(employees.get(i));
-    }
-
     for (int i = 0; i < employees.size(); i++) {
       employeesTable.getItems().add(employees.get(i));
     }
