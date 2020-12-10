@@ -92,7 +92,6 @@ public class CreateProjectGUI2
 
     employeeListView = new ListView<Employee>();
     employeeListView.setPrefHeight(120);
-    employeeListView.getSelectionModel().selectedItemProperty().addListener((listListener));
 
     teamMembersTable = new ListView<Employee>();
 
