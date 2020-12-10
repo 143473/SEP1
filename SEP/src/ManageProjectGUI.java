@@ -107,6 +107,7 @@ public class ManageProjectGUI
 
   public VBox getMainPane()
   {
+    initializeTable();
     return mainPane;
   }
 
