@@ -127,7 +127,6 @@ public class CreateProjectGUI2
     {
       employeeListView.getItems().add(employees.get(i));
     }
-    System.out.println("ASS");
 
     for (int i = 0; i < employees.size(); i++) {
       employeesTable.getItems().add(employees.get(i));
