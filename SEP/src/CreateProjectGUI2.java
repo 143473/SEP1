@@ -287,7 +287,12 @@ public class CreateProjectGUI2
 
       return allValuesCorrect;
     }
+
+  public EmployeeList getEmployeeList()
+  {
+    return employeeList;
   }
+}
 
 /*
   private class MyActionListener implements EventHandler<ActionEvent>
