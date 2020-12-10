@@ -3,7 +3,7 @@ import java.util.GregorianCalendar;
 
 /**
  * A class representing the Date that can be used in multiple other classes.
- * @author Bartosz Ochedzan
+ * @author Bartosz Ochedzan, Marketa Lapcikova
  * @version 1.0
  */
 public class MyDate implements Serializable
@@ -11,6 +11,7 @@ public class MyDate implements Serializable
   private int day;
   private int month;
   private int year;
+
   /**
    * Three-argument constructor.
    * @param day
@@ -24,14 +25,26 @@ public class MyDate implements Serializable
     this.year = year;
   }
 
+  /**
+   * Gets the day of the date
+   * @return day of the date as int
+   */
   public int getDay(){
     return day;
   }
 
+  /**
+   * Gets the month of the date
+   * @return month of the date as int
+   */
   public int getMonth(){
     return month;
   }
 
+  /**
+   * Gets the year of the date
+   * @return year of the date as int
+   */
   public int getYear(){
     return year;
   }
@@ -53,6 +66,10 @@ public class MyDate implements Serializable
   return new MyDate(day,month,year);
   }
 
+  /**
+   * Checks if the date is at least 15 years back from now
+   * @return true if it is at least 15 years back from now, false otherwise
+   */
   public boolean is15Years(){
     GregorianCalendar currentDate = new GregorianCalendar();
     int currentDay = currentDate.get(GregorianCalendar.DATE);
@@ -87,6 +104,12 @@ public class MyDate implements Serializable
       }
     }
   }
+
+  /**
+   * Compares this MyDate object to another one
+   * @param obj other MyDate object for comparison
+   * @return boolean true if those objects equal, false otherwise
+   */
   public boolean equals(Object obj){
     if(!(obj instanceof MyDate)){
       return false;
@@ -95,6 +118,10 @@ public class MyDate implements Serializable
     return temp.getDay() == getDay() && temp.getMonth() == getMonth() && temp.getYear() == getYear();
   }
 
+  /**
+   * Detects if the year of the MyDate object is leap or not
+   * @return boolean true if the year is leap, false otherwise
+   */
   public boolean isLeapYear(){
     if((year%4 == 0)&&(year%100 != 0)){
       return true;
@@ -108,6 +135,10 @@ public class MyDate implements Serializable
     }
   }
 
+  /**
+   * Detects how many days there should be in the month of this MyDate object
+   * @return int of days that are in this month
+   */
   public int daysInMonth(){
     int daysInMonth = 0;
     switch (month){
@@ -136,6 +167,11 @@ public class MyDate implements Serializable
     }
     return daysInMonth;
   }
+
+  /**
+   * Checks if the date of the MyDate object exists, makes sense
+   * @return boolean true if it is valid, false otherwise
+   */
 
   public boolean isValidDate(){
     if((month < 1)||(month > 12)){

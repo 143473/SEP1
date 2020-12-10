@@ -20,10 +20,18 @@ public class EmployeeStatus {
         return null;
     }
 
+    /**
+     * Gets all the statuses
+     * @return String array of all the statuses
+     */
     public String [] getStatuses(){
         return statuses;
     }
 
+    /**
+     * Gets the default index
+     * @return the default int defaultIndex
+     */
     public int getDefaultIndex(){
         return defaultIndex;
     }

@@ -13,7 +13,7 @@ import javax.swing.*;
 /**
  * The 2nd part of the project creation user interface, that allows for
  * setting the status of the project and choosing the team members.
- * @author Claudiu Cordunianu
+ * @author Claudiu Cordunianu, Timothy Engkar, Marketa Lapcikova
  * @version 1.0
  */
 public class CreateProjectGUI2 {
@@ -24,7 +24,6 @@ public class CreateProjectGUI2 {
   private EmployeeAdapter employeeAdapter;
   private ProjectsAdapter projectsAdapter;
   private MyActionListener listener;
-  private MyListListener listListener;
 
   private VBox mainPane;
   private HBox hBoxPaneButton;
@@ -55,6 +54,12 @@ public class CreateProjectGUI2 {
   private Button add;
   private Button removeButton;
 
+  /**
+   * 3-argument constructor setting the values for the GUI
+   * @param employeeAdapter the employee adaptor class
+   * @param projectsAdapter the projects adaptor class
+   * @param sepGUI the main GUI
+   */
   public CreateProjectGUI2(EmployeeAdapter employeeAdapter, ProjectsAdapter projectsAdapter, SepGUI sepGUI) {
     employeeList = new EmployeeList();
     this.sepGUI = sepGUI;
@@ -62,7 +67,6 @@ public class CreateProjectGUI2 {
     this.employeeAdapter = employeeAdapter;
     this.projectsAdapter = projectsAdapter;
     listener = new MyActionListener();
-    listListener = new MyListListener();
 
     title = new Label("Create a new project");
     Font titleFont = new Font(30);
@@ -95,7 +99,6 @@ public class CreateProjectGUI2 {
 
     employeeListView = new ListView<Employee>();
     employeeListView.setPrefHeight(120);
-    employeeListView.getSelectionModel().selectedItemProperty().addListener((listListener));
 
     teamMembersTable = new ListView<Employee>();
 
@@ -120,7 +123,14 @@ public class CreateProjectGUI2 {
     newWindowPane = new VBox(searchPane, employeeListView, add);
   }
 
+  /**
+   * Listener to the actions
+   */
   private class MyActionListener implements EventHandler<ActionEvent> {
+    /**
+     * Handles the actions in this class
+     * @param e the action that happened
+     */
     public void handle(ActionEvent e) {
       Employee temp = employeeListView.getSelectionModel().getSelectedItem();
 
@@ -154,6 +164,10 @@ public class CreateProjectGUI2 {
 
   }
 
+  /**
+   * Checks all the fields necessary to continue for their values
+   * @return boolean if all the values are correct, true if they are, false otherwise
+   */
   public boolean callAdd() {
     boolean OK = true;
     Employee employeeAdded = employeeListView.getSelectionModel().getSelectedItem();
@@ -173,10 +187,17 @@ public class CreateProjectGUI2 {
     return OK;
   }
 
+  /**
+   *Sets the project list to the sent one
+   * @param projectList projectList that needs to be set
+   */
   public void setProjectList(ProjectList projectList) {
     this.projectList = projectList;
   }
 
+  /**
+   * Initializes list view to new values
+   */
   public void initializeListView() {
     employeeListView.getItems().clear();
     EmployeeList employees = employeeAdapter.getAllEmployees();
@@ -188,7 +209,6 @@ public class CreateProjectGUI2 {
 
   /**
    * Method for getting the second part of Create Project GUI, to be used in mainGUI
-   *
    * @return Returns the main pane
    */
   public VBox getMainPane() {
@@ -197,7 +217,6 @@ public class CreateProjectGUI2 {
 
   /**
    * Method for getting the go back button of this class
-   *
    * @return Returns the go back button
    */
   public Button getGoBackButton() {
@@ -206,36 +225,42 @@ public class CreateProjectGUI2 {
 
   /**
    * Method for getting the continue button of this class
-   *
    * @return Returns the continue button
    */
-
   public Button getContinueButton() {
     return continueButton;
   }
 
-
+  /**
+   * Gets the Button addTeamMember
+   * @return Button addTeamMember
+   */
   public Button getAddTeamMember() {
     return addTeamMember;
   }
 
 
+  /**
+   * Initializes list view returns newWindowPane
+   * @return VBox newWindowPane
+   */
   public VBox getNewWindowPane() {
     initializeListView();
     return newWindowPane;
   }
 
-  private class MyListListener implements ChangeListener<Employee> {
-    public void changed(ObservableValue<? extends Employee> employee, Employee oldEmployee, Employee newEmployee) {
-
-
-    }
-  }
-
+  /**
+   * Gets the Button add
+   * @return Button add
+   */
   public Button getAdd() {
     return add;
   }
 
+  /**
+   * Checks all the fields necessary to continue for their values
+   * @return boolean if all the values are correct, true if they are, false otherwise
+   */
   public boolean callContinueButton() {
     boolean allValuesCorrect = true;
     if (teamMembersTable.getItems().isEmpty()) {
@@ -255,30 +280,4 @@ public class CreateProjectGUI2 {
     return allValuesCorrect;
   }
 }
-/*
-  private class MyActionListener implements EventHandler<ActionEvent>
-  {
-    public void handle(ActionEvent e)
-    {
-      if (e.getSource() == addTeamMember)
-      {
-        // New window (Stage)
-        Stage newWindow = new Stage();
-        newWindow.setTitle("Choose Team Member");
-        scene = new Scene(newWindowPane);
-        newWindow.setScene(scene);
-
-        // Specifies the modality for new window.
-        newWindow.initModality(Modality.WINDOW_MODAL);
-
-        // Specifies the owner Window (parent) for new window
-        newWindow.initOwner(primaryStage);
-
-        // Set position of second window, related to primary window.
-        newWindow.setX(primaryStage.getX() + 200);
-        newWindow.setY(primaryStage.getY() + 100);
-
-
-}
-*/
 

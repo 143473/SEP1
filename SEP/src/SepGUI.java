@@ -11,7 +11,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
+/**
+ *  A class handling the main application
+ *  * @author Claudiu Corduianu
+ *  * @version 1.0
+ */
 
 public class SepGUI extends Application
 {
