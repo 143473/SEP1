@@ -294,30 +294,3 @@ public class CreateProjectGUI2
   }
 }
 
-/*
-  private class MyActionListener implements EventHandler<ActionEvent>
-  {
-    public void handle(ActionEvent e)
-    {
-      if (e.getSource() == addTeamMember)
-      {
-        // New window (Stage)
-        Stage newWindow = new Stage();
-        newWindow.setTitle("Choose Team Member");
-        scene = new Scene(newWindowPane);
-        newWindow.setScene(scene);
-
-        // Specifies the modality for new window.
-        newWindow.initModality(Modality.WINDOW_MODAL);
-
-        // Specifies the owner Window (parent) for new window
-        newWindow.initOwner(primaryStage);
-
-        // Set position of second window, related to primary window.
-        newWindow.setX(primaryStage.getX() + 200);
-        newWindow.setY(primaryStage.getY() + 100);
-
-
-}
-*/
-
