@@ -20,6 +20,8 @@ public class CreateProjectGUI2
   private HBox searchPane;
   private HBox topButtonsPane;
 
+  private ProjectList projectList;
+
   private Label title;
   private Label status;
   private Label searchByName;
@@ -129,6 +131,11 @@ public class CreateProjectGUI2
 
     newWindowPane = new VBox(searchPane, employeesTable, add);
   }
+
+  public void setProjectList(ProjectList projectList) {
+    this.projectList = projectList;
+  }
+
   private void initializeTable(){
     employeesTable.getItems().clear();
     EmployeeList employees = employeeAdapter.getAllEmployees();

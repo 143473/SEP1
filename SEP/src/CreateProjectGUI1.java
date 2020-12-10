@@ -18,6 +18,7 @@ import javax.swing.*;
  */
 public class CreateProjectGUI1
 {
+  private SepGUI sepGUI;
   private ProjectsAdapter projectsAdapter;
   private GridPane gridPane;
   private VBox mainPane;
@@ -33,8 +34,9 @@ public class CreateProjectGUI1
 
   private MyActionListener listener;
 
-  public CreateProjectGUI1(ProjectsAdapter projectsAdapter) {
+  public CreateProjectGUI1(ProjectsAdapter projectsAdapter, SepGUI sepGUI) {
     this.projectsAdapter = projectsAdapter;
+    this.sepGUI = sepGUI;
 
     listener = new MyActionListener();
 
@@ -87,8 +89,7 @@ public class CreateProjectGUI1
             System.out.println("adding it");
             projectList.addProject(newProject);
             projectsAdapter.saveProjects(projectList);
-            JOptionPane.showMessageDialog(null, "New project was successfully added!",
-                    "Message", JOptionPane.INFORMATION_MESSAGE);
+            sepGUI.getCreateProjectGUI2().setProjectList(projectList);
           }
           else{
             System.out.println("not adding it");
