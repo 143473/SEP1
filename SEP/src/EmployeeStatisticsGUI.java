@@ -1,16 +1,12 @@
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import javafx.stage.Stage;
-import javafx.scene.text.Font;
-import javafx.scene.control.TableView.TableViewSelectionModel;
 
 public class EmployeeStatisticsGUI{
     private EmployeeAdapter employeeAdapter;
@@ -38,7 +34,6 @@ public class EmployeeStatisticsGUI{
 */
 
     private MyActionListener listener;
-
     public EmployeeStatisticsGUI(EmployeeAdapter employeeAdapter){
         this.employeeAdapter = employeeAdapter;
 

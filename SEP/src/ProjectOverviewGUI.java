@@ -1,14 +1,10 @@
-import javafx.application.Application;
 import javafx.geometry.Insets;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.stage.Stage;
 
 public class ProjectOverviewGUI
 {
@@ -56,5 +52,15 @@ public class ProjectOverviewGUI
   public VBox getMainPane()
   {
     return mainPane;
+  }
+
+  public Button getManage()
+  {
+    return manage;
+  }
+
+  public Button getAdd()
+  {
+    return add;
   }
 }
