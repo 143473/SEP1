@@ -47,6 +47,7 @@ public class ProjectOverviewGUI
     tableTitle = new Label("Choose a project from the list");
 
     title.setFont(Font.font("Calibri", FontWeight.BOLD, 20));
+
     projectsTable = new TableView();
 
     searchPane = new HBox(5);
@@ -66,6 +67,7 @@ public class ProjectOverviewGUI
 
     statusCol = new TableColumn("Status");
     statusCol.setCellValueFactory(new PropertyValueFactory("status"));
+
     teamMemberCol = new TableColumn("Team Member");
     teamMemberCol.setCellValueFactory(new PropertyValueFactory("teammember"));
 
