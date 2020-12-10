@@ -22,7 +22,6 @@ public class CreateProjectGUI2
   private EmployeeAdapter employeeAdapter;
   private ProjectsAdapter projectsAdapter;
   private MyActionListener listener;
-  private MyListListener listListener;
 
   private VBox mainPane;
   private HBox hBoxPaneButton;
@@ -60,7 +59,6 @@ public class CreateProjectGUI2
     this.employeeAdapter = employeeAdapter;
     this.projectsAdapter = projectsAdapter;
     listener = new MyActionListener();
-    listListener = new MyListListener();
 
     title = new Label("Create a new project");
     Font titleFont = new Font(30);
@@ -94,7 +92,6 @@ public class CreateProjectGUI2
 
     employeeListView = new ListView<Employee>();
     employeeListView.setPrefHeight(120);
-    employeeListView.getSelectionModel().selectedItemProperty().addListener((listListener));
 
     teamMembersTable = new ListView<Employee>();
 

@@ -30,7 +30,7 @@ public class AssignTasksGUI4 {
      */
     public AssignTasksGUI4(){
 
-        titleLabel = new Label("View Assigned Tasks");
+        titleLabel = new Label("Assign Employee");
         titleLabel.setFont(new Font("Cambria", 32));
 
         topPane = new HBox(500);
