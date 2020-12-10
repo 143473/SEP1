@@ -39,7 +39,7 @@ public class EditRemoveEmployeeGUI{
     private HBox employeePane;
 
     private ListView<Employee> studentListView;
-    private FlowPane comboPane;
+    private FlowPane listPane;
 
     private Button saveButton;
     private Button removeButton;
@@ -94,22 +94,17 @@ public class EditRemoveEmployeeGUI{
         informationPane.addRow(1, lastNameLabel, lastNameField);
         informationPane.addRow(2, birthdayLabel, birthdayPane);
 
-
         studentListView = new ListView<Employee>();
         studentListView.setPrefHeight(120);
         studentListView.getSelectionModel().selectedItemProperty().addListener((listListener));
 
-        FlowPane listPane = new FlowPane();
+        listPane = new FlowPane();
         listPane.setAlignment(Pos.BASELINE_RIGHT);
         listPane.setPrefWidth(200);
         listPane.getChildren().add(studentListView);
 
-
-
-
         employeePane = new HBox();
         employeePane.getChildren().addAll(informationPane, listPane);
-
 
         saveButton = new Button("Save");
         removeButton = new Button("Remove");
