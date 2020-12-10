@@ -3,14 +3,9 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-
-import javax.swing.*;
 
 /**
  * The 2nd part of the project creation user interface, that allows for
@@ -27,7 +22,6 @@ public class CreateProjectGUI2
   private EmployeeAdapter employeeAdapter;
   private ProjectsAdapter projectsAdapter;
   private MyActionListener listener;
-  private MyListListener listListener;
 
   private VBox mainPane;
   private HBox hBoxPaneButton;
@@ -72,7 +66,6 @@ public class CreateProjectGUI2
     this.employeeAdapter = employeeAdapter;
     this.projectsAdapter = projectsAdapter;
     listener = new MyActionListener();
-    listListener = new MyListListener();
 
     title = new Label("Create a new project");
     Font titleFont = new Font(30);
