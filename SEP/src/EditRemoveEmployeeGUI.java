@@ -176,6 +176,11 @@ public class EditRemoveEmployeeGUI{
 
                     if (alert.getResult() == ButtonType.YES) {
                         employeeAdapter.deleteEmployee(index);
+                        firstNameField.setText("");
+                        lastNameField.setText("");
+                        dayField.setText("");
+                        monthField.setText("");
+                        yearField.setText("");
                         Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
                         alert2.setHeaderText("Editing successful");
                         alert2.setContentText("Changes were saved successfully!");
