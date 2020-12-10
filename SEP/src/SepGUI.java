@@ -193,6 +193,47 @@ public class SepGUI extends Application
     newWindow.setX(parentStage.getX() + 200);
     newWindow.setY(parentStage.getY() + 100);
 
+    createProjectGUI1.getButtonContinue().setOnAction(listener);
+    createProjectGUI2.getContinueButton().setOnAction(listener);
+    createProjectGUI2.getGoBackButton().setOnAction(listener);
+    createProjectGUI2.getAddTeamMember().setOnAction(listener);
+    createProjectGUI2.getAdd().setOnAction(listener);
+    createProjectGUI3.getFinishButton().setOnAction(listener);
+    createProjectGUI3.getGoBackButton().setOnAction(listener);
+    projectOverviewGUI.getAdd().setOnAction(listener);
+    projectOverviewGUI.getManage().setOnAction(listener);
+    projectOverviewGUI.getContinueButton().setOnAction(listener);
+    reqOfSelectedPrjGUI.getAdd().setOnAction(listener);
+    reqOfSelectedPrjGUI.getContinueButton().setOnAction(listener);
+    reqOfSelectedPrjGUI.getManage().setOnAction(listener);
+    reqOfSelectedPrjGUI.getGoBackButton().setOnAction(listener);
+    tasksOfReqOfPrjGUI.getGoBackButton().setOnAction(listener);
+    tasksOfReqOfPrjGUI.getAdd().setOnAction(listener);
+    tasksOfReqOfPrjGUI.getManage().setOnAction(listener);
+    manageProjectGUI.getManageTeamMembers().setOnAction(listener);
+    manageProjectGUI.getCancel().setOnAction(listener);
+    manageRequirementGUI.getCancel().setOnAction(listener);
+    addRequirementGUI.getCancel().setOnAction(listener);
+    manageTaskGUI.getCancel().setOnAction(listener);
+    addTaskGUI.getCancel().setOnAction(listener);
+    changeTeamMembersGUI.getCancel().setOnAction(listener);
+    changeTeamMembersGUI.getAddButton().setOnAction(listener);
+
+    assignTasksGUI1.getContinueButton().setOnAction(listener);
+    assignTasksGUI2.getContinueButton().setOnAction(listener);
+    assignTasksGUI2.getGoBackButton().setOnAction(listener);
+    assignTasksGUI3.getButtonContinue().setOnAction(listener);
+    assignTasksGUI3.getGoBackButton().setOnAction(listener);
+    assignTasksGUI4.getButtonContinue().setOnAction(listener);
+    assignTasksGUI4.getGoBackButton().setOnAction(listener);
+    assignTasksGUI5.getGoBackButton().setOnAction(listener);
+
+    reportTasksGUI1.getContinueButton().setOnAction(listener);
+    reportTasksGUI2.getContinueButton().setOnAction(listener);
+
+    viewAssignedTasksGUI1.getContinueButton().setOnAction(listener);
+    viewAssignedTasksGUI2.getGoBack().setOnAction(listener);
+
 
   }
   public CreateProjectGUI2 getCreateProjectGUI2(){
@@ -203,46 +244,6 @@ public class SepGUI extends Application
   {
     public void handle(ActionEvent e)
     {
-      createProjectGUI1.getButtonContinue().setOnAction(listener);
-      createProjectGUI2.getContinueButton().setOnAction(listener);
-      createProjectGUI2.getGoBackButton().setOnAction(listener);
-      createProjectGUI2.getAddTeamMember().setOnAction(listener);
-      createProjectGUI2.getAdd().setOnAction(listener);
-      createProjectGUI3.getFinishButton().setOnAction(listener);
-      createProjectGUI3.getGoBackButton().setOnAction(listener);
-      projectOverviewGUI.getAdd().setOnAction(listener);
-      projectOverviewGUI.getManage().setOnAction(listener);
-      projectOverviewGUI.getContinueButton().setOnAction(listener);
-      reqOfSelectedPrjGUI.getAdd().setOnAction(listener);
-      reqOfSelectedPrjGUI.getContinueButton().setOnAction(listener);
-      reqOfSelectedPrjGUI.getManage().setOnAction(listener);
-      reqOfSelectedPrjGUI.getGoBackButton().setOnAction(listener);
-      tasksOfReqOfPrjGUI.getGoBackButton().setOnAction(listener);
-      tasksOfReqOfPrjGUI.getAdd().setOnAction(listener);
-      tasksOfReqOfPrjGUI.getManage().setOnAction(listener);
-      manageProjectGUI.getManageTeamMembers().setOnAction(listener);
-      manageProjectGUI.getCancel().setOnAction(listener);
-      manageRequirementGUI.getCancel().setOnAction(listener);
-      addRequirementGUI.getCancel().setOnAction(listener);
-      manageTaskGUI.getCancel().setOnAction(listener);
-      addTaskGUI.getCancel().setOnAction(listener);
-      changeTeamMembersGUI.getCancel().setOnAction(listener);
-      changeTeamMembersGUI.getAddButton().setOnAction(listener);
-
-      assignTasksGUI1.getContinueButton().setOnAction(listener);
-      assignTasksGUI2.getContinueButton().setOnAction(listener);
-      assignTasksGUI2.getGoBackButton().setOnAction(listener);
-      assignTasksGUI3.getButtonContinue().setOnAction(listener);
-      assignTasksGUI3.getGoBackButton().setOnAction(listener);
-      assignTasksGUI4.getButtonContinue().setOnAction(listener);
-      assignTasksGUI4.getGoBackButton().setOnAction(listener);
-      assignTasksGUI5.getGoBackButton().setOnAction(listener);
-
-      reportTasksGUI1.getContinueButton().setOnAction(listener);
-      reportTasksGUI2.getContinueButton().setOnAction(listener);
-
-      viewAssignedTasksGUI1.getContinueButton().setOnAction(listener);
-      viewAssignedTasksGUI2.getGoBack().setOnAction(listener);
 
       if (e.getSource() == homeMenuItem)
       {
@@ -260,7 +261,7 @@ public class SepGUI extends Application
 
       else if (e.getSource() == createProjectGUI1.getButtonContinue())
         {
-
+          createProjectGUI1.callContinueButton();
           stackPane.getChildren().clear();
           stackPane.getChildren().add(createProjectGUI2.getMainPane());
         }
