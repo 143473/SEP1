@@ -1,12 +1,11 @@
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 
 import javax.swing.*;
 
@@ -103,7 +102,6 @@ public class CreateProjectGUI2 {
     goBackButton = new Button("Go back");
     addTeamMember = new Button("Add Team Member");
     removeButton = new Button("Remove Member");
-    removeButton.setOnAction(listener);
 
     topButtonsPane = new HBox(5);
     topButtonsPane.getChildren().addAll(addTeamMember, removeButton);
@@ -125,6 +123,7 @@ public class CreateProjectGUI2 {
       Employee temp = employeeListView.getSelectionModel().getSelectedItem();
 
       if (e.getSource() == searchButton) {
+
         String searchingFor = searchField.getText();
         employeeListView.getItems().clear();
         EmployeeList chosenEmployees = employeeAdapter.getEmployeesByName(searchingFor);
@@ -147,29 +146,23 @@ public class CreateProjectGUI2 {
           JOptionPane
                   .showMessageDialog(null, "Changes were saved successfully!",
                           "Editing successful", JOptionPane.INFORMATION_MESSAGE);
+          //clear fields
         }
+      } else {
+        JOptionPane.showMessageDialog(null, "No employee was chosen!",
+                "Editing unsuccessful", JOptionPane.ERROR_MESSAGE);
       }
     }
 
   }
 
-  public boolean callAdd() {
-    boolean OK = true;
+  public void callAdd() {
+    System.out.println("dfcvghjk");
     Employee employeeAdded = employeeListView.getSelectionModel().getSelectedItem();
-    if(employeeAdded == null){
-      Alert alert = new Alert(Alert.AlertType.WARNING);
-      alert.setHeaderText("Warning");
-      alert.setContentText("No employee was chosen!");
-      alert.showAndWait();
-      OK = false;
-    }
-    if(OK){
-      teamMembersTable.getItems().add(employeeAdded);
-      employeeList.addEmployee(employeeAdded);
-      employeeListView.getItems().remove(employeeAdded);
-    }
+    teamMembersTable.getItems().add(employeeAdded);
+    employeeList.addEmployee(employeeAdded);
+    employeeListView.getItems().remove(employeeAdded);
 
-    return OK;
   }
 
   public void setProjectList(ProjectList projectList) {
