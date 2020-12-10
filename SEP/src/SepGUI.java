@@ -64,7 +64,7 @@ public class SepGUI extends Application
 
   private MyActionListener listener;
 
-  public void start(Stage parentStage) throws Exception
+  public void start(Stage parentStage)
   {
     this.parentStage = parentStage;
     parentStage.setTitle("Student File Adapter GUI 4");
@@ -148,6 +148,8 @@ public class SepGUI extends Application
     parentStage.setScene(scene);
     parentStage.setResizable(false);
     parentStage.show();
+
+    // Pop -up window with full list of employees
     // New window (Stage)
     newWindow = new Stage();
     newWindow.setTitle("Choose Employee");

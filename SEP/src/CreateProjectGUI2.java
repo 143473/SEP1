@@ -1,7 +1,5 @@
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -14,17 +12,18 @@ import javafx.scene.text.Font;
  */
 public class CreateProjectGUI2
 {
-  private Scene scene;
-  private GridPane gridPane;
+
   private VBox mainPane;
   private HBox hBoxPaneButton;
   private VBox newWindowPane;
   private HBox statusPane;
   private HBox searchPane;
+  private HBox topButtonsPane;
 
   private Label title;
   private Label status;
   private Label searchByName;
+  private Label tableTitle;
 
   private TextField searchField;
 
@@ -44,12 +43,10 @@ public class CreateProjectGUI2
   private Button searchButton;
   private Button addTeamMember;
   private Button add;
-
-
+  private Button removeButton;
 
   public CreateProjectGUI2()
   {
-
 
     title = new Label("Create a new project");
     Font titleFont = new Font(30);
@@ -57,15 +54,16 @@ public class CreateProjectGUI2
 
     status = new Label("Project's status: ");
     statusBox = new ComboBox();
+    tableTitle = new Label("List of Team Members");
 
     searchByName = new Label("Search by name: ");
     searchField = new TextField();
     searchButton = new Button("Search");
 
-    statusPane = new HBox();
+    statusPane = new HBox(5);
     statusPane.getChildren().addAll(status,statusBox);
 
-    searchPane = new HBox();
+    searchPane = new HBox(5);
     searchPane.getChildren().addAll(searchByName,searchField,searchButton);
 
     /*gridPane = new GridPane();
@@ -107,14 +105,18 @@ public class CreateProjectGUI2
     continueButton = new Button("Continue");
     goBackButton = new Button("Go back");
     addTeamMember = new Button("Add Team Member");
+    removeButton = new Button("Remove Member");
+
+    topButtonsPane = new HBox(5);
+    topButtonsPane.getChildren().addAll(addTeamMember, removeButton);
 
     add = new Button("Add");
 
-    hBoxPaneButton = new HBox();
+    hBoxPaneButton = new HBox(5);
     hBoxPaneButton.getChildren().addAll(continueButton, goBackButton);
 
-    mainPane = new VBox();
-    mainPane.getChildren().addAll(title, statusPane,addTeamMember, employeesTable, hBoxPaneButton);
+    mainPane = new VBox(5);
+    mainPane.getChildren().addAll(title, statusPane,topButtonsPane,tableTitle, employeesTable, hBoxPaneButton);
 
 
 
@@ -139,11 +141,6 @@ public class CreateProjectGUI2
   public Button getAddTeamMember()
   {
     return addTeamMember;
-  }
-
-  public Scene getScene()
-  {
-    return scene;
   }
 
   public VBox getNewWindowPane()
