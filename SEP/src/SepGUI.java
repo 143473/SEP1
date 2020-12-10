@@ -245,6 +245,11 @@ public class SepGUI extends Application
     return createProjectGUI2;
   }
 
+  public CreateProjectGUI3 getCreateProjectGUI3(){
+    return createProjectGUI3;
+  }
+
+
   private class MyActionListener implements EventHandler<ActionEvent>
   {
     public void handle(ActionEvent e)

@@ -98,7 +98,6 @@ public class CreateProjectGUI1
       Project newProject = new Project(inputName.getText(), inputDescription.getText());
       if(!projectList.containsProject(newProject)){
         projectList.addProject(newProject);
-        projectsAdapter.saveProjects(projectList);
         sepGUI.getCreateProjectGUI2().setProjectList(projectList);
       }
       else{
