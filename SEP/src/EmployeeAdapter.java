@@ -89,14 +89,27 @@ public class EmployeeAdapter
   {
     Employee changedEmployee = new Employee(firstName, lastName, birthday);
     EmployeeList employees = getAllEmployees();
+    System.out.println(employees.get(indexInList));
 
+    employees.removeEmployee(employees.get(indexInList));
+    employees.addEmployee(changedEmployee);
+    System.out.println(firstName);
+
+    saveEmployees(employees);
+  }
+
+  public void deleteEmployee(int indexInList){
+    EmployeeList employees = getAllEmployees();
     for (int i = 0; i < employees.size(); i++) {
       if(i == indexInList){
         employees.removeEmployee(employees.get(i));
-        employees.addEmployee(changedEmployee);
       }
     }
     saveEmployees(employees);
+  }
+
+  public Employee getSelectedEmployee(int index){
+    return getAllEmployees().get(index);
   }
 
 }

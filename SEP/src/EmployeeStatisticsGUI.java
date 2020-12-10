@@ -135,7 +135,7 @@ public class EmployeeStatisticsGUI{
 
     private class MyActionListener implements EventHandler<ActionEvent> {
         public void handle(ActionEvent e) {
-            if(e.getSource() == searchButton){
+            if (e.getSource() == searchButton) {
                 String searchingFor = searchField.getText();
                 allEmployeesTable.getItems().clear();
                 EmployeeList chosenEmployees = employeeAdapter.getEmployeesByName(searchingFor);

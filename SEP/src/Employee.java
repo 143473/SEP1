@@ -108,6 +108,19 @@ public class Employee implements Serializable {
         return dateOfBirth.copy();
     }
 
+    public int getDayOfBirth(){
+        return dateOfBirth.getDay();
+    }
+
+    public int getMonthOfBirth(){
+        return dateOfBirth.getMonth();
+    }
+
+    public int getYearOfBirth(){
+        return dateOfBirth.getYear();
+    }
+
+
     /**
      * Compares the Employee with another object
      * @param obj the object we are comparing this Employee to
@@ -120,7 +133,10 @@ public class Employee implements Serializable {
         Employee other = (Employee) obj;
         return firstName.equals(other.firstName) &&
                 lastName.equals(other.lastName) &&
-                dateOfBirth.equals(other.dateOfBirth) &&
-                projects.equals(other.projects);
+                dateOfBirth.equals(other.dateOfBirth);
+    }
+
+    public String toString(){
+        return firstName+" "+lastName+" ("+getDayOfBirth()+"/"+getMonthOfBirth()+"/"+getYearOfBirth()+")";
     }
 }

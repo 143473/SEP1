@@ -38,13 +38,14 @@ public class EditRemoveEmployeeGUI{
     private GridPane informationPane;
     private HBox employeePane;
 
-    private ListView<Employee> studentListView;
+    private ListView<Employee> employeeListView;
     private FlowPane listPane;
 
     private Button saveButton;
     private Button removeButton;
     private HBox buttonsPane;
     private EmployeeAdapter employeeAdapter;
+
     private MyActionListener listener;
     private MyListListener listListener;
 
@@ -52,6 +53,7 @@ public class EditRemoveEmployeeGUI{
         this.employeeAdapter = employeeAdapter;
         listener = new MyActionListener();
         listListener = new MyListListener();
+
         titleLabel = new Label("Edit or Remove Employee");
         titleLabel.setFont(new Font("Cambria", 32));
 
@@ -71,21 +73,22 @@ public class EditRemoveEmployeeGUI{
 
         dayField = new TextField();
         dayField.setPromptText("dd");
-        dayField.setMaxWidth(140);
+        dayField.setMaxWidth(40);
+        dayField.setEditable(false);
         monthField = new TextField();
         monthField.setPromptText("mm");
         monthField.setMaxWidth(40);
+        monthField.setEditable(false);
         yearField = new TextField();
         yearField.setPromptText("yyyy");
         yearField.setMaxWidth(60);
+        yearField.setEditable(false);
 
         birthdayPane = new HBox(5);
-        birthdayPane.getChildren().addAll(dayField);
+        birthdayPane.getChildren().addAll(dayField, monthField, yearField);
 
         firstNameField = new TextField();
-        firstNameField.setEditable(false);
         lastNameField = new TextField();
-        lastNameField.setEditable(false);
 
         informationPane = new GridPane();
         informationPane.setHgap(5);
@@ -94,20 +97,22 @@ public class EditRemoveEmployeeGUI{
         informationPane.addRow(1, lastNameLabel, lastNameField);
         informationPane.addRow(2, birthdayLabel, birthdayPane);
 
-        studentListView = new ListView<Employee>();
-        studentListView.setPrefHeight(120);
-        studentListView.getSelectionModel().selectedItemProperty().addListener((listListener));
+        employeeListView = new ListView<Employee>();
+        employeeListView.setPrefHeight(120);
+        employeeListView.getSelectionModel().selectedItemProperty().addListener((listListener));
 
         listPane = new FlowPane();
         listPane.setAlignment(Pos.BASELINE_RIGHT);
         listPane.setPrefWidth(200);
-        listPane.getChildren().add(studentListView);
+        listPane.getChildren().add(employeeListView);
 
         employeePane = new HBox();
         employeePane.getChildren().addAll(informationPane, listPane);
 
         saveButton = new Button("Save");
+        saveButton.setOnAction(listener);
         removeButton = new Button("Remove");
+        removeButton.setOnAction(listener);
 
         buttonsPane = new HBox(15);
         buttonsPane.getChildren().addAll(saveButton, removeButton);
@@ -115,64 +120,93 @@ public class EditRemoveEmployeeGUI{
         mainPane = new VBox();
         mainPane.getChildren().addAll(titleLabel, employeePane, buttonsPane);
     }
-    public void updateStudentListView()
-    {
-        int currentIndex = studentListView.getSelectionModel().getSelectedIndex();
-
-        studentListView.getItems().clear();
-
-        EmployeeList students = employeeAdapter.getAllEmployees();
-        for (int i = 0; i < students.size(); i++)
-        {
-            studentListView.getItems().add(students.get(i));
-        }
-
-        if (currentIndex == -1 && studentListView.getItems().size() > 0)
-        {
-            studentListView.getSelectionModel().select(0);
-        }
-        else
-        {
-            studentListView.getSelectionModel().select(currentIndex);
-        }
-    }
     private class MyActionListener implements EventHandler<ActionEvent>
     {
         public void handle(ActionEvent e)
         {
+            Employee temp = employeeListView.getSelectionModel().getSelectedItem();
+            //employee's index in the EmployeeList but the first one is invalid
+            int index = employeeListView.getSelectionModel().getSelectedIndex()-1;
             if (e.getSource() == saveButton)
             {
-                String firstName = firstNameField.getText();
-                String lastName = lastNameField.getText();
-                MyDate day = new MyDate(Integer.parseInt(dayField.getText()), Integer.parseInt(monthField.getText()), Integer.parseInt(yearField.getText()));
-                //employee's index in the EmployeeList
-                int index = studentListView.getSelectionModel().getSelectedIndex();
+                //not selected
+                if(employeeListView.getSelectionModel().getSelectedItem() != null){
+                        String firstName = firstNameField.getText();
+                        String lastName = lastNameField.getText();
+                        MyDate day = temp.getDateOfBirth();
 
-                employeeAdapter.saveChangedEmployee(firstName, lastName, day, index);
-                updateStudentListView();
-                dayField.setText("");
-                JOptionPane.showMessageDialog(null, "Changes were saved successfully!",
-                        "Editing successful", JOptionPane.INFORMATION_MESSAGE);
+                        employeeAdapter.saveChangedEmployee(firstName, lastName, day, index);
+                        initializeListView();
+                        JOptionPane.showMessageDialog(null, "Changes were saved successfully!",
+                                "Editing successful", JOptionPane.INFORMATION_MESSAGE);
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "No employee was chosen!",
+                            "Editing unsuccessful", JOptionPane.ERROR_MESSAGE);
+                }
 
+            }
+            if(e.getSource() == removeButton){
+                if(!employeeListView.getSelectionModel().getSelectedItem().equals("-")) {
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+                            "Do you really want to delete employee " + firstNameField.getText() + " " + lastNameField.getText() + " (" + dayField.getText() + "/" + monthField.getText() + "/" + yearField.getText() + ")?",
+                            ButtonType.YES,
+                            ButtonType.NO);
+                    alert.setTitle("Delete employee");
+                    alert.setHeaderText(null);
+
+                    alert.showAndWait();
+
+                    if (alert.getResult() == ButtonType.YES) {
+                        employeeAdapter.deleteEmployee(index);
+                        JOptionPane.showMessageDialog(null, "Changes were saved successfully!",
+                                "Editing successful", JOptionPane.INFORMATION_MESSAGE);
+                        initializeListView();
+                        //clear fields
+                    }
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "No employee was chosen!",
+                            "Editing unsuccessful", JOptionPane.ERROR_MESSAGE);
+                }
             }
         }
     }
+    public void initializeListView(){
+        employeeListView.getItems().clear();
+        EmployeeList employees = employeeAdapter.getAllEmployees();
+        employeeListView.getItems().add(null);
+        for (int i = 0; i < employees.size(); i++) {
+            employeeListView.getItems().add(employees.get(i));
+        }
+        System.out.println("whatever");
+
+    }
+    public VBox getMainPane(){
+        initializeListView();
+        return mainPane;
+    }
+
     private class MyListListener implements ChangeListener<Employee>
     {
-        public void changed(ObservableValue<? extends Employee> student, Employee oldStudent, Employee newStudent)
+        public void changed(ObservableValue<? extends Employee> employee, Employee oldEmployee, Employee newEmployee)
         {
-            Employee temp = studentListView.getSelectionModel().getSelectedItem();
+
+            Employee temp = employeeListView.getSelectionModel().getSelectedItem();
+            //employee's index in the EmployeeList but the first one is invalid
+            int index = employeeListView.getSelectionModel().getSelectedIndex()-1;
 
             if (temp != null)
             {
-                firstNameField.setText(temp.getFirstName());
-                lastNameField.setText(temp.getLastName());
-                dayField.setPromptText(temp.toString());
+                Employee selectedEmployee = employeeAdapter.getSelectedEmployee(index);
+                firstNameField.setText(selectedEmployee.getFirstName());
+                lastNameField.setText(selectedEmployee.getLastName());
+                dayField.setText(Integer.toString(selectedEmployee.getDayOfBirth()));
+                monthField.setText(Integer.toString(selectedEmployee.getMonthOfBirth()));
+                yearField.setText(Integer.toString(selectedEmployee.getYearOfBirth()));
             }
+
         }
-    }
-    public VBox getMainPane(){
-        return mainPane;
     }
 
 }

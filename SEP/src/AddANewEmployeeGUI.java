@@ -121,7 +121,7 @@ public class AddANewEmployeeGUI{
                         allValuesCorrect = false;
                     }
                 }
-                if(allValuesCorrect == true){
+                if(allValuesCorrect){
                     dateOfBirth = new MyDate(Integer.parseInt(dayField.getText().replaceFirst("^0+(?!$)", "")), Integer.parseInt(monthField.getText().replaceFirst("^0+(?!$)", "")), Integer.parseInt(yearField.getText().replaceFirst("^0+(?!$)", "")));
                     if(!dateOfBirth.is15Years()){
                         JOptionPane.showMessageDialog(null, "Employee has to be at least 15 years old!",
@@ -133,7 +133,7 @@ public class AddANewEmployeeGUI{
                                 "Invalid input", JOptionPane.ERROR_MESSAGE);
                         allValuesCorrect = false;
                     }
-                    if(allValuesCorrect == true){
+                    if(allValuesCorrect){
                         EmployeeList employeeList = employeeAdapter.getAllEmployees();
                         Employee newEmployee = new Employee(nameField.getText(), lastNameField.getText(), dateOfBirth);
                         if(!employeeList.containsEmployee(newEmployee)){

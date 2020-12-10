@@ -24,6 +24,18 @@ public class MyDate implements Serializable
     this.year = year;
   }
 
+  public int getDay(){
+    return day;
+  }
+
+  public int getMonth(){
+    return month;
+  }
+
+  public int getYear(){
+    return year;
+  }
+
   /**
    * Shows date
    * @return shows date in that format
@@ -74,6 +86,13 @@ public class MyDate implements Serializable
         }
       }
     }
+  }
+  public boolean equals(Object obj){
+    if(!(obj instanceof MyDate)){
+      return false;
+    }
+    MyDate temp = (MyDate) obj;
+    return temp.getDay() == getDay() && temp.getMonth() == getMonth() && temp.getYear() == getYear();
   }
 
   public boolean isLeapYear(){
