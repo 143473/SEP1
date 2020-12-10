@@ -253,6 +253,7 @@ public class SepGUI extends Application
         stackPane.getChildren().clear();
         stackPane.getChildren().add(createProjectGUI1.getMainPane());
       }
+
       else if (e.getSource() == createProjectGUI1.getButtonContinue())
         {
 
