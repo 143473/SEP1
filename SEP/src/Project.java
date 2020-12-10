@@ -10,19 +10,43 @@ public class Project implements Serializable
 {
   private String name;
   private String description;
-  private ProgressStatus status;
+  private String status;
+  private int statusNumber;
   private ArrayList<Requirement> requirements;
   private ArrayList<AssignedEmployee> assignedEmployees;
-  private ArrayList<AssignedEmployee> employeeList;
 
   /**
-   * Two-argument constructor.
+   * Three-argument constructor.
    * @param name
    * @param description
    */
-  public Project(String name, String description){
+  public Project(String name, String description, int statusNumber){
     this.name = name;
     this.description = description;
+    requirements = new ArrayList<Requirement>();
+    assignedEmployees = new ArrayList<AssignedEmployee>();
+    ProgressStatus progressStatus = new ProgressStatus();
+    this.status = progressStatus.chooseStatus(statusNumber);
+    this.statusNumber = statusNumber;
+  }
+
+  public Project(String name, String description){
+    this.name = name;
+    this.description =description;
+    requirements = new ArrayList<Requirement>();
+    assignedEmployees = new ArrayList<AssignedEmployee>();
+    ProgressStatus progressStatus = new ProgressStatus();
+    this.status = progressStatus.chooseStatus(0);
+    this.statusNumber = 0;
+  }
+
+  public boolean equals(Object obj){
+    if(!(obj instanceof Project)){
+      return false;
+    }
+    Project temp = (Project) obj;
+    return temp.name.equals(name) && temp.description.equals(description) && temp.status.equals(status) &&
+            temp.statusNumber == statusNumber && temp.requirements.equals(requirements) && temp.assignedEmployees.equals(assignedEmployees);
   }
 
   /**
@@ -74,23 +98,27 @@ return false;
    * @return List of all assigned employees to the project
    */
   public ArrayList<AssignedEmployee> getEmployees(){
-  return employeeList;
-}
+    return assignedEmployees;
+  }
 
   /**
    * Gets project´s progress status
    * @return project status
    */
-  public ProgressStatus getProgressStatus(){
+  public String getStatusString(){
     return status;
   }
 
+  public int getStatusInt(){
+    return statusNumber;
+  }
   /**
    * Sets project´s progress status
-   * @param status what progress staus change to
+   * @param index what progress staus change to
    */
-  public void setProgressStatus(ProgressStatus status){
-  this.status = status;
+  public void setProgressStatus(int index){
+    ProgressStatus progressStatus = new ProgressStatus();
+    this.status = progressStatus.chooseStatus(index);
   }
 
   /**
