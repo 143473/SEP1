@@ -80,14 +80,20 @@ public class CreateProjectGUI2
     firstColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("firstName"));
 
     secondColumn = new TableColumn<Employee, String>("Last Name");
-    secondColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("lastname"));
+    secondColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("lastName"));
 
     thirdColumn = new TableColumn<Employee, MyDate>("Birthday");
-    thirdColumn.setCellValueFactory(new PropertyValueFactory<Employee, MyDate>("birthday"));
+    thirdColumn.setCellValueFactory(new PropertyValueFactory<Employee, MyDate>("dateOfBirth"));
 
     employeesTable.getColumns().add(firstColumn);
     employeesTable.getColumns().add(secondColumn);
     employeesTable.getColumns().add(thirdColumn);
+
+    firstColumn.setReorderable(false);
+    secondColumn.setReorderable(false);
+    thirdColumn.setReorderable(false);
+    thirdColumn.setSortable(false);
+
 
     firstNameColumn = new TableColumn("First Name");
     firstNameColumn.setCellFactory(new PropertyValueFactory<String, String>("First name"));
