@@ -1,55 +1,69 @@
-import javafx.application.Application;
-import javafx.application.Application;
 import javafx.geometry.Insets;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.stage.Stage;
 
 public class TasksOfReqOfPrjGUI
 {
 
   private VBox mainPane;
+  private HBox searchPane;
+  private HBox topButtons;
+  private GridPane projectRequirementPane;
+
   private Button add;
   private Button manage;
+  private Button searchButton;
+  private Button goBackButton;
+
   private TextField search;
-  private Label projectname;
-  private Label spacer;
-  private Label spacer2;
-  private Label reqname;
-  private Label tasks;
+
+  private Label projectName;
+  private Label requirementName;
+  private Label projectLabel;
+  private Label requirementLabel;
+  private Label tableTitle;
+  private Label searchLabel;
+
   private TableView table;
+
 
   public TasksOfReqOfPrjGUI(){
 
     add = new Button("ADD");
     manage = new Button("MANAGE");
-    search = new TextField();
-    projectname = new Label("Projectnamehere");
-    projectname.setFont(Font.font("Calibri", FontWeight.BOLD, 20));
-    spacer = new Label("-");
-    spacer.setFont(Font.font("Calibri", FontWeight.BOLD, 20));
-    spacer2 = new Label("-");
-    spacer2.setFont(Font.font("Calibri", FontWeight.BOLD, 20));
-    reqname = new Label("Reqnamehere");
-    reqname.setFont(Font.font("Calibri", FontWeight.BOLD, 20));
-    tasks = new Label("Tasks");
-    tasks.setFont(Font.font("Calibri", FontWeight.BOLD, 20));
+
+    projectLabel = new Label("Project:");
+    projectLabel.setFont(Font.font("Calibri", FontWeight.BOLD, 20));
+    projectName = new Label();
+    requirementLabel = new Label("Requirement:");
+    requirementLabel.setFont(Font.font("Calibri", FontWeight.BOLD, 20));
+    requirementName = new Label();
+
     table = new TableView();
-    HBox hb = new HBox();
-    hb.setSpacing(5);
-    hb.getChildren().addAll(projectname,spacer,reqname,spacer2,tasks);
-    HBox hb11 = new HBox();
-    hb11.setSpacing(500);
-    hb11.getChildren().addAll(hb, search);
-    HBox hb2 = new HBox();
-    hb2.setSpacing(100);
-    hb2.getChildren().addAll(manage, add);
+
+    goBackButton = new Button("Go Back");
+
+    projectRequirementPane = new GridPane();
+    projectRequirementPane.setHgap(5);
+    projectRequirementPane.addRow(0,projectLabel, projectName);
+    projectRequirementPane.addRow(1,requirementLabel,requirementName);
+
+    tableTitle = new Label("List of tasks");
+
+    searchLabel = new Label("Search for a project");
+    search = new TextField();
+    searchButton = new Button("Search");
+    searchPane = new HBox(5);
+    searchPane.getChildren().addAll(searchLabel,search,searchButton);
+
+    topButtons = new HBox(5);
+    topButtons.getChildren().addAll(add,manage);
+
     TableColumn idCol = new TableColumn("ID");
     idCol.setCellValueFactory(new PropertyValueFactory("id"));
     TableColumn nameCol = new TableColumn("Name");
@@ -72,15 +86,30 @@ public class TasksOfReqOfPrjGUI
     table.setPrefHeight(300);
     table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-    mainPane = new VBox(20);
-    mainPane.setPadding(new Insets(25, 25, 25, 25));;
-    mainPane.getChildren().addAll(hb11, hb2, table);
+    mainPane = new VBox(5);
+    mainPane.setPadding(new Insets(25, 25, 25, 25));
+    mainPane.getChildren().addAll(projectRequirementPane,searchPane,topButtons,tableTitle, table,goBackButton);
 
 
   }
   public VBox getMainPane()
   {
     return mainPane;
+  }
+
+  public Button getGoBackButton()
+  {
+    return goBackButton;
+  }
+
+  public Button getAdd()
+  {
+    return add;
+  }
+
+  public Button getManage()
+  {
+    return manage;
   }
 }
 
