@@ -64,14 +64,15 @@ public class SepGUI extends Application
 
   private MyActionListener listener;
 
-  public void start(Stage parentStage) throws Exception
+  public void start(Stage parentStage)
   {
     this.parentStage = parentStage;
     parentStage.setTitle("Student File Adapter GUI 4");
     listener = new MyActionListener();
-    EmployeeAdapter employeeAdapter = new EmployeeAdapter("x");
+    EmployeeAdapter employeeAdapter = new EmployeeAdapter("employees.bin");
+    ProjectsAdapter projectsAdapter = new ProjectsAdapter("");
 
-    createProjectGUI1 = new CreateProjectGUI1();
+    createProjectGUI1 = new CreateProjectGUI1(projectsAdapter);
     createProjectGUI2 = new CreateProjectGUI2();
     createProjectGUI3 = new CreateProjectGUI3();
     projectOverviewGUI = new ProjectOverviewGUI();
@@ -148,6 +149,8 @@ public class SepGUI extends Application
     parentStage.setScene(scene);
     parentStage.setResizable(false);
     parentStage.show();
+
+    // Pop -up window with full list of employees
     // New window (Stage)
     newWindow = new Stage();
     newWindow.setTitle("Choose Employee");
@@ -183,6 +186,7 @@ public class SepGUI extends Application
       manageProjectGUI.getManageTeamMembers().setOnAction(listener);
       manageProjectGUI.getCancel().setOnAction(listener);
       changeTeamMembersGUI.getCancel().setOnAction(listener);
+      changeTeamMembersGUI.getAddButton().setOnAction(listener);
 
       if (e.getSource() == homeMenuItem)
       {
@@ -257,7 +261,7 @@ public class SepGUI extends Application
         stackPane.getChildren().add(projectOverviewGUI.getMainPane());
       }
 
-        //Change Team Members
+        //Change Team Members - editing existing list of team-members
         else if(e.getSource() == manageProjectGUI.getManageTeamMembers())
       {
         stackPane.getChildren().clear();
@@ -267,6 +271,15 @@ public class SepGUI extends Application
       {
         stackPane.getChildren().clear();
         stackPane.getChildren().add(manageProjectGUI.getMainPane());
+      }
+        //Pop-up Change Team Members
+      else if (e.getSource() == changeTeamMembersGUI.getAddButton())
+      {
+        newWindow.show();
+      }
+      else if (e.getSource() == createProjectGUI2.getAdd())
+      {
+        newWindow.close();
       }
 
         //Manage Requirements
