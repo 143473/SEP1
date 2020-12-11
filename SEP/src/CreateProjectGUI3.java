@@ -90,7 +90,7 @@ public class CreateProjectGUI3
     this.projectList = projectsAdapter.getAllProjects();
     if (projectList.size() > 0) {
       Project project = projectList.get(projectList.size()-1);
-      ArrayList<AssignedEmployee> employeeList = project.getEmployees();
+      ArrayList<AssignedEmployee> employeeList = project.getAssignedEmployees();
       for (int i = 0; i < employeeList.size(); i++) {
         employeesBox1.getItems().add(employeeList.get(i));
       }
