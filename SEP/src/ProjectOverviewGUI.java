@@ -69,7 +69,7 @@ public class ProjectOverviewGUI
     statusCol.setCellValueFactory(new PropertyValueFactory("status"));
 
     teamMemberCol = new TableColumn("Team Member");
-    teamMemberCol.setCellValueFactory(new PropertyValueFactory("teammember"));
+    teamMemberCol.setCellValueFactory(new PropertyValueFactory("assignedEmployees"));
 
     projectsTable.getColumns().setAll(nameCol, descriptionCol,statusCol,teamMemberCol);
     projectsTable.setPrefWidth(450);
