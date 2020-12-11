@@ -73,6 +73,8 @@ public class CreateProjectGUI2
       statusBox.getItems().add(statuses[i]);
     }
     statusBox.setValue(statuses[progressStatus.getDefaultIndex()]);
+
+
     tableTitle = new Label("List of Team Members");
 
     searchByName = new Label("Search by name: ");
@@ -324,6 +326,9 @@ public class CreateProjectGUI2
           sepGUI.getCreateProjectGUI3().getEmployeesBox3().getItems().add(employeeList.get(i));
         }
       }
+      sepGUI.getCreateProjectGUI3().getEmployeesBox1().getSelectionModel().select(0);
+      sepGUI.getCreateProjectGUI3().getEmployeesBox2().getSelectionModel().select(0);
+      sepGUI.getCreateProjectGUI3().getEmployeesBox3().getSelectionModel().select(0);
     }
 
   public EmployeeList getEmployeeList()

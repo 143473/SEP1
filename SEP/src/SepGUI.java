@@ -335,6 +335,8 @@ public class SepGUI extends Application
       {
         stackPane.getChildren().clear();
         stackPane.getChildren().add(manageProjectGUI.getMainPane());
+
+
       }
         else if(e.getSource() == manageProjectGUI.getCancel())
       {

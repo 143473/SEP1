@@ -83,4 +83,11 @@ public class ProjectsAdapter
     }
     return resultProjects;
   }
+
+  public Project getSelectedProject(int index){
+    if(index < getAllProjects().size()){
+      return getAllProjects().get(index);
+    }
+    return null;
+  }
 }
