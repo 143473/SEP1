@@ -31,7 +31,12 @@ public class CreateProjectGUI3
   private Button finishButton;
   private Button goBackButton;
 
-  public CreateProjectGUI3(){
+  private ProjectsAdapter projectsAdapter;
+
+  public CreateProjectGUI3(ProjectsAdapter projectsAdapter, SepGUI sepGUI){
+
+    sepGUI = new SepGUI();
+    this.projectsAdapter = projectsAdapter;
     title = new Label("Set team members roles");
     Font titleFont = new Font(30);
     title.setFont(titleFont);
@@ -60,6 +65,20 @@ public class CreateProjectGUI3
     mainPane = new VBox();
     mainPane.setSpacing(5);
     mainPane.getChildren().addAll(title, gridPane, hBoxPane);
+  }
+  public ComboBox getEmployeesBox1()
+  {
+    return employeesBox1;
+  }
+
+  public ComboBox getEmployeesBox2()
+  {
+    return employeesBox2;
+  }
+
+  public ComboBox getEmployeesBox3()
+  {
+    return employeesBox3;
   }
 
   public VBox getMainPane()

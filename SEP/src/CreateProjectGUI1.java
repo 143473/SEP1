@@ -7,8 +7,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
-import javax.swing.*;
-
 /**
  * The 1st part of the project creation user interface, that allows for
  * setting up the project name and project description.
@@ -111,6 +109,7 @@ public class CreateProjectGUI1
     }
     return true;
   }
+
 
   /**
    *Gets the continue button

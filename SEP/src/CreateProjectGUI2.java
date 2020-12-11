@@ -7,6 +7,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
+import java.util.ArrayList;
+
 /**
  * The 2nd part of the project creation user interface, that allows for
  * setting the status of the project and choosing the team members.
@@ -31,6 +33,7 @@ public class CreateProjectGUI2
   private HBox topButtonsPane;
 
   private ProjectList projectList;
+  private Project project;
 
   private Label title;
   private Label status;
@@ -148,7 +151,9 @@ public class CreateProjectGUI2
 
           if (alert.getResult() == ButtonType.YES)
           {
+            employeeList.removeEmployee(teamMembersTable.getSelectionModel().getSelectedItem());
             teamMembersTable.getItems().remove(teamMembersTable.getSelectionModel().getSelectedItem());
+            employeeListView.getItems().add(teamMembersTable.getSelectionModel().getSelectedItem());
             Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
             alert2.setHeaderText("Editing successful");
             alert2.setContentText("Changes were saved successfully!");
@@ -188,6 +193,11 @@ public class CreateProjectGUI2
 
       return OK;
     }
+
+  public Project getProject()
+  {
+    return project;
+  }
 
     public void setProjectList(ProjectList projectList)
     {
@@ -281,8 +291,29 @@ public class CreateProjectGUI2
             employeeList.get(i).getDateOfBirth());
         project.addTeamMember(assignedEmployee);
       }
-
+      getTeamMembersToBox(project.getEmployees());
       return allValuesCorrect;
+    }
+    public void getTeamMembersToBox(ArrayList<AssignedEmployee> assignedEmployees)
+    {
+      sepGUI.getCreateProjectGUI3().getEmployeesBox1().getItems().clear();
+      sepGUI.getCreateProjectGUI3().getEmployeesBox2().getItems().clear();
+      sepGUI.getCreateProjectGUI3().getEmployeesBox3().getItems().clear();
+      for (int i = 0; i < assignedEmployees.size(); i++)
+      {
+        if (!(sepGUI.getCreateProjectGUI3().getEmployeesBox1().getItems().contains(assignedEmployees.get(i))))
+        {
+          sepGUI.getCreateProjectGUI3().getEmployeesBox1().getItems().add(assignedEmployees.get(i));
+        }
+        if (!(sepGUI.getCreateProjectGUI3().getEmployeesBox2().getItems().contains(assignedEmployees.get(i))))
+        {
+          sepGUI.getCreateProjectGUI3().getEmployeesBox2().getItems().add(assignedEmployees.get(i));
+        }
+        if (!(sepGUI.getCreateProjectGUI3().getEmployeesBox3().getItems().contains(assignedEmployees.get(i))))
+        {
+          sepGUI.getCreateProjectGUI3().getEmployeesBox3().getItems().add(assignedEmployees.get(i));
+        }
+      }
     }
 
   public EmployeeList getEmployeeList()
