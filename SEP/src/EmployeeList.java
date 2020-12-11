@@ -65,4 +65,12 @@ public class EmployeeList implements Serializable {
         }
         return null;
     }
+
+    public String toString(){
+        String returnStr = "";
+        for (int i = 0; i < employeeList.size(); i++) {
+            returnStr+= employeeList.get(i)+"\n";
+        }
+        return returnStr;
+    }
 }
