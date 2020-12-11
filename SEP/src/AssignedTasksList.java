@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -5,7 +6,7 @@ import java.util.ArrayList;
  * @author Timothy Engkar
  * @version 1.0
  */
-public class AssignedTasksList {
+public class AssignedTasksList implements Serializable {
     private ArrayList<AssignedTasks> assignedTasks;
 
     /**

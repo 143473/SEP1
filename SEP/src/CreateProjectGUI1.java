@@ -33,12 +33,10 @@ public class CreateProjectGUI1
   /**
    * 2-argument constructor setting the file name.
    * @param projectsAdapter
-   * @param sepGUI
    */
 
-  public CreateProjectGUI1(ProjectsAdapter projectsAdapter, SepGUI sepGUI) {
+  public CreateProjectGUI1(ProjectsAdapter projectsAdapter) {
     this.projectsAdapter = projectsAdapter;
-    this.sepGUI = sepGUI;
 
 
     title = new Label("Create a New Project");
@@ -96,10 +94,9 @@ public class CreateProjectGUI1
       Project newProject = new Project(inputName.getText(), inputDescription.getText());
       if(!projectList.containsProject(newProject)){
         projectList.addProject(newProject);
-        sepGUI.getCreateProjectGUI2().setProjectList(projectList);
+        projectsAdapter.saveProjects(projectList);
       }
       else{
-        System.out.println("not adding it");
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setHeaderText("Duplicate project");
         alert.setContentText("This project already exists!");

@@ -14,7 +14,11 @@ import javafx.scene.text.Font;
  */
 public class CreateProjectGUI3
 {
+  private EmployeeAdapter employeeAdapter;
+  private ProjectsAdapter projectsAdapter;
   private SepGUI sepGUI;
+
+  private ProjectList projectList;
   private GridPane gridPane;
   private HBox hBoxPane;
   private VBox mainPane;
@@ -31,12 +35,12 @@ public class CreateProjectGUI3
   private Button finishButton;
   private Button goBackButton;
 
-  private ProjectsAdapter projectsAdapter;
+  public CreateProjectGUI3(EmployeeAdapter employeeAdapter, ProjectsAdapter projectsAdapter){
+    projectList = projectsAdapter.getAllProjects();
 
-  public CreateProjectGUI3(ProjectsAdapter projectsAdapter, SepGUI sepGUI){
-
-    sepGUI = new SepGUI();
+    this.employeeAdapter = employeeAdapter;
     this.projectsAdapter = projectsAdapter;
+    sepGUI = new SepGUI();
     title = new Label("Set team members roles");
     Font titleFont = new Font(30);
     title.setFont(titleFont);
@@ -66,20 +70,6 @@ public class CreateProjectGUI3
     mainPane.setSpacing(5);
     mainPane.getChildren().addAll(title, gridPane, hBoxPane);
   }
-  public ComboBox getEmployeesBox1()
-  {
-    return employeesBox1;
-  }
-
-  public ComboBox getEmployeesBox2()
-  {
-    return employeesBox2;
-  }
-
-  public ComboBox getEmployeesBox3()
-  {
-    return employeesBox3;
-  }
 
   public VBox getMainPane()
   {
@@ -94,5 +84,32 @@ public class CreateProjectGUI3
   public Button getGoBackButton()
   {
     return goBackButton;
+  }
+
+  public void setProjectList()
+  {
+    this.projectList = projectsAdapter.getAllProjects();
+    if (projectList.size() > 0) {
+      Project project = projectList.get(projectList.size()-1);
+      ArrayList<AssignedEmployee> employeeList = project.getAssignedEmployees();
+      for (int i = 0; i < employeeList.size(); i++) {
+        employeesBox1.getItems().add(employeeList.get(i));
+      }
+      employeesBox2 = new ComboBox();
+      for (int i = 0; i < employeeList.size(); i++) {
+        employeesBox2.getItems().add(employeeList.get(i));
+      }
+      employeesBox3 = new ComboBox();
+      for (int i = 0; i < employeeList.size(); i++) {
+        employeesBox3.getItems().add(employeeList.get(i));
+      }
+      gridPane.addRow(0, scrumMaster, employeesBox1);
+      gridPane.addRow(1, projectCreator, employeesBox2);
+      gridPane.addRow(2, productOwner, employeesBox3);
+
+    }
+
+
+
   }
 }

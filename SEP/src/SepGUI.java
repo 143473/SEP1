@@ -87,7 +87,7 @@ public class SepGUI extends Application
     parentStage.setTitle("Student File Adapter GUI 4");
     listener = new MyActionListener();
     EmployeeAdapter employeeAdapter = new EmployeeAdapter("employees.bin");
-    ProjectsAdapter projectsAdapter = new ProjectsAdapter("y");
+    ProjectsAdapter projectsAdapter = new ProjectsAdapter("projects.bin");
 
     createProjectGUI1 = new CreateProjectGUI1(projectsAdapter, this);
     createProjectGUI2 = new CreateProjectGUI2(employeeAdapter, projectsAdapter,this);
@@ -274,6 +274,7 @@ public class SepGUI extends Application
         {
 
           if(createProjectGUI1.callContinueButton()){
+            createProjectGUI2.setProjectList();
             stackPane.getChildren().clear();
             stackPane.getChildren().add(createProjectGUI2.getMainPane());
           }
@@ -282,9 +283,11 @@ public class SepGUI extends Application
       else if (e.getSource() == createProjectGUI2.getContinueButton())
       {
         if(createProjectGUI2.callContinueButton()){
+          createProjectGUI3.setProjectList();
           stackPane.getChildren().clear();
           stackPane.getChildren().add(createProjectGUI3.getMainPane());
         }
+
       }
       else if (e.getSource() == createProjectGUI2.getGoBackButton())
       {
@@ -301,6 +304,7 @@ public class SepGUI extends Application
         if(createProjectGUI2.callAdd()){
           newWindow.close();
         }
+
       }
       //Continue Create Project
       else if (e.getSource() == createProjectGUI3.getFinishButton())
