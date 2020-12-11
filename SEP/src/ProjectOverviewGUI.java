@@ -1,3 +1,5 @@
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -9,6 +11,8 @@ import javafx.scene.text.FontWeight;
 public class ProjectOverviewGUI
 {
   private ProjectsAdapter projectsAdapter;
+
+  private MyActionListener listener;
 
   private Button add;
   private Button manage;
@@ -35,6 +39,8 @@ public class ProjectOverviewGUI
   public ProjectOverviewGUI(ProjectsAdapter projectsAdapter){
     this.projectsAdapter = projectsAdapter;
 
+    listener = new MyActionListener();
+
     add = new Button("Add");
     manage = new Button("Manage");
     continueButton = new Button("Continue");
@@ -42,6 +48,7 @@ public class ProjectOverviewGUI
     searchLabel = new Label("Search for a project");
     search = new TextField();
     searchButton = new Button("Search");
+    searchButton.setOnAction(listener);
 
     title = new Label("Project Overview");
     tableTitle = new Label("Choose a project from the list");
@@ -90,6 +97,12 @@ public class ProjectOverviewGUI
       projectsTable.getItems().add(projects.get(i));
     }
   }
+  private void initializeTable(ProjectList newProjects){
+    projectsTable.getItems().clear();
+    for (int i = 0; i < newProjects.size(); i++) {
+      projectsTable.getItems().add(newProjects.get(i));
+    }
+  }
 
   public VBox getMainPane()
   {
@@ -110,5 +123,17 @@ public class ProjectOverviewGUI
   public Button getContinueButton()
   {
     return continueButton;
+  }
+
+  private class MyActionListener implements EventHandler<ActionEvent> {
+    public void handle(ActionEvent e) {
+      if (e.getSource() == searchButton)
+      {
+        String searchingFor = search.getText();
+        ProjectList projects = projectsAdapter.getAllProjects();
+        ProjectList chosenProjects = projectsAdapter.getProjectsByName(searchingFor, projects);
+        initializeTable(chosenProjects);
+      }
+    }
   }
 }

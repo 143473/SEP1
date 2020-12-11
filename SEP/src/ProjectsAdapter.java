@@ -71,4 +71,16 @@ public class ProjectsAdapter
       System.out.println("IO Error writing to file");
     }
   }
+
+  public ProjectList getProjectsByName(String searchingFor, ProjectList projectList){
+    ProjectList resultProjects = new ProjectList();
+
+    searchingFor = searchingFor.toLowerCase();
+    for (int i = 0; i < projectList.size(); i++) {
+      if(projectList.get(i).getName().toLowerCase().contains(searchingFor)){
+        resultProjects.addProject(projectList.get(i));
+      }
+    }
+    return resultProjects;
+  }
 }
