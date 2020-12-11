@@ -35,8 +35,9 @@ public class CreateProjectGUI1
    * @param projectsAdapter
    */
 
-  public CreateProjectGUI1(ProjectsAdapter projectsAdapter) {
+  public CreateProjectGUI1(ProjectsAdapter projectsAdapter, SepGUI sepGUI) {
     this.projectsAdapter = projectsAdapter;
+    this.sepGUI = sepGUI;
 
 
     title = new Label("Create a New Project");

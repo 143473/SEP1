@@ -35,7 +35,7 @@ public class CreateProjectGUI3
   private Button finishButton;
   private Button goBackButton;
 
-  public CreateProjectGUI3(EmployeeAdapter employeeAdapter, ProjectsAdapter projectsAdapter){
+  public CreateProjectGUI3(EmployeeAdapter employeeAdapter, ProjectsAdapter projectsAdapter, SepGUI sepGUI){
     projectList = projectsAdapter.getAllProjects();
 
     this.employeeAdapter = employeeAdapter;
@@ -76,6 +76,21 @@ public class CreateProjectGUI3
     return mainPane;
   }
 
+  public ComboBox getEmployeesBox2()
+  {
+    return employeesBox2;
+  }
+
+  public ComboBox getEmployeesBox1()
+  {
+    return employeesBox1;
+  }
+
+  public ComboBox getEmployeesBox3()
+  {
+    return employeesBox3;
+  }
+
   public Button getFinishButton()
   {
     return finishButton;
@@ -91,7 +106,11 @@ public class CreateProjectGUI3
     this.projectList = projectsAdapter.getAllProjects();
     if (projectList.size() > 0) {
       Project project = projectList.get(projectList.size()-1);
-      ArrayList<AssignedEmployee> employeeList = project.getAssignedEmployees();
+
+
+      /*ArrayList<AssignedEmployee> employeeList = project.getAssignedEmployees();
+
+
       for (int i = 0; i < employeeList.size(); i++) {
         employeesBox1.getItems().add(employeeList.get(i));
       }
@@ -105,7 +124,7 @@ public class CreateProjectGUI3
       }
       gridPane.addRow(0, scrumMaster, employeesBox1);
       gridPane.addRow(1, projectCreator, employeesBox2);
-      gridPane.addRow(2, productOwner, employeesBox3);
+      gridPane.addRow(2, productOwner, employeesBox3);*/
 
     }
 

@@ -179,7 +179,6 @@ public class CreateProjectGUI2
           alert.showAndWait();
         }
       }
-
     }
   }
 
@@ -205,9 +204,9 @@ public class CreateProjectGUI2
       return OK;
     }
 
-    public void setProjectList(ProjectList projectList)
+    public void setProjectList()
     {
-      this.projectList = projectList;
+      this.projectList = projectsAdapter.getAllProjects();
     }
 
     public void initializeListView()
@@ -299,28 +298,30 @@ public class CreateProjectGUI2
           project.addTeamMember(assignedEmployee);
         }
         projectsAdapter.saveProjects(projectList);
+        getTeamMembersToBox(employeeList);
       }
-      getTeamMembersToBox(project.getEmployees());
+
+
       return allValuesCorrect;
     }
-    public void getTeamMembersToBox(ArrayList<AssignedEmployee> assignedEmployees)
+    public void getTeamMembersToBox(EmployeeList employeeList)
     {
       sepGUI.getCreateProjectGUI3().getEmployeesBox1().getItems().clear();
       sepGUI.getCreateProjectGUI3().getEmployeesBox2().getItems().clear();
       sepGUI.getCreateProjectGUI3().getEmployeesBox3().getItems().clear();
-      for (int i = 0; i < assignedEmployees.size(); i++)
+      for (int i = 0; i < employeeList.size(); i++)
       {
-        if (!(sepGUI.getCreateProjectGUI3().getEmployeesBox1().getItems().contains(assignedEmployees.get(i))))
+        if (!(sepGUI.getCreateProjectGUI3().getEmployeesBox1().getItems().contains(employeeList.get(i))))
         {
-          sepGUI.getCreateProjectGUI3().getEmployeesBox1().getItems().add(assignedEmployees.get(i));
+          sepGUI.getCreateProjectGUI3().getEmployeesBox1().getItems().add(employeeList.get(i));
         }
-        if (!(sepGUI.getCreateProjectGUI3().getEmployeesBox2().getItems().contains(assignedEmployees.get(i))))
+        if (!(sepGUI.getCreateProjectGUI3().getEmployeesBox2().getItems().contains(employeeList.get(i))))
         {
-          sepGUI.getCreateProjectGUI3().getEmployeesBox2().getItems().add(assignedEmployees.get(i));
+          sepGUI.getCreateProjectGUI3().getEmployeesBox2().getItems().add(employeeList.get(i));
         }
-        if (!(sepGUI.getCreateProjectGUI3().getEmployeesBox3().getItems().contains(assignedEmployees.get(i))))
+        if (!(sepGUI.getCreateProjectGUI3().getEmployeesBox3().getItems().contains(employeeList.get(i))))
         {
-          sepGUI.getCreateProjectGUI3().getEmployeesBox3().getItems().add(assignedEmployees.get(i));
+          sepGUI.getCreateProjectGUI3().getEmployeesBox3().getItems().add(employeeList.get(i));
         }
       }
     }
