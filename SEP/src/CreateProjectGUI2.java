@@ -17,6 +17,8 @@ public class CreateProjectGUI2
 {
   private EmployeeList employeeList;
 
+  private SepGUI sepGUI;
+
   private EmployeeAdapter employeeAdapter;
   private ProjectsAdapter projectsAdapter;
   private MyActionListener listener;
@@ -49,9 +51,10 @@ public class CreateProjectGUI2
   private Button add;
   private Button removeButton;
 
-  public CreateProjectGUI2(EmployeeAdapter employeeAdapter, ProjectsAdapter projectsAdapter)
+  public CreateProjectGUI2(EmployeeAdapter employeeAdapter, ProjectsAdapter projectsAdapter, SepGUI sepGUI)
   {
     employeeList = new EmployeeList();
+    this.sepGUI = sepGUI;
 
     this.employeeAdapter = employeeAdapter;
     this.projectsAdapter = projectsAdapter;
@@ -159,7 +162,9 @@ public class CreateProjectGUI2
 
           if (alert.getResult() == ButtonType.YES)
           {
+            employeeList.removeEmployee(teamMembersTable.getSelectionModel().getSelectedItem());
             teamMembersTable.getItems().remove(teamMembersTable.getSelectionModel().getSelectedItem());
+            employeeListView.getItems().add(teamMembersTable.getSelectionModel().getSelectedItem());
             Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
             alert2.setHeaderText("Editing successful");
             alert2.setContentText("Changes were saved successfully!");
@@ -174,7 +179,6 @@ public class CreateProjectGUI2
           alert.showAndWait();
         }
       }
-
     }
   }
 
@@ -294,8 +298,32 @@ public class CreateProjectGUI2
           project.addTeamMember(assignedEmployee);
         }
         projectsAdapter.saveProjects(projectList);
+        getTeamMembersToBox(employeeList);
       }
+
+
       return allValuesCorrect;
+    }
+    public void getTeamMembersToBox(EmployeeList employeeList)
+    {
+      sepGUI.getCreateProjectGUI3().getEmployeesBox1().getItems().clear();
+      sepGUI.getCreateProjectGUI3().getEmployeesBox2().getItems().clear();
+      sepGUI.getCreateProjectGUI3().getEmployeesBox3().getItems().clear();
+      for (int i = 0; i < employeeList.size(); i++)
+      {
+        if (!(sepGUI.getCreateProjectGUI3().getEmployeesBox1().getItems().contains(employeeList.get(i))))
+        {
+          sepGUI.getCreateProjectGUI3().getEmployeesBox1().getItems().add(employeeList.get(i));
+        }
+        if (!(sepGUI.getCreateProjectGUI3().getEmployeesBox2().getItems().contains(employeeList.get(i))))
+        {
+          sepGUI.getCreateProjectGUI3().getEmployeesBox2().getItems().add(employeeList.get(i));
+        }
+        if (!(sepGUI.getCreateProjectGUI3().getEmployeesBox3().getItems().contains(employeeList.get(i))))
+        {
+          sepGUI.getCreateProjectGUI3().getEmployeesBox3().getItems().add(employeeList.get(i));
+        }
+      }
     }
 
   public EmployeeList getEmployeeList()

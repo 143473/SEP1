@@ -89,9 +89,9 @@ public class SepGUI extends Application
     EmployeeAdapter employeeAdapter = new EmployeeAdapter("employees.bin");
     ProjectsAdapter projectsAdapter = new ProjectsAdapter("projects.bin");
 
-    createProjectGUI1 = new CreateProjectGUI1(projectsAdapter);
-    createProjectGUI2 = new CreateProjectGUI2(employeeAdapter, projectsAdapter);
-    createProjectGUI3 = new CreateProjectGUI3(employeeAdapter, projectsAdapter);
+    createProjectGUI1 = new CreateProjectGUI1(projectsAdapter, this);
+    createProjectGUI2 = new CreateProjectGUI2(employeeAdapter, projectsAdapter,this);
+    createProjectGUI3 = new CreateProjectGUI3(employeeAdapter, projectsAdapter,this);
     projectOverviewGUI = new ProjectOverviewGUI(projectsAdapter);
     manageProjectGUI = new ManageProjectGUI(projectsAdapter);
     changeTeamMembersGUI = new ChangeTeamMembersGUI();

@@ -1,4 +1,3 @@
-import com.sun.javafx.scene.paint.GradientUtils;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -6,8 +5,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-
-import java.util.ArrayList;
 
 /**
  * The 3rd part of the project creation user interface, that allows for
@@ -19,7 +16,7 @@ public class CreateProjectGUI3
 {
   private EmployeeAdapter employeeAdapter;
   private ProjectsAdapter projectsAdapter;
-
+  private SepGUI sepGUI;
 
   private ProjectList projectList;
   private GridPane gridPane;
@@ -38,12 +35,12 @@ public class CreateProjectGUI3
   private Button finishButton;
   private Button goBackButton;
 
-  public CreateProjectGUI3(EmployeeAdapter employeeAdapter, ProjectsAdapter projectsAdapter){
+  public CreateProjectGUI3(EmployeeAdapter employeeAdapter, ProjectsAdapter projectsAdapter, SepGUI sepGUI){
     projectList = projectsAdapter.getAllProjects();
 
     this.employeeAdapter = employeeAdapter;
     this.projectsAdapter = projectsAdapter;
-
+    sepGUI = new SepGUI();
     title = new Label("Set team members roles");
     Font titleFont = new Font(30);
     title.setFont(titleFont);
@@ -52,11 +49,15 @@ public class CreateProjectGUI3
     projectCreator = new Label("Project Creator: ");
     productOwner = new Label("Product Owner");
     employeesBox1 = new ComboBox();
-
+    employeesBox2 = new ComboBox();
+    employeesBox3 = new ComboBox();
 
     gridPane = new GridPane();
     gridPane.setVgap(10);
     gridPane.setHgap(10);
+    gridPane.addRow(0, scrumMaster, employeesBox1);
+    gridPane.addRow(1, projectCreator, employeesBox2);
+    gridPane.addRow(2, productOwner, employeesBox3);
 
     finishButton = new Button("Finish");
     goBackButton = new Button("Go Back");
@@ -75,6 +76,21 @@ public class CreateProjectGUI3
     return mainPane;
   }
 
+  public ComboBox getEmployeesBox2()
+  {
+    return employeesBox2;
+  }
+
+  public ComboBox getEmployeesBox1()
+  {
+    return employeesBox1;
+  }
+
+  public ComboBox getEmployeesBox3()
+  {
+    return employeesBox3;
+  }
+
   public Button getFinishButton()
   {
     return finishButton;
@@ -90,7 +106,11 @@ public class CreateProjectGUI3
     this.projectList = projectsAdapter.getAllProjects();
     if (projectList.size() > 0) {
       Project project = projectList.get(projectList.size()-1);
-      ArrayList<AssignedEmployee> employeeList = project.getAssignedEmployees();
+
+
+      /*ArrayList<AssignedEmployee> employeeList = project.getAssignedEmployees();
+
+
       for (int i = 0; i < employeeList.size(); i++) {
         employeesBox1.getItems().add(employeeList.get(i));
       }
@@ -104,7 +124,7 @@ public class CreateProjectGUI3
       }
       gridPane.addRow(0, scrumMaster, employeesBox1);
       gridPane.addRow(1, projectCreator, employeesBox2);
-      gridPane.addRow(2, productOwner, employeesBox3);
+      gridPane.addRow(2, productOwner, employeesBox3);*/
 
     }
 
