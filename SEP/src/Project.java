@@ -13,7 +13,8 @@ public class Project implements Serializable
   private String status;
   private int statusNumber;
   private ArrayList<Requirement> requirements;
-  private ArrayList<AssignedEmployee> assignedEmployees;
+
+  private AssignedEmployeeList assignedEmployeeList;
 
   /**
    * Three-argument constructor.
@@ -24,7 +25,7 @@ public class Project implements Serializable
     this.name = name;
     this.description = description;
     requirements = new ArrayList<Requirement>();
-    assignedEmployees = new ArrayList<AssignedEmployee>();
+    assignedEmployeeList = new AssignedEmployeeList();
     ProgressStatus progressStatus = new ProgressStatus();
     this.status = progressStatus.chooseStatus(statusNumber);
     this.statusNumber = statusNumber;
@@ -34,7 +35,7 @@ public class Project implements Serializable
     this.name = name;
     this.description =description;
     requirements = new ArrayList<Requirement>();
-    assignedEmployees = new ArrayList<AssignedEmployee>();
+    assignedEmployeeList = new AssignedEmployeeList();
     ProgressStatus progressStatus = new ProgressStatus();
     this.status = progressStatus.chooseStatus(0);
     this.statusNumber = 0;
@@ -46,7 +47,7 @@ public class Project implements Serializable
     }
     Project temp = (Project) obj;
     return temp.name.equals(name) && temp.description.equals(description) && temp.status.equals(status) &&
-            temp.statusNumber == statusNumber && temp.requirements.equals(requirements) && temp.assignedEmployees.equals(assignedEmployees);
+            temp.statusNumber == statusNumber && temp.requirements.equals(requirements) && temp.assignedEmployeeList.equals(assignedEmployeeList);
   }
 
   /**
@@ -97,8 +98,8 @@ return false;
    * Gets all the assigned employees
    * @return List of all assigned employees to the project
    */
-  public ArrayList<AssignedEmployee> getAssignedEmployees(){
-    return assignedEmployees;
+  public AssignedEmployeeList getAssignedEmployeeList(){
+    return assignedEmployeeList;
   }
 
   /**
@@ -126,7 +127,7 @@ return false;
    * @param teamMember desired team member
    */
   public void addTeamMember(AssignedEmployee teamMember){
-    this.assignedEmployees.add(teamMember);
+    this.assignedEmployeeList.addAssignedEmployee(teamMember);
   }
 
   /**
@@ -134,7 +135,7 @@ return false;
    * @param teamMember desired team member
    */
   public void removeTeamMember(AssignedEmployee teamMember){
-  this.assignedEmployees.remove(teamMember);
+  this.assignedEmployeeList.removeEmployee(teamMember);
   }
 
   /**
