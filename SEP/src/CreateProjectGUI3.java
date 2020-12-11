@@ -1,6 +1,6 @@
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -17,6 +17,8 @@ public class CreateProjectGUI3
   private EmployeeAdapter employeeAdapter;
   private ProjectsAdapter projectsAdapter;
   private SepGUI sepGUI;
+
+  private MyActionListener listener;
 
   private ProjectList projectList;
   private GridPane gridPane;
@@ -37,6 +39,8 @@ public class CreateProjectGUI3
 
   public CreateProjectGUI3(EmployeeAdapter employeeAdapter, ProjectsAdapter projectsAdapter, SepGUI sepGUI){
     projectList = projectsAdapter.getAllProjects();
+
+    listener = new MyActionListener();
 
     this.employeeAdapter = employeeAdapter;
     this.projectsAdapter = projectsAdapter;
@@ -127,8 +131,21 @@ public class CreateProjectGUI3
       gridPane.addRow(2, productOwner, employeesBox3);*/
 
     }
+  }
 
+  private class MyActionListener implements EventHandler<ActionEvent>
+  {
+    public void handle(ActionEvent e)
+    {
 
+      if (e.getSource() == finishButton){
 
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText("Adding successful");
+        alert.setContentText("New project was successfully added to the list!");
+        alert.showAndWait();
+      }
+
+    }
   }
 }

@@ -15,6 +15,10 @@ public class Project implements Serializable
   private ArrayList<Requirement> requirements;
   private ArrayList<AssignedEmployee> assignedEmployees;
 
+  private AssignedEmployee scrumMaster;
+  private AssignedEmployee projectCreator;
+  private AssignedEmployee productOwner;
+
   /**
    * Three-argument constructor.
    * @param name
@@ -28,9 +32,6 @@ public class Project implements Serializable
     ProgressStatus progressStatus = new ProgressStatus();
     this.status = progressStatus.chooseStatus(statusNumber);
     this.statusNumber = statusNumber;
-    AssignedEmployee scrumMaster;
-    AssignedEmployee projectCreator;
-    AssignedEmployee productOwner;
   }
 
   public Project(String name, String description){
