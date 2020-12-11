@@ -82,6 +82,20 @@ public class EmployeeAdapter
    * @param searchingFor String of characters we need to look for in the names of employees
    * @return EmployeeList of employees whose name contains the String searchingFor
    */
+  public EmployeeList getEmployeesByName(String searchingFor, EmployeeList employeeList){
+    EmployeeList allEmployees = employeeList;
+    EmployeeList resultEmployees = new EmployeeList();
+
+    searchingFor = searchingFor.toLowerCase();
+    for (int i = 0; i < allEmployees.size(); i++) {
+      String fullName = (allEmployees.get(i).getFirstName()+" "+allEmployees.get(i).getLastName()).toLowerCase();
+      if(fullName.contains(searchingFor)){
+        resultEmployees.addEmployee(allEmployees.get(i));
+      }
+    }
+    return resultEmployees;
+  }
+
   public EmployeeList getEmployeesByName(String searchingFor){
     EmployeeList allEmployees = getAllEmployees();
     EmployeeList resultEmployees = new EmployeeList();

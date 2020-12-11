@@ -124,8 +124,22 @@ public class CreateProjectGUI2
       if (e.getSource() == searchButton)
       {
         String searchingFor = searchField.getText();
+        EmployeeList employeeListOfRemainingEmployees = new EmployeeList();
+        EmployeeList addedEmployees = new EmployeeList();
+        for (int i = 0; i < teamMembersTable.getItems().size(); i++) {
+          if(teamMembersTable.getItems().get(i) != null){
+            addedEmployees.addEmployee(teamMembersTable.getItems().get(i));
+          }
+        }
+        employeeListOfRemainingEmployees = employeeAdapter.getAllEmployees();
+        for (int i = 0; i < employeeListOfRemainingEmployees.size(); i++) {
+          if(addedEmployees.containsEmployee(employeeListOfRemainingEmployees.get(i))){
+            employeeListOfRemainingEmployees.removeEmployee(employeeListOfRemainingEmployees.get(i));
+          }
+        }
+        System.out.println(employeeListOfRemainingEmployees);
+        EmployeeList chosenEmployees = employeeAdapter.getEmployeesByName(searchingFor, employeeListOfRemainingEmployees);
         employeeListView.getItems().clear();
-        EmployeeList chosenEmployees = employeeAdapter.getEmployeesByName(searchingFor);
         for (int i = 0; i < chosenEmployees.size(); i++)
         {
           employeeListView.getItems().add(chosenEmployees.get(i));
