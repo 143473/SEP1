@@ -1,10 +1,12 @@
+import java.io.Serializable;
+
 /**
  * A subclass of class Employee containg the status of the employee in given project
  * @author Marketa Lapcikova, Timothy Johan Engkar
  * @version 1.0
  */
 
-public class AssignedEmployee extends Employee{
+public class AssignedEmployee extends Employee implements Serializable {
     private String status;
     private int statusNumber;
 

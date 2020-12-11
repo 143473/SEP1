@@ -1,3 +1,4 @@
+import com.sun.javafx.scene.paint.GradientUtils;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -5,6 +6,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+
+import java.util.ArrayList;
 
 /**
  * The 3rd part of the project creation user interface, that allows for
@@ -14,7 +17,11 @@ import javafx.scene.text.Font;
  */
 public class CreateProjectGUI3
 {
-  private SepGUI sepGUI;
+  private EmployeeAdapter employeeAdapter;
+  private ProjectsAdapter projectsAdapter;
+
+
+  private ProjectList projectList;
   private GridPane gridPane;
   private HBox hBoxPane;
   private VBox mainPane;
@@ -31,7 +38,11 @@ public class CreateProjectGUI3
   private Button finishButton;
   private Button goBackButton;
 
-  public CreateProjectGUI3(){
+  public CreateProjectGUI3(EmployeeAdapter employeeAdapter, ProjectsAdapter projectsAdapter){
+
+    this.employeeAdapter = employeeAdapter;
+    this.projectsAdapter = projectsAdapter;
+
     title = new Label("Set team members roles");
     Font titleFont = new Font(30);
     title.setFont(titleFont);
@@ -40,8 +51,19 @@ public class CreateProjectGUI3
     projectCreator = new Label("Project Creator: ");
     productOwner = new Label("Product Owner");
     employeesBox1 = new ComboBox();
+    Project project = projectList.get(projectList.size()-1);
+    ArrayList<AssignedEmployee> employeeList = project.getEmployees();
+    for (int i = 0; i < employeeList.size(); i++) {
+      employeesBox1.getItems().add(employeeList.get(i));
+    }
     employeesBox2 = new ComboBox();
+    for (int i = 0; i < employeeList.size(); i++) {
+      employeesBox2.getItems().add(employeeList.get(i));
+    }
     employeesBox3 = new ComboBox();
+    for (int i = 0; i < employeeList.size(); i++) {
+      employeesBox3.getItems().add(employeeList.get(i));
+    }
 
     gridPane = new GridPane();
     gridPane.setVgap(10);
@@ -75,5 +97,10 @@ public class CreateProjectGUI3
   public Button getGoBackButton()
   {
     return goBackButton;
+  }
+
+  public void setProjectList(ProjectList projectList)
+  {
+    this.projectList = projectsAdapter.getAllProjects();
   }
 }

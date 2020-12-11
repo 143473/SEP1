@@ -17,8 +17,6 @@ public class CreateProjectGUI2
 {
   private EmployeeList employeeList;
 
-  private SepGUI sepGUI;
-
   private EmployeeAdapter employeeAdapter;
   private ProjectsAdapter projectsAdapter;
   private MyActionListener listener;
@@ -51,10 +49,9 @@ public class CreateProjectGUI2
   private Button add;
   private Button removeButton;
 
-  public CreateProjectGUI2(EmployeeAdapter employeeAdapter, ProjectsAdapter projectsAdapter, SepGUI sepGUI)
+  public CreateProjectGUI2(EmployeeAdapter employeeAdapter, ProjectsAdapter projectsAdapter)
   {
     employeeList = new EmployeeList();
-    this.sepGUI = sepGUI;
 
     this.employeeAdapter = employeeAdapter;
     this.projectsAdapter = projectsAdapter;
@@ -189,9 +186,9 @@ public class CreateProjectGUI2
       return OK;
     }
 
-    public void setProjectList(ProjectList projectList)
+    public void setProjectList()
     {
-      this.projectList = projectList;
+      this.projectList = projectsAdapter.getAllProjects();
     }
 
     public void initializeListView()
@@ -271,17 +268,19 @@ public class CreateProjectGUI2
         alert.showAndWait();
         allValuesCorrect = false;
       }
-      Project project = projectList.get(0);
-      project.setProgressStatus(statusBox.getSelectionModel().getSelectedIndex());
-      for (int i = 0; i < employeeList.size(); i++)
-      {
-        AssignedEmployee assignedEmployee = new AssignedEmployee(
-            employeeList.get(i).getFirstName(),
-            employeeList.get(i).getLastName(),
-            employeeList.get(i).getDateOfBirth());
-        project.addTeamMember(assignedEmployee);
+      if(allValuesCorrect){
+        Project project = projectList.get(projectList.size()-1);
+        project.setProgressStatus(statusBox.getSelectionModel().getSelectedIndex());
+        for (int i = 0; i < employeeList.size(); i++)
+        {
+          AssignedEmployee assignedEmployee = new AssignedEmployee(
+                  employeeList.get(i).getFirstName(),
+                  employeeList.get(i).getLastName(),
+                  employeeList.get(i).getDateOfBirth());
+          project.addTeamMember(assignedEmployee);
+        }
+        projectsAdapter.saveProjects(projectList);
       }
-
       return allValuesCorrect;
     }
 

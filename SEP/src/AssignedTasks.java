@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
@@ -5,7 +6,7 @@ import java.util.Objects;
  * @author Timothy Engkar
  * @version 1.0
  */
-public class AssignedTasks extends Task{
+public class AssignedTasks extends Task implements Serializable {
     private double spentTime;
     private MyDate date;
     private AssignedEmployee assignedEmployee;

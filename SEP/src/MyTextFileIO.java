@@ -77,6 +77,10 @@ public class MyTextFileIO
         }
     }
 
+    public void createANewFolder(String fileName){
+
+    }
+
     // Reads the first line from the file with the given file name and returns it as a String
     public String readStringFromFile(String fileName) throws FileNotFoundException
     {

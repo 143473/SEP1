@@ -1,10 +1,12 @@
+import java.io.Serializable;
+
 /**
  * An class containing the array of possible project statuses
  * @author Marketa Lapcikova
  * @version 1.0
  */
 
-public class ProgressStatus {
+public class ProgressStatus implements Serializable {
   private String[] statuses = new String[]{ "Not started", "Started", "Ended", "Approved", "Rejected"};
   private String chosenStatus;
   private int defaultIndex = 0;

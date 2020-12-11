@@ -87,11 +87,11 @@ public class SepGUI extends Application
     parentStage.setTitle("Student File Adapter GUI 4");
     listener = new MyActionListener();
     EmployeeAdapter employeeAdapter = new EmployeeAdapter("employees.bin");
-    ProjectsAdapter projectsAdapter = new ProjectsAdapter("y");
+    ProjectsAdapter projectsAdapter = new ProjectsAdapter("projects.bin");
 
-    createProjectGUI1 = new CreateProjectGUI1(projectsAdapter, this);
-    createProjectGUI2 = new CreateProjectGUI2(employeeAdapter, projectsAdapter,this);
-    createProjectGUI3 = new CreateProjectGUI3();
+    createProjectGUI1 = new CreateProjectGUI1(projectsAdapter);
+    createProjectGUI2 = new CreateProjectGUI2(employeeAdapter, projectsAdapter);
+    createProjectGUI3 = new CreateProjectGUI3(employeeAdapter, projectsAdapter);
     projectOverviewGUI = new ProjectOverviewGUI(projectsAdapter);
     manageProjectGUI = new ManageProjectGUI(projectsAdapter);
     changeTeamMembersGUI = new ChangeTeamMembersGUI();
