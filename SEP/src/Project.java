@@ -29,6 +29,9 @@ public class Project implements Serializable
     ProgressStatus progressStatus = new ProgressStatus();
     this.status = progressStatus.chooseStatus(statusNumber);
     this.statusNumber = statusNumber;
+    AssignedEmployee scrumMaster;
+    AssignedEmployee projectCreator;
+    AssignedEmployee productOwner;
   }
 
   public Project(String name, String description){
