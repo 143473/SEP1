@@ -39,6 +39,7 @@ public class CreateProjectGUI3
   private Button goBackButton;
 
   public CreateProjectGUI3(EmployeeAdapter employeeAdapter, ProjectsAdapter projectsAdapter){
+    projectList = projectsAdapter.getAllProjects();
 
     this.employeeAdapter = employeeAdapter;
     this.projectsAdapter = projectsAdapter;
@@ -51,26 +52,11 @@ public class CreateProjectGUI3
     projectCreator = new Label("Project Creator: ");
     productOwner = new Label("Product Owner");
     employeesBox1 = new ComboBox();
-    Project project = projectList.get(projectList.size()-1);
-    ArrayList<AssignedEmployee> employeeList = project.getEmployees();
-    for (int i = 0; i < employeeList.size(); i++) {
-      employeesBox1.getItems().add(employeeList.get(i));
-    }
-    employeesBox2 = new ComboBox();
-    for (int i = 0; i < employeeList.size(); i++) {
-      employeesBox2.getItems().add(employeeList.get(i));
-    }
-    employeesBox3 = new ComboBox();
-    for (int i = 0; i < employeeList.size(); i++) {
-      employeesBox3.getItems().add(employeeList.get(i));
-    }
+
 
     gridPane = new GridPane();
     gridPane.setVgap(10);
     gridPane.setHgap(10);
-    gridPane.addRow(0, scrumMaster, employeesBox1);
-    gridPane.addRow(1, projectCreator, employeesBox2);
-    gridPane.addRow(2, productOwner, employeesBox3);
 
     finishButton = new Button("Finish");
     goBackButton = new Button("Go Back");
@@ -99,8 +85,30 @@ public class CreateProjectGUI3
     return goBackButton;
   }
 
-  public void setProjectList(ProjectList projectList)
+  public void setProjectList()
   {
     this.projectList = projectsAdapter.getAllProjects();
+    if (projectList.size() > 0) {
+      Project project = projectList.get(projectList.size()-1);
+      ArrayList<AssignedEmployee> employeeList = project.getAssignedEmployees();
+      for (int i = 0; i < employeeList.size(); i++) {
+        employeesBox1.getItems().add(employeeList.get(i));
+      }
+      employeesBox2 = new ComboBox();
+      for (int i = 0; i < employeeList.size(); i++) {
+        employeesBox2.getItems().add(employeeList.get(i));
+      }
+      employeesBox3 = new ComboBox();
+      for (int i = 0; i < employeeList.size(); i++) {
+        employeesBox3.getItems().add(employeeList.get(i));
+      }
+      gridPane.addRow(0, scrumMaster, employeesBox1);
+      gridPane.addRow(1, projectCreator, employeesBox2);
+      gridPane.addRow(2, productOwner, employeesBox3);
+
+    }
+
+
+
   }
 }

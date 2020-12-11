@@ -274,6 +274,7 @@ public class SepGUI extends Application
         {
 
           if(createProjectGUI1.callContinueButton()){
+            createProjectGUI2.setProjectList();
             stackPane.getChildren().clear();
             stackPane.getChildren().add(createProjectGUI2.getMainPane());
           }
@@ -282,6 +283,7 @@ public class SepGUI extends Application
       else if (e.getSource() == createProjectGUI2.getContinueButton())
       {
         if(createProjectGUI2.callContinueButton()){
+          createProjectGUI3.setProjectList();
           stackPane.getChildren().clear();
           stackPane.getChildren().add(createProjectGUI3.getMainPane());
         }

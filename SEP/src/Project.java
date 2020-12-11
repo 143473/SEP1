@@ -97,7 +97,7 @@ return false;
    * Gets all the assigned employees
    * @return List of all assigned employees to the project
    */
-  public ArrayList<AssignedEmployee> getEmployees(){
+  public ArrayList<AssignedEmployee> getAssignedEmployees(){
     return assignedEmployees;
   }
 
@@ -105,11 +105,11 @@ return false;
    * Gets project´s progress status
    * @return project status
    */
-  public String getStatusString(){
+  public String getStatus(){
     return status;
   }
 
-  public int getStatusInt(){
+  public int getStatusNumber(){
     return statusNumber;
   }
   /**
