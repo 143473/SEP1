@@ -70,4 +70,7 @@ public class ReportTasksGUI3 {
     {
         return goBackButton;
     }
+    public Button getReportButton(){
+        return reportButton;
+    }
 }
