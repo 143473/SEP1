@@ -62,8 +62,8 @@ public class ManageProjectGUI
     projectDescriptionLabel = new Label("Project description");
     statusLabel = new Label("Status");
     scrumMasterLabel = new Label("Scrum Master");
-    productOwnerLabel = new Label("Project Owner");
-    projectCreatorLabel = new Label("Product Creator");
+    productOwnerLabel = new Label("Product Owner");
+    projectCreatorLabel = new Label("Project Creator");
     nameField = new TextField();
     descriptionField = new TextField();
 
@@ -176,6 +176,10 @@ public class ManageProjectGUI
         descriptionField.setText(selectedProject.getDescription());
         statusBox.setValue(selectedProject.getStatus());
         ArrayList<AssignedEmployee> assignedEmployees = selectedProject.getAssignedEmployees();
+        scrumMasterBox.getItems().clear();
+        productOwnerBox.getItems().clear();
+        projectCreatorBox.getItems().clear();
+
         for (int i = 0; i < assignedEmployees.size(); i++)
         {
           if(!scrumMasterBox.getItems().contains(assignedEmployees.get(i))){
