@@ -94,7 +94,7 @@ public class SepGUI extends Application
     createProjectGUI3 = new CreateProjectGUI3(employeeAdapter, projectsAdapter,this);
     projectOverviewGUI = new ProjectOverviewGUI(projectsAdapter,this);
     manageProjectGUI = new ManageProjectGUI(projectsAdapter);
-    changeTeamMembersGUI = new ChangeTeamMembersGUI(projectsAdapter, this);
+    changeTeamMembersGUI = new ChangeTeamMembersGUI(employeeAdapter, projectsAdapter, this);
     manageRequirementGUI = new ManageRequirementGUI();
     manageTaskGUI = new ManageTaskGUI();
     reqOfSelectedPrjGUI = new ReqOfSelectedPrjGUI(projectsAdapter, this);
@@ -377,6 +377,7 @@ public class SepGUI extends Application
       }
         else if(e.getSource() == changeTeamMembersGUI.getCancel())
       {
+        changeTeamMembersGUI.initializeCurrentProject();
         stackPane.getChildren().clear();
         stackPane.getChildren().add(manageProjectGUI.getMainPane());
       }
