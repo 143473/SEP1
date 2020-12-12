@@ -1,5 +1,6 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * An adapter to the projects file, making it easy to retrieve and store information.
@@ -94,6 +95,30 @@ public class ProjectsAdapter
       }
     }
     return resultProjects;
+  }
+
+  public ArrayList<Requirement> getRequirementsByName(String searchingFor, ArrayList<Requirement> requirements){
+    ArrayList<Requirement> resultRequirements = new ArrayList<Requirement>();
+
+    searchingFor = searchingFor.toLowerCase();
+    for (int i = 0; i < requirements.size(); i++) {
+      if(requirements.get(i).getName().toLowerCase().contains(searchingFor)){
+        resultRequirements.add(requirements.get(i));
+      }
+    }
+    return resultRequirements;
+  }
+
+  public ArrayList<Task> getTasksByName(String searchingFor, ArrayList<Task> tasks){
+    ArrayList<Task> resultTasks = new ArrayList<Task>();
+
+    searchingFor = searchingFor.toLowerCase();
+    for (int i = 0; i < tasks.size(); i++) {
+      if(tasks.get(i).getName().toLowerCase().contains(searchingFor)){
+        resultTasks.add(tasks.get(i));
+      }
+    }
+    return resultTasks;
   }
 
   public Project getSelectedProject(int index){

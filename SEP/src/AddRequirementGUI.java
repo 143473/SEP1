@@ -56,7 +56,7 @@ public class AddRequirementGUI
     userStory = new TextField();
 
     estimation = new TextField();
-    estimatedTimeLabel = new Label("Estimation");
+    estimatedTimeLabel = new Label("Estimation in hours");
 
     deadlineLabel = new Label("Deadline");
     day = new TextField();
@@ -126,6 +126,7 @@ public class AddRequirementGUI
       responsibleEmployeeBox.getItems().add(chosenAssignedEmployees.get(i));
       System.out.println(chosenAssignedEmployees.get(i));
     }
+    responsibleEmployeeBox.getSelectionModel().selectFirst();
   }
 
   public boolean callSaveButton(){

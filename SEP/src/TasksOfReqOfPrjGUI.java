@@ -1,3 +1,5 @@
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -7,8 +9,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
+import java.util.ArrayList;
+
 public class TasksOfReqOfPrjGUI
 {
+  private MyActionListener listener;
 
   private VBox mainPane;
   private HBox searchPane;
@@ -31,8 +36,14 @@ public class TasksOfReqOfPrjGUI
 
   private TableView table;
 
+  private ProjectsAdapter projectsAdapter;
+  private SepGUI sepGUI;
 
-  public TasksOfReqOfPrjGUI(){
+  public TasksOfReqOfPrjGUI(ProjectsAdapter projectsAdapter, SepGUI sepGUI){
+
+    listener = new MyActionListener();
+    this.projectsAdapter = projectsAdapter;
+    this.sepGUI = sepGUI;
 
     add = new Button("Add");
     manage = new Button("Manage");
@@ -58,6 +69,7 @@ public class TasksOfReqOfPrjGUI
     searchLabel = new Label("Search for a task: ");
     search = new TextField();
     searchButton = new Button("Search");
+    searchButton.setOnAction(listener);
     searchPane = new HBox(5);
     searchPane.getChildren().addAll(searchLabel,search,searchButton);
 
@@ -110,6 +122,36 @@ public class TasksOfReqOfPrjGUI
   public Button getManage()
   {
     return manage;
+  }
+
+  private class MyActionListener implements EventHandler<ActionEvent> {
+    public void handle(ActionEvent e) {
+      if (e.getSource() == searchButton)
+      {
+        String searchingFor = search.getText();
+        Requirement requirement = (Requirement)sepGUI.getReqOfSelectedPrjGUI().getTable().getSelectionModel().getSelectedItem();
+        ArrayList<Task> tasks = requirement.getTasks();
+        ArrayList<Task> chosenTasks = projectsAdapter.getTasksByName(searchingFor, tasks);
+        initializeTable(chosenTasks);
+      }
+    }
+  }
+
+  private void initializeTable()
+  {
+    table.getItems().clear();
+    Requirement requirement = (Requirement)sepGUI.getReqOfSelectedPrjGUI().getTable().getSelectionModel().getSelectedItem();
+    for (int i = 0; i < requirement.getTasks().size(); i++)
+    {
+      table.getItems().add(requirement.getTasks().get(i));
+    }
+  }
+
+  private void initializeTable(ArrayList<Task> newTasks){
+    table.getItems().clear();
+    for (int i = 0; i < newTasks.size(); i++) {
+      table.getItems().add(newTasks.get(i));
+    }
   }
 }
 

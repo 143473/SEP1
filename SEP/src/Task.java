@@ -129,4 +129,12 @@ public class Task implements Serializable
             deadline.equals(other.deadline) &&
             employeeList.equals(other.employeeList);
   }
+
+  public String getName(){
+    return name;
+  }
+
+  public String getDescription(){
+    return description;
+  }
 }

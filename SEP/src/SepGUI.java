@@ -100,7 +100,7 @@ public class SepGUI extends Application
     manageRequirementGUI = new ManageRequirementGUI();
     manageTaskGUI = new ManageTaskGUI();
     reqOfSelectedPrjGUI = new ReqOfSelectedPrjGUI(projectsAdapter, this);
-    tasksOfReqOfPrjGUI = new TasksOfReqOfPrjGUI();
+    tasksOfReqOfPrjGUI = new TasksOfReqOfPrjGUI(projectsAdapter, this);
     manageRequirementGUI = new ManageRequirementGUI();
     manageTaskGUI = new ManageTaskGUI();
     addRequirementGUI = new AddRequirementGUI(projectsAdapter, this);

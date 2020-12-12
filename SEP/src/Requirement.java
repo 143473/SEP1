@@ -32,6 +32,7 @@ public class Requirement implements Serializable
     this.importance = importance;
     this.responsibleEmployee = responsibleEmployee;
     this.deadline = deadline;
+    tasks = new ArrayList<Task>();
   }
 
   /**
@@ -48,6 +49,7 @@ public class Requirement implements Serializable
     this.estimatedTime = estimatedTime;
     this.deadline = deadline;
     importance = 0;
+    tasks = new ArrayList<Task>();
   }
 
   public String getName()
@@ -239,5 +241,9 @@ public class Requirement implements Serializable
     if(importance!=0){
       return new Requirement(name, userStory, estimatedTime, importance, getResponsibleEmployee(), deadline);
     }else return new Requirement(name, userStory, estimatedTime, deadline);
+  }
+
+  public ArrayList<Task> getTasks(){
+    return tasks;
   }
 }

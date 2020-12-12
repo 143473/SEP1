@@ -1,3 +1,5 @@
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -7,6 +9,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+
+import java.util.ArrayList;
 
 public class ReqOfSelectedPrjGUI
 {
@@ -32,10 +36,13 @@ public class ReqOfSelectedPrjGUI
   private Label tableTitle;
   private Label searchLabel;
 
+  private MyActionListener listener;
+
   private TableView<Requirement> table;
 
   public ReqOfSelectedPrjGUI(ProjectsAdapter projectsAdapter, SepGUI sepGUI){
 
+    listener = new MyActionListener();
     this.projectsAdapter = projectsAdapter;
     this.sepGUI = sepGUI;
 
@@ -47,7 +54,7 @@ public class ReqOfSelectedPrjGUI
     projectName = new Text();
     projectName.setFont(Font.font("Calibri", FontWeight.BOLD, FontPosture.ITALIC, 20));
 
-    table = new TableView();
+    table = new TableView<Requirement>();
 
     projectNamePane = new HBox(5);
     projectNamePane.getChildren().addAll(projectLabel, projectName);
@@ -63,6 +70,7 @@ public class ReqOfSelectedPrjGUI
     searchLabel = new Label("Search for a requirement");
     search = new TextField();
     searchButton = new Button("Search");
+    searchButton.setOnAction(listener);
     searchPane = new HBox(5);
     searchPane.getChildren().addAll(searchLabel,search,searchButton);
 
@@ -132,6 +140,13 @@ public class ReqOfSelectedPrjGUI
     return mainPane;
   }
 
+  private void initializeTable(ArrayList<Requirement> newRequirements){
+    table.getItems().clear();
+    for (int i = 0; i < newRequirements.size(); i++) {
+      table.getItems().add(newRequirements.get(i));
+    }
+  }
+
   public Text getProjectName()
   {
     return projectName;
@@ -160,5 +175,18 @@ public class ReqOfSelectedPrjGUI
   public Button getGoBackButton()
   {
     return goBackButton;
+  }
+
+  private class MyActionListener implements EventHandler<ActionEvent> {
+    public void handle(ActionEvent e) {
+      if (e.getSource() == searchButton)
+      {
+        String searchingFor = search.getText();
+        Project project = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem();
+        ArrayList<Requirement> requirements = project.getRequirements();
+        ArrayList<Requirement> chosenRequirements = projectsAdapter.getRequirementsByName(searchingFor, requirements);
+        initializeTable(chosenRequirements);
+      }
+    }
   }
 }
