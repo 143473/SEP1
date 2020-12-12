@@ -10,6 +10,13 @@ public class AssignedEmployee extends Employee implements Serializable {
     private String status;
     private int statusNumber;
 
+
+    public AssignedEmployee(){
+        super();
+        status = "";
+        statusNumber = 0;
+    }
+
     /**
      * 4-argument constructor setting first and last name, date of birth and status of the employee
      * @param firstName first name(s) of the employee

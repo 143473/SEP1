@@ -14,17 +14,17 @@ public class ProjectList implements Serializable
     }
     /**
      * Adds a project to the list.
-     * @param projects the Project to add to the list
+     * @param project the Project to add to the list
      */
-    public void addProject(Project projects){
-      this.projects.add(projects);
+    public void addProject(Project project){
+      projects.add(project);
     }
     /**
      * Removes a Project from the list.
-     * @param projects the Project to remove from the list
+     * @param project the Project to remove from the list
      */
-    public void removeProject(Project projects){
-      this.projects.remove(projects);
+    public void removeProject(Project project){
+      projects.remove(project);
   }
 
   /**

@@ -117,4 +117,9 @@ public class CreateProjectGUI1
   {
     return buttonContinue;
   }
+
+  public void clearFields(){
+    inputName.setText("");
+    inputDescription.setText("");
+  }
 }

@@ -12,6 +12,13 @@ public class Employee implements Serializable {
     private MyDate dateOfBirth;
     private ArrayList<Project> projects;
 
+    public Employee(){
+        firstName = "Jim";
+        lastName = "Joe";
+        dateOfBirth = new MyDate(1, 1, 1900);
+        projects = new ArrayList<Project>();
+    }
+
     /**
      * 3-argument constructor initializing the Employee
      * @param firstName first name(s) of the employee

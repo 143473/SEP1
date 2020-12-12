@@ -266,6 +266,8 @@ public class SepGUI extends Application
       //Create Project
       else if (e.getSource() == createProject)
       {
+        createProjectGUI1.clearFields();
+        createProjectGUI2.clearFields();
         stackPane.getChildren().clear();
         stackPane.getChildren().add(createProjectGUI1.getMainPane());
       }

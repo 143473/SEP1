@@ -7,7 +7,7 @@ Adam,Adamson,24,12,1987
 Mickey,Mouse,18,11,1928
 Johnny,Depp,9,6,1963
 Bill,Gates,28,10,1955
-Sej,Tankian,21,8,1967
+Serj,Tankian,21,8,1967
 Michael,Jackson,29,8,1958
 Steve,Jobs,24,2,1955
 Stevie,Wonder,13,5,1950

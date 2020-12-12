@@ -135,30 +135,36 @@ public class CreateProjectGUI3
     }
   }
   public boolean callFinishButton(){
+    boolean OK = true;
 
-    Project project = projectList.get(projectList.size()-1);
-    ArrayList<AssignedEmployee> assignedEmployees = projectList.get(projectList.size()-1).getAssignedEmployees();
-    project.setScrumMaster(assignedEmployees.get(employeesBox1.getSelectionModel().getSelectedIndex()));
-    project.setProjectCreator(assignedEmployees.get(employeesBox2.getSelectionModel().getSelectedIndex()));
-    project.setProductOwner(assignedEmployees.get(employeesBox3.getSelectionModel().getSelectedIndex()));
+    if(employeesBox1.getSelectionModel().getSelectedItem().equals(employeesBox2.getSelectionModel().getSelectedItem()) ||
+        employeesBox1.getSelectionModel().getSelectedItem().equals(employeesBox3.getSelectionModel().getSelectedItem()) ||
+        employeesBox2.getSelectionModel().getSelectedItem().equals(employeesBox3.getSelectionModel().getSelectedItem())){
+      Alert alert = new Alert(Alert.AlertType.WARNING);
+      alert.setHeaderText("Duplicate team member");
+      alert.setContentText("One team member cannot be assigned multiple statuses!");
+      alert.showAndWait();
+      OK = false;
+    }
+    if(OK){
+      Project project = projectList.get(projectList.size()-1);
+      AssignedEmployeeList assignedEmployees = projectList.get(projectList.size()-1).getAssignedEmployeeList();
+      project.setScrumMaster(assignedEmployees.get(employeesBox1.getSelectionModel().getSelectedIndex()));
+      project.setProjectCreator(assignedEmployees.get(employeesBox2.getSelectionModel().getSelectedIndex()));
+      project.setProductOwner(assignedEmployees.get(employeesBox3.getSelectionModel().getSelectedIndex()));
 
-    System.out.println("Scrum master: "+assignedEmployees.get(employeesBox1.getSelectionModel().getSelectedIndex()));
-    System.out.println("Project creator: "+assignedEmployees.get(employeesBox2.getSelectionModel().getSelectedIndex()));
-    System.out.println("Product owner: "+assignedEmployees.get(employeesBox3.getSelectionModel().getSelectedIndex()));
+      assignedEmployees.get(employeesBox1.getSelectionModel().getSelectedIndex()).setStatus(0);
+      assignedEmployees.get(employeesBox2.getSelectionModel().getSelectedIndex()).setStatus(2);
+      assignedEmployees.get(employeesBox3.getSelectionModel().getSelectedIndex()).setStatus(1);
 
+      projectsAdapter.saveProjects(projectList);
 
-    assignedEmployees.get(employeesBox1.getSelectionModel().getSelectedIndex()).setStatus(0);
-    assignedEmployees.get(employeesBox2.getSelectionModel().getSelectedIndex()).setStatus(2);
-    assignedEmployees.get(employeesBox3.getSelectionModel().getSelectedIndex()).setStatus(1);
-
-    projectsAdapter.saveProjects(projectList);
-
-    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-    alert.setHeaderText("Adding successful");
-    alert.setContentText("New project was successfully added to the list!");
-    alert.showAndWait();
-
-    return true;
+      Alert alert = new Alert(Alert.AlertType.INFORMATION);
+      alert.setHeaderText("Adding successful");
+      alert.setContentText("New project was successfully added to the list!");
+      alert.showAndWait();
+    }
+    return OK;
 
   }
 

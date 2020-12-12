@@ -31,7 +31,7 @@ public class ManageProjectGUI
   private Button removeButton;
   private Button manageTeamMembersButton;
 
-  private TableView projectsTable;
+  private TableView<Project> projectsTable;
   private TableColumn projectCol;
 
   private Label projectNameLabel;
@@ -88,7 +88,7 @@ public class ManageProjectGUI
     removeButton.setOnAction(listener);
     manageTeamMembersButton = new Button("Change Team Members");
 
-    projectsTable = new TableView();
+    projectsTable = new TableView<Project>();
 
     projectCol = new TableColumn("Project name");
     projectCol.setCellValueFactory(new PropertyValueFactory("name"));
@@ -167,7 +167,7 @@ public class ManageProjectGUI
     public void changed(ObservableValue<? extends Project> project, Project oldProject, Project newProject)
     {
 
-      Project temp = (Project)projectsTable.getSelectionModel().getSelectedItem();
+      Project temp = projectsTable.getSelectionModel().getSelectedItem();
       int index = projectsTable.getSelectionModel().getSelectedIndex();
       if (temp != null)
       {
@@ -175,7 +175,7 @@ public class ManageProjectGUI
         nameField.setText(selectedProject.getName());
         descriptionField.setText(selectedProject.getDescription());
         statusBox.setValue(selectedProject.getStatus());
-        ArrayList<AssignedEmployee> assignedEmployees = selectedProject.getAssignedEmployees();
+        AssignedEmployeeList assignedEmployees = selectedProject.getAssignedEmployeeList();
         scrumMasterBox.getItems().clear();
         productOwnerBox.getItems().clear();
         projectCreatorBox.getItems().clear();
@@ -198,14 +198,15 @@ public class ManageProjectGUI
   }
 
   public Project getSelectedProject(){
-    return (Project) projectsTable.getSelectionModel().getSelectedItem();
+    return projectsTable.getSelectionModel().getSelectedItem();
   }
 
   private class MyActionListener implements EventHandler<ActionEvent> {
     public void handle(ActionEvent e) {
-      int index = projectsTable.getSelectionModel().getSelectedIndex();
-      Project selectedProject = projectsAdapter.getSelectedProject(index);
       if(e.getSource() == saveButton){
+        int index = projectsTable.getSelectionModel().getSelectedIndex();
+        Project selectedProject = projectsAdapter.getSelectedProject(index);
+
         boolean OK = true;
 
         if(!nameField.getText().isEmpty()){
@@ -234,7 +235,7 @@ public class ManageProjectGUI
         if (!(projectsTable.getSelectionModel().getSelectedItem() == null))
         {
           Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
-                  "Do you really want to delete this project?", ButtonType.YES, ButtonType.NO);
+                  "Do you really want to delete project "+projectsTable.getSelectionModel().getSelectedItem().getName()+"?", ButtonType.YES, ButtonType.NO);
           alert.setTitle("Delete project");
           alert.setHeaderText(null);
 
@@ -243,8 +244,9 @@ public class ManageProjectGUI
           if (alert.getResult() == ButtonType.YES)
           {
             ProjectList allProjects = projectsAdapter.getAllProjects();
-            allProjects.removeProject((Project)projectsTable.getSelectionModel().getSelectedItem());
+            allProjects.removeProject(getSelectedProject());
             projectsAdapter.saveProjects(allProjects);
+
             initializeTable();
 
             nameField.setText("");

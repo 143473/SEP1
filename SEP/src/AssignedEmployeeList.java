@@ -60,7 +60,7 @@ public class AssignedEmployeeList implements Serializable {
    * @param index the index of the assignedEmployee in the assignedEmployeeList
    * @return the assignedEmployee object of this index
    */
-  public Employee get(int index){
+  public AssignedEmployee get(int index){
     if(index < assignedEmployeeList.size()){
       return assignedEmployeeList.get(index);
     }

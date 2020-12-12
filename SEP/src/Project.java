@@ -33,6 +33,9 @@ public class Project implements Serializable
     ProgressStatus progressStatus = new ProgressStatus();
     this.status = progressStatus.chooseStatus(statusNumber);
     this.statusNumber = statusNumber;
+    scrumMaster = new AssignedEmployee();
+    projectCreator = new AssignedEmployee();
+    productOwner = new AssignedEmployee();
   }
 
   public Project(String name, String description){
@@ -43,6 +46,9 @@ public class Project implements Serializable
     ProgressStatus progressStatus = new ProgressStatus();
     this.status = progressStatus.chooseStatus(0);
     this.statusNumber = 0;
+    projectCreator = new AssignedEmployee();
+    productOwner = new AssignedEmployee();
+    scrumMaster = new AssignedEmployee();
   }
 
   public boolean equals(Object obj){
@@ -50,8 +56,13 @@ public class Project implements Serializable
       return false;
     }
     Project temp = (Project) obj;
-    return temp.name.equals(name) && temp.description.equals(description) && temp.status.equals(status) &&
-            temp.statusNumber == statusNumber && temp.requirements.equals(requirements) && temp.assignedEmployeeList.equals(assignedEmployeeList);
+    return temp.getName().equals(name) && temp.getDescription().equals(description) && temp.getStatus().equals(status) &&
+            temp.getStatusNumber() == statusNumber && temp.getRequirements().equals(requirements) && temp.getAssignedEmployeeList().equals(assignedEmployeeList)
+            && temp.getProductOwner().equals(productOwner) && temp.getScrumMaster().equals(scrumMaster) && getProjectCreator().equals(projectCreator);
+  }
+
+  public ArrayList<Requirement> getRequirements(){
+    return requirements;
   }
 
   /**
@@ -175,5 +186,8 @@ return false;
   }
   public AssignedEmployee getProductOwner(){
     return productOwner;
+  }
+  public String toString(){
+    return getName();
   }
 }

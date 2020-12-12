@@ -96,6 +96,7 @@ public class CreateProjectGUI2
     employeeListView.setPrefHeight(120);
 
     teamMembersTable = new ListView<Employee>();
+    teamMembersTable.getItems().clear();
 
     continueButton = new Button("Continue");
     goBackButton = new Button("Go back");
@@ -142,7 +143,6 @@ public class CreateProjectGUI2
             employeeListOfRemainingEmployees.removeEmployee(employeeListOfRemainingEmployees.get(i));
           }
         }
-        System.out.println(employeeListOfRemainingEmployees);
         EmployeeList chosenEmployees = employeeAdapter.getEmployeesByName(searchingFor, employeeListOfRemainingEmployees);
         employeeListView.getItems().clear();
         for (int i = 0; i < chosenEmployees.size(); i++)
@@ -165,8 +165,8 @@ public class CreateProjectGUI2
           if (alert.getResult() == ButtonType.YES)
           {
             employeeList.removeEmployee(teamMembersTable.getSelectionModel().getSelectedItem());
-            teamMembersTable.getItems().remove(teamMembersTable.getSelectionModel().getSelectedItem());
-            employeeListView.getItems().add(teamMembersTable.getSelectionModel().getSelectedItem());
+            initializeTeamMembersTable();
+            initializeListView();
             Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
             alert2.setHeaderText("Editing successful");
             alert2.setContentText("Changes were saved successfully!");
@@ -198,9 +198,9 @@ public class CreateProjectGUI2
       }
       if (OK)
       {
-        teamMembersTable.getItems().add(employeeAdded);
         employeeList.addEmployee(employeeAdded);
-        employeeListView.getItems().remove(employeeAdded);
+        initializeTeamMembersTable();
+        initializeListView();
       }
 
       return OK;
@@ -215,11 +215,27 @@ public class CreateProjectGUI2
     {
       employeeListView.getItems().clear();
       EmployeeList employees = employeeAdapter.getAllEmployees();
-      employeeListView.getItems().add(null);
+      EmployeeList chosenEmployees = new EmployeeList();
+      for (int i = 0; i < teamMembersTable.getItems().size(); i++) {
+        chosenEmployees.addEmployee(teamMembersTable.getItems().get(i));
+      }
+      for (int i = 0; i < employees.size(); i++) {
+        if(chosenEmployees.containsEmployee(employees.get(i))){
+          employees.removeEmployee(employees.get(i));
+        }
+      }
       for (int i = 0; i < employees.size(); i++)
       {
         employeeListView.getItems().add(employees.get(i));
       }
+    }
+
+    public void initializeTeamMembersTable(){
+      teamMembersTable.getItems().clear();
+      for (int i = 0; i < employeeList.size(); i++) {
+        teamMembersTable.getItems().add(employeeList.get(i));
+      }
+
     }
 
     /**
@@ -334,5 +350,12 @@ public class CreateProjectGUI2
   public EmployeeList getEmployeeList()
   {
     return employeeList;
+  }
+
+  public void clearFields(){
+      statusBox.getSelectionModel().select(0);
+      initializeTeamMembersTable();
+      initializeListView();
+      teamMembersTable.getItems().clear();
   }
 }
