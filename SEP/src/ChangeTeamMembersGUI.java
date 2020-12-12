@@ -1,13 +1,9 @@
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 
 /**
  *  A class handling changing the team members
@@ -58,7 +54,7 @@ public class ChangeTeamMembersGUI {
     listener = new MyActionListener();
 
     title = new Label();
-    title.setFont(Font.font("Calibri", FontWeight.BOLD, 20));
+    title.getStyleClass().add("heading");
     removeButton = new Button("Remove");
     removeButton.setOnAction(listener);
     saveButton = new Button("Save");
@@ -87,7 +83,6 @@ public class ChangeTeamMembersGUI {
 
     mainPane = new VBox(20);
     mainPane.setSpacing(10);
-    mainPane.setPadding(new Insets(25, 25, 25, 25));;
     mainPane.getChildren().addAll(title,teamMembersTable,buttonsPane);
 
     newWindowPane = new VBox(searchPane, employeeListView, add);

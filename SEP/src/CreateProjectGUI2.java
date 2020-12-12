@@ -3,9 +3,9 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 
 /**
  * The 2nd part of the project creation user interface, that allows for
@@ -29,6 +29,7 @@ public class CreateProjectGUI2
   private HBox statusPane;
   private HBox searchPane;
   private HBox topButtonsPane;
+  private GridPane searchStatusPane;
 
   private ProjectList projectList;
 
@@ -61,8 +62,7 @@ public class CreateProjectGUI2
     listener = new MyActionListener();
 
     title = new Label("Create a new project");
-    Font titleFont = new Font(30);
-    title.setFont(titleFont);
+    title.getStyleClass().add("heading");
 
     status = new Label("Project's status: ");
     statusBox = new ComboBox();
@@ -82,15 +82,11 @@ public class CreateProjectGUI2
     searchButton = new Button("Search");
     searchButton.setOnAction(listener);
 
-    statusPane = new HBox(5);
+    statusPane = new HBox(8);
     statusPane.getChildren().addAll(status, statusBox);
 
-    searchPane = new HBox(5);
+    searchPane = new HBox(8);
     searchPane.getChildren().addAll(searchByName, searchField, searchButton);
-
-    /*gridPane = new GridPane();
-    gridPane.addRow(0, status, statusBox);
-    gridPane.addRow(1, searchByName, searchField, searchButton);*/
 
     employeeListView = new ListView<Employee>();
     employeeListView.setPrefHeight(120);
@@ -104,21 +100,28 @@ public class CreateProjectGUI2
     removeButton = new Button("Remove Member");
     removeButton.setOnAction(listener);
 
-    topButtonsPane = new HBox(5);
-    topButtonsPane.getChildren().addAll(addTeamMember, removeButton);
+    searchStatusPane = new GridPane();
+    searchStatusPane.addRow(0, status, statusBox);
+    searchStatusPane.addRow(1, addTeamMember, removeButton);
+    searchStatusPane.setVgap(8);
+    searchStatusPane.setHgap(8);
+
 
     add = new Button("Add");
     add.setOnAction(listener);
+    add.getStyleClass().add("newWindow");
 
-    hBoxPaneButton = new HBox(5);
+    hBoxPaneButton = new HBox(8);
     hBoxPaneButton.getChildren().addAll(continueButton, goBackButton);
 
-    mainPane = new VBox(5);
+    mainPane = new VBox(8);
     mainPane.getChildren()
-        .addAll(title, statusPane, topButtonsPane, tableTitle, teamMembersTable,
+        .addAll(title, searchStatusPane, tableTitle, teamMembersTable,
             hBoxPaneButton);
 
-    newWindowPane = new VBox(searchPane, employeeListView, add);
+    newWindowPane = new VBox(8);
+    newWindowPane.getChildren().addAll(searchPane, employeeListView, add);
+    newWindowPane.getStyleClass().add("window");
   }
 
   private class MyActionListener implements EventHandler<ActionEvent>

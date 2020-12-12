@@ -1,12 +1,12 @@
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-
-import java.util.ArrayList;
 
 /**
  * The 3rd part of the project creation user interface, that allows for
@@ -48,8 +48,7 @@ public class CreateProjectGUI3
     this.projectsAdapter = projectsAdapter;
     sepGUI = new SepGUI();
     title = new Label("Set team members roles");
-    Font titleFont = new Font(30);
-    title.setFont(titleFont);
+    title.getStyleClass().add("heading");
 
     scrumMaster = new Label("Scrum Master: ");
     projectCreator = new Label("Project Creator: ");
@@ -59,8 +58,8 @@ public class CreateProjectGUI3
     employeesBox3 = new ComboBox();
 
     gridPane = new GridPane();
-    gridPane.setVgap(10);
-    gridPane.setHgap(10);
+    gridPane.setVgap(8);
+    gridPane.setHgap(8);
     gridPane.addRow(0, scrumMaster, employeesBox1);
     gridPane.addRow(1, projectCreator, employeesBox2);
     gridPane.addRow(2, productOwner, employeesBox3);
@@ -68,12 +67,10 @@ public class CreateProjectGUI3
     finishButton = new Button("Finish");
     goBackButton = new Button("Go Back");
 
-    hBoxPane = new HBox();
-    hBoxPane.setSpacing(20);
+    hBoxPane = new HBox(8);
     hBoxPane.getChildren().addAll(finishButton, goBackButton);
 
-    mainPane = new VBox();
-    mainPane.setSpacing(5);
+    mainPane = new VBox(8);
     mainPane.getChildren().addAll(title, gridPane, hBoxPane);
   }
 

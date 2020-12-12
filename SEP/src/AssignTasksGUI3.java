@@ -1,10 +1,6 @@
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 
 /**
  * A GUI tab containing components for displaying a list of tasks.
@@ -12,11 +8,14 @@ import javafx.scene.text.Font;
  * @version 1.0
  */
 public class AssignTasksGUI3 {
+
+    private SepGUI sepGUI;
     private VBox mainPane;
     private HBox topPane;
     private HBox bottomButtons;
 
     private Label titleLabel;
+    private Label tableLabel;
 
     private TableView tasksTable;
     private TableView.TableViewSelectionModel defaultSelectionModel;
@@ -30,20 +29,23 @@ public class AssignTasksGUI3 {
     /**
      * Constructor initializing the GUI components
      */
-    public AssignTasksGUI3(){
+    public AssignTasksGUI3(SepGUI sepGUI){
 
-        titleLabel = new Label("Task Table");
-        titleLabel.setFont(new Font("Cambria", 32));
+        this.sepGUI = sepGUI;
+        titleLabel = new Label();
+        titleLabel.getStyleClass().add("heading");
 
         topPane = new HBox(400);
         topPane.getChildren().addAll(titleLabel);
+
+        tableLabel = new Label("Choose a requirement from the list");
 
         tasksTable = new TableView();
         tasksTable.setPrefHeight(290);
         tasksTable.setTableMenuButtonVisible(true);
 
         taskNameColumn = new TableColumn("Task Name");
-        taskNameColumn.setPrefWidth(500);
+        taskNameColumn.setPrefWidth(460);
 
         taskDescriptionColumn = new TableColumn("Task Description");
         taskDescriptionColumn.setPrefWidth(500);
@@ -77,5 +79,22 @@ public class AssignTasksGUI3 {
     public Button getGoBackButton()
     {
         return goBackButton;
+    }
+    public boolean callContinueButton(){
+        boolean gogo = true;
+        if(sepGUI.getAssignTasksGUI2().getRequirementTable().getSelectionModel().getSelectedItem()==null)
+        {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText("Warning");
+            alert.setContentText("No requirement was chosen!");
+            alert.showAndWait();
+            gogo = false;
+        }
+        else
+        {
+            titleLabel.setText("HAVE TO FIGURE IT OUT");
+            gogo =true;
+        }
+        return gogo;
     }
 }

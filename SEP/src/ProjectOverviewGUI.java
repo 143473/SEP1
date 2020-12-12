@@ -1,12 +1,9 @@
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
 
@@ -38,6 +35,7 @@ public class ProjectOverviewGUI
   private HBox topPane;
   private HBox searchPane;
   private HBox topButtons;
+  private HBox bottomButtons;
 
   public ProjectOverviewGUI(ProjectsAdapter projectsAdapter,SepGUI sepGUI){
     this.projectsAdapter = projectsAdapter;
@@ -48,26 +46,29 @@ public class ProjectOverviewGUI
     manage = new Button("Manage");
     continueButton = new Button("Continue");
 
-    searchLabel = new Label("Search for a project");
+    title = new Label("Project Overview");
+    title.getStyleClass().add("heading");
+
     search = new TextField();
+    search.setPromptText("Search by name");
     searchButton = new Button("Search");
     searchButton.setOnAction(listener);
 
-    title = new Label("Project Overview");
     tableTitle = new Label("Choose a project from the list");
-
-    title.setFont(Font.font("Calibri", FontWeight.BOLD, 20));
 
     projectsTable = new TableView();
 
-    searchPane = new HBox(5);
-    searchPane.getChildren().addAll(searchLabel,search,searchButton);
+    searchPane = new HBox(8);
+    searchPane.getChildren().addAll(search,searchButton);
 
-    topPane = new HBox();
+    topPane = new HBox(530);
     topPane.getChildren().addAll(title,searchPane);
 
-    topButtons = new HBox(5);
+    topButtons = new HBox(8);
     topButtons.getChildren().addAll(add, manage);
+
+    bottomButtons = new HBox(800);
+    bottomButtons.getChildren().addAll(topButtons, continueButton);
 
     nameCol = new TableColumn("Name");
     nameCol.setCellValueFactory(new PropertyValueFactory("name"));
@@ -87,11 +88,10 @@ public class ProjectOverviewGUI
     setCellFactory();
 
     projectsTable.getColumns().setAll(nameCol, descriptionCol,statusCol,teamMemberCol);
-    projectsTable.setPrefHeight(350);
+    projectsTable.setPrefHeight(290);
 
-    mainPane = new VBox(5);
-    mainPane.setPadding(new Insets(25, 25, 25, 25));
-    mainPane.getChildren().addAll(title,topPane,topButtons,tableTitle, projectsTable,continueButton);
+    mainPane = new VBox(8);
+    mainPane.getChildren().addAll(topPane,tableTitle, projectsTable,bottomButtons);
   }
   private void initializeTable(){
     projectsTable.getItems().clear();

@@ -1,4 +1,3 @@
-import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -6,8 +5,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 
 public class ManageRequirementGUI
 {
@@ -37,7 +34,7 @@ public class ManageRequirementGUI
   public ManageRequirementGUI(){
 
   title = new Label("Manage Requirements");
-  title.setFont(Font.font("Calibri", FontWeight.BOLD, 20));
+  title.getStyleClass().add("heading");
   name = new TextField();
   userstory = new TextField();
   estimation = new TextField();
@@ -82,7 +79,6 @@ public class ManageRequirementGUI
 
 
     mainPane = new VBox(5);
-    mainPane.setPadding(new Insets(25, 25, 25, 25));;
     mainPane.getChildren().addAll(title,requirementForm,bottomButtons);
 
 

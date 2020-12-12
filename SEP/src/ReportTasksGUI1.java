@@ -5,7 +5,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 
 public class ReportTasksGUI1 {
 
@@ -19,14 +18,12 @@ public class ReportTasksGUI1 {
     private Label tableLabel;
 
     private HBox searchPane;
-    private Label searchLabel;
     private TextField searchField;
     private Button searchButton;
 
     private Button continueButton;
 
     private TableView<Employee> allAssignedTasksTable;
-    private TableView.TableViewSelectionModel defaultSelectionModel;
     private TableColumn<Employee, String> firstNameColumn;
     private TableColumn<Employee, String> lastNameColumn;
     private TableColumn<Employee, MyDate> birthdayColumn;
@@ -37,21 +34,21 @@ public class ReportTasksGUI1 {
         this.listener = new MyActionListener();
         this.employeeAdapter = employeeAdapter;
         titleLabel = new Label("Report Tasks");
-        titleLabel.setFont(new Font("Cambria", 32));
+        titleLabel.getStyleClass().add("heading");
+        titleLabel.setPrefWidth(520);
 
         tableLabel = new Label("Choose an employee from the list ");
 
-        searchLabel = new Label("Search: ");
         searchField = new TextField();
         searchField.setPromptText("Search by name");
         searchButton = new Button("Search");
         searchButton.setOnAction(listener);
 
         searchPane = new HBox(8);
-        searchPane.getChildren().addAll(searchLabel, searchField, searchButton);
+        searchPane.getChildren().addAll(searchField, searchButton);
         searchPane.setAlignment(Pos.BOTTOM_RIGHT);
 
-        topPane = new HBox(400);
+        topPane = new HBox(250);
         topPane.getChildren().addAll(titleLabel, searchPane);
 
         allAssignedTasksTable = new TableView();

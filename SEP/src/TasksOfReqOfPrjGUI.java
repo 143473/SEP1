@@ -1,13 +1,10 @@
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 
 import java.util.ArrayList;
 
@@ -49,10 +46,10 @@ public class TasksOfReqOfPrjGUI
     manage = new Button("Manage");
 
     projectLabel = new Label("Project:");
-    projectLabel.setFont(Font.font("Calibri", FontWeight.BOLD, 20));
+    projectLabel.getStyleClass().add("heading");
     projectName = new Label();
     requirementLabel = new Label("Requirement:");
-    requirementLabel.setFont(Font.font("Calibri", FontWeight.BOLD, 20));
+    requirementLabel.getStyleClass().add("heading");
     requirementName = new Label();
 
     table = new TableView();
@@ -99,7 +96,6 @@ public class TasksOfReqOfPrjGUI
     table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
     mainPane = new VBox(5);
-    mainPane.setPadding(new Insets(25, 25, 25, 25));
     mainPane.getChildren().addAll(projectRequirementPane,searchPane,topButtons,tableTitle, table,goBackButton);
 
 

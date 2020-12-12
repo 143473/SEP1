@@ -8,7 +8,6 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 
 /**
  * A GUI tab containing components for displaying a list of tasks.
@@ -42,7 +41,7 @@ public class AssignTasksGUI5 {
     public AssignTasksGUI5(){
 
         titleLabel = new Label("Assign a task");
-        titleLabel.setFont(new Font("Cambria", 32));
+        titleLabel.getStyleClass().add("heading");
 
         dayLabel = new Label("Birthday:");
         dayLabel.setPadding(new Insets(10, 0, 0, 10));

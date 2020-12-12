@@ -3,7 +3,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 
 /**
  * @author Timothy Engkar
@@ -34,7 +33,7 @@ public class ViewAssignedTasksGUI2 {
 
         this.sepGUI = sepGUI;
         employeeName = new Label();
-        employeeName.setFont(new Font("Cambria", 32));
+        employeeName.getStyleClass().add("heading");
         employeeName.setPrefWidth(700);
 
         statusBox = new ComboBox<String>();
@@ -49,7 +48,7 @@ public class ViewAssignedTasksGUI2 {
         comboPane.setPrefWidth(200);
         comboPane.getChildren().add(statusBox);
 
-        topPane = new HBox(100);
+        topPane = new HBox(300);
         topPane.getChildren().addAll(employeeName, comboPane);
 
         allAssignedTasksTable = new TableView();

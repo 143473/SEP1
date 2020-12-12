@@ -1,7 +1,6 @@
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 
 public class ReportTasksGUI2 {
 
@@ -26,7 +25,7 @@ public class ReportTasksGUI2 {
 
         this.sepGUI = sepGUI;
         employeeName = new Label();
-        employeeName.setFont(new Font("Cambria", 32));
+        employeeName.getStyleClass().add("heading");
 
         topPane = new HBox(500);
         topPane.getChildren().addAll(employeeName);

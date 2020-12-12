@@ -5,7 +5,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 
 /**
  * @author Timothy Engkar
@@ -40,7 +39,8 @@ public class ViewAssignedTasksGUI1 {
         this.employeeAdapter = employeeAdapter;
 
         titleLabel = new Label("View Assigned Tasks");
-        titleLabel.setFont(new Font("Cambria", 30));
+        titleLabel.setPrefWidth(520);
+        titleLabel.getStyleClass().add("heading");
 
         tableLabel = new Label("Choose an employee from the list ");
 
@@ -53,7 +53,7 @@ public class ViewAssignedTasksGUI1 {
         searchPane.getChildren().addAll(searchField, searchButton);
         searchPane.setAlignment(Pos.BOTTOM_RIGHT);
 
-        topPane = new HBox(500);
+        topPane = new HBox(250);
         topPane.getChildren().addAll(titleLabel, searchPane);
 
         allAssignedTasksTable = new TableView();

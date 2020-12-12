@@ -5,7 +5,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 
 /**
  * A GUI tab containing components for displaying a list of projects.
@@ -35,7 +34,7 @@ public class AssignTasksGUI1 {
 
         this.projectsAdapter = projectsAdapter;
         titleLabel = new Label("Assign Tasks");
-        titleLabel.setFont(new Font("Cambria", 32));
+        titleLabel.getStyleClass().add("heading");
 
         tableLabel = new Label("Choose a project from the list");
 
@@ -47,7 +46,7 @@ public class AssignTasksGUI1 {
         assignTasksTable.setTableMenuButtonVisible(true);
 
         projectNameColumn = new TableColumn("Project Name");
-        projectNameColumn.setPrefWidth(500);
+        projectNameColumn.setPrefWidth(460);
 
         projectDescriptionColumn = new TableColumn("Project Description");
         projectDescriptionColumn.setPrefWidth(500);

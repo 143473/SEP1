@@ -2,14 +2,11 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 
 public class ManageProjectGUI
 {
@@ -55,7 +52,7 @@ public class ManageProjectGUI
     listener = new MyActionListener();
 
     title = new Label("Manage Project");
-    title.setFont(Font.font("Calibri", FontWeight.BOLD, 20));
+    title.getStyleClass().add("heading");
     projectNameLabel = new Label("Project name");
     projectDescriptionLabel = new Label("Project description");
     statusLabel = new Label("Status");
@@ -112,7 +109,6 @@ public class ManageProjectGUI
 
     mainPane = new VBox(20);
     mainPane.setSpacing(10);
-    mainPane.setPadding(new Insets(25, 25, 25, 25));;
     mainPane.getChildren().addAll(title,hbox);
 
 

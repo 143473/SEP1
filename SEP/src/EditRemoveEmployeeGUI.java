@@ -2,14 +2,12 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 
 /**
  *  A class handling editing and removing employees
@@ -42,6 +40,8 @@ public class EditRemoveEmployeeGUI{
     private Button saveButton;
     private Button removeButton;
     private HBox buttonsPane;
+    private VBox middlePane;
+
     private EmployeeAdapter employeeAdapter;
 
     private MyActionListener listener;
@@ -57,21 +57,19 @@ public class EditRemoveEmployeeGUI{
         listListener = new MyListListener();
 
         titleLabel = new Label("Edit or Remove Employee");
-        titleLabel.setFont(new Font("Cambria", 32));
+        titleLabel.getStyleClass().add("heading");
 
 
         firstNameLabel = new Label("First name:");
-        firstNameLabel.setPadding(new Insets(10, 0, 5, 10));
         firstNameField = new TextField();
         firstNameField.setMaxWidth(100);
 
         lastNameLabel = new Label("Last name:");
-        lastNameLabel.setPadding(new Insets(10, 0, 5, 10));
+
         lastNameField = new TextField();
         lastNameField.setMaxWidth(100);
 
         birthdayLabel = new Label("Birthday:");
-        birthdayLabel.setPadding(new Insets(10, 0, 5, 10));
 
         dayField = new TextField();
         dayField.setPromptText("dd");
@@ -93,34 +91,38 @@ public class EditRemoveEmployeeGUI{
         lastNameField = new TextField();
 
         informationPane = new GridPane();
-        informationPane.setHgap(5);
-        informationPane.setVgap(5);
+        informationPane.setHgap(8);
+        informationPane.setVgap(8);
         informationPane.addRow(0, firstNameLabel, firstNameField);
         informationPane.addRow(1, lastNameLabel, lastNameField);
         informationPane.addRow(2, birthdayLabel, birthdayPane);
 
         employeeListView = new ListView<Employee>();
+        employeeListView.setPrefWidth(280);
         employeeListView.setPrefHeight(120);
         employeeListView.getSelectionModel().selectedItemProperty().addListener((listListener));
 
         listPane = new FlowPane();
+        listPane.setHgap(8);
         listPane.setAlignment(Pos.BASELINE_RIGHT);
-        listPane.setPrefWidth(200);
-        listPane.getChildren().add(employeeListView);
-
-        employeePane = new HBox();
-        employeePane.getChildren().addAll(informationPane, listPane);
+        listPane.setPrefWidth(300);
 
         saveButton = new Button("Save");
         saveButton.setOnAction(listener);
         removeButton = new Button("Remove");
         removeButton.setOnAction(listener);
 
-        buttonsPane = new HBox(15);
+        buttonsPane = new HBox(8);
         buttonsPane.getChildren().addAll(saveButton, removeButton);
 
-        mainPane = new VBox();
-        mainPane.getChildren().addAll(titleLabel, employeePane, buttonsPane);
+        middlePane = new VBox(8);
+        middlePane.getChildren().addAll(informationPane,buttonsPane);
+
+        employeePane = new HBox(8);
+        employeePane.getChildren().addAll(middlePane, employeeListView);
+
+        mainPane = new VBox(8);
+        mainPane.getChildren().addAll(titleLabel, employeePane);
     }
 
     /**

@@ -1,14 +1,9 @@
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 
@@ -32,7 +27,7 @@ public class ReqOfSelectedPrjGUI
   private TextField search;
 
   private Label projectLabel;
-  private Text projectName;
+  private Label projectName;
   private Label tableTitle;
   private Label searchLabel;
 
@@ -49,15 +44,13 @@ public class ReqOfSelectedPrjGUI
     add = new Button("Add");
     manage = new Button("Manage");
     search = new TextField();
-    projectLabel = new Label("Project: ");
-    projectLabel.setFont(Font.font("Calibri", FontWeight.BOLD, 20));
-    projectName = new Text();
-    projectName.setFont(Font.font("Calibri", FontWeight.BOLD, FontPosture.ITALIC, 20));
+    projectName = new Label();
+    projectName.getStyleClass().add("heading");
 
     table = new TableView<Requirement>();
 
     projectNamePane = new HBox(5);
-    projectNamePane.getChildren().addAll(projectLabel, projectName);
+    projectNamePane.getChildren().addAll(projectName);
 
     continueButton = new Button("Continue");
     goBackButton = new Button("Go Back");
@@ -102,7 +95,7 @@ public class ReqOfSelectedPrjGUI
     table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
     mainPane = new VBox(5);
-    mainPane.setPadding(new Insets(25, 25, 25, 25));
+
     mainPane.getChildren().addAll(projectNamePane, searchPane,topButtons, tableTitle, table,bottomButtons);
 
 
@@ -148,7 +141,7 @@ public class ReqOfSelectedPrjGUI
     }
   }
 
-  public Text getProjectName()
+  public Label getProjectName()
   {
     return projectName;
   }

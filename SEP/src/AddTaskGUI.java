@@ -1,12 +1,9 @@
-import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 
 public class AddTaskGUI
 {
@@ -32,7 +29,7 @@ public class AddTaskGUI
   public AddTaskGUI(){
 
     title = new Label("Add Task");
-    title.setFont(Font.font("Calibri", FontWeight.BOLD, 20));
+    title.getStyleClass().add("heading");
     name = new TextField();
     estimation = new TextField();
     day = new TextField();
@@ -69,7 +66,6 @@ public class AddTaskGUI
 
     mainPane = new VBox(20);
     mainPane.setSpacing(10);
-    mainPane.setPadding(new Insets(25, 25, 25, 25));;
     mainPane.getChildren().addAll(title,hbox,bottomButtons);
 
 

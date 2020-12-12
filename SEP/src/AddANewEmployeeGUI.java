@@ -1,6 +1,5 @@
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -8,7 +7,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 
 /**
  *  A class handling adding a new employee
@@ -50,23 +48,20 @@ public class AddANewEmployeeGUI{
 
         listener = new MyActionListener();
 
-        mainPane = new VBox();
+        mainPane = new VBox(8);
 
         titleLabel = new Label("Add a new employee");
-        titleLabel.setFont(new Font("Cambria", 32));
+        titleLabel.getStyleClass().add("heading");
 
         nameLabel = new Label("Name(s):");
-        nameLabel.setPadding(new Insets(10, 0, 5, 10));
         nameField = new TextField();
         nameField.setMaxWidth(100);
 
         lastNameLabel = new Label("Last name(s):");
-        lastNameLabel.setPadding(new Insets(10, 0, 5, 10));
         lastNameField = new TextField();
         lastNameField.setMaxWidth(100);
 
         birthdayLabel = new Label("Birthday:");
-        birthdayLabel.setPadding(new Insets(10, 0, 5, 10));
         dayField = new TextField();
         dayField.setPromptText("dd");
         dayField.setMaxWidth(40);
@@ -87,7 +82,8 @@ public class AddANewEmployeeGUI{
         informationPane.add(lastNameField, 1, 1);
         informationPane.add(birthdayLabel, 0, 2);
         informationPane.add(birthdayPane, 1, 2);
-        informationPane.setVgap(10);
+        informationPane.setVgap(8);
+        informationPane.setHgap(8);
 
         addButton = new Button("Add");
         addButton.setOnAction(listener);

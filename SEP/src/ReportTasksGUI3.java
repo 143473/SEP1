@@ -5,7 +5,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 
 /**
  * @author Timothy Engkar
@@ -30,7 +29,7 @@ public class ReportTasksGUI3 {
     public ReportTasksGUI3(){
 
         titleLabel = new Label("Report a Tasks");
-        titleLabel.setFont(new Font("Cambria", 32));
+        titleLabel.getStyleClass().add("heading");
 
         topPane = new HBox(500);
         topPane.getChildren().addAll(titleLabel);

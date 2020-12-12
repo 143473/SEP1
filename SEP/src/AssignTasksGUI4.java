@@ -4,7 +4,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 
 /**
  * A GUI tab containing components for displaying a list of assigned employees.
@@ -31,7 +30,7 @@ public class AssignTasksGUI4 {
     public AssignTasksGUI4(){
 
         titleLabel = new Label("Assign Employee");
-        titleLabel.setFont(new Font("Cambria", 32));
+        titleLabel.getStyleClass().add("heading");
 
         topPane = new HBox(500);
         topPane.getChildren().addAll(titleLabel);
@@ -41,7 +40,7 @@ public class AssignTasksGUI4 {
         allAssignedTasksTable.setTableMenuButtonVisible(true);
 
         nameColumn = new TableColumn("Name");
-        nameColumn.setPrefWidth(500);
+        nameColumn.setPrefWidth(460);
 
         birthdayColumn = new TableColumn("Birthday");
         birthdayColumn.setPrefWidth(500);

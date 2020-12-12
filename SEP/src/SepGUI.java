@@ -112,8 +112,8 @@ public class SepGUI extends Application
     editRemoveEmployeeGUI = new EditRemoveEmployeeGUI(employeeAdapter);
 
     assignTasksGUI1 = new AssignTasksGUI1(projectsAdapter);
-    assignTasksGUI2 = new AssignTasksGUI2(this);
-    assignTasksGUI3 = new AssignTasksGUI3();
+    assignTasksGUI2 = new AssignTasksGUI2(projectsAdapter,this);
+    assignTasksGUI3 = new AssignTasksGUI3(this);
     assignTasksGUI4 = new AssignTasksGUI4();
     assignTasksGUI5 = new AssignTasksGUI5();
     reportTasksGUI1 = new ReportTasksGUI1(employeeAdapter);
@@ -173,10 +173,13 @@ public class SepGUI extends Application
 
     stackPane = new StackPane();
     stackPane.getChildren().add(vBox);
+    stackPane.getStyleClass().add("stackPane");
 
     mainPane = new VBox();
     mainPane.getChildren().addAll(menuBar, stackPane);
     scene = new Scene(mainPane, 1000, 500);
+    scene.getStylesheets().add("MyStyles.css");
+
 
     parentStage.setScene(scene);
     parentStage.setResizable(false);
@@ -266,6 +269,12 @@ public class SepGUI extends Application
     viewAssignedTasksGUI1.getContinueButton().setOnAction(listener);
     viewAssignedTasksGUI2.getGoBack().setOnAction(listener);
   }
+
+  public AssignTasksGUI2 getAssignTasksGUI2()
+  {
+    return assignTasksGUI2;
+  }
+
   public CreateProjectGUI2 getCreateProjectGUI2(){
     return createProjectGUI2;
   }
@@ -549,8 +558,11 @@ public class SepGUI extends Application
       }
         else if (e.getSource() == assignTasksGUI2.getContinueButton())
       {
-        stackPane.getChildren().clear();
-        stackPane.getChildren().add(assignTasksGUI3.getMainPane());
+        if(assignTasksGUI3.callContinueButton())
+        {
+          stackPane.getChildren().clear();
+          stackPane.getChildren().add(assignTasksGUI3.getMainPane());
+        }
       }
       else if (e.getSource() == assignTasksGUI2.getGoBackButton())
       {

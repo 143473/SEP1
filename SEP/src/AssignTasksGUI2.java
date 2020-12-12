@@ -1,7 +1,7 @@
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 
 /**
  * A GUI tab containing components for displaying a list of requirements.
@@ -10,13 +10,15 @@ import javafx.scene.text.Font;
  */
 public class AssignTasksGUI2 {
     private SepGUI sepGUI;
+    private ProjectsAdapter projectsAdapter;
     private VBox mainPane;
     private HBox topPane;
     private HBox bottomButtons;
 
     private Label projectName;
+    private Label tableLabel;
 
-    private TableView requirementTable;
+    private TableView<Requirement> requirementTable;
     private TableView.TableViewSelectionModel defaultSelectionModel;
     private TableColumn requirementNameColumn;
     private TableColumn requirementDescriptionColumn;
@@ -28,23 +30,28 @@ public class AssignTasksGUI2 {
     /**
      * Constructor initializing the GUI components
      */
-    public AssignTasksGUI2(SepGUI sepGUI){
+    public AssignTasksGUI2(ProjectsAdapter projectsAdapter,SepGUI sepGUI){
 
         this.sepGUI = sepGUI;
+        this.projectsAdapter = projectsAdapter;
         projectName = new Label();
-        projectName.setFont(new Font("Cambria", 32));
+        projectName.getStyleClass().add("heading");
 
         topPane = new HBox(5);
         topPane.getChildren().addAll(projectName);
+
+        tableLabel = new Label("Choose a requirement from the list");
 
         requirementTable = new TableView();
         requirementTable.setPrefHeight(290);
         requirementTable.setTableMenuButtonVisible(true);
 
         requirementNameColumn = new TableColumn("Requirement Name");
-        requirementNameColumn.setPrefWidth(500);
+        requirementNameColumn.setCellValueFactory(new PropertyValueFactory("name"));
+        requirementNameColumn.setPrefWidth(460);
 
         requirementDescriptionColumn = new TableColumn("Requirement Description");
+        requirementNameColumn.setCellValueFactory(new PropertyValueFactory("userStory"));
         requirementDescriptionColumn.setPrefWidth(500);
 
         requirementNameColumn.setReorderable(false);
@@ -63,9 +70,31 @@ public class AssignTasksGUI2 {
         mainPane.getChildren().addAll(topPane, requirementTable, bottomButtons);
     }
 
+    public TableView getRequirementTable()
+    {
+        return requirementTable;
+    }
+    private void initializeTable()
+    {
+        requirementTable.getItems().clear();
+        ProjectList projects = projectsAdapter.getAllProjects();
+        int index = sepGUI.getAssignTasksGUI1().getAssignTasksTable().getSelectionModel().getSelectedIndex();
+        Project selectedProject = projectsAdapter.getSelectedProject(index);
+        for (int i = 0; i < selectedProject.getRequirements().size(); i++)
+        {
+            requirementTable.getItems().add(selectedProject.getRequirements().get(i));
+        }
+    }
+
     public VBox getMainPane()
     {
+        initializeTable();
         return mainPane;
+    }
+
+    public Label getProjectName()
+    {
+        return projectName;
     }
 
     public Button getContinueButton()
@@ -90,7 +119,7 @@ public class AssignTasksGUI2 {
     else
     {
       String projectNameString = sepGUI.getAssignTasksGUI1().getAssignTasksTable().getSelectionModel().getSelectedItem().getName();
-      projectName.setText(projectNameString);
+      projectName.setText(projectNameString+"\\");
       gogo =true;
     }
     return gogo;

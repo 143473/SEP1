@@ -1,0 +1,15 @@
+.heading{
+    -fx-font: 30px Tahoma;
+    -fx-fill: linear-gradient(from 0% 0% to 100% 200%, repeat, aqua 0%, red 50%);
+    -fx-stroke: black;
+    -fx-stroke-width: 1;
+}
+.stackPane{
+    -fx-padding:1em;
+}
+.newWindow{
+    -fx-padding:2em;
+}
+.window{
+    -fx-padding:2em;
+}

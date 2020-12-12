@@ -1,10 +1,7 @@
-import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 
 public class AddRequirementGUI
 {
@@ -47,7 +44,7 @@ public class AddRequirementGUI
     this.sepGUI = sepGUI;
 
     title = new Label("Add Requirement");
-    title.setFont(Font.font("Calibri", FontWeight.BOLD, 20));
+    title.getStyleClass().add("heading");
 
     nameLabel = new Label("Name");
     name = new TextField();
@@ -103,7 +100,6 @@ public class AddRequirementGUI
 
 
     mainPane = new VBox(5);
-    mainPane.setPadding(new Insets(25, 25, 25, 25));;
     mainPane.getChildren().addAll(title,requirementForm,bottomButtons);
 
 

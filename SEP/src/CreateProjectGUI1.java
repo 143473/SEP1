@@ -1,11 +1,9 @@
-import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 
 /**
  * The 1st part of the project creation user interface, that allows for
@@ -41,8 +39,7 @@ public class CreateProjectGUI1
 
 
     title = new Label("Create a New Project");
-    Font titleFont = new Font(30);
-    title.setFont(titleFont);
+    title.getStyleClass().add("heading");
 
     projectName = new Label("Project name:");
     inputName = new TextField();
@@ -50,16 +47,15 @@ public class CreateProjectGUI1
     inputDescription = new TextField();
 
     gridPane = new GridPane();
-    gridPane.setVgap(10);
-    gridPane.setHgap(10);
+    gridPane.setVgap(8);
+    gridPane.setHgap(8);
     gridPane.addRow(0, projectName, inputName);
     gridPane.addRow(1, projectDesc, inputDescription);
 
     buttonContinue = new Button("Continue");
 
-    mainPane = new VBox();
+    mainPane = new VBox(8);
     mainPane.getChildren().addAll(title, gridPane, buttonContinue);
-    mainPane.setPadding(new Insets(25, 25, 25, 25));
 
   }
   /**

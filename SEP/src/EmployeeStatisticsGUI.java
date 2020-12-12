@@ -6,7 +6,6 @@ import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 
 public class EmployeeStatisticsGUI{
     private EmployeeAdapter employeeAdapter;
@@ -40,19 +39,18 @@ public class EmployeeStatisticsGUI{
         listener = new MyActionListener();
 
         titleLabel = new Label("Employee statistics");
-        titleLabel.setFont(new Font("Cambria", 32));
+        titleLabel.getStyleClass().add("heading");
 
-        searchLabel = new Label("Search by name: ");
         searchField = new TextField();
-        searchField.setPromptText("Bob");
+        searchField.setPromptText("Search by name:");
         searchButton = new Button("Search");
         searchButton.setOnAction(listener);
 
         searchPane = new HBox(8);
-        searchPane.getChildren().addAll(searchLabel, searchField, searchButton);
+        searchPane.getChildren().addAll(searchField, searchButton);
         searchPane.setAlignment(Pos.BOTTOM_RIGHT);
 
-        topPane = new HBox(400);
+        topPane = new HBox(515);
         topPane.getChildren().addAll(titleLabel, searchPane);
 
         allEmployeesTable = new TableView<Employee>();
