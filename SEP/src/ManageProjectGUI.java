@@ -151,8 +151,7 @@ public class ManageProjectGUI
   /**
    * List Listener to the changes
    */
-  private class MyListListener implements ChangeListener<Project>
-  {
+  private class MyListListener implements ChangeListener<Project> {
     /**
      * Method what happens when any changes in the ListView occure
      * @param project project object as the observable value
@@ -188,7 +187,6 @@ public class ManageProjectGUI
         productOwnerBox.getSelectionModel().select(selectedProject.getProductOwner());
         projectCreatorBox.getSelectionModel().select(selectedProject.getProjectCreator());
       }
-
     }
   }
 
