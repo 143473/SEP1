@@ -231,7 +231,19 @@ public class ChangeTeamMembersGUI {
 
           if (alert.getResult() == ButtonType.YES)
           {
-            employeeList.removeEmployee(teamMembersTable.getSelectionModel().getSelectedItem());
+
+            ProjectList allProjects = projectsAdapter.getAllProjects();
+            for (int i = 0; i < allProjects.size(); i++) {
+              if(allProjects.get(i).equals(currentProject)){
+                allProjects.get(i).removeTeamMember(teamMembersTable.getSelectionModel().getSelectedItem());
+                }
+              }
+
+            projectsAdapter.saveProjects(allProjects);
+
+            initializeTeamMembersTable();
+            initializeListView();
+
             initializeTeamMembersTable();
             initializeListView();
             Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
@@ -273,13 +285,12 @@ public class ChangeTeamMembersGUI {
       OK = false;
     }
     if(OK){
-      employeeList.removeEmployee(teamMembersTable.getSelectionModel().getSelectedItem());
       ProjectList allProjects = projectsAdapter.getAllProjects();
       for (int i = 0; i < allProjects.size(); i++) {
         if(allProjects.get(i).equals(currentProject)){
           allProjects.get(i).removeAllTeamMembers();
           for (int j = 0; j < teamMembersTable.getItems().size(); j++) {
-            allProjects.get(i).addTeamMember(teamMembersTable.getItems().get(i));
+            allProjects.get(i).addTeamMember(teamMembersTable.getItems().get(j));
           }
         }
       }
