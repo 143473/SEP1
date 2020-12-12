@@ -60,8 +60,14 @@ public class AddTaskGUI
 
     deadline = new Label("Deadline");
     dayField = new TextField();
+    dayField.setPromptText("dd");
+    dayField.setMaxWidth(40);
     monthField = new TextField();
+    monthField.setPromptText("mm");
+    monthField.setMaxWidth(40);
     yearField = new TextField();
+    yearField.setPromptText("yyyy");
+    yearField.setMaxWidth(60);
 
     statusLabel = new Label("Status");
     statusBox = new ChoiceBox();
@@ -144,18 +150,17 @@ public class AddTaskGUI
     Task task;
     MyDate deadline;
     boolean allValuesCorrect = true;
-    if(nameField.getText().equals("") || nameField.getText().trim().isEmpty())
-    {
+    if(nameField.getText().equals("") || nameField.getText().trim().isEmpty()) {
       Alert alert = new Alert(Alert.AlertType.WARNING);
       alert.setHeaderText("Invalid input");
-      alert.setContentText("Requirement name cannot be empty!");
+      alert.setContentText("Task name cannot be empty!");
       alert.showAndWait();
       allValuesCorrect =  false;
     }
     else if(descriptionField.getText().equals("") || descriptionField.getText().trim().isEmpty()){
       Alert alert = new Alert(Alert.AlertType.WARNING);
       alert.setHeaderText("Invalid input");
-      alert.setContentText("User story cannot be empty!");
+      alert.setContentText("Task description cannot be empty!");
       alert.showAndWait();
       allValuesCorrect = false;
     }
@@ -170,8 +175,7 @@ public class AddTaskGUI
       try{
         double estimationTemporary = Double.parseDouble(estimationField.getText());
       }
-      catch (NumberFormatException nfe)
-      {
+      catch (NumberFormatException nfe) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setHeaderText("Invalid input");
         alert.setContentText("Value in estimation has to be a number!");
@@ -189,14 +193,12 @@ public class AddTaskGUI
     }
     else
     {
-      try
-      {
+      try {
         int temporary = Integer.parseInt(dayField.getText());
         temporary = Integer.parseInt(monthField.getText());
         temporary = Integer.parseInt(yearField.getText());
       }
-      catch (NumberFormatException nfe)
-      {
+      catch (NumberFormatException nfe) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setHeaderText("Invalid input");
         alert.setContentText("Values in deadline have to be numbers!");
@@ -204,8 +206,7 @@ public class AddTaskGUI
         allValuesCorrect = false;
       }
 
-      if (allValuesCorrect)
-      {
+      if (allValuesCorrect) {
         deadline = new MyDate(
                 Integer.parseInt(dayField.getText().replaceFirst("^0+(?!$)", "")),
                 Integer.parseInt(monthField.getText().replaceFirst("^0+(?!$)", "")),
@@ -216,16 +217,14 @@ public class AddTaskGUI
                 deadline);
         task.setProgressStatus((ProgressStatus) statusBox.getSelectionModel().getSelectedItem());
 
-        if (!deadline.isValidDate())
-        {
+        if (!deadline.isValidDate()) {
           Alert alert = new Alert(Alert.AlertType.WARNING);
           alert.setHeaderText("Invalid input");
           alert.setContentText("Entered date is not valid!");
           alert.showAndWait();
           allValuesCorrect = false;
         }
-        if (allValuesCorrect)
-        {
+        if (allValuesCorrect) {
           ProjectList projectList = projectsAdapter.getAllProjects();
           Project project = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem();
           Requirement requirement = (Requirement) sepGUI.getReqOfSelectedPrjGUI().getTable().getSelectionModel().getSelectedItem();
