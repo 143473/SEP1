@@ -500,6 +500,7 @@ public class SepGUI extends Application
         if (addRequirementGUI.callSaveButton()){
           stackPane.getChildren().clear();
           stackPane.getChildren().add(reqOfSelectedPrjGUI.getMainPane());
+          reqOfSelectedPrjGUI.initializeTable();
         }
       }
       //add task

@@ -107,7 +107,7 @@ public class ReqOfSelectedPrjGUI
 
 
   }
-  private void initializeTable()
+  public void initializeTable()
   {
     table.getItems().clear();
     ProjectList projects = projectsAdapter.getAllProjects();
