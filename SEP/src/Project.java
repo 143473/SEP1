@@ -209,6 +209,6 @@ return false;
     return productOwner;
   }
   public String toString(){
-    return getName();
+    return getName()+"\n"+getAssignedEmployeeList();
   }
 }
