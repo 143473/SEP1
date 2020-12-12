@@ -12,6 +12,7 @@ public class Requirement implements Serializable
   private MyDate deadline;
   private double spentTime;
   private ArrayList<AssignedEmployee> employeeList;
+  private AssignedEmployee responsibleEmployee;
 
   /**
    * Six-argument constructor that also sets the importance of a requirement
@@ -28,9 +29,8 @@ public class Requirement implements Serializable
     this.userStory = userStory;
     this.estimatedTime = estimatedTime;
     this.importance = importance;
-    responsibleEmployee = new AssignedEmployee(
-        responsibleEmployee.getFirstName(), responsibleEmployee.getLastName(),responsibleEmployee.getDateOfBirth(),responsibleEmployee.getStatusInt());
-    deadline = new MyDate(9,12,2020);
+    this.responsibleEmployee = responsibleEmployee;
+    this.deadline = deadline;
   }
 
   /**
@@ -45,7 +45,7 @@ public class Requirement implements Serializable
     this.name = name;
     this.userStory = userStory;
     this.estimatedTime = estimatedTime;
-    deadline = new MyDate(9,12,2020);
+    this.deadline = deadline;
     importance = 0;
   }
 

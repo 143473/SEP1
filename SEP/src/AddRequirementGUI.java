@@ -115,7 +115,7 @@ public class AddRequirementGUI
   public void initializeCurrentProject(){
     currentProject = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem();
 
-    title.setText("Requirement for:  "+currentProject.getName());
+    title.setText("Requirement for:  " + currentProject.getName());
     initializeResponsibleEmployeeBox();
   }
 
