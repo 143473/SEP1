@@ -4,6 +4,7 @@ import java.util.ArrayList;
 public class Requirement implements Serializable
 {
   private int id;
+  private String name, userStory;
   private double estimatedTime;
   private int importance;
   private ProgressStatus status;
@@ -13,15 +14,18 @@ public class Requirement implements Serializable
   private ArrayList<AssignedEmployee> employeeList;
 
   /**
-   * Four-argument constructor that also sets the importance of a requirement
-   *
+   * Six-argument constructor that also sets the importance of a requirement
+   * @param name
+   * @param userStory
    * @param estimatedTime
    * @param importance
    * @param responsibleEmployee
    * @param deadline
    */
-  public Requirement(double estimatedTime, int importance, AssignedEmployee responsibleEmployee, MyDate deadline)
+  public Requirement(String name, String userStory, double estimatedTime, int importance, AssignedEmployee responsibleEmployee, MyDate deadline)
   {
+    this.name = name;
+    this.userStory = userStory;
     this.estimatedTime = estimatedTime;
     this.importance = importance;
     responsibleEmployee = new AssignedEmployee(
@@ -30,16 +34,17 @@ public class Requirement implements Serializable
   }
 
   /**
-   * Three-parameter constructor that does not set the importance of a requirement(To be set later)
-   *
+   * Five-parameter constructor that does not set the importance of a requirement(To be set later)
+   * @param name
+   * @param userStory
    * @param estimatedTime
-   * @param responsibleEmployee
    * @param deadline
    */
-  public Requirement(double estimatedTime, AssignedEmployee responsibleEmployee, MyDate deadline)
+  public Requirement(String name, String userStory, double estimatedTime, MyDate deadline)
   {
+    this.name = name;
+    this.userStory = userStory;
     this.estimatedTime = estimatedTime;
-    responsibleEmployee = new AssignedEmployee(responsibleEmployee.getFirstName(),responsibleEmployee.getLastName(),responsibleEmployee.getDateOfBirth(),responsibleEmployee.getStatusInt());
     deadline = new MyDate(9,12,2020);
     importance = 0;
   }
@@ -212,7 +217,7 @@ public class Requirement implements Serializable
   public Requirement copy()
   {
     if(importance!=0){
-      return new Requirement(estimatedTime, importance, getResponsibleEmployee(), deadline);
-    }else return new Requirement(estimatedTime, getResponsibleEmployee(), deadline);
+      return new Requirement(name, userStory, estimatedTime, importance, getResponsibleEmployee(), deadline);
+    }else return new Requirement(name, userStory, estimatedTime, deadline);
   }
 }

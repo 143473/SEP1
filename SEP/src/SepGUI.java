@@ -101,7 +101,7 @@ public class SepGUI extends Application
     tasksOfReqOfPrjGUI = new TasksOfReqOfPrjGUI();
     manageRequirementGUI = new ManageRequirementGUI();
     manageTaskGUI = new ManageTaskGUI();
-    addRequirementGUI = new AddRequirementGUI();
+    addRequirementGUI = new AddRequirementGUI(projectsAdapter);
     addTaskGUI = new AddTaskGUI();
 
 
@@ -450,6 +450,13 @@ public class SepGUI extends Application
       {
         stackPane.getChildren().clear();
         stackPane.getChildren().add(reqOfSelectedPrjGUI.getMainPane());
+      }
+      else if(e.getSource() == addRequirementGUI.getSave())
+      {
+        if (addRequirementGUI.callSaveButton()){
+          stackPane.getChildren().clear();
+          stackPane.getChildren().add(reqOfSelectedPrjGUI.getMainPane());
+        }
       }
       //add task
       else if(e.getSource() == tasksOfReqOfPrjGUI.getAdd())
