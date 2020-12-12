@@ -7,6 +7,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+import javafx.util.Callback;
 
 public class ProjectOverviewGUI
 {
@@ -68,34 +70,35 @@ public class ProjectOverviewGUI
 
     nameCol = new TableColumn("Name");
     nameCol.setCellValueFactory(new PropertyValueFactory("name"));
+    nameCol.setPrefWidth(200);
 
     descriptionCol = new TableColumn("Description");
     descriptionCol.setCellValueFactory(new PropertyValueFactory("description"));
+    descriptionCol.setPrefWidth(300);
 
     statusCol = new TableColumn("Status");
     statusCol.setCellValueFactory(new PropertyValueFactory("status"));
+    statusCol.setPrefWidth(70);
 
-    teamMemberCol = new TableColumn("Team Member");
-    teamMemberCol.setCellValueFactory(new PropertyValueFactory("assignedEmployees"));
+    teamMemberCol = new TableColumn("Team Members");
+    teamMemberCol.setCellValueFactory(new PropertyValueFactory("assignedEmployeeList"));
+    teamMemberCol.setPrefWidth(375);
+    setCellFactory();
 
     projectsTable.getColumns().setAll(nameCol, descriptionCol,statusCol,teamMemberCol);
-    projectsTable.setPrefWidth(450);
-    projectsTable.setPrefHeight(300);
-    projectsTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+    projectsTable.setPrefHeight(350);
 
     mainPane = new VBox(5);
     mainPane.setPadding(new Insets(25, 25, 25, 25));
     mainPane.getChildren().addAll(title,topPane,topButtons,tableTitle, projectsTable,continueButton);
-
-
   }
   private void initializeTable(){
     projectsTable.getItems().clear();
     ProjectList projects = projectsAdapter.getAllProjects();
-
     for (int i = 0; i < projects.size(); i++) {
       projectsTable.getItems().add(projects.get(i));
     }
+
   }
   private void initializeTable(ProjectList newProjects){
     projectsTable.getItems().clear();
@@ -126,7 +129,31 @@ public class ProjectOverviewGUI
   {
     return continueButton;
   }
+  private void setCellFactory() {
 
+    Callback<TableColumn, TableCell> cellFactory = new Callback<TableColumn, TableCell>() {
+      @Override
+      public TableCell call(TableColumn param) {
+        final TableCell cell = new TableCell() {
+          private Text text;
+
+          @Override
+          public void updateItem(Object item, boolean empty) {
+            super.updateItem(item, empty);
+            if (!isEmpty()) {
+              text = new Text(item.toString());
+              text.setWrappingWidth(330);
+              setGraphic(text);
+            }
+          }
+        };
+        return cell;
+      }
+    };
+
+    teamMemberCol.setCellFactory(cellFactory);
+    descriptionCol.setCellFactory(cellFactory);
+  }
   private class MyActionListener implements EventHandler<ActionEvent> {
     public void handle(ActionEvent e) {
       if (e.getSource() == searchButton)

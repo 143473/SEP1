@@ -50,7 +50,7 @@ public class AssignedEmployee extends Employee implements Serializable {
      * Gets the employee status of the employee
      * @return the status of the employee
      */
-    public String getStatusString() {
+    public String getStatus() {
         return status;
     }
 
@@ -68,5 +68,9 @@ public class AssignedEmployee extends Employee implements Serializable {
      */
     public AssignedEmployee copy(){
         return new AssignedEmployee(getFirstName(), getLastName(), getDateOfBirth(), statusNumber);
+    }
+    public String toString(){
+
+        return getFirstName() + " " + getLastName()+ " (" + getStatus()+")";
     }
 }
