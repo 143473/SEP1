@@ -63,6 +63,7 @@ public class ReportTasksGUI1 {
         mainPane.getChildren().addAll(topPane, allAssignedTasksTable,continueButton);
     }
 
+
     public VBox getMainPane()
     {
         return mainPane;

@@ -2,6 +2,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -12,13 +13,15 @@ import javafx.scene.text.Font;
  * @version 1.0
  */
 public class AssignTasksGUI1 {
+    private ProjectsAdapter projectsAdapter;
+
     private VBox mainPane;
     private HBox topPane;
 
     private Label titleLabel;
     private Label tableLabel;
 
-    private TableView assignTasksTable;
+    private TableView<Project> assignTasksTable;
     private TableView.TableViewSelectionModel defaultSelectionModel;
     private TableColumn projectNameColumn;
     private TableColumn projectDescriptionColumn;
@@ -28,8 +31,9 @@ public class AssignTasksGUI1 {
     /**
      * Constructor initializing the GUI components
      */
-    public AssignTasksGUI1(){
+    public AssignTasksGUI1(ProjectsAdapter projectsAdapter){
 
+        this.projectsAdapter = projectsAdapter;
         titleLabel = new Label("Assign Tasks");
         titleLabel.setFont(new Font("Cambria", 32));
 
@@ -52,7 +56,9 @@ public class AssignTasksGUI1 {
         projectDescriptionColumn.setReorderable(false);
 
         assignTasksTable.getColumns().add(projectNameColumn);
+        projectNameColumn.setCellValueFactory(new PropertyValueFactory("name"));
         assignTasksTable.getColumns().add(projectDescriptionColumn);
+        projectDescriptionColumn.setCellValueFactory(new PropertyValueFactory("description"));
 
         continueButton = new Button("Continue");
 
@@ -60,8 +66,18 @@ public class AssignTasksGUI1 {
         mainPane.getChildren().addAll(topPane, tableLabel,assignTasksTable,continueButton);
     }
 
+    private void initializeTable()
+    {
+        assignTasksTable.getItems().clear();
+        ProjectList projects = projectsAdapter.getAllProjects();
+        for (int i = 0; i < projects.size(); i++)
+        {
+            assignTasksTable.getItems().add(projects.get(i));
+        }
+    }
     public VBox getMainPane()
     {
+        initializeTable();
         return mainPane;
     }
 
@@ -69,4 +85,28 @@ public class AssignTasksGUI1 {
     {
         return continueButton;
     }
+
+    public TableView<Project> getAssignTasksTable()
+    {
+        return assignTasksTable;
+    }
+    /*public boolean callContinueButton(){
+    boolean gogo = true;
+    if(projectsTable.getSelectionModel().getSelectedItem()==null)
+    {
+      Alert alert = new Alert(Alert.AlertType.WARNING);
+      alert.setHeaderText("Warning");
+      alert.setContentText("No project was chosen!");
+      alert.showAndWait();
+      gogo = false;
+    }
+    else
+    {
+      String projectName = projectsTable.getSelectionModel().getSelectedItem().getName();
+      System.out.println(projectsTable.getSelectionModel().getSelectedItem().getName());
+      sepGUI.getReqOfSelectedPrjGUI().getProjectName().setText(projectName);
+      gogo =true;
+    }
+    return gogo;
+  }*/
 }
