@@ -7,12 +7,13 @@ public class Requirement implements Serializable
   private String name, userStory;
   private double estimatedTime;
   private int importance;
-  private ProgressStatus status;
+  private String status;
   private ArrayList<Task> tasks;
   private MyDate deadline;
   private double spentTime;
-  private ArrayList<AssignedEmployee> employeeList;
+  private AssignedEmployeeList employeeList;
   private AssignedEmployee responsibleEmployee;
+
 
   /**
    * Six-argument constructor that also sets the importance of a requirement
@@ -47,6 +48,32 @@ public class Requirement implements Serializable
     this.estimatedTime = estimatedTime;
     this.deadline = deadline;
     importance = 0;
+  }
+
+  public String getName()
+  {
+    return name;
+  }
+
+  public String getUserStory()
+  {
+    return userStory;
+  }
+  /**
+   * Gets progress status of the requirement
+   *
+   * @return a String of the status
+   */
+  public String getStatus(){
+    return status;
+  }
+  /**
+   * Sets progress status of the requirement
+   * @param index from 1 to 4
+   */
+  public void setStatus(int index){
+    ProgressStatus progressStatus = new ProgressStatus();
+    this.status = progressStatus.chooseStatus(index);
   }
 
   /**
@@ -147,7 +174,7 @@ public class Requirement implements Serializable
    */
   public void setResponsibleEmployee(AssignedEmployee responsibleEmployee)
   {
-  setResponsibleEmployee(responsibleEmployee);
+    this.responsibleEmployee = responsibleEmployee;
   }
 
   /**
@@ -165,20 +192,13 @@ public class Requirement implements Serializable
    *
    * @param progressStatus
    */
-  public void setProgressStatus(ProgressStatus progressStatus)
+  public void setProgressStatus(String progressStatus)
   {
   this.status = progressStatus;
   }
 
-  /**
-   * Gets progress status of the requirement
-   *
-   * @return
-   */
-  public ProgressStatus getProgressStatus()
-  {
-    return status;
-  }
+
+
 
   /**
    * Adds a task to the requirement
@@ -205,7 +225,7 @@ public class Requirement implements Serializable
    *
    * @return
    */
-  public ArrayList<AssignedEmployee> getWorkingMembers()
+  public AssignedEmployeeList getWorkingMembers()
   {
   return employeeList;
   }

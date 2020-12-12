@@ -22,7 +22,7 @@ public class AddRequirementGUI
   private TextField month;
   private TextField year;
 
-  private ChoiceBox statusBox;
+  private ChoiceBox<String> statusBox;
   private ChoiceBox<AssignedEmployee> responsibleEmployeeBox;
 
   private Label nameLabel;
@@ -187,6 +187,7 @@ public class AddRequirementGUI
         requirement = new Requirement(name.getText(), userStory.getText(),
             Double.parseDouble(estimation.getText().replaceFirst("^0+(?!$)", "")),
             deadline);
+        requirement.setProgressStatus(statusBox.getSelectionModel().getSelectedItem());
 
         if (!deadline.isValidDate())
         {
