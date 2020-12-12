@@ -1,5 +1,3 @@
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
@@ -8,12 +6,12 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-import java.util.ArrayList;
-
 public class AddRequirementGUI
 {
   private ProjectsAdapter projectsAdapter;
   private ProjectList projectList;
+  private SepGUI sepGUI;
+  private Project currentProject;
 
   private Label title;
 
@@ -42,8 +40,11 @@ public class AddRequirementGUI
   private GridPane requirementForm;
   private HBox datePane;
 
-  public AddRequirementGUI(ProjectsAdapter projectsAdapter){
-    projectList = projectsAdapter.getAllProjects();;
+  public AddRequirementGUI(ProjectsAdapter projectsAdapter, SepGUI sepGUI){
+
+    this.projectsAdapter = projectsAdapter;
+    projectList = projectsAdapter.getAllProjects();
+    this.sepGUI = sepGUI;
 
     title = new Label("Add Requirement");
     title.setFont(Font.font("Calibri", FontWeight.BOLD, 20));
@@ -110,6 +111,21 @@ public class AddRequirementGUI
 
   public void setProjectList() {
     projectList = projectsAdapter.getAllProjects();
+  }
+  public void initializeCurrentProject(){
+    currentProject = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem();
+
+    title.setText("Requirement for:  "+currentProject.getName());
+    initializeResponsibleEmployeeBox();
+  }
+
+  public void initializeResponsibleEmployeeBox(){
+    responsibleEmployeeBox.getItems().clear();
+    AssignedEmployeeList chosenAssignedEmployees = currentProject.getAssignedEmployeeList();
+    for (int i = 0; i < chosenAssignedEmployees.size(); i++) {
+      responsibleEmployeeBox.getItems().add(chosenAssignedEmployees.get(i));
+      System.out.println(chosenAssignedEmployees.get(i));
+    }
   }
 
   public boolean callSaveButton(){
@@ -191,7 +207,9 @@ public class AddRequirementGUI
   }
 
   public VBox getMainPane(){
+    initializeCurrentProject();
     return mainPane;
+
   }
 
   public Button getCancel(){
