@@ -357,5 +357,6 @@ public class CreateProjectGUI2
       initializeTeamMembersTable();
       initializeListView();
       teamMembersTable.getItems().clear();
+      employeeList = new EmployeeList();
   }
 }
