@@ -30,12 +30,21 @@ public class ChangeTeamMembersGUI {
   private TableColumn lastNameColumn;
   private TableColumn birthdayColumn;
 
+  private ProjectsAdapter projectsAdapter;
+  private SepGUI sepGUI;
+
+  private Project currentProject;
+
   /**
-   *  0-argument constructor initializing all the parts of the GUI
+   *  2-argument constructor initializing all the parts of the GUI
+   *
    */
-  public ChangeTeamMembersGUI()
+  public ChangeTeamMembersGUI(ProjectsAdapter projectsAdapter, SepGUI sepGUI)
   {
-    title = new Label("Team Members");
+    this.projectsAdapter = projectsAdapter;
+    this.sepGUI = sepGUI;
+
+    title = new Label();
     title.setFont(Font.font("Calibri", FontWeight.BOLD, 20));
     removeButton = new Button("Remove");
     cancelButton = new Button("Cancel");
@@ -92,5 +101,11 @@ public class ChangeTeamMembersGUI {
   public Button getAddButton()
   {
     return addButton;
+  }
+
+  public void initializeCurrentProject(){
+    currentProject = sepGUI.getManageProjectGUI().getSelectedProject();
+
+    title.setText("Team Members of "+currentProject.getName());
   }
 }
