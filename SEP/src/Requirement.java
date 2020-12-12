@@ -240,4 +240,14 @@ public class Requirement implements Serializable
       return new Requirement(name, userStory, estimatedTime, importance, getResponsibleEmployee(), deadline);
     }else return new Requirement(name, userStory, estimatedTime, deadline);
   }
+  public boolean equals(Object obj)
+  {
+    if (!(obj instanceof Requirement))
+    {
+      return false;
+    }
+    Requirement temp = (Requirement) obj;
+    return temp.getName().equals(name) && temp.getUserStory().equals(userStory)
+        && temp.getStatus().equals(status) && temp.getEstimatedTime() == estimatedTime && temp.deadline == deadline;
+  }
 }

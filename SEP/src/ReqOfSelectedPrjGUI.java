@@ -84,9 +84,9 @@ public class ReqOfSelectedPrjGUI
     /*TableColumn totalHoursCol = new TableColumn("Total Hours");
     totalHoursCol.setCellValueFactory(new PropertyValueFactory("totalHours"));
     TableColumn teammembersCol = new TableColumn("Team Members");
-    teammembersCol.setCellValueFactory(new PropertyValueFactory("teammembers"));
-    TableColumn responsibleCol = new TableColumn<Requirement >("Responsible Team Member");
-    responsibleCol.setCellValueFactory(new PropertyValueFactory("responsibleTeamMember"));*/
+    teammembersCol.setCellValueFactory(new PropertyValueFactory("teammembers"));*/
+    TableColumn responsibleCol = new TableColumn<Requirement, AssignedEmployee>("Responsible Team Member");
+    responsibleCol.setCellValueFactory(new PropertyValueFactory("responsibleEmployee"));
 
     table.getColumns().setAll(nameCol,userStoryCol,estimationCol,deadlineCol,statusCol);
     table.setPrefWidth(450);
@@ -103,10 +103,11 @@ public class ReqOfSelectedPrjGUI
   {
     table.getItems().clear();
     ProjectList projects = projectsAdapter.getAllProjects();
-    Project project = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem();
-    for (int i = 0; i < project.getRequirements().size(); i++)
+    int index = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedIndex();
+    Project selectedProject = projectsAdapter.getSelectedProject(index);
+    for (int i = 0; i < selectedProject.getRequirements().size(); i++)
     {
-      table.getItems().add(project.getRequirements().get(i));
+      table.getItems().add(selectedProject.getRequirements().get(i));
     }
   }
   public boolean callContinueButton(){

@@ -188,6 +188,7 @@ public class AddRequirementGUI
             Double.parseDouble(estimation.getText().replaceFirst("^0+(?!$)", "")),
             deadline);
         requirement.setProgressStatus(statusBox.getSelectionModel().getSelectedItem());
+        requirement.setResponsibleEmployee(responsibleEmployeeBox.getSelectionModel().getSelectedItem());
 
         if (!deadline.isValidDate())
         {
@@ -199,24 +200,24 @@ public class AddRequirementGUI
         }
         if (allValuesCorrect)
         {
-          ProjectList projectList = projectsAdapter.getAllProjects();
-          Project project = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem();
-          project.addRequirement(requirement);
-          for (int i = 0; i < project.getRequirements().size(); i++)
+
+          int index = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedIndex();
+          Project selectedProject = projectsAdapter.getSelectedProject(index);
+
+          for (int i = 0; i < selectedProject.getRequirements().size(); i++)
           {
-            if (project.getRequirements().get(i).equals(requirement))
+            if (!(selectedProject.getRequirements().get(i).equals(requirement)))
             {
-              projectList.addProject(project);
+              selectedProject.addRequirement(requirement);
               projectsAdapter.saveProjects(projectList);
             }
             else
             {
               Alert alert = new Alert(Alert.AlertType.WARNING);
-              alert.setHeaderText("Duplicate project");
-              alert.setContentText("This project already exists!");
+              alert.setHeaderText("Duplicate requirement");
+              alert.setContentText("This requirement already exists!");
               alert.showAndWait();
               allValuesCorrect = false;
-              project.removeRequirement(requirement);
             }
           }
         }
