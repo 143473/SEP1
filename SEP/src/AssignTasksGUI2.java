@@ -1,7 +1,4 @@
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -12,11 +9,12 @@ import javafx.scene.text.Font;
  * @version 1.0
  */
 public class AssignTasksGUI2 {
+    private SepGUI sepGUI;
     private VBox mainPane;
     private HBox topPane;
     private HBox bottomButtons;
 
-    private Label titleLabel;
+    private Label projectName;
 
     private TableView requirementTable;
     private TableView.TableViewSelectionModel defaultSelectionModel;
@@ -30,13 +28,14 @@ public class AssignTasksGUI2 {
     /**
      * Constructor initializing the GUI components
      */
-    public AssignTasksGUI2(){
+    public AssignTasksGUI2(SepGUI sepGUI){
 
-        titleLabel = new Label("Requirement Table");
-        titleLabel.setFont(new Font("Cambria", 32));
+        this.sepGUI = sepGUI;
+        projectName = new Label();
+        projectName.setFont(new Font("Cambria", 32));
 
         topPane = new HBox(5);
-        topPane.getChildren().addAll(titleLabel);
+        topPane.getChildren().addAll(projectName);
 
         requirementTable = new TableView();
         requirementTable.setPrefHeight(290);
@@ -78,4 +77,22 @@ public class AssignTasksGUI2 {
     {
         return goBackButton;
     }
+    public boolean callContinueButton(){
+    boolean gogo = true;
+    if(sepGUI.getAssignTasksGUI1().getAssignTasksTable().getSelectionModel().getSelectedItem()==null)
+    {
+      Alert alert = new Alert(Alert.AlertType.WARNING);
+      alert.setHeaderText("Warning");
+      alert.setContentText("No project was chosen!");
+      alert.showAndWait();
+      gogo = false;
+    }
+    else
+    {
+      String projectNameString = sepGUI.getAssignTasksGUI1().getAssignTasksTable().getSelectionModel().getSelectedItem().getName();
+      projectName.setText(projectNameString);
+      gogo =true;
+    }
+    return gogo;
+  }
 }

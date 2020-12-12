@@ -109,8 +109,8 @@ public class SepGUI extends Application
     addANewEmployeeGUI = new AddANewEmployeeGUI(employeeAdapter);
     editRemoveEmployeeGUI = new EditRemoveEmployeeGUI(employeeAdapter);
 
-    assignTasksGUI1 = new AssignTasksGUI1();
-    assignTasksGUI2 = new AssignTasksGUI2();
+    assignTasksGUI1 = new AssignTasksGUI1(projectsAdapter);
+    assignTasksGUI2 = new AssignTasksGUI2(this);
     assignTasksGUI3 = new AssignTasksGUI3();
     assignTasksGUI4 = new AssignTasksGUI4();
     assignTasksGUI5 = new AssignTasksGUI5();
@@ -264,6 +264,11 @@ public class SepGUI extends Application
   public ProjectOverviewGUI getProjectOverviewGUI()
   {
     return projectOverviewGUI;
+  }
+
+  public AssignTasksGUI1 getAssignTasksGUI1()
+  {
+    return assignTasksGUI1;
   }
 
   private class MyActionListener implements EventHandler<ActionEvent>
@@ -487,6 +492,7 @@ public class SepGUI extends Application
         }
         else if (e.getSource() == assignTasksGUI1.getContinueButton())
       {
+        assignTasksGUI2.callContinueButton();
         stackPane.getChildren().clear();
         stackPane.getChildren().add(assignTasksGUI2.getMainPane());
       }
