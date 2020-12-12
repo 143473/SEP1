@@ -131,79 +131,98 @@ public class AddRequirementGUI
   public boolean callSaveButton(){
     Requirement requirement;
     MyDate deadline;
-    if(name.getText().equals("") || name.getText().trim().isEmpty()){
+    boolean allValuesCorrect = true;
+    if(name.getText().equals("") || name.getText().trim().isEmpty())
+    {
       Alert alert = new Alert(Alert.AlertType.WARNING);
       alert.setHeaderText("Invalid input");
       alert.setContentText("Requirement name cannot be empty!");
       alert.showAndWait();
-      return false;
+      allValuesCorrect =  false;
     }
     else if(userStory.getText().equals("") || userStory.getText().trim().isEmpty()){
       Alert alert = new Alert(Alert.AlertType.WARNING);
       alert.setHeaderText("Invalid input");
       alert.setContentText("User story cannot be empty!");
       alert.showAndWait();
-      return false;
+      allValuesCorrect = false;
     }
     else if(estimation.getText().equals("") || estimation.getText().trim().isEmpty()){
       Alert alert = new Alert(Alert.AlertType.WARNING);
       alert.setHeaderText("Invalid input");
       alert.setContentText("User story cannot be empty!");
       alert.showAndWait();
-      return false;
+      allValuesCorrect = false;
     }
     else if(day.getText().isEmpty() || month.getText().isEmpty() || year.getText().isEmpty()){
       Alert alert = new Alert(Alert.AlertType.WARNING);
       alert.setHeaderText("Invalid input");
       alert.setContentText("Date of birth cannot be empty!");
       alert.showAndWait();
-      return false;
+      allValuesCorrect= false;
     }
-    else{
-      try {
+    else
+    {
+      try
+      {
         int temporary = Integer.parseInt(day.getText());
         temporary = Integer.parseInt(month.getText());
         temporary = Integer.parseInt(year.getText());
-      } catch (NumberFormatException nfe) {
+      }
+      catch (NumberFormatException nfe)
+      {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setHeaderText("Invalid input");
         alert.setContentText("Values in deadline have to be numbers!");
         alert.showAndWait();
-        return false;
+        allValuesCorrect = false;
       }
-    }
-    if(true){
-      deadline = new MyDate(Integer.parseInt(day.getText().replaceFirst("^0+(?!$)", "")),
-              Integer.parseInt(month.getText().replaceFirst("^0+(?!$)", "")),
-              Integer.parseInt(year.getText().replaceFirst("^0+(?!$)", "")));
-      requirement = new Requirement(name.getText(), userStory.getText(),
-              Double.parseDouble(estimation.getText().replaceFirst("^0+(?!$)", "")), deadline);
-      if(!deadline.isValidDate()){
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setHeaderText("Invalid input");
-        alert.setContentText("Entered date is not valid!");
-        alert.showAndWait();
-        return false;
-      }
-      if (true){
-        ProjectList projectList = projectsAdapter.getAllProjects();
-        Project project = projectList.get(projectList.size()-1);
-        project.setStatus(statusBox.getSelectionModel().getSelectedIndex());
-        project.addRequirement(requirement);
-        if(!projectList.containsProject(project)){
-          projectList.addProject(project);
-          projectsAdapter.saveProjects(projectList);
-        }
-        else{
+
+      if (allValuesCorrect)
+      {
+        deadline = new MyDate(
+            Integer.parseInt(day.getText().replaceFirst("^0+(?!$)", "")),
+            Integer.parseInt(month.getText().replaceFirst("^0+(?!$)", "")),
+            Integer.parseInt(year.getText().replaceFirst("^0+(?!$)", "")));
+        requirement = new Requirement(name.getText(), userStory.getText(),
+            Double.parseDouble(estimation.getText().replaceFirst("^0+(?!$)", "")),
+            deadline);
+
+        if (!deadline.isValidDate())
+        {
           Alert alert = new Alert(Alert.AlertType.WARNING);
-          alert.setHeaderText("Duplicate project");
-          alert.setContentText("This project already exists!");
+          alert.setHeaderText("Invalid input");
+          alert.setContentText("Entered date is not valid!");
           alert.showAndWait();
-          return false;
+          allValuesCorrect = false;
+        }
+        if (allValuesCorrect)
+        {
+          ProjectList projectList = projectsAdapter.getAllProjects();
+          Project project = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem();
+          project.addRequirement(requirement);
+          for (int i = 0; i < project.getRequirements().size(); i++)
+          {
+            if (project.getRequirements().get(i).equals(requirement))
+            {
+              projectList.addProject(project);
+              projectsAdapter.saveProjects(projectList);
+            }
+            else
+            {
+              Alert alert = new Alert(Alert.AlertType.WARNING);
+              alert.setHeaderText("Duplicate project");
+              alert.setContentText("This project already exists!");
+              alert.showAndWait();
+              allValuesCorrect = false;
+              project.removeRequirement(requirement);
+            }
+          }
         }
       }
     }
-    return true;
+    return allValuesCorrect;
+
   }
 
   public VBox getMainPane(){

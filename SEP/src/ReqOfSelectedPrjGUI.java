@@ -99,15 +99,16 @@ public class ReqOfSelectedPrjGUI
 
 
   }
-  /*private void initializeTable()
+  private void initializeTable()
   {
     table.getItems().clear();
     ProjectList projects = projectsAdapter.getAllProjects();
-    for (int i = 0; i < projects.size(); i++)
+    Project project = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem();
+    for (int i = 0; i < project.getRequirements().size(); i++)
     {
-      table.getItems().add(projects.get(i).);
+      table.getItems().add(project.getRequirements().get(i));
     }
-  }*/
+  }
   public boolean callContinueButton(){
     boolean gogo = true;
     if(sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem()== null)
@@ -127,6 +128,7 @@ public class ReqOfSelectedPrjGUI
   }
   public VBox getMainPane()
   {
+    initializeTable();
     return mainPane;
   }
 

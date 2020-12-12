@@ -218,6 +218,7 @@ public class SepGUI extends Application
     manageProjectGUI.getCancel().setOnAction(listener);
     manageRequirementGUI.getCancel().setOnAction(listener);
     addRequirementGUI.getCancel().setOnAction(listener);
+    addRequirementGUI.getSave().setOnAction(listener);
     manageTaskGUI.getCancel().setOnAction(listener);
     addTaskGUI.getCancel().setOnAction(listener);
     changeTeamMembersGUI.getCancel().setOnAction(listener);
@@ -292,7 +293,6 @@ public class SepGUI extends Application
         stackPane.getChildren().clear();
         stackPane.getChildren().add(vBox);
       }
-
       //PROJECTS
       //Create Project
       else if (e.getSource() == createProject)
