@@ -176,7 +176,7 @@ public class Requirement implements Serializable
    */
   public AssignedEmployee getResponsibleEmployee()
   {
-   return getResponsibleEmployee();
+   return responsibleEmployee;
   }
 
   /**
@@ -227,4 +227,13 @@ public class Requirement implements Serializable
   public ArrayList<Task> getTasks(){
     return tasks;
   }
+
+  public int getId(){
+    return id;
+  }
+
+  public String toString(){
+    return name;
+  }
+
 }
