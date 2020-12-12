@@ -493,9 +493,11 @@ public class SepGUI extends Application
         }
         else if (e.getSource() == assignTasksGUI1.getContinueButton())
       {
-        assignTasksGUI2.callContinueButton();
-        stackPane.getChildren().clear();
-        stackPane.getChildren().add(assignTasksGUI2.getMainPane());
+        if(assignTasksGUI2.callContinueButton())
+        {
+          stackPane.getChildren().clear();
+          stackPane.getChildren().add(assignTasksGUI2.getMainPane());
+        }
       }
         else if (e.getSource() == assignTasksGUI2.getContinueButton())
       {
