@@ -1,6 +1,5 @@
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class Task implements Serializable
 {
@@ -11,19 +10,21 @@ public class Task implements Serializable
   private ProgressStatus status;
   private MyDate deadline;
   private ArrayList<AssignedEmployee> employeeList;
+  private AssignedEmployee responsibleEmployee;
   /**
    * Four-Argument Constructor
    * @param name
    * @param description
    * @param estimatedTime
-   * @param responsibleEmployee
    */
-  public Task(String name, String description,MyDate deadline, double estimatedTime, AssignedEmployee responsibleEmployee){
+  public Task(String name, String description, double estimatedTime, MyDate deadline){
     this.name = name;
     this.description = description;
     this.estimatedTime = estimatedTime;
-    responsibleEmployee = new AssignedEmployee(responsibleEmployee.getFirstName(),responsibleEmployee.getLastName(),responsibleEmployee.getDateOfBirth(),responsibleEmployee.getStatusInt());
+    this.responsibleEmployee = responsibleEmployee;
+    this.deadline = deadline;
   }
+
 
   /**
    * Sets estimated time that will be needed for completing the task
@@ -113,7 +114,7 @@ public class Task implements Serializable
    * @return
    */
   public Task copy(){
-    return new Task(name, description,deadline, estimatedTime,getResponsibleEmployee());
+    return new Task(name, description, estimatedTime, deadline);
   }
 
   public boolean equals(Object obj) {

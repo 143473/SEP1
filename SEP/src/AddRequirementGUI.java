@@ -43,7 +43,6 @@ public class AddRequirementGUI
   private HBox datePane;
 
   public AddRequirementGUI(ProjectsAdapter projectsAdapter, SepGUI sepGUI){
-
     this.projectsAdapter = projectsAdapter;
     projectList = projectsAdapter.getAllProjects();
     this.sepGUI = sepGUI;
@@ -120,6 +119,7 @@ public class AddRequirementGUI
   public void setProjectList() {
     projectList = projectsAdapter.getAllProjects();
   }
+
   public void initializeCurrentProject(){
     currentProject = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem();
 
@@ -260,7 +260,6 @@ public class AddRequirementGUI
   public VBox getMainPane(){
     initializeCurrentProject();
     return mainPane;
-
   }
 
   public Button getCancel(){
@@ -269,6 +268,7 @@ public class AddRequirementGUI
   public Button getSave(){
     return save;
   }
+
   public void clearFields(){
     name.setText("");
     userStory.setText("");

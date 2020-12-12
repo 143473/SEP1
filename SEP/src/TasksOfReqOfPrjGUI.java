@@ -124,7 +124,25 @@ public class TasksOfReqOfPrjGUI
     return manage;
   }
 
-  private class MyActionListener implements EventHandler<ActionEvent> {
+  public boolean callContinueButton(){
+    boolean gogo = true;
+    if(sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem()== null)
+    {
+      Alert alert = new Alert(Alert.AlertType.WARNING);
+      alert.setHeaderText("Warning");
+      alert.setContentText("No project was chosen!");
+      alert.showAndWait();
+      gogo = false;
+    }
+    else
+    {
+      projectName.setText(sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem().getName());
+      gogo =true;
+    }
+    return gogo;
+  }
+
+    private class MyActionListener implements EventHandler<ActionEvent> {
     public void handle(ActionEvent e) {
       if (e.getSource() == searchButton)
       {

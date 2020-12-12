@@ -104,7 +104,7 @@ public class SepGUI extends Application
     manageRequirementGUI = new ManageRequirementGUI();
     manageTaskGUI = new ManageTaskGUI();
     addRequirementGUI = new AddRequirementGUI(projectsAdapter, this);
-    addTaskGUI = new AddTaskGUI();
+    addTaskGUI = new AddTaskGUI(projectsAdapter, this);
 
 
     employeeStatisticsGUI = new EmployeeStatisticsGUI(employeeAdapter);
@@ -243,6 +243,7 @@ public class SepGUI extends Application
     manageTaskGUI.getCancel().setOnAction(listener);
 
     addTaskGUI.getCancel().setOnAction(listener);
+    addTaskGUI.getSave().setOnAction(listener);
 
     changeTeamMembersGUI.getSave().setOnAction(listener);
     changeTeamMembersGUI.getAddButton().setOnAction(listener);
@@ -463,7 +464,6 @@ public class SepGUI extends Application
           stackPane.getChildren().clear();
           stackPane.getChildren().add(tasksOfReqOfPrjGUI.getMainPane());
         }
-
       }
       //Manage Tasks
       else if(e.getSource() == tasksOfReqOfPrjGUI.getManage())
@@ -518,6 +518,14 @@ public class SepGUI extends Application
         stackPane.getChildren().clear();
         stackPane.getChildren().add(tasksOfReqOfPrjGUI.getMainPane());
       }
+      else if(e.getSource() == addTaskGUI.getSave())
+      {
+        if (addTaskGUI.callSaveButton()){
+          stackPane.getChildren().clear();
+          stackPane.getChildren().add(tasksOfReqOfPrjGUI.getMainPane());
+        }
+      }
+
         //EMPLOYEES
         else if (e.getSource() == employeesStatisticsMenuItem)
         {
