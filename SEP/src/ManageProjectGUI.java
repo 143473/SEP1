@@ -11,8 +11,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-import java.util.ArrayList;
-
 public class ManageProjectGUI
 {
   private ProjectsAdapter projectsAdapter;
@@ -240,12 +238,15 @@ public class ManageProjectGUI
           alert.setHeaderText(null);
 
           alert.showAndWait();
-
+          int index = projectsTable.getSelectionModel().getSelectedIndex();
           if (alert.getResult() == ButtonType.YES)
           {
+            /*
             ProjectList allProjects = projectsAdapter.getAllProjects();
             allProjects.removeProject(getSelectedProject());
-            projectsAdapter.saveProjects(allProjects);
+            projectsAdapter.saveProjects(allProjects);*/
+
+            projectsAdapter.deleteProject(index);
 
             initializeTable();
 

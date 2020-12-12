@@ -51,6 +51,18 @@ public class ProjectsAdapter
     return projects;
   }
 
+
+
+  public void deleteProject (int indexInList){
+    ProjectList projectList = getAllProjects();
+    for (int i = 0; i < projectList.size(); i++) {
+      if(i == indexInList){
+        projectList.removeProject(projectList.get(i));
+      }
+    }
+    saveProjects(projectList);
+  }
+
   /**
    * Use the MyFileIO class to save some projects.
    * @param projects the list of projects that will be saved
