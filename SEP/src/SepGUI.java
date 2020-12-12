@@ -238,6 +238,7 @@ public class SepGUI extends Application
     manageRequirementGUI.getCancel().setOnAction(listener);
 
     addRequirementGUI.getCancel().setOnAction(listener);
+    addRequirementGUI.getSave().setOnAction(listener);
 
     manageTaskGUI.getCancel().setOnAction(listener);
 
