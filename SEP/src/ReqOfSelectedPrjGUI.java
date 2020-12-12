@@ -1,19 +1,22 @@
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 
 public class ReqOfSelectedPrjGUI
 {
+  private ProjectsAdapter projectsAdapter;
+  private SepGUI sepGUI;
 
   private VBox mainPane;
   private HBox searchPane;
   private HBox topButtons;
-  private GridPane projectNamePane;
+  private HBox projectNamePane;
   private HBox bottomButtons;
 
   private Button add;
@@ -25,27 +28,28 @@ public class ReqOfSelectedPrjGUI
   private TextField search;
 
   private Label projectLabel;
-  private Label projectName;
-  private Label spacer;
+  private Text projectName;
   private Label tableTitle;
   private Label searchLabel;
 
   private TableView table;
 
-  public ReqOfSelectedPrjGUI(){
+  public ReqOfSelectedPrjGUI(ProjectsAdapter projectsAdapter, SepGUI sepGUI){
+
+    this.projectsAdapter = projectsAdapter;
+    this.sepGUI = sepGUI;
 
     add = new Button("Add");
     manage = new Button("Manage");
     search = new TextField();
-    projectLabel = new Label("Project:");
+    projectLabel = new Label("Project: ");
     projectLabel.setFont(Font.font("Calibri", FontWeight.BOLD, 20));
-    spacer = new Label("-");
-    projectName = new Label();
-    spacer.setFont(Font.font("Calibri", FontWeight.BOLD, 20));
+    projectName = new Text();
+    projectName.setFont(Font.font("Calibri", FontWeight.BOLD, FontPosture.ITALIC, 20));
+
     table = new TableView();
 
-    projectNamePane = new GridPane();
-    projectNamePane.setHgap(5);
+    projectNamePane = new HBox(5);
     projectNamePane.getChildren().addAll(projectLabel, projectName);
 
     continueButton = new Button("Continue");
@@ -95,9 +99,45 @@ public class ReqOfSelectedPrjGUI
 
 
   }
+  /*private void initializeTable()
+  {
+    table.getItems().clear();
+    ProjectList projects = projectsAdapter.getAllProjects();
+    for (int i = 0; i < projects.size(); i++)
+    {
+      table.getItems().add(projects.get(i).);
+    }
+  }*/
+  public boolean callContinueButton(){
+    boolean gogo = true;
+    if(sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem()== null)
+    {
+      Alert alert = new Alert(Alert.AlertType.WARNING);
+      alert.setHeaderText("Warning");
+      alert.setContentText("No project was chosen!");
+      alert.showAndWait();
+      gogo = false;
+    }
+    else
+    {
+      projectName.setText(sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem().getName());
+      gogo =true;
+    }
+    return gogo;
+  }
   public VBox getMainPane()
   {
     return mainPane;
+  }
+
+  public Text getProjectName()
+  {
+    return projectName;
+  }
+
+  public TableView getTable()
+  {
+    return table;
   }
 
   public Button getContinueButton()

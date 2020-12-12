@@ -92,12 +92,12 @@ public class SepGUI extends Application
     createProjectGUI1 = new CreateProjectGUI1(projectsAdapter, this);
     createProjectGUI2 = new CreateProjectGUI2(employeeAdapter, projectsAdapter,this);
     createProjectGUI3 = new CreateProjectGUI3(employeeAdapter, projectsAdapter,this);
-    projectOverviewGUI = new ProjectOverviewGUI(projectsAdapter);
+    projectOverviewGUI = new ProjectOverviewGUI(projectsAdapter,this);
     manageProjectGUI = new ManageProjectGUI(projectsAdapter);
     changeTeamMembersGUI = new ChangeTeamMembersGUI();
     manageRequirementGUI = new ManageRequirementGUI();
     manageTaskGUI = new ManageTaskGUI();
-    reqOfSelectedPrjGUI = new ReqOfSelectedPrjGUI();
+    reqOfSelectedPrjGUI = new ReqOfSelectedPrjGUI(projectsAdapter, this);
     tasksOfReqOfPrjGUI = new TasksOfReqOfPrjGUI();
     manageRequirementGUI = new ManageRequirementGUI();
     manageTaskGUI = new ManageTaskGUI();
@@ -239,17 +239,28 @@ public class SepGUI extends Application
 
     viewAssignedTasksGUI1.getContinueButton().setOnAction(listener);
     viewAssignedTasksGUI2.getGoBack().setOnAction(listener);
-
-
   }
   public CreateProjectGUI2 getCreateProjectGUI2(){
     return createProjectGUI2;
   }
-
   public CreateProjectGUI3 getCreateProjectGUI3(){
     return createProjectGUI3;
   }
 
+  public ReqOfSelectedPrjGUI getReqOfSelectedPrjGUI()
+  {
+    return reqOfSelectedPrjGUI;
+  }
+
+  public TasksOfReqOfPrjGUI getTasksOfReqOfPrjGUI()
+  {
+    return tasksOfReqOfPrjGUI;
+  }
+
+  public ProjectOverviewGUI getProjectOverviewGUI()
+  {
+    return projectOverviewGUI;
+  }
 
   private class MyActionListener implements EventHandler<ActionEvent>
   {
@@ -335,8 +346,6 @@ public class SepGUI extends Application
       {
         stackPane.getChildren().clear();
         stackPane.getChildren().add(manageProjectGUI.getMainPane());
-
-
       }
         else if(e.getSource() == manageProjectGUI.getCancel())
       {
@@ -373,8 +382,11 @@ public class SepGUI extends Application
       }
       else if(e.getSource() == projectOverviewGUI.getContinueButton())
       {
-        stackPane.getChildren().clear();
-        stackPane.getChildren().add(reqOfSelectedPrjGUI.getMainPane());
+        if(reqOfSelectedPrjGUI.callContinueButton())
+        {
+          stackPane.getChildren().clear();
+          stackPane.getChildren().add(reqOfSelectedPrjGUI.getMainPane());
+        }
       }
       //Manage Requirements
       else if(e.getSource() == reqOfSelectedPrjGUI.getManage())
