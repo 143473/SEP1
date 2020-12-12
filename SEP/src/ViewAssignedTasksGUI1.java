@@ -18,6 +18,7 @@ public class ViewAssignedTasksGUI1 {
     private HBox topPane;
 
     private Label titleLabel;
+    private Label tableLabel;
 
     private HBox searchPane;
     private TextField searchField;
@@ -40,6 +41,8 @@ public class ViewAssignedTasksGUI1 {
 
         titleLabel = new Label("View Assigned Tasks");
         titleLabel.setFont(new Font("Cambria", 30));
+
+        tableLabel = new Label("Choose an employee from the list ");
 
         searchField = new TextField();
         searchField.setPromptText("Search by name");
@@ -73,7 +76,7 @@ public class ViewAssignedTasksGUI1 {
         continueButton = new Button("Continue");
 
         mainPane = new VBox(10);
-        mainPane.getChildren().addAll(topPane, allAssignedTasksTable, continueButton);
+        mainPane.getChildren().addAll(topPane,tableLabel, allAssignedTasksTable, continueButton);
     }
 
     private void initializeTable(){

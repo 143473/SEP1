@@ -114,8 +114,8 @@ public class SepGUI extends Application
     assignTasksGUI3 = new AssignTasksGUI3();
     assignTasksGUI4 = new AssignTasksGUI4();
     assignTasksGUI5 = new AssignTasksGUI5();
-    reportTasksGUI1 = new ReportTasksGUI1();
-    reportTasksGUI2 = new ReportTasksGUI2();
+    reportTasksGUI1 = new ReportTasksGUI1(employeeAdapter);
+    reportTasksGUI2 = new ReportTasksGUI2(this);
     reportTasksGUI3 = new ReportTasksGUI3();
     viewAssignedTasksGUI1 = new ViewAssignedTasksGUI1(employeeAdapter);
     viewAssignedTasksGUI2 = new ViewAssignedTasksGUI2(this);
@@ -234,6 +234,7 @@ public class SepGUI extends Application
 
     reportTasksGUI1.getContinueButton().setOnAction(listener);
     reportTasksGUI2.getContinueButton().setOnAction(listener);
+    reportTasksGUI2.getGoBack().setOnAction(listener);
     reportTasksGUI3.getGoBackButton().setOnAction(listener);
     reportTasksGUI3.getReportButton().setOnAction(listener);
 
@@ -274,6 +275,11 @@ public class SepGUI extends Application
   public AssignTasksGUI1 getAssignTasksGUI1()
   {
     return assignTasksGUI1;
+  }
+
+  public ReportTasksGUI1 getReportTasksGUI1()
+  {
+    return reportTasksGUI1;
   }
 
   private class MyActionListener implements EventHandler<ActionEvent>
@@ -555,13 +561,21 @@ public class SepGUI extends Application
         }
       else if (e.getSource() == reportTasksGUI1.getContinueButton())
       {
-        stackPane.getChildren().clear();
-        stackPane.getChildren().add(reportTasksGUI2.getMainPane());
+        if(reportTasksGUI2.callContinueButton())
+        {
+          stackPane.getChildren().clear();
+          stackPane.getChildren().add(reportTasksGUI2.getMainPane());
+        }
       }
       else if (e.getSource() == reportTasksGUI2.getContinueButton())
       {
         stackPane.getChildren().clear();
         stackPane.getChildren().add(reportTasksGUI3.getMainPane());
+      }
+      else if (e.getSource() == reportTasksGUI2.getGoBack())
+      {
+        stackPane.getChildren().clear();
+        stackPane.getChildren().add(reportTasksGUI1.getMainPane());
       }
       else if(e.getSource() == reportTasksGUI3.getReportButton())
       {
