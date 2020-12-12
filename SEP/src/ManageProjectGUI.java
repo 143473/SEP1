@@ -319,6 +319,13 @@ public class ManageProjectGUI
           selectedProject.setProductOwner(productOwnerBox.getSelectionModel().getSelectedItem());
           selectedProject.setProjectCreator(projectCreatorBox.getSelectionModel().getSelectedItem());
 
+          //setting the status of to "team member"
+          AssignedEmployeeList assignedEmployeeList = selectedProject.getAssignedEmployeeList();
+          for (int i = 0; i < assignedEmployeeList.size(); i++) {
+            assignedEmployeeList.get(i).setStatus(3);
+          }
+
+          //setting the status of 3 chosen people
           selectedProject.getAssignedEmployeeList().get(scrumMasterBox.getSelectionModel().getSelectedIndex()).setStatus(0);
           selectedProject.getAssignedEmployeeList().get(projectCreatorBox.getSelectionModel().getSelectedIndex()).setStatus(2);
           selectedProject.getAssignedEmployeeList().get(productOwnerBox.getSelectionModel().getSelectedIndex()).setStatus(1);
