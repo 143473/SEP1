@@ -155,7 +155,21 @@ public class AddRequirementGUI
       alert.showAndWait();
       allValuesCorrect = false;
     }
-    else if(day.getText().isEmpty() || month.getText().isEmpty() || year.getText().isEmpty()){
+    else{
+      try{
+        double estimationTemporary = Double.parseDouble(estimation.getText());
+      }
+      catch (NumberFormatException nfe)
+      {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setHeaderText("Invalid input");
+        alert.setContentText("Value in estimation has to be a number!");
+        alert.showAndWait();
+        allValuesCorrect = false;
+      }
+    }
+
+    if(day.getText().isEmpty() || month.getText().isEmpty() || year.getText().isEmpty()){
       Alert alert = new Alert(Alert.AlertType.WARNING);
       alert.setHeaderText("Invalid input");
       alert.setContentText("Date of birth cannot be empty!");
@@ -189,7 +203,6 @@ public class AddRequirementGUI
             Double.parseDouble(estimation.getText().replaceFirst("^0+(?!$)", "")),
             deadline);
         requirement.setProgressStatus(statusBox.getSelectionModel().getSelectedItem());
-        requirement.setResponsibleEmployee(responsibleEmployeeBox.getSelectionModel().getSelectedItem());
 
         if (!deadline.isValidDate())
         {
@@ -201,31 +214,30 @@ public class AddRequirementGUI
         }
         if (allValuesCorrect)
         {
+          ProjectList projectList = projectsAdapter.getAllProjects();
+          Project project = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem();
 
-          int index = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedIndex();
-          Project selectedProject = projectsAdapter.getSelectedProject(index);
-
-          for (int i = 0; i < selectedProject.getRequirements().size(); i++)
-          {
-            if (!(selectedProject.getRequirements().get(i).equals(requirement)))
-            {
-              selectedProject.addRequirement(requirement);
-              projectsAdapter.saveProjects(projectList);
-            }
-            else
-            {
+          boolean equals = false;
+          for (int i = 0; i < project.getRequirements().size(); i++) {
+            if(project.getRequirements().get(i).equals(requirement)){
+              equals = true;
               Alert alert = new Alert(Alert.AlertType.WARNING);
-              alert.setHeaderText("Duplicate requirement");
-              alert.setContentText("This requirement already exists!");
+              alert.setHeaderText("Duplicate project");
+              alert.setContentText("This project already exists!");
               alert.showAndWait();
               allValuesCorrect = false;
             }
+          }
+          if(!equals){
+            projectList.removeProject(project);
+            project.addRequirement(requirement);
+            projectList.addProject(project);
+            projectsAdapter.saveProjects(projectList);
           }
         }
       }
     }
     return allValuesCorrect;
-
   }
 
   public VBox getMainPane(){
@@ -239,5 +251,8 @@ public class AddRequirementGUI
   }
   public Button getSave(){
     return save;
+  }
+  public void clearFields(){
+
   }
 }
