@@ -6,6 +6,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
+import java.util.ArrayList;
+
 /**
  * The 3rd part of the project creation user interface, that allows for
  * setting the status for the employees
@@ -132,18 +134,40 @@ public class CreateProjectGUI3
 
     }
   }
+  public boolean callFinishButton(){
+
+    Project project = projectList.get(projectList.size()-1);
+    ArrayList<AssignedEmployee> assignedEmployees = projectList.get(projectList.size()-1).getAssignedEmployees();
+    project.setScrumMaster(assignedEmployees.get(employeesBox1.getSelectionModel().getSelectedIndex()));
+    project.setProjectCreator(assignedEmployees.get(employeesBox2.getSelectionModel().getSelectedIndex()));
+    project.setProductOwner(assignedEmployees.get(employeesBox3.getSelectionModel().getSelectedIndex()));
+
+    System.out.println("Scrum master: "+assignedEmployees.get(employeesBox1.getSelectionModel().getSelectedIndex()));
+    System.out.println("Project creator: "+assignedEmployees.get(employeesBox2.getSelectionModel().getSelectedIndex()));
+    System.out.println("Product owner: "+assignedEmployees.get(employeesBox3.getSelectionModel().getSelectedIndex()));
+
+
+    assignedEmployees.get(employeesBox1.getSelectionModel().getSelectedIndex()).setStatus(0);
+    assignedEmployees.get(employeesBox2.getSelectionModel().getSelectedIndex()).setStatus(2);
+    assignedEmployees.get(employeesBox3.getSelectionModel().getSelectedIndex()).setStatus(1);
+
+    projectsAdapter.saveProjects(projectList);
+
+    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    alert.setHeaderText("Adding successful");
+    alert.setContentText("New project was successfully added to the list!");
+    alert.showAndWait();
+
+    return true;
+
+  }
 
   private class MyActionListener implements EventHandler<ActionEvent>
   {
     public void handle(ActionEvent e)
     {
-
       if (e.getSource() == finishButton){
 
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setHeaderText("Adding successful");
-        alert.setContentText("New project was successfully added to the list!");
-        alert.showAndWait();
       }
 
     }

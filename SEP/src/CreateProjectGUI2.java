@@ -290,7 +290,7 @@ public class CreateProjectGUI2
       }
       if(allValuesCorrect){
         Project project = projectList.get(projectList.size()-1);
-        project.setProgressStatus(statusBox.getSelectionModel().getSelectedIndex());
+        project.setStatus(statusBox.getSelectionModel().getSelectedIndex());
         for (int i = 0; i < employeeList.size(); i++)
         {
           AssignedEmployee assignedEmployee = new AssignedEmployee(

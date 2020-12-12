@@ -309,8 +309,11 @@ public class SepGUI extends Application
       //Continue Create Project
       else if (e.getSource() == createProjectGUI3.getFinishButton())
       {
-        stackPane.getChildren().clear();
-        stackPane.getChildren().add(projectOverviewGUI.getMainPane());
+        if(createProjectGUI3.callFinishButton()){
+          stackPane.getChildren().clear();
+          stackPane.getChildren().add(projectOverviewGUI.getMainPane());
+        }
+
       }
       else if (e.getSource() == createProjectGUI3.getGoBackButton())
       {

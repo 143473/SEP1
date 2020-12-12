@@ -10,8 +10,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
-import javax.swing.*;
-
 /**
  *  A class handling adding a new employee
  *  * @author Marketa Lapcikova

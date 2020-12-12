@@ -1,5 +1,7 @@
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -8,6 +10,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+
+import java.util.ArrayList;
 
 public class ManageProjectGUI
 {
@@ -18,9 +22,9 @@ public class ManageProjectGUI
   private TextField descriptionField;
 
   private ChoiceBox statusBox;
-  private ChoiceBox scrumMasterBox;
-  private ChoiceBox projectOwnerBox;
-  private ChoiceBox projectCreatorBox;
+  private ChoiceBox<AssignedEmployee> scrumMasterBox;
+  private ChoiceBox<AssignedEmployee> productOwnerBox;
+  private ChoiceBox<AssignedEmployee> projectCreatorBox;
 
   private Button saveButton;
   private Button cancelButton;
@@ -43,13 +47,14 @@ public class ManageProjectGUI
   private VBox vbox2;
   private HBox hbox;
 
-
+  private MyActionListener listener;
   private MyListListener listListener;
 
   public ManageProjectGUI(ProjectsAdapter projectsAdapter){
     this.projectsAdapter = projectsAdapter;
 
     listListener = new MyListListener();
+    listener = new MyActionListener();
 
     title = new Label("Manage Project");
     title.setFont(Font.font("Calibri", FontWeight.BOLD, 20));
@@ -70,12 +75,17 @@ public class ManageProjectGUI
       statusBox.getItems().add(statuses[i]);
     }
 
-    scrumMasterBox = new ChoiceBox();
-    projectOwnerBox = new ChoiceBox();
-    projectCreatorBox = new ChoiceBox();
+    scrumMasterBox = new ChoiceBox<AssignedEmployee>();
+    scrumMasterBox.setPrefWidth(50);
+    productOwnerBox = new ChoiceBox<AssignedEmployee>();
+    productOwnerBox.setPrefWidth(50);
+    projectCreatorBox = new ChoiceBox<AssignedEmployee>();
+    projectCreatorBox.setPrefWidth(50);
     saveButton = new Button("Save");
+    saveButton.setOnAction(listener);
     cancelButton = new Button("Cancel");
     removeButton = new Button("Remove");
+    removeButton.setOnAction(listener);
     manageTeamMembersButton = new Button("Change Team Members");
 
     projectsTable = new TableView();
@@ -89,7 +99,7 @@ public class ManageProjectGUI
 
     vbox = new VBox();
     vbox.setSpacing(10);
-    vbox.getChildren().addAll(nameField, descriptionField,statusBox, scrumMasterBox,projectOwnerBox,projectCreatorBox,manageTeamMembersButton);
+    vbox.getChildren().addAll(nameField, descriptionField,statusBox, scrumMasterBox,productOwnerBox,projectCreatorBox,manageTeamMembersButton);
 
     projectsTable.getColumns().setAll(projectCol);
     projectsTable.setPrefWidth(450);
@@ -102,7 +112,8 @@ public class ManageProjectGUI
     vbox2.setAlignment(Pos.BOTTOM_RIGHT);
     vbox2.getChildren().addAll(projectsTable, saveButton,cancelButton,removeButton);
 
-    hbox = new HBox(vboxlabels,vbox, vbox2);
+    hbox = new HBox(10);
+    hbox.getChildren().addAll(vboxlabels,vbox, vbox2);
 
     mainPane = new VBox(20);
     mainPane.setSpacing(10);
@@ -164,8 +175,96 @@ public class ManageProjectGUI
         nameField.setText(selectedProject.getName());
         descriptionField.setText(selectedProject.getDescription());
         statusBox.setValue(selectedProject.getStatus());
+        ArrayList<AssignedEmployee> assignedEmployees = selectedProject.getAssignedEmployees();
+        for (int i = 0; i < assignedEmployees.size(); i++)
+        {
+          if(!scrumMasterBox.getItems().contains(assignedEmployees.get(i))){
+            scrumMasterBox.getItems().add(assignedEmployees.get(i));
+            productOwnerBox.getItems().add(assignedEmployees.get(i));
+            projectCreatorBox.getItems().add(assignedEmployees.get(i));
+          }
+
+        }
+        scrumMasterBox.getSelectionModel().select(selectedProject.getScrumMaster());
+        productOwnerBox.getSelectionModel().select(selectedProject.getProductOwner());
+        projectCreatorBox.getSelectionModel().select(selectedProject.getProjectCreator());
       }
 
+    }
+  }
+
+  public Project getSelectedProject(){
+    return (Project) projectsTable.getSelectionModel().getSelectedItem();
+  }
+
+  private class MyActionListener implements EventHandler<ActionEvent> {
+    public void handle(ActionEvent e) {
+      int index = projectsTable.getSelectionModel().getSelectedIndex();
+      Project selectedProject = projectsAdapter.getSelectedProject(index);
+      if(e.getSource() == saveButton){
+        boolean OK = true;
+
+        if(!nameField.getText().isEmpty()){
+          selectedProject.setName(nameField.getText());
+        }
+        else{
+          Alert alert = new Alert(Alert.AlertType.WARNING);
+          alert.setHeaderText("Warning");
+          alert.setContentText("Name of project cannot be empty!");
+          alert.showAndWait();
+          OK = false;
+        }
+        if(!descriptionField.getText().isEmpty()){
+          selectedProject.setDescription(descriptionField.getText());
+        }
+        else{
+          Alert alert = new Alert(Alert.AlertType.WARNING);
+          alert.setHeaderText("Warning");
+          alert.setContentText("Description of project cannot be empty!");
+          alert.showAndWait();
+          OK = false;
+        }
+
+      }
+      if(e.getSource() == removeButton){
+        if (!(projectsTable.getSelectionModel().getSelectedItem() == null))
+        {
+          Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+                  "Do you really want to delete this project?", ButtonType.YES, ButtonType.NO);
+          alert.setTitle("Delete project");
+          alert.setHeaderText(null);
+
+          alert.showAndWait();
+
+          if (alert.getResult() == ButtonType.YES)
+          {
+            ProjectList allProjects = projectsAdapter.getAllProjects();
+            allProjects.removeProject((Project)projectsTable.getSelectionModel().getSelectedItem());
+            projectsAdapter.saveProjects(allProjects);
+            initializeTable();
+
+            nameField.setText("");
+            descriptionField.setText("");
+            statusBox.getSelectionModel().clearSelection();
+            scrumMasterBox.getSelectionModel().clearSelection();
+            projectCreatorBox.getSelectionModel().clearSelection();
+            productOwnerBox.getSelectionModel().clearSelection();
+
+            Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
+            alert2.setHeaderText("Deleting successful");
+            alert2.setContentText("Changes were saved successfully!");
+            alert2.showAndWait();
+          }
+        }
+        else
+        {
+          Alert alert = new Alert(Alert.AlertType.WARNING);
+          alert.setHeaderText("Warning");
+          alert.setContentText("No project was chosen!");
+          alert.showAndWait();
+        }
+
+      }
     }
   }
 }

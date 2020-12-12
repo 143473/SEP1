@@ -120,7 +120,7 @@ return false;
    * Sets project´s progress status
    * @param index what progress staus change to
    */
-  public void setProgressStatus(int index){
+  public void setStatus(int index){
     ProgressStatus progressStatus = new ProgressStatus();
     this.status = progressStatus.chooseStatus(index);
   }
@@ -155,5 +155,24 @@ return false;
    */
   public void removeRequirement(Requirement requirement){
   this.requirements.remove(requirement);
+  }
+
+  public void setScrumMaster(AssignedEmployee scrumMaster){
+    this.scrumMaster = scrumMaster;
+  }
+  public void setProjectCreator(AssignedEmployee projectCreator){
+    this.projectCreator = projectCreator;
+  }
+  public void setProductOwner(AssignedEmployee productOwner){
+    this.productOwner = productOwner;
+  }
+  public AssignedEmployee getScrumMaster(){
+    return scrumMaster;
+  }
+  public AssignedEmployee getProjectCreator(){
+    return projectCreator;
+  }
+  public AssignedEmployee getProductOwner(){
+    return productOwner;
   }
 }
