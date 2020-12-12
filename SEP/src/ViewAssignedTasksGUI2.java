@@ -10,12 +10,14 @@ import javafx.scene.text.Font;
  * @version 1.0
  */
 public class ViewAssignedTasksGUI2 {
+
+    private SepGUI sepGUI;
     private VBox mainPane;
     private HBox topPane;
     private HBox hBoxPaneButton;
 
 
-    private Label titleLabel;
+    private Label employeeName;
 
     private ComboBox statusBox;
     private FlowPane comboPane;
@@ -28,10 +30,11 @@ public class ViewAssignedTasksGUI2 {
 
     private Button goBack;
 
-    public ViewAssignedTasksGUI2(){
+    public ViewAssignedTasksGUI2(SepGUI sepGUI){
 
-        titleLabel = new Label("Name - Birthday");
-        titleLabel.setFont(new Font("Cambria", 32));
+        this.sepGUI = sepGUI;
+        employeeName = new Label();
+        employeeName.setFont(new Font("Cambria", 32));
 
         statusBox = new ComboBox<String>();
         statusBox.getItems().addAll(
@@ -46,7 +49,7 @@ public class ViewAssignedTasksGUI2 {
         comboPane.getChildren().add(statusBox);
 
         topPane = new HBox(500);
-        topPane.getChildren().addAll(titleLabel, comboPane);
+        topPane.getChildren().addAll(employeeName, comboPane);
 
         allAssignedTasksTable = new TableView();
         allAssignedTasksTable.setPrefHeight(290);
@@ -91,5 +94,24 @@ public class ViewAssignedTasksGUI2 {
     public Button getGoBack()
     {
         return goBack;
+    }
+    public boolean callContinueButton(){
+        boolean gogo = true;
+        if(sepGUI.getViewAssignedTasksGUI1().getAllAssignedTasksTable().getSelectionModel().getSelectedItem()== null)
+        {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText("Warning");
+            alert.setContentText("No employee was chosen!");
+            alert.showAndWait();
+            gogo = false;
+        }
+        else
+        {
+            String name = sepGUI.getViewAssignedTasksGUI1().getAllAssignedTasksTable().getSelectionModel().getSelectedItem().getFirstName() + " "+
+                sepGUI.getViewAssignedTasksGUI1().getAllAssignedTasksTable().getSelectionModel().getSelectedItem().getLastName();
+            employeeName.setText(name);
+            gogo =true;
+        }
+        return gogo;
     }
 }

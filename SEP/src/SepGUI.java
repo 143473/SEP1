@@ -117,8 +117,8 @@ public class SepGUI extends Application
     reportTasksGUI1 = new ReportTasksGUI1();
     reportTasksGUI2 = new ReportTasksGUI2();
     reportTasksGUI3 = new ReportTasksGUI3();
-    viewAssignedTasksGUI1 = new ViewAssignedTasksGUI1();
-    viewAssignedTasksGUI2 = new ViewAssignedTasksGUI2();
+    viewAssignedTasksGUI1 = new ViewAssignedTasksGUI1(employeeAdapter);
+    viewAssignedTasksGUI2 = new ViewAssignedTasksGUI2(this);
 
     addEmployeeMenuItem = new MenuItem("Add a new employee");
     addEmployeeMenuItem.setOnAction(listener);
@@ -259,6 +259,11 @@ public class SepGUI extends Application
   public TasksOfReqOfPrjGUI getTasksOfReqOfPrjGUI()
   {
     return tasksOfReqOfPrjGUI;
+  }
+
+  public ViewAssignedTasksGUI1 getViewAssignedTasksGUI1()
+  {
+    return viewAssignedTasksGUI1;
   }
 
   public ProjectOverviewGUI getProjectOverviewGUI()
@@ -578,8 +583,11 @@ public class SepGUI extends Application
         }
         else if (e.getSource() == viewAssignedTasksGUI1.getContinueButton())
         {
-        stackPane.getChildren().clear();
-        stackPane.getChildren().add(viewAssignedTasksGUI2.getMainPane());
+          if(viewAssignedTasksGUI2.callContinueButton())
+          {
+            stackPane.getChildren().clear();
+            stackPane.getChildren().add(viewAssignedTasksGUI2.getMainPane());
+          }
       }
       else if (e.getSource() == viewAssignedTasksGUI2.getGoBack())
       {
