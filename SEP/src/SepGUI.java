@@ -487,6 +487,7 @@ public class SepGUI extends Application
       //add requirement
       else if(e.getSource() == reqOfSelectedPrjGUI.getAdd())
       {
+        addRequirementGUI.clearFields();
         stackPane.getChildren().clear();
         stackPane.getChildren().add(addRequirementGUI.getMainPane());
       }

@@ -233,6 +233,11 @@ public class AddRequirementGUI
             project.addRequirement(requirement);
             projectList.addProject(project);
             projectsAdapter.saveProjects(projectList);
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText("Adding successful");
+            alert.setContentText("New requirement was successfully added to the list!");
+            alert.showAndWait();
           }
         }
       }
@@ -253,6 +258,13 @@ public class AddRequirementGUI
     return save;
   }
   public void clearFields(){
-
+    name.setText("");
+    userStory.setText("");
+    estimation.setText("");
+    day.setText("");
+    month.setText("");
+    year.setText("");
+    statusBox.getSelectionModel().selectFirst();
+    responsibleEmployeeBox.getSelectionModel().selectFirst();
   }
 }
