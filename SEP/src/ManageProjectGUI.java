@@ -74,11 +74,8 @@ public class ManageProjectGUI
     }
 
     scrumMasterBox = new ChoiceBox<AssignedEmployee>();
-    scrumMasterBox.setPrefWidth(50);
     productOwnerBox = new ChoiceBox<AssignedEmployee>();
-    productOwnerBox.setPrefWidth(50);
     projectCreatorBox = new ChoiceBox<AssignedEmployee>();
-    projectCreatorBox.setPrefWidth(50);
     saveButton = new Button("Save");
     saveButton.setOnAction(listener);
     cancelButton = new Button("Cancel");

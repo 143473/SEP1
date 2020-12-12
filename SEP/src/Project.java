@@ -20,6 +20,21 @@ public class Project implements Serializable
   private AssignedEmployee projectCreator;
   private AssignedEmployee productOwner;
 
+  /*
+  public Project(){
+    name = "";
+    description = "";
+    requirements = new ArrayList<Requirement>();
+    assignedEmployeeList = new AssignedEmployeeList();
+    ProgressStatus progressStatus = new ProgressStatus();
+    status = progressStatus.chooseStatus(0);
+    statusNumber = 0;
+    scrumMaster = new AssignedEmployee();
+    projectCreator = new AssignedEmployee();
+    productOwner = new AssignedEmployee();
+  }
+*/
+
   /**
    * Three-argument constructor.
    * @param name
@@ -153,6 +168,12 @@ return false;
   this.assignedEmployeeList.removeEmployee(teamMember);
   }
 
+
+  public void removeAllTeamMembers(){
+    for (int i = 0; i < assignedEmployeeList.size(); i++) {
+      assignedEmployeeList.removeEmployee(assignedEmployeeList.get(i));
+    }
+  }
   /**
    * Adds a requirement to the project
    * @param requirement requirement that is about to be added to the project

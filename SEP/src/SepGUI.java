@@ -187,6 +187,10 @@ public class SepGUI extends Application
     scene = new Scene(createProjectGUI2.getNewWindowPane());
     newWindow.setScene(scene);
 
+    scene = new Scene(changeTeamMembersGUI.getNewWindowPane());
+    newWindow.setScene(scene);
+
+
     // Specifies the modality for new window.
     newWindow.initModality(Modality.WINDOW_MODAL);
 
@@ -198,30 +202,42 @@ public class SepGUI extends Application
     newWindow.setY(parentStage.getY() + 100);
 
     createProjectGUI1.getButtonContinue().setOnAction(listener);
+
     createProjectGUI2.getContinueButton().setOnAction(listener);
     createProjectGUI2.getGoBackButton().setOnAction(listener);
     createProjectGUI2.getAddTeamMember().setOnAction(listener);
     createProjectGUI2.getAdd().setOnAction(listener);
+
     createProjectGUI3.getFinishButton().setOnAction(listener);
     createProjectGUI3.getGoBackButton().setOnAction(listener);
+
     projectOverviewGUI.getAdd().setOnAction(listener);
     projectOverviewGUI.getManage().setOnAction(listener);
     projectOverviewGUI.getContinueButton().setOnAction(listener);
+
     reqOfSelectedPrjGUI.getAdd().setOnAction(listener);
     reqOfSelectedPrjGUI.getContinueButton().setOnAction(listener);
     reqOfSelectedPrjGUI.getManage().setOnAction(listener);
     reqOfSelectedPrjGUI.getGoBackButton().setOnAction(listener);
+
     tasksOfReqOfPrjGUI.getGoBackButton().setOnAction(listener);
     tasksOfReqOfPrjGUI.getAdd().setOnAction(listener);
     tasksOfReqOfPrjGUI.getManage().setOnAction(listener);
+
     manageProjectGUI.getManageTeamMembers().setOnAction(listener);
     manageProjectGUI.getCancel().setOnAction(listener);
+
     manageRequirementGUI.getCancel().setOnAction(listener);
+
     addRequirementGUI.getCancel().setOnAction(listener);
+
     manageTaskGUI.getCancel().setOnAction(listener);
+
     addTaskGUI.getCancel().setOnAction(listener);
-    changeTeamMembersGUI.getCancel().setOnAction(listener);
+
+    changeTeamMembersGUI.getSave().setOnAction(listener);
     changeTeamMembersGUI.getAddButton().setOnAction(listener);
+    changeTeamMembersGUI.getAdd().setOnAction(listener);
 
     assignTasksGUI1.getContinueButton().setOnAction(listener);
     assignTasksGUI2.getContinueButton().setOnAction(listener);
@@ -321,7 +337,11 @@ public class SepGUI extends Application
         if(createProjectGUI2.callAdd()){
           newWindow.close();
         }
-
+      }
+      else if(e.getSource() == changeTeamMembersGUI.getAdd()){
+        if(changeTeamMembersGUI.callAdd()){
+          newWindow.close();
+        }
       }
       //Continue Create Project
       else if (e.getSource() == createProjectGUI3.getFinishButton())
@@ -375,16 +395,22 @@ public class SepGUI extends Application
         }
 
       }
-        else if(e.getSource() == changeTeamMembersGUI.getCancel())
+        else if(e.getSource() == changeTeamMembersGUI.getSave())
       {
-        changeTeamMembersGUI.initializeCurrentProject();
-        stackPane.getChildren().clear();
-        stackPane.getChildren().add(manageProjectGUI.getMainPane());
+        if(changeTeamMembersGUI.callSaveButton()){
+          changeTeamMembersGUI.initializeCurrentProject();
+          stackPane.getChildren().clear();
+          stackPane.getChildren().add(manageProjectGUI.getMainPane());
+        }
+
       }
         //Pop-up Change Team Members
       else if (e.getSource() == changeTeamMembersGUI.getAddButton())
       {
         newWindow.show();
+      }
+      else if(e.getSource() == changeTeamMembersGUI.getAdd()){
+        newWindow.close();
       }
       else if (e.getSource() == createProjectGUI2.getAdd())
       {
