@@ -97,11 +97,9 @@ public class SepGUI extends Application
     projectOverviewGUI = new ProjectOverviewGUI(projectsAdapter,this);
     manageProjectGUI = new ManageProjectGUI(projectsAdapter);
     changeTeamMembersGUI = new ChangeTeamMembersGUI(employeeAdapter, projectsAdapter, this);
-    manageRequirementGUI = new ManageRequirementGUI();
-    manageTaskGUI = new ManageTaskGUI();
+    manageRequirementGUI = new ManageRequirementGUI(projectsAdapter, this);
     reqOfSelectedPrjGUI = new ReqOfSelectedPrjGUI(projectsAdapter, this);
     tasksOfReqOfPrjGUI = new TasksOfReqOfPrjGUI(projectsAdapter, this);
-    manageRequirementGUI = new ManageRequirementGUI();
     manageTaskGUI = new ManageTaskGUI();
     addRequirementGUI = new AddRequirementGUI(projectsAdapter, this);
     addTaskGUI = new AddTaskGUI(projectsAdapter, this);
@@ -453,6 +451,7 @@ public class SepGUI extends Application
       //Manage Requirements
       else if(e.getSource() == reqOfSelectedPrjGUI.getManage())
       {
+        manageRequirementGUI.clearFields();
         stackPane.getChildren().clear();
         stackPane.getChildren().add(manageRequirementGUI.getMainPane());
       }

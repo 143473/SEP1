@@ -127,4 +127,14 @@ public class ProjectsAdapter
     }
     return null;
   }
+
+  public Requirement getSelectedRequirement(int projectIndex, int requirementIndex){
+    Project selectedProject = getSelectedProject(projectIndex);
+    if(selectedProject != null){
+      if(requirementIndex < selectedProject.getRequirements().size()){
+        return selectedProject.getRequirements().get(requirementIndex);
+      }
+    }
+    return null;
+  }
 }
