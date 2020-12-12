@@ -13,6 +13,7 @@ import javafx.util.Callback;
 public class ProjectOverviewGUI
 {
   private ProjectsAdapter projectsAdapter;
+  private SepGUI sepGUI;
 
   private MyActionListener listener;
 
@@ -27,7 +28,7 @@ public class ProjectOverviewGUI
   private Label tableTitle;
   private Label searchLabel;
 
-  private TableView projectsTable;
+  private TableView<Project> projectsTable;
   private TableColumn nameCol;
   private TableColumn descriptionCol;
   private TableColumn statusCol;
@@ -38,7 +39,7 @@ public class ProjectOverviewGUI
   private HBox searchPane;
   private HBox topButtons;
 
-  public ProjectOverviewGUI(ProjectsAdapter projectsAdapter){
+  public ProjectOverviewGUI(ProjectsAdapter projectsAdapter,SepGUI sepGUI){
     this.projectsAdapter = projectsAdapter;
 
     listener = new MyActionListener();
@@ -113,12 +114,35 @@ public class ProjectOverviewGUI
     return mainPane;
   }
 
+  public TableView<Project> getProjectsTable()
+  {
+    return projectsTable;
+  }
+
   public Button getManage()
   {
     return manage;
   }
 
-
+  /*public boolean callContinueButton(){
+    boolean gogo = true;
+    if(projectsTable.getSelectionModel().getSelectedItem()==null)
+    {
+      Alert alert = new Alert(Alert.AlertType.WARNING);
+      alert.setHeaderText("Warning");
+      alert.setContentText("No project was chosen!");
+      alert.showAndWait();
+      gogo = false;
+    }
+    else
+    {
+      String projectName = projectsTable.getSelectionModel().getSelectedItem().getName();
+      System.out.println(projectsTable.getSelectionModel().getSelectedItem().getName());
+      sepGUI.getReqOfSelectedPrjGUI().getProjectName().setText(projectName);
+      gogo =true;
+    }
+    return gogo;
+  }*/
 
   public Button getAdd()
   {
