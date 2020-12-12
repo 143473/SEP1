@@ -194,6 +194,10 @@ public class ManageProjectGUI
     return projectsTable.getSelectionModel().getSelectedItem();
   }
 
+  public int getSelectedIndex(){
+    return projectsTable.getSelectionModel().getFocusedIndex();
+  }
+
   private class MyActionListener implements EventHandler<ActionEvent> {
     public void handle(ActionEvent e) {
       if(e.getSource() == saveButton){
@@ -266,6 +270,69 @@ public class ManageProjectGUI
           alert.showAndWait();
         }
 
+      }
+      else if(e.getSource() == saveButton){
+        boolean OK = true;
+        if(nameField.getText().isEmpty()){
+          Alert alert = new Alert(Alert.AlertType.WARNING);
+          alert.setHeaderText("Warning");
+          alert.setContentText("Project name cannot be empty!");
+          alert.showAndWait();
+          OK = false;
+        }
+        if(descriptionField.getText().isEmpty()){
+          Alert alert = new Alert(Alert.AlertType.WARNING);
+          alert.setHeaderText("Warning");
+          alert.setContentText("Project description cannot be empty!");
+          alert.showAndWait();
+          OK = false;
+        }
+        ProjectList allProjects = projectsAdapter.getAllProjects();
+        for (int i = 0; i < allProjects.size(); i++) {
+          if(allProjects.get(i).getName().equals(nameField.getText())){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText("Warning");
+            alert.setContentText("Project named "+nameField.getText()+" already exists!");
+            alert.showAndWait();
+            OK = false;
+          }
+        }
+
+        if(scrumMasterBox.getSelectionModel().getSelectedItem().equals(productOwnerBox.getSelectionModel().getSelectedItem())
+        || scrumMasterBox.getSelectionModel().getSelectedItem().equals(projectCreatorBox.getSelectionModel().getSelectedItem())
+        || productOwnerBox.getSelectionModel().getSelectedItem().equals(projectCreatorBox.getSelectionModel().getSelectedItem())){
+          Alert alert = new Alert(Alert.AlertType.WARNING);
+          alert.setHeaderText("Warning");
+          alert.setContentText("One person can be assigned only one status!");
+          alert.showAndWait();
+          OK = false;
+        }
+        if(OK){
+          int selectedIndex = projectsTable.getSelectionModel().getSelectedIndex();;
+          Project selectedProject = projectsTable.getSelectionModel().getSelectedItem();
+          projectsAdapter.deleteProject(selectedIndex);
+
+          selectedProject.setName(nameField.getText());
+          selectedProject.setDescription(descriptionField.getText());
+          selectedProject.setStatus(statusBox.getSelectionModel().getSelectedIndex());
+          selectedProject.setScrumMaster(scrumMasterBox.getSelectionModel().getSelectedItem());
+          selectedProject.setProductOwner(productOwnerBox.getSelectionModel().getSelectedItem());
+          selectedProject.setProjectCreator(projectCreatorBox.getSelectionModel().getSelectedItem());
+
+          selectedProject.getAssignedEmployeeList().get(scrumMasterBox.getSelectionModel().getSelectedIndex()).setStatus(0);
+          selectedProject.getAssignedEmployeeList().get(projectCreatorBox.getSelectionModel().getSelectedIndex()).setStatus(2);
+          selectedProject.getAssignedEmployeeList().get(productOwnerBox.getSelectionModel().getSelectedIndex()).setStatus(1);
+
+          allProjects.addProject(selectedProject);
+          projectsAdapter.saveProjects(allProjects);
+
+          Alert alert = new Alert(Alert.AlertType.INFORMATION);
+          alert.setHeaderText("Editing successful");
+          alert.setContentText("Changes were saved successfully!");
+          alert.showAndWait();
+
+          initializeTable();
+        }
       }
     }
   }
