@@ -355,6 +355,7 @@ public class SepGUI extends Application
         //Manage Projects
         else if (e.getSource() == projectOverviewGUI.getManage())
       {
+        manageProjectGUI.clearFields();
         stackPane.getChildren().clear();
         stackPane.getChildren().add(manageProjectGUI.getMainPane());
       }
@@ -367,9 +368,12 @@ public class SepGUI extends Application
         //Change Team Members - editing existing list of team-members
         else if(e.getSource() == manageProjectGUI.getManageTeamMembers())
       {
-        changeTeamMembersGUI.initializeCurrentProject();
-        stackPane.getChildren().clear();
-        stackPane.getChildren().add(changeTeamMembersGUI.getMainPane());
+        if(manageProjectGUI.callChangeTeamMembers()){
+          changeTeamMembersGUI.initializeCurrentProject();
+          stackPane.getChildren().clear();
+          stackPane.getChildren().add(changeTeamMembersGUI.getMainPane());
+        }
+
       }
         else if(e.getSource() == changeTeamMembersGUI.getCancel())
       {

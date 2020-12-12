@@ -274,4 +274,25 @@ public class ManageProjectGUI
       }
     }
   }
+
+  public boolean callChangeTeamMembers(){
+    boolean OK = true;
+    if(projectsTable.getSelectionModel().getSelectedItem() == null){
+      Alert alert = new Alert(Alert.AlertType.WARNING);
+      alert.setHeaderText("Warning");
+      alert.setContentText("No project was chosen!");
+      alert.showAndWait();
+      OK = false;
+    }
+    return OK;
+  }
+
+  public void clearFields(){
+    nameField.setText("");
+    descriptionField.setText("");
+    statusBox.getSelectionModel().select(0);
+    scrumMasterBox.getSelectionModel().clearSelection();
+    productOwnerBox.getSelectionModel().clearSelection();
+    projectCreatorBox.getSelectionModel().clearSelection();
+  }
 }
