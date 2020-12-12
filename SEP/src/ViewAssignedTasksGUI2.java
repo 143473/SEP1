@@ -35,6 +35,7 @@ public class ViewAssignedTasksGUI2 {
         this.sepGUI = sepGUI;
         employeeName = new Label();
         employeeName.setFont(new Font("Cambria", 32));
+        employeeName.setPrefWidth(700);
 
         statusBox = new ComboBox<String>();
         statusBox.getItems().addAll(
@@ -48,7 +49,7 @@ public class ViewAssignedTasksGUI2 {
         comboPane.setPrefWidth(200);
         comboPane.getChildren().add(statusBox);
 
-        topPane = new HBox(500);
+        topPane = new HBox(100);
         topPane.getChildren().addAll(employeeName, comboPane);
 
         allAssignedTasksTable = new TableView();
