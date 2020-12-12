@@ -1,9 +1,6 @@
 
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -25,12 +22,11 @@ public class ChangeTeamMembersGUI {
   private Button removeButton;
   private Button cancelButton;
 
-  private TableView teamMembersTable;
-  private TableColumn firstNameColumn;
-  private TableColumn lastNameColumn;
-  private TableColumn birthdayColumn;
+  private ListView<Employee> employeeListView;
+  private ListView<AssignedEmployee> teamMembersTable;
 
   private ProjectsAdapter projectsAdapter;
+  private EmployeeAdapter employeeAdapter;
   private SepGUI sepGUI;
 
   private Project currentProject;
@@ -39,9 +35,10 @@ public class ChangeTeamMembersGUI {
    *  2-argument constructor initializing all the parts of the GUI
    *
    */
-  public ChangeTeamMembersGUI(ProjectsAdapter projectsAdapter, SepGUI sepGUI)
+  public ChangeTeamMembersGUI(EmployeeAdapter employeeAdapter, ProjectsAdapter projectsAdapter, SepGUI sepGUI)
   {
     this.projectsAdapter = projectsAdapter;
+    this.employeeAdapter = employeeAdapter;
     this.sepGUI = sepGUI;
 
     title = new Label();
@@ -50,19 +47,10 @@ public class ChangeTeamMembersGUI {
     cancelButton = new Button("Cancel");
     addButton = new Button("Add Team Member");
 
-    firstNameColumn = new TableColumn("First Name");
-    firstNameColumn.setCellFactory(new PropertyValueFactory<String, String>("First name"));
+    employeeListView = new ListView<Employee>();
+    employeeListView.setPrefHeight(120);
 
-
-    lastNameColumn = new TableColumn("Last Name");
-    lastNameColumn.setCellFactory(new PropertyValueFactory<String, String>("Last name"));
-
-
-    birthdayColumn = new TableColumn("Birthday");
-    birthdayColumn.setCellFactory(new PropertyValueFactory<String, String>("Birthday"));
-
-    teamMembersTable = new TableView();
-    teamMembersTable.getColumns().addAll(firstNameColumn, lastNameColumn, birthdayColumn);
+    teamMembersTable = new ListView<AssignedEmployee>();
 
     buttonsPane = new HBox();
     buttonsPane.setSpacing(50);
@@ -71,7 +59,7 @@ public class ChangeTeamMembersGUI {
     mainPane = new VBox(20);
     mainPane.setSpacing(10);
     mainPane.setPadding(new Insets(25, 25, 25, 25));;
-    mainPane.getChildren().addAll(title,teamMembersTable,buttonsPane);
+    mainPane.getChildren().addAll(title,employeeListView,buttonsPane);
 
 
   }
@@ -107,5 +95,58 @@ public class ChangeTeamMembersGUI {
     currentProject = sepGUI.getManageProjectGUI().getSelectedProject();
 
     title.setText("Team Members of "+currentProject.getName());
+    initializeTeamMembersTable();
+  }
+
+  public void initializeTeamMembersTable(){
+    teamMembersTable.getItems().clear();
+    AssignedEmployeeList chosenAssignedEmployees = currentProject.getAssignedEmployeeList();
+    for (int i = 0; i < chosenAssignedEmployees.size(); i++) {
+      teamMembersTable.getItems().add(chosenAssignedEmployees.get(i));
+      System.out.println(chosenAssignedEmployees.get(i));
+    }
+  }
+
+  public void initializeListView()
+  {
+    employeeListView.getItems().clear();
+    EmployeeList employees = employeeAdapter.getAllEmployees();
+    AssignedEmployeeList chosenAssignedEmployees = currentProject.getAssignedEmployeeList();
+    EmployeeList chosenEmployees = new EmployeeList();
+    for (int i = 0; i < chosenAssignedEmployees.size(); i++) {
+      chosenEmployees.addEmployee(new Employee(chosenAssignedEmployees.get(i).getFirstName(), chosenAssignedEmployees.get(i).getLastName(),
+              chosenAssignedEmployees.get(i).getDateOfBirth()));
+    }
+    for (int i = 0; i < employees.size(); i++) {
+      if(chosenEmployees.containsEmployee(employees.get(i))){
+        employees.removeEmployee(employees.get(i));
+      }
+    }
+    for (int i = 0; i < employees.size(); i++)
+    {
+      employeeListView.getItems().add(employees.get(i));
+    }
+  }
+
+  public boolean callAdd()
+  {
+    boolean OK = true;
+    Employee employeeAdded = employeeListView.getSelectionModel().getSelectedItem();
+    if (employeeAdded == null)
+    {
+      Alert alert = new Alert(Alert.AlertType.WARNING);
+      alert.setHeaderText("Warning");
+      alert.setContentText("No employee was chosen!");
+      alert.showAndWait();
+      OK = false;
+    }
+    if (OK)
+    {
+      currentProject.addTeamMember(new AssignedEmployee(employeeAdded.getFirstName(), employeeAdded.getLastName(), employeeAdded.getDateOfBirth()));
+
+      initializeListView();
+    }
+
+    return OK;
   }
 }

@@ -235,7 +235,6 @@ public class CreateProjectGUI2
       for (int i = 0; i < employeeList.size(); i++) {
         teamMembersTable.getItems().add(employeeList.get(i));
       }
-
     }
 
     /**
