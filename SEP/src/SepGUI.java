@@ -459,8 +459,11 @@ public class SepGUI extends Application
       //List of tasks for the selected requirement
       else if (e.getSource() == reqOfSelectedPrjGUI.getContinueButton())
       {
-        stackPane.getChildren().clear();
-        stackPane.getChildren().add(tasksOfReqOfPrjGUI.getMainPane());
+        if(tasksOfReqOfPrjGUI.callContinueButton()){
+          stackPane.getChildren().clear();
+          stackPane.getChildren().add(tasksOfReqOfPrjGUI.getMainPane());
+        }
+
       }
       //Manage Tasks
       else if(e.getSource() == tasksOfReqOfPrjGUI.getManage())

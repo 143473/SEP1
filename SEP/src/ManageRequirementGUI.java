@@ -1,8 +1,5 @@
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -19,21 +16,29 @@ public class ManageRequirementGUI
   private TextField day;
   private TextField month;
   private TextField year;
+
   private ChoiceBox status;
   private ChoiceBox responsibleEmployee;
+
+  private TableView<Project> projectsTable;
+  private TableColumn projectCol;
+
   private Label reqname;
   private Label userstorytxt;
   private Label estimatedT;
   private Label deadline;
   private Label statustxt;
   private Label responsibleEmp;
+
   private Button save;
   private Button cancel;
   private Button remove;
+
   private VBox mainPane;
   private HBox bottomButtons;
   private GridPane requirementForm;
   private HBox datePane;
+
   public ManageRequirementGUI(){
 
   title = new Label("Manage Requirements");
