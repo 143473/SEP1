@@ -59,7 +59,7 @@ public class ChangeTeamMembersGUI {
     mainPane = new VBox(20);
     mainPane.setSpacing(10);
     mainPane.setPadding(new Insets(25, 25, 25, 25));;
-    mainPane.getChildren().addAll(title,employeeListView,buttonsPane);
+    mainPane.getChildren().addAll(title,teamMembersTable,buttonsPane);
 
 
   }
