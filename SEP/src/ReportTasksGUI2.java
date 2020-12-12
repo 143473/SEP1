@@ -1,17 +1,16 @@
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
 public class ReportTasksGUI2 {
+
+    private SepGUI sepGUI;
     private VBox mainPane;
     private HBox topPane;
     private HBox hBoxPaneButton;
 
-    private Label titleLabel;
+    private Label employeeName;
 
     private TableView allAssignedTasksTable;
     private TableColumn projectNameColumn;
@@ -23,13 +22,14 @@ public class ReportTasksGUI2 {
     private Button continueButton;
 
 
-    public ReportTasksGUI2(){
+    public ReportTasksGUI2(SepGUI sepGUI){
 
-        titleLabel = new Label("Report Tasks");
-        titleLabel.setFont(new Font("Cambria", 32));
+        this.sepGUI = sepGUI;
+        employeeName = new Label();
+        employeeName.setFont(new Font("Cambria", 32));
 
         topPane = new HBox(500);
-        topPane.getChildren().addAll(titleLabel);
+        topPane.getChildren().addAll(employeeName);
 
         allAssignedTasksTable = new TableView();
         allAssignedTasksTable.setPrefHeight(290);
@@ -76,6 +76,31 @@ public class ReportTasksGUI2 {
     public Button getContinueButton()
     {
         return continueButton;
+    }
+
+    public Button getGoBack()
+    {
+        return goBack;
+    }
+
+    public boolean callContinueButton(){
+        boolean gogo = true;
+        if(sepGUI.getReportTasksGUI1().getAllAssignedTasksTable().getSelectionModel().getSelectedItem() == null)
+        {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText("Warning");
+            alert.setContentText("No employee was chosen!");
+            alert.showAndWait();
+            gogo = false;
+        }
+        else
+        {
+            String name = sepGUI.getReportTasksGUI1().getAllAssignedTasksTable().getSelectionModel().getSelectedItem().getFirstName() + " "+
+                sepGUI.getReportTasksGUI1().getAllAssignedTasksTable().getSelectionModel().getSelectedItem().getLastName();
+            employeeName.setText(name);
+            gogo =true;
+        }
+        return gogo;
     }
 
 }

@@ -1,8 +1,5 @@
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -11,38 +8,57 @@ import javafx.scene.text.FontWeight;
 
 public class AddRequirementGUI
 {
+  private ProjectsAdapter projectsAdapter;
+  private ProjectList projectList;
+  private SepGUI sepGUI;
+  private Project currentProject;
 
   private Label title;
+
   private TextField name;
-  private TextField userstory;
+  private TextField userStory;
   private TextField estimation;
   private TextField day;
   private TextField month;
   private TextField year;
-  private ChoiceBox status;
-  private ChoiceBox responsibleEmployee;
-  private Label reqname;
-  private Label userstorytxt;
-  private Label estimatedT;
-  private Label deadline;
-  private Label statustxt;
-  private Label responsibleEmp;
+
+  private ChoiceBox statusBox;
+  private ChoiceBox<AssignedEmployee> responsibleEmployeeBox;
+
+  private Label nameLabel;
+  private Label userStoryLabel;
+  private Label estimatedTimeLabel;
+  private Label deadlineLabel;
+  private Label statusLabel;
+  private Label responsibleEmployeeLabel;
+
   private Button save;
   private Button cancel;
-  private Button remove;
+
   private VBox mainPane;
   private HBox bottomButtons;
   private GridPane requirementForm;
   private HBox datePane;
 
-  public AddRequirementGUI(){
+  public AddRequirementGUI(ProjectsAdapter projectsAdapter, SepGUI sepGUI){
+
+    this.projectsAdapter = projectsAdapter;
+    projectList = projectsAdapter.getAllProjects();
+    this.sepGUI = sepGUI;
 
     title = new Label("Add Requirement");
     title.setFont(Font.font("Calibri", FontWeight.BOLD, 20));
-    name = new TextField();
-    userstory = new TextField();
-    estimation = new TextField();
 
+    nameLabel = new Label("Name");
+    name = new TextField();
+
+    userStoryLabel = new Label("User Story");
+    userStory = new TextField();
+
+    estimation = new TextField();
+    estimatedTimeLabel = new Label("Estimation");
+
+    deadlineLabel = new Label("Deadline");
     day = new TextField();
     day.setPromptText("dd");
     day.setMaxWidth(40);
@@ -56,26 +72,31 @@ public class AddRequirementGUI
     datePane = new HBox(5);
     datePane.getChildren().addAll(day,month,year);
 
-    status = new ChoiceBox();
-    responsibleEmployee = new ChoiceBox();
-    reqname = new Label("Name");
-    userstorytxt = new Label("User Story");
-    estimatedT = new Label("Estimation");
-    deadline = new Label("Deadline");
-    statustxt = new Label("Status");
-    responsibleEmp = new Label("Responsible Employee");
+    statusLabel = new Label("Status");
+    statusBox = new ChoiceBox();
+    ProgressStatus progressStatus = new ProgressStatus();
+    String[] statuses = progressStatus.getStatuses();
+    for (int i = 0; i < statuses.length; i++)
+    {
+      statusBox.getItems().add(statuses[i]);
+    }
+    statusBox.setValue(statuses[progressStatus.getDefaultIndex()]);
+
+    responsibleEmployeeLabel = new Label("Responsible Employee");
+    responsibleEmployeeBox = new ChoiceBox<AssignedEmployee>();
+
     save = new Button("Save");
     cancel = new Button("Cancel");
 
     requirementForm = new GridPane();
     requirementForm.setHgap(5);
     requirementForm.setVgap(5);
-    requirementForm.addRow(0,reqname,name);
-    requirementForm.addRow(1,userstorytxt, userstory);
-    requirementForm.addRow(2,estimatedT,estimation);
-    requirementForm.addRow(3,deadline,datePane);
-    requirementForm.addRow(4,statustxt,status);
-    requirementForm.addRow(5,responsibleEmp,responsibleEmployee);
+    requirementForm.addRow(0,nameLabel,name);
+    requirementForm.addRow(1,userStoryLabel, userStory);
+    requirementForm.addRow(2,estimatedTimeLabel, estimation);
+    requirementForm.addRow(3,deadlineLabel,datePane);
+    requirementForm.addRow(4,statusLabel,statusBox);
+    requirementForm.addRow(5,responsibleEmployeeLabel,responsibleEmployeeBox);
 
     bottomButtons = new HBox(5);
     bottomButtons.getChildren().addAll(save,cancel);
@@ -87,13 +108,114 @@ public class AddRequirementGUI
 
 
   }
-  public VBox getMainPane()
-  {
-    return mainPane;
+
+  public void setProjectList() {
+    projectList = projectsAdapter.getAllProjects();
+  }
+  public void initializeCurrentProject(){
+    currentProject = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem();
+
+    title.setText("Requirement for:  " + currentProject.getName());
+    initializeResponsibleEmployeeBox();
   }
 
-  public Button getCancel()
-  {
+  public void initializeResponsibleEmployeeBox(){
+    responsibleEmployeeBox.getItems().clear();
+    AssignedEmployeeList chosenAssignedEmployees = currentProject.getAssignedEmployeeList();
+    for (int i = 0; i < chosenAssignedEmployees.size(); i++) {
+      responsibleEmployeeBox.getItems().add(chosenAssignedEmployees.get(i));
+      System.out.println(chosenAssignedEmployees.get(i));
+    }
+  }
+
+  public boolean callSaveButton(){
+    Requirement requirement;
+    MyDate deadline;
+    if(name.getText().equals("") || name.getText().trim().isEmpty()){
+      Alert alert = new Alert(Alert.AlertType.WARNING);
+      alert.setHeaderText("Invalid input");
+      alert.setContentText("Requirement name cannot be empty!");
+      alert.showAndWait();
+      return false;
+    }
+    else if(userStory.getText().equals("") || userStory.getText().trim().isEmpty()){
+      Alert alert = new Alert(Alert.AlertType.WARNING);
+      alert.setHeaderText("Invalid input");
+      alert.setContentText("User story cannot be empty!");
+      alert.showAndWait();
+      return false;
+    }
+    else if(estimation.getText().equals("") || estimation.getText().trim().isEmpty()){
+      Alert alert = new Alert(Alert.AlertType.WARNING);
+      alert.setHeaderText("Invalid input");
+      alert.setContentText("User story cannot be empty!");
+      alert.showAndWait();
+      return false;
+    }
+    else if(day.getText().isEmpty() || month.getText().isEmpty() || year.getText().isEmpty()){
+      Alert alert = new Alert(Alert.AlertType.WARNING);
+      alert.setHeaderText("Invalid input");
+      alert.setContentText("Date of birth cannot be empty!");
+      alert.showAndWait();
+      return false;
+    }
+    else{
+      try {
+        int temporary = Integer.parseInt(day.getText());
+        temporary = Integer.parseInt(month.getText());
+        temporary = Integer.parseInt(year.getText());
+      } catch (NumberFormatException nfe) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setHeaderText("Invalid input");
+        alert.setContentText("Values in deadline have to be numbers!");
+        alert.showAndWait();
+        return false;
+      }
+    }
+    if(true){
+      deadline = new MyDate(Integer.parseInt(day.getText().replaceFirst("^0+(?!$)", "")),
+              Integer.parseInt(month.getText().replaceFirst("^0+(?!$)", "")),
+              Integer.parseInt(year.getText().replaceFirst("^0+(?!$)", "")));
+      requirement = new Requirement(name.getText(), userStory.getText(),
+              Double.parseDouble(estimation.getText().replaceFirst("^0+(?!$)", "")), deadline);
+      if(!deadline.isValidDate()){
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setHeaderText("Invalid input");
+        alert.setContentText("Entered date is not valid!");
+        alert.showAndWait();
+        return false;
+      }
+      if (true){
+        ProjectList projectList = projectsAdapter.getAllProjects();
+        Project project = projectList.get(projectList.size()-1);
+        project.setStatus(statusBox.getSelectionModel().getSelectedIndex());
+        project.addRequirement(requirement);
+        if(!projectList.containsProject(project)){
+          projectList.addProject(project);
+          projectsAdapter.saveProjects(projectList);
+        }
+        else{
+          Alert alert = new Alert(Alert.AlertType.WARNING);
+          alert.setHeaderText("Duplicate project");
+          alert.setContentText("This project already exists!");
+          alert.showAndWait();
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  public VBox getMainPane(){
+    initializeCurrentProject();
+    return mainPane;
+
+  }
+
+  public Button getCancel(){
     return cancel;
+  }
+  public Button getSave(){
+    return save;
   }
 }

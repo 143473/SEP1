@@ -103,7 +103,7 @@ public class SepGUI extends Application
     tasksOfReqOfPrjGUI = new TasksOfReqOfPrjGUI();
     manageRequirementGUI = new ManageRequirementGUI();
     manageTaskGUI = new ManageTaskGUI();
-    addRequirementGUI = new AddRequirementGUI();
+    addRequirementGUI = new AddRequirementGUI(projectsAdapter, this);
     addTaskGUI = new AddTaskGUI();
 
 
@@ -111,16 +111,16 @@ public class SepGUI extends Application
     addANewEmployeeGUI = new AddANewEmployeeGUI(employeeAdapter);
     editRemoveEmployeeGUI = new EditRemoveEmployeeGUI(employeeAdapter);
 
-    assignTasksGUI1 = new AssignTasksGUI1();
-    assignTasksGUI2 = new AssignTasksGUI2();
+    assignTasksGUI1 = new AssignTasksGUI1(projectsAdapter);
+    assignTasksGUI2 = new AssignTasksGUI2(this);
     assignTasksGUI3 = new AssignTasksGUI3();
     assignTasksGUI4 = new AssignTasksGUI4();
     assignTasksGUI5 = new AssignTasksGUI5();
-    reportTasksGUI1 = new ReportTasksGUI1();
-    reportTasksGUI2 = new ReportTasksGUI2();
+    reportTasksGUI1 = new ReportTasksGUI1(employeeAdapter);
+    reportTasksGUI2 = new ReportTasksGUI2(this);
     reportTasksGUI3 = new ReportTasksGUI3();
-    viewAssignedTasksGUI1 = new ViewAssignedTasksGUI1();
-    viewAssignedTasksGUI2 = new ViewAssignedTasksGUI2();
+    viewAssignedTasksGUI1 = new ViewAssignedTasksGUI1(employeeAdapter);
+    viewAssignedTasksGUI2 = new ViewAssignedTasksGUI2(this);
 
     addEmployeeMenuItem = new MenuItem("Add a new employee");
     addEmployeeMenuItem.setOnAction(listener);
@@ -258,6 +258,7 @@ public class SepGUI extends Application
 
     reportTasksGUI1.getContinueButton().setOnAction(listener);
     reportTasksGUI2.getContinueButton().setOnAction(listener);
+    reportTasksGUI2.getGoBack().setOnAction(listener);
     reportTasksGUI3.getGoBackButton().setOnAction(listener);
     reportTasksGUI3.getReportButton().setOnAction(listener);
 
@@ -285,9 +286,24 @@ public class SepGUI extends Application
     return tasksOfReqOfPrjGUI;
   }
 
+  public ViewAssignedTasksGUI1 getViewAssignedTasksGUI1()
+  {
+    return viewAssignedTasksGUI1;
+  }
+
   public ProjectOverviewGUI getProjectOverviewGUI()
   {
     return projectOverviewGUI;
+  }
+
+  public AssignTasksGUI1 getAssignTasksGUI1()
+  {
+    return assignTasksGUI1;
+  }
+
+  public ReportTasksGUI1 getReportTasksGUI1()
+  {
+    return reportTasksGUI1;
   }
 
   private class MyActionListener implements EventHandler<ActionEvent>
@@ -478,6 +494,13 @@ public class SepGUI extends Application
         stackPane.getChildren().clear();
         stackPane.getChildren().add(reqOfSelectedPrjGUI.getMainPane());
       }
+      else if(e.getSource() == addRequirementGUI.getSave())
+      {
+        if (addRequirementGUI.callSaveButton()){
+          stackPane.getChildren().clear();
+          stackPane.getChildren().add(reqOfSelectedPrjGUI.getMainPane());
+        }
+      }
       //add task
       else if(e.getSource() == tasksOfReqOfPrjGUI.getAdd())
       {
@@ -515,8 +538,11 @@ public class SepGUI extends Application
         }
         else if (e.getSource() == assignTasksGUI1.getContinueButton())
       {
-        stackPane.getChildren().clear();
-        stackPane.getChildren().add(assignTasksGUI2.getMainPane());
+        if(assignTasksGUI2.callContinueButton())
+        {
+          stackPane.getChildren().clear();
+          stackPane.getChildren().add(assignTasksGUI2.getMainPane());
+        }
       }
         else if (e.getSource() == assignTasksGUI2.getContinueButton())
       {
@@ -569,13 +595,21 @@ public class SepGUI extends Application
         }
       else if (e.getSource() == reportTasksGUI1.getContinueButton())
       {
-        stackPane.getChildren().clear();
-        stackPane.getChildren().add(reportTasksGUI2.getMainPane());
+        if(reportTasksGUI2.callContinueButton())
+        {
+          stackPane.getChildren().clear();
+          stackPane.getChildren().add(reportTasksGUI2.getMainPane());
+        }
       }
       else if (e.getSource() == reportTasksGUI2.getContinueButton())
       {
         stackPane.getChildren().clear();
         stackPane.getChildren().add(reportTasksGUI3.getMainPane());
+      }
+      else if (e.getSource() == reportTasksGUI2.getGoBack())
+      {
+        stackPane.getChildren().clear();
+        stackPane.getChildren().add(reportTasksGUI1.getMainPane());
       }
       else if(e.getSource() == reportTasksGUI3.getReportButton())
       {
@@ -597,8 +631,11 @@ public class SepGUI extends Application
         }
         else if (e.getSource() == viewAssignedTasksGUI1.getContinueButton())
         {
-        stackPane.getChildren().clear();
-        stackPane.getChildren().add(viewAssignedTasksGUI2.getMainPane());
+          if(viewAssignedTasksGUI2.callContinueButton())
+          {
+            stackPane.getChildren().clear();
+            stackPane.getChildren().add(viewAssignedTasksGUI2.getMainPane());
+          }
       }
       else if (e.getSource() == viewAssignedTasksGUI2.getGoBack())
       {
