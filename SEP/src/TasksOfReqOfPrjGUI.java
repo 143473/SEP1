@@ -36,6 +36,9 @@ public class TasksOfReqOfPrjGUI
   private ProjectsAdapter projectsAdapter;
   private SepGUI sepGUI;
 
+  private Project selectedProject;
+  private Requirement selectedRequirement;
+
   public TasksOfReqOfPrjGUI(ProjectsAdapter projectsAdapter, SepGUI sepGUI){
 
     listener = new MyActionListener();
@@ -133,6 +136,8 @@ public class TasksOfReqOfPrjGUI
     {
       projectName.setText(sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem().getName());
       requirementName.setText(sepGUI.getReqOfSelectedPrjGUI().getRequirementsTable().getSelectionModel().getSelectedItem().toString());
+      selectedProject = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem();
+      selectedRequirement= sepGUI.getReqOfSelectedPrjGUI().getRequirementsTable().getSelectionModel().getSelectedItem();
       gogo =true;
     }
     return gogo;
@@ -155,26 +160,24 @@ public class TasksOfReqOfPrjGUI
   {
     //does not initialize right when Cancel adding a new requirement, keeps old requirements
     //initialized right after going back to projects and then requirements
+    /*
     table.getItems().clear();
     Requirement selectedRequirement = sepGUI.getReqOfSelectedPrjGUI().getRequirementsTable().getSelectionModel().getSelectedItem();
     for (int i = 0; i < selectedRequirement.getTasks().size(); i++)
     {
       table.getItems().add(selectedRequirement.getTasks().get(i));
     }
-
+*/
     //should work and update requirements even when going back from adding a req Cancel
     //throws a NullPointerException
-    /*
-    table.getItems().clear();
-    Project selectedProject = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem();
-    int selectedRequirementIndex = sepGUI.getReqOfSelectedPrjGUI().getRequirementsTable().getSelectionModel().getSelectedIndex();
-    ArrayList<Task> tasks = projectsAdapter.getAllProjects().getProject(selectedProject).getRequirements().get(selectedRequirementIndex).getTasks();
 
-    for (int i = 0; i < tasks.size(); i++)
-    {
-      table.getItems().add(tasks.get(i));
+    table.getItems().clear();
+    if(selectedProject != null && selectedRequirement != null){
+      ArrayList<Task> tasks = projectsAdapter.getAllTasks(selectedProject.getName(), selectedRequirement.getId());
+      for (int i = 0; i < tasks.size(); i++) {
+        table.getItems().add(tasks.get(i));
+      }
     }
-    */
   }
 
   private void initializeTable(ArrayList<Task> newTasks){

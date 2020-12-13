@@ -51,6 +51,7 @@ public class ProjectsAdapter
     return projects;
   }
 
+
   public ArrayList<Requirement> getAllRequirements(String name)
   {
     ProjectList projects = new ProjectList();
@@ -74,6 +75,27 @@ public class ProjectsAdapter
   }
 
 
+  public ArrayList<Task> getAllTasks(String nameOfProject, int indexOfRequirement)
+  {
+    ProjectList projects = new ProjectList();
+    try
+    {
+      projects = (ProjectList) mfio.readObjectFromFile(fileName);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO Error reading file");
+    }
+    catch (ClassNotFoundException e)
+    {
+      System.out.println("Class Not Found");
+    }
+    return  projects.getProjectByName(nameOfProject).getRequirements().get(indexOfRequirement).getTasks();
+  }
 
   public void deleteProject (int indexInList){
     ProjectList projectList = getAllProjects();
