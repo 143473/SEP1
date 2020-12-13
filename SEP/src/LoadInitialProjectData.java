@@ -22,12 +22,12 @@ public class LoadInitialProjectData {
         AssignedEmployee assignedEmployee1 = new AssignedEmployee("Quewueveve", "Osas", birthday,0);
         AssignedEmployee assignedEmployee2 = new AssignedEmployee("Aeaeeaeeae", "Pepe", birthday,1);
         AssignedEmployee assignedEmployee3 = new AssignedEmployee("Nanananan", "Nunu", birthday,2);
-        Requirement requirement1 = new Requirement("requirement", "ueueueue",12.0,3,assignedEmployee1,deadline,1,"Started");
-        Requirement requirement2 = new Requirement("requirement", "ueueueue",12.0,3,assignedEmployee1,deadline,2,"Started");
-        Requirement requirement3 = new Requirement("requirement", "ueueueue",12.0,3,assignedEmployee1,deadline,3,"Started");
-        Task task1 = new Task("task","This is task",12.0,deadline);
-        Task task2 = new Task("task","This is task",12.0,deadline);
-        Task task3 = new Task("task","This is task",12.0,deadline);
+        Requirement requirement1 = new Requirement("requirement1", "ueueueue",12.0,1,assignedEmployee1,deadline,1,"Started");
+        Requirement requirement2 = new Requirement("requirement2", "dfdfdfdf",12.0,2,assignedEmployee1,deadline,2,"Started");
+        Requirement requirement3 = new Requirement("requirement3", "ytytyty",12.0,3,assignedEmployee1,deadline,3,"Started");
+        Task task1 = new Task("task1","This is task 1",12.0,deadline);
+        Task task2 = new Task("task2","This is task 2",12.0,deadline);
+        Task task3 = new Task("task3","This is task 3",12.0,deadline);
         requirement1.addTask(task1);
         requirement1.addTask(task2);
         requirement1.addTask(task3);

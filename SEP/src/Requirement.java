@@ -69,6 +69,22 @@ public class Requirement implements Serializable
     this.status = progressStatus.chooseStatus(index);
   }
 
+  public void setId(int id){
+    this.id = id;
+  }
+
+  public void setName(String name){
+    this.name = name;
+  }
+
+  public void setUserStory(String userStory){
+    this.userStory = userStory;
+  }
+
+  public void setStatus(String status){
+    this.status = status;
+  }
+
   /**
    * Sets importance of the requirement
    *
@@ -255,5 +271,6 @@ public class Requirement implements Serializable
   public String toString(){
     return name;
   }
+
 
 }

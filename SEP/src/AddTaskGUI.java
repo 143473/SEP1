@@ -130,7 +130,7 @@ public class AddTaskGUI
     projectList = projectsAdapter.getAllProjects();
   }
   public void initializeCurrentRequirement(){
-    currentRequiremnt = sepGUI.getReqOfSelectedPrjGUI().getRequirementsTable().getSelectionModel().getSelectedItem();
+    currentRequiremnt = sepGUI.getReqOfSelectedPrjGUI().getTable().getSelectionModel().getSelectedItem();
 
     title.setText("Task for:  " + currentRequiremnt.getName());
     initializeResponsibleEmployeeBox();
@@ -227,7 +227,7 @@ public class AddTaskGUI
         if (allValuesCorrect) {
           ProjectList projectList = projectsAdapter.getAllProjects();
           Project project = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem();
-          Requirement requirement = sepGUI.getReqOfSelectedPrjGUI().getRequirementsTable().getSelectionModel().getSelectedItem();
+          Requirement requirement = sepGUI.getReqOfSelectedPrjGUI().getTable().getSelectionModel().getSelectedItem();
 
           boolean equals = false;
           for (int i = 0; i < project.getRequirements().size(); i++) {

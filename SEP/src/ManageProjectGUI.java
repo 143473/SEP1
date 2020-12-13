@@ -240,12 +240,7 @@ public class ManageProjectGUI
 
             initializeTable();
 
-            nameField.setText("");
-            descriptionField.setText("");
-            statusBox.getSelectionModel().clearSelection();
-            scrumMasterBox.getSelectionModel().clearSelection();
-            projectCreatorBox.getSelectionModel().clearSelection();
-            productOwnerBox.getSelectionModel().clearSelection();
+            clearFields();
 
             Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
             alert2.setHeaderText("Deleting successful");
@@ -299,30 +294,28 @@ public class ManageProjectGUI
           OK = false;
         }
         if(OK){
-          int selectedIndex = projectsTable.getSelectionModel().getSelectedIndex();;
-          Project selectedProject = projectsTable.getSelectionModel().getSelectedItem();
-          projectsAdapter.deleteProject(selectedIndex);
+          ProjectList projectList = projectsAdapter.getAllProjects();
+          Project chosenProject = projectList.get(projectsTable.getSelectionModel().getSelectedIndex());
 
-          selectedProject.setName(nameField.getText());
-          selectedProject.setDescription(descriptionField.getText());
-          selectedProject.setStatus(statusBox.getSelectionModel().getSelectedIndex());
-          selectedProject.setScrumMaster(scrumMasterBox.getSelectionModel().getSelectedItem());
-          selectedProject.setProductOwner(productOwnerBox.getSelectionModel().getSelectedItem());
-          selectedProject.setProjectCreator(projectCreatorBox.getSelectionModel().getSelectedItem());
+          chosenProject.setName(nameField.getText());
+          chosenProject.setDescription(descriptionField.getText());
+          chosenProject.setStatus(statusBox.getSelectionModel().getSelectedIndex());
+          chosenProject.setScrumMaster(scrumMasterBox.getSelectionModel().getSelectedItem());
+          chosenProject.setProductOwner(productOwnerBox.getSelectionModel().getSelectedItem());
+          chosenProject.setProjectCreator(projectCreatorBox.getSelectionModel().getSelectedItem());
 
           //setting the status of to "team member"
-          AssignedEmployeeList assignedEmployeeList = selectedProject.getAssignedEmployeeList();
+          AssignedEmployeeList assignedEmployeeList = chosenProject.getAssignedEmployeeList();
           for (int i = 0; i < assignedEmployeeList.size(); i++) {
             assignedEmployeeList.get(i).setStatus(3);
           }
 
           //setting the status of 3 chosen people
-          selectedProject.getAssignedEmployeeList().get(scrumMasterBox.getSelectionModel().getSelectedIndex()).setStatus(0);
-          selectedProject.getAssignedEmployeeList().get(projectCreatorBox.getSelectionModel().getSelectedIndex()).setStatus(2);
-          selectedProject.getAssignedEmployeeList().get(productOwnerBox.getSelectionModel().getSelectedIndex()).setStatus(1);
+          chosenProject.getAssignedEmployeeList().get(scrumMasterBox.getSelectionModel().getSelectedIndex()).setStatus(0);
+          chosenProject.getAssignedEmployeeList().get(projectCreatorBox.getSelectionModel().getSelectedIndex()).setStatus(2);
+          chosenProject.getAssignedEmployeeList().get(productOwnerBox.getSelectionModel().getSelectedIndex()).setStatus(1);
 
-          allProjects.addProject(selectedProject);
-          projectsAdapter.saveProjects(allProjects);
+          projectsAdapter.saveProjects(projectList);
 
           Alert alert = new Alert(Alert.AlertType.INFORMATION);
           alert.setHeaderText("Editing successful");
