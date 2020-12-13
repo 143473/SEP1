@@ -64,6 +64,12 @@ public class ProjectsAdapter
     saveProjects(projectList);
   }
 
+  public void deleteRequirement(int projectIndex, int requirementIndex){
+    ProjectList projectList = getAllProjects();
+    projectList.get(projectIndex).removeRequirement(projectList.get(projectIndex).getRequirements().get(requirementIndex));
+    saveProjects(projectList);
+  }
+
   /**
    * Use the MyFileIO class to save some projects.
    * @param projects the list of projects that will be saved
@@ -124,6 +130,16 @@ public class ProjectsAdapter
   public Project getSelectedProject(int index){
     if(index < getAllProjects().size()){
       return getAllProjects().get(index);
+    }
+    return null;
+  }
+
+  public Requirement getSelectedRequirement(int projectIndex, int requirementIndex){
+    Project selectedProject = getSelectedProject(projectIndex);
+    if(selectedProject != null){
+      if(requirementIndex < selectedProject.getRequirements().size()){
+        return selectedProject.getRequirements().get(requirementIndex);
+      }
     }
     return null;
   }
