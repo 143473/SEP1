@@ -46,16 +46,12 @@ public class AssignTasksGUI2 {
         requirementTable.setPrefHeight(290);
         requirementTable.setTableMenuButtonVisible(true);
 
-        requirementNameColumn = new TableColumn("Requirement Name");
+        requirementNameColumn = new TableColumn<Requirement, String>("Name");
         requirementNameColumn.setCellValueFactory(new PropertyValueFactory("name"));
         requirementNameColumn.setPrefWidth(460);
-
-        requirementDescriptionColumn = new TableColumn("Requirement Description");
-        requirementNameColumn.setCellValueFactory(new PropertyValueFactory("userStory"));
+        requirementDescriptionColumn = new TableColumn<Requirement, String>("User Story");
+        requirementDescriptionColumn.setCellValueFactory(new PropertyValueFactory("userStory"));
         requirementDescriptionColumn.setPrefWidth(500);
-
-        requirementNameColumn.setReorderable(false);
-        requirementDescriptionColumn.setReorderable(false);
 
         requirementTable.getColumns().add(requirementNameColumn);
         requirementTable.getColumns().add(requirementDescriptionColumn);
@@ -77,9 +73,7 @@ public class AssignTasksGUI2 {
     private void initializeTable()
     {
         requirementTable.getItems().clear();
-        ProjectList projects = projectsAdapter.getAllProjects();
-        int index = sepGUI.getAssignTasksGUI1().getAssignTasksTable().getSelectionModel().getSelectedIndex();
-        Project selectedProject = projectsAdapter.getSelectedProject(index);
+        Project selectedProject = sepGUI.getAssignTasksGUI1().getAssignTasksTable().getSelectionModel().getSelectedItem();
         for (int i = 0; i < selectedProject.getRequirements().size(); i++)
         {
             requirementTable.getItems().add(selectedProject.getRequirements().get(i));
