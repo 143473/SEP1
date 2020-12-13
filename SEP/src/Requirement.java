@@ -11,6 +11,7 @@ public class Requirement implements Serializable
   private ArrayList<Task> tasks;
   private MyDate deadline;
   private double spentTime;
+  private AssignedEmployeeList employeeList;
   private AssignedEmployee responsibleEmployee;
 
 
@@ -212,6 +213,15 @@ public class Requirement implements Serializable
   this.tasks.remove(task);
   }
 
+  /**
+   * Gets list of all members that are working on that requirement
+   *
+   * @return
+   */
+  public AssignedEmployeeList getWorkingMembers()
+  {
+  return employeeList;
+  }
 
   /**
    *
