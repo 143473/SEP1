@@ -10,7 +10,7 @@ public class AddTaskGUI
   private ProjectsAdapter projectsAdapter;
   private ProjectList projectList;
   private SepGUI sepGUI;
-  private Project currentProject;
+  private Requirement currentRequiremnt;
 
   private Label title;
 
@@ -22,7 +22,7 @@ public class AddTaskGUI
   private TextField yearField;
 
   private ChoiceBox statusBox;
-  private ChoiceBox responsibleEmployeeBox;
+  private ChoiceBox<AssignedEmployee> responsibleEmployeeBox;
 
   private Label nameLabel;
   private Label descriptionLabel;
@@ -80,7 +80,7 @@ public class AddTaskGUI
     statusBox.setValue(statuses[progressStatus.getDefaultIndex()]);
 
     responsibleEmployeeLabel = new Label("Responsible Employee");
-    responsibleEmployeeBox = new ChoiceBox();
+    responsibleEmployeeBox = new ChoiceBox<AssignedEmployee>();
 
     save = new Button("Save");
     cancel = new Button("Cancel");
@@ -129,16 +129,16 @@ public class AddTaskGUI
   public void setProjectList() {
     projectList = projectsAdapter.getAllProjects();
   }
-  public void initializeCurrentProject(){
-    currentProject = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem();
+  public void initializeCurrentRequirement(){
+    currentRequiremnt = sepGUI.getReqOfSelectedPrjGUI().getRequirementsTable().getSelectionModel().getSelectedItem();
 
-    title.setText("Requirement for:  " + currentProject.getName());
+    title.setText("Task for:  " + currentRequiremnt.getName());
     initializeResponsibleEmployeeBox();
   }
 
   public void initializeResponsibleEmployeeBox(){
     responsibleEmployeeBox.getItems().clear();
-    AssignedEmployeeList chosenAssignedEmployees = currentProject.getAssignedEmployeeList();
+    AssignedEmployeeList chosenAssignedEmployees = currentRequiremnt.getWorkingMembers();
     for (int i = 0; i < chosenAssignedEmployees.size(); i++) {
       responsibleEmployeeBox.getItems().add(chosenAssignedEmployees.get(i));
       System.out.println(chosenAssignedEmployees.get(i));
@@ -227,7 +227,7 @@ public class AddTaskGUI
         if (allValuesCorrect) {
           ProjectList projectList = projectsAdapter.getAllProjects();
           Project project = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem();
-          Requirement requirement = (Requirement) sepGUI.getReqOfSelectedPrjGUI().getTable().getSelectionModel().getSelectedItem();
+          Requirement requirement = sepGUI.getReqOfSelectedPrjGUI().getRequirementsTable().getSelectionModel().getSelectedItem();
 
           boolean equals = false;
           for (int i = 0; i < project.getRequirements().size(); i++) {
