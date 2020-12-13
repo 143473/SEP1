@@ -94,6 +94,7 @@ public class ChangeTeamMembersGUI {
    */
   public VBox getMainPane()
   {
+
     return mainPane;
   }
 
@@ -225,6 +226,7 @@ public class ChangeTeamMembersGUI {
           alert.showAndWait();
 
           if (alert.getResult() == ButtonType.YES) {
+            System.out.println(projectsAdapter.getAllProjects().getProject(currentProject));
             if (teamMembersTable.getSelectionModel().getSelectedItem().equals(projectsAdapter.getAllProjects().getProject(currentProject).getProductOwner())
                     || teamMembersTable.getSelectionModel().getSelectedItem().equals(projectsAdapter.getAllProjects().getProject(currentProject).getProjectCreator())
                     || teamMembersTable.getSelectionModel().getSelectedItem().equals(projectsAdapter.getAllProjects().getProject(currentProject).getScrumMaster())) {
@@ -270,6 +272,7 @@ public class ChangeTeamMembersGUI {
 
   public boolean callSaveButton(){
     boolean OK = true;
+    System.out.println("asdadad");
     if(teamMembersTable.getItems().isEmpty()){
       Alert alert = new Alert(Alert.AlertType.WARNING);
       alert.setHeaderText("Warning");
@@ -286,12 +289,15 @@ public class ChangeTeamMembersGUI {
     }
     if(OK){
       ProjectList allProjects = projectsAdapter.getAllProjects();
-      Project changedProject = allProjects.getProject(currentProject);
+      /*Project changedProject = allProjects.getProject(currentProject);*/
+      allProjects.removeProject(currentProject.getName());
+      allProjects.addProject(currentProject);
+      /*System.out.println(currentProject);
       for (int i = 0; i < teamMembersTable.getItems().size(); i++) {
-        if(!changedProject.getAssignedEmployeeList().containsEmployee(teamMembersTable.getItems().get(i))){
-          changedProject.addTeamMember(teamMembersTable.getItems().get(i));
+        if(!currentProject.getAssignedEmployeeList().containsEmployee(teamMembersTable.getItems().get(i))){
+          currentProject.addTeamMember(teamMembersTable.getItems().get(i));
         }
-      }
+      }*/
       projectsAdapter.saveProjects(allProjects);
 
       initializeTeamMembersTable();

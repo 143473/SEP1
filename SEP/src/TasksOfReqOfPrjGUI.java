@@ -143,7 +143,7 @@ public class TasksOfReqOfPrjGUI
       if (e.getSource() == searchButton)
       {
         String searchingFor = search.getText();
-        Requirement requirement = (Requirement)sepGUI.getReqOfSelectedPrjGUI().getRequirementsTable().getSelectionModel().getSelectedItem();
+        Requirement requirement = sepGUI.getReqOfSelectedPrjGUI().getRequirementsTable().getSelectionModel().getSelectedItem();
         ArrayList<Task> tasks = requirement.getTasks();
         ArrayList<Task> chosenTasks = projectsAdapter.getTasksByName(searchingFor, tasks);
         initializeTable(chosenTasks);

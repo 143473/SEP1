@@ -51,6 +51,7 @@ public class SepGUI extends Application
   private ViewAssignedTasksGUI1 viewAssignedTasksGUI1;
 
   private ProjectsAdapter projectsAdapter;
+  private AssignedTasksAdapter assignedTasksAdapter;
 
   private EmployeeStatisticsGUI employeeStatisticsGUI;
   private AddANewEmployeeGUI addANewEmployeeGUI;
@@ -91,6 +92,7 @@ public class SepGUI extends Application
     listener = new MyActionListener();
     EmployeeAdapter employeeAdapter = new EmployeeAdapter("employees.bin");
     ProjectsAdapter projectsAdapter = new ProjectsAdapter("projects.bin");
+    AssignedTasksAdapter assignedTasksAdapter = new AssignedTasksAdapter("assignedTasks.bin");
 
     createProjectGUI1 = new CreateProjectGUI1(projectsAdapter, this);
     createProjectGUI2 = new CreateProjectGUI2(employeeAdapter, projectsAdapter,this);
@@ -114,7 +116,7 @@ public class SepGUI extends Application
     assignTasksGUI2 = new AssignTasksGUI2(projectsAdapter,this);
     assignTasksGUI3 = new AssignTasksGUI3(this);
     assignTasksGUI4 = new AssignTasksGUI4(this);
-    assignTasksGUI5 = new AssignTasksGUI5(this);
+    assignTasksGUI5 = new AssignTasksGUI5(this,assignedTasksAdapter);
     reportTasksGUI1 = new ReportTasksGUI1(employeeAdapter);
     reportTasksGUI2 = new ReportTasksGUI2(this);
     reportTasksGUI3 = new ReportTasksGUI3();
@@ -624,12 +626,16 @@ public class SepGUI extends Application
       }
       else if (e.getSource() == assignTasksGUI4.getButtonContinue())
       {
-        if (assignTasksGUI4.callContinueButton())
+        if (assignTasksGUI5.callContinueButton())
         {
           stackPane.getChildren().clear();
           stackPane.getChildren().add(assignTasksGUI5.getMainPane());
         }
       }
+      /*else if (e.getSource() == assignTasksGUI5.getAssignButton())
+      {
+        if(assignTasksGUI4.)
+      }*/
       else if (e.getSource() == assignTasksGUI5.getGoBackButton())
       {
         stackPane.getChildren().clear();

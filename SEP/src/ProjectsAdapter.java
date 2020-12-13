@@ -51,7 +51,7 @@ public class ProjectsAdapter
     return projects;
   }
 
-  public ArrayList<Requirement> getAllRequirements(Project project)
+  public ArrayList<Requirement> getAllRequirements(String name)
   {
     ProjectList projects = new ProjectList();
     try
@@ -70,7 +70,7 @@ public class ProjectsAdapter
     {
       System.out.println("Class Not Found");
     }
-    return  projects.getProject(project).getRequirements();
+    return  projects.getProjectByName(name).getRequirements();
   }
 
 

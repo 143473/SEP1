@@ -257,7 +257,7 @@ public class Requirement implements Serializable
     }
     Requirement temp = (Requirement) obj;
     return temp.getName().equals(name) && temp.getUserStory().equals(userStory)
-        && temp.getStatus().equals(status) && temp.getEstimatedTime() == estimatedTime && temp.deadline == deadline;
+        && temp.getStatus().equals(status) && temp.getEstimatedTime() == estimatedTime && temp.deadline.equals(deadline);
   }
 
   public ArrayList<Task> getTasks(){

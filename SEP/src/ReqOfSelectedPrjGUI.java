@@ -128,25 +128,25 @@ public class ReqOfSelectedPrjGUI
   {
     //does not initialize right when Cancel adding a new requirement, keeps old requirements
     //initialized right after going back to projects and then requirements
-    requirementsTable.getItems().clear();
+    /*requirementsTable.getItems().clear();
     Project selectedProject = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem();
     for (int i = 0; i < selectedProject.getRequirements().size(); i++)
     {
       requirementsTable.getItems().add(selectedProject.getRequirements().get(i));
-    }
+    }*/
 
     //should work and update requirements even when going back from adding a req Cancel
     //throws a NullPointerException
-    /*
+
     requirementsTable.getItems().clear();
     if(selectedProject != null){
-      ArrayList<Requirement> requirements = projectsAdapter.getAllRequirements(selectedProject);
+      ArrayList<Requirement> requirements = projectsAdapter.getAllRequirements(selectedProject.getName());
       for (int i = 0; i < requirements.size(); i++)
       {
         requirementsTable.getItems().add(requirements.get(i));
       }
     }
-    */
+
   }
   public boolean callContinueButton(){
     boolean gogo = true;

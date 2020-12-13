@@ -65,6 +65,12 @@ public class EmployeeList implements Serializable {
         }
         return null;
     }
+    public boolean equals(Object obj){
+        if(!(obj instanceof EmployeeList))
+            return false;
+        EmployeeList temp = (EmployeeList)obj;
+        return employeeList.equals(temp.employeeList);
+    }
 
     public String toString(){
         String returnStr = "";

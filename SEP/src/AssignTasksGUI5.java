@@ -1,6 +1,7 @@
-import javafx.geometry.Pos;
-import javafx.scene.control.*;
-import javafx.scene.layout.FlowPane;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -12,10 +13,13 @@ import javafx.scene.layout.VBox;
  */
 public class AssignTasksGUI5 {
 
+    private AssignedTasksAdapter assignedTasksAdapter;
     private SepGUI sepGUI;
     private VBox mainPane;
 
     private Label titleLabel;
+    private Label taskLabel;
+    private Label employeeLabel;
 
     private Label dayLabel;
     private TextField dayField;
@@ -26,21 +30,25 @@ public class AssignTasksGUI5 {
     private HBox bottomButtons;
 
     private GridPane informationPane;
-    private FlowPane listPane;
 
     private Button assignButton;
     private Button goBackButton;
 
-    private ListView employeeListView;
 
     /**
      * Constructor initializing the GUI components
      */
-    public AssignTasksGUI5(SepGUI sepGUI){
+    public AssignTasksGUI5(SepGUI sepGUI,AssignedTasksAdapter assignedTasksAdapter){
 
         this.sepGUI = sepGUI;
+        this.assignedTasksAdapter = assignedTasksAdapter;
         titleLabel = new Label("Assign a task");
         titleLabel.getStyleClass().add("heading");
+        employeeLabel = new Label();
+        employeeLabel.getStyleClass().add("heading");
+        taskLabel = new Label();
+        taskLabel.getStyleClass().add("heading");
+
 
         dayLabel = new Label("Date for the task: ");
         dayField = new TextField();
@@ -63,12 +71,6 @@ public class AssignTasksGUI5 {
         informationPane.add(dayPane, 1, 2);*/
         informationPane.setVgap(8);
 
-        employeeListView = new ListView<Employee>();
-        listPane = new FlowPane();
-        listPane.setAlignment(Pos.BASELINE_RIGHT);
-        listPane.setPrefWidth(200);
-        listPane.getChildren().add(employeeListView);
-
         assignButton = new Button("Assign");
         goBackButton = new Button("Go back");
 
@@ -76,7 +78,7 @@ public class AssignTasksGUI5 {
         bottomButtons.getChildren().addAll(assignButton, goBackButton);
 
         mainPane = new VBox(8);
-        mainPane.getChildren().addAll(titleLabel, informationPane, bottomButtons, employeeListView);
+        mainPane.getChildren().addAll(titleLabel, taskLabel, employeeLabel, informationPane, bottomButtons);
     }
 
     public VBox getMainPane()
@@ -100,11 +102,99 @@ public class AssignTasksGUI5 {
         }
         else
         {
-           /* String name = sepGUI.getViewAssignedTasksGUI1().getAllAssignedTasksTable().getSelectionModel().getSelectedItem().getFirstName() + " "+
-                sepGUI.getViewAssignedTasksGUI1().getAllAssignedTasksTable().getSelectionModel().getSelectedItem().getLastName();
-            employeeName.setText(name);*/
+            String projectName = sepGUI.getAssignTasksGUI1().getAssignTasksTable().getSelectionModel().getSelectedItem().getName();
+            String requirementName = sepGUI.getAssignTasksGUI2().getRequirementTable().getSelectionModel().getSelectedItem().toString();
+            String taskName = sepGUI.getAssignTasksGUI3().getTasksTable().getSelectionModel().getSelectedItem().getName();
+            taskLabel.setText(projectName + "\\" + requirementName + "\\" + taskName);
+            String employeeName = sepGUI.getAssignTasksGUI4().getAllAssignedTasksTable().getSelectionModel().getSelectedItem().getFirstName() +
+                sepGUI.getAssignTasksGUI4().getAllAssignedTasksTable().getSelectionModel().getSelectedItem().getLastName();
+            employeeLabel.setText(employeeName);
             gogo =true;
         }
+
         return gogo;
+    }
+
+    public Button getAssignButton()
+    {
+        return assignButton;
+    }
+
+    public boolean callAssignButton()
+    {
+        boolean allValuesCorrect = true;
+        MyDate dateForTheTask;
+        if (dayField.getText().isEmpty() || monthField.getText().isEmpty() || yearField.getText().isEmpty())
+        {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText("Invalid input");
+            alert.setContentText("Date for the task cannot be empty!");
+            alert.showAndWait();
+            allValuesCorrect = false;
+        }
+        else
+        {
+            try
+            {
+                int temporary = Integer.parseInt(dayField.getText());
+                temporary = Integer.parseInt(monthField.getText());
+                temporary = Integer.parseInt(yearField.getText());
+            }
+            catch (NumberFormatException nfe)
+            {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setHeaderText("Invalid input");
+                alert.setContentText(
+                    "Values in date for the task have to be numbers!");
+                alert.showAndWait();
+                allValuesCorrect = false;
+            }
+        }
+        if (allValuesCorrect)
+        {
+            dateForTheTask = new MyDate(Integer
+                .parseInt(dayField.getText().replaceFirst("^0+(?!$)", "")),
+                Integer.parseInt(
+                    monthField.getText().replaceFirst("^0+(?!$)", "")), Integer
+                .parseInt(yearField.getText().replaceFirst("^0+(?!$)", "")));
+            if (!dateForTheTask.isValidDate())
+            {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setHeaderText("Invalid input");
+                alert.setContentText("Entered date is not valid!");
+                alert.showAndWait();
+                allValuesCorrect = false;
+            }
+            else if (allValuesCorrect)
+            {
+                AssignedEmployee assignedEmployee = sepGUI.getAssignTasksGUI4().getAllAssignedTasksTable().getSelectionModel()
+                    .getSelectedItem();
+                Task task = sepGUI.getAssignTasksGUI3().getTasksTable().getSelectionModel().getSelectedItem();
+                AssignedTasksList assignedTaskList = assignedTasksAdapter.getAllAssignedTasks();
+                AssignedTasks assignedTask = new AssignedTasks(task.getName(),
+                    task.getDescription(), task.getDeadline(), task.getEstimatedTime(),
+                    task.getResponsibleEmployee(), assignedEmployee,
+                    dateForTheTask, task.getId(), task.getStatus());
+                assignedTaskList.addAssignedTask(assignedTask);
+                assignedTasksAdapter.saveAssignedTasks(assignedTaskList);
+                        /*if(!employeeList.contains(newEmployee)){
+                            employeeList.addEmployee(newEmployee);
+                            employeeAdapter.saveEmployees(employeeList);
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setHeaderText("Message");
+                            alert.setContentText("New employee was successfully added!");
+                            alert.showAndWait();
+                        }
+
+                        else{
+                            Alert alert = new Alert(Alert.AlertType.WARNING);
+                            alert.setHeaderText("Duplicate employee");
+                            alert.setContentText("This employee is already in the list!");
+                            alert.showAndWait();
+                        }*/
+                allValuesCorrect = true;
+            }
+        }
+        return allValuesCorrect;
     }
 }

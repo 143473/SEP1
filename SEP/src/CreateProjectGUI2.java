@@ -141,10 +141,14 @@ public class CreateProjectGUI2
           }
         }
         employeeListOfRemainingEmployees = employeeAdapter.getAllEmployees();
-        for (int i = 0; i < employeeListOfRemainingEmployees.size(); i++) {
+        /*for (int i = 0; i < employeeListOfRemainingEmployees.size(); i++) {
           if(addedEmployees.containsEmployee(employeeListOfRemainingEmployees.get(i))){
             employeeListOfRemainingEmployees.removeEmployee(employeeListOfRemainingEmployees.get(i));
           }
+        }*/
+        for (int i = 0; i < addedEmployees.size(); i++)
+        {
+          employeeListOfRemainingEmployees.removeEmployee(addedEmployees.get(i));
         }
         EmployeeList chosenEmployees = employeeAdapter.getEmployeesByName(searchingFor, employeeListOfRemainingEmployees);
         employeeListView.getItems().clear();
@@ -216,16 +220,21 @@ public class CreateProjectGUI2
 
     public void initializeListView()
     {
+      System.out.println("aasdasd");
       employeeListView.getItems().clear();
       EmployeeList employees = employeeAdapter.getAllEmployees();
       EmployeeList chosenEmployees = new EmployeeList();
       for (int i = 0; i < teamMembersTable.getItems().size(); i++) {
         chosenEmployees.addEmployee(teamMembersTable.getItems().get(i));
       }
-      for (int i = 0; i < employees.size(); i++) {
+      /*for (int i = 0; i < employees.size(); i++) {
         if(chosenEmployees.containsEmployee(employees.get(i))){
           employees.removeEmployee(employees.get(i));
         }
+      }*/
+      for (int i = 0; i < chosenEmployees.size(); i++)
+      {
+        employees.removeEmployee(chosenEmployees.get(i));
       }
       for (int i = 0; i < employees.size(); i++)
       {

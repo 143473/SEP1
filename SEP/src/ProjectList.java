@@ -26,6 +26,15 @@ public class ProjectList implements Serializable
     public void removeProject(Project project){
       projects.remove(project);
   }
+    public void removeProject(String name)
+    {
+      for (int i = 0; i < projects.size(); i++)
+      {
+        if(projects.get(i).getName().equals(name))
+          projects.remove(i);
+        break;
+      }
+    }
 
   /**
    * Checks if ArrayList of Project objects contains specific project
@@ -51,6 +60,7 @@ public class ProjectList implements Serializable
   }
 
   public Project getProject(Project project){
+   /* System.out.println(projects.size());*/
     for (int i = 0; i < projects.size(); i++) {
       if(projects.get(i).equals(project)){
         return projects.get(i);
@@ -59,6 +69,14 @@ public class ProjectList implements Serializable
     return null;
   }
 
+  public Project getProjectByName(String name){
+    for (int i = 0; i < projects.size(); i++)
+    {
+      if(projects.get(i).getName().equals(name))
+        return projects.get(i);
+    }
+    return null;
+  }
   public String toString(){
     String returnStr = "";
     for (int i = 0; i < projects.size(); i++) {

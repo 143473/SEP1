@@ -77,4 +77,10 @@ public class AssignedEmployeeList implements Serializable {
     }
     return returnStr;
   }
+  public boolean equals(Object obj){
+    if(!(obj instanceof AssignedEmployeeList))
+      return false;
+    AssignedEmployeeList temp = (AssignedEmployeeList)obj;
+    return assignedEmployeeList.equals(temp.assignedEmployeeList);
+  }
 }

@@ -85,7 +85,7 @@ public class ProjectOverviewGUI
     teamMemberCol = new TableColumn("Team Members");
     teamMemberCol.setCellValueFactory(new PropertyValueFactory("assignedEmployeeList"));
     teamMemberCol.setPrefWidth(375);
-    setCellFactory();
+
 
     projectsTable.getColumns().setAll(nameCol, descriptionCol,statusCol,teamMemberCol);
     projectsTable.setPrefHeight(290);
