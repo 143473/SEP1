@@ -153,8 +153,19 @@ public class TasksOfReqOfPrjGUI
 
   private void initializeTable()
   {
+    //does not initialize right when Cancel adding a new requirement, keeps old requirements
+    //initialized right after going back to projects and then requirements
     table.getItems().clear();
+    Requirement selectedRequirement = sepGUI.getReqOfSelectedPrjGUI().getRequirementsTable().getSelectionModel().getSelectedItem();
+    for (int i = 0; i < selectedRequirement.getTasks().size(); i++)
+    {
+      table.getItems().add(selectedRequirement.getTasks().get(i));
+    }
 
+    //should work and update requirements even when going back from adding a req Cancel
+    //throws a NullPointerException
+    /*
+    table.getItems().clear();
     Project selectedProject = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem();
     int selectedRequirementIndex = sepGUI.getReqOfSelectedPrjGUI().getRequirementsTable().getSelectionModel().getSelectedIndex();
     ArrayList<Task> tasks = projectsAdapter.getAllProjects().getProject(selectedProject).getRequirements().get(selectedRequirementIndex).getTasks();
@@ -163,6 +174,7 @@ public class TasksOfReqOfPrjGUI
     {
       table.getItems().add(tasks.get(i));
     }
+    */
   }
 
   private void initializeTable(ArrayList<Task> newTasks){
