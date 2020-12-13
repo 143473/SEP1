@@ -16,55 +16,69 @@ public class LoadInitialProjectData {
      * @throws IOException exceptions happening during input or output
      */
     public static void main(String[] args)
-    {
+    {   MyDate birthday = new MyDate(12,9,2020);
+        MyDate deadline = new MyDate(14,12,2020);
+        Project project1 = new Project("Project1", "description1", 3);
+        AssignedEmployee assignedEmployee1 = new AssignedEmployee("Quewueveve", "Osas", birthday,0);
+        AssignedEmployee assignedEmployee2 = new AssignedEmployee("Aeaeeaeeae", "Pepe", birthday,1);
+        AssignedEmployee assignedEmployee3 = new AssignedEmployee("Nanananan", "Nunu", birthday,2);
+        Requirement requirement1 = new Requirement("requirement", "ueueueue",12.0,3,assignedEmployee1,deadline,1,"Started");
+        Requirement requirement2 = new Requirement("requirement", "ueueueue",12.0,3,assignedEmployee1,deadline,2,"Started");
+        Requirement requirement3 = new Requirement("requirement", "ueueueue",12.0,3,assignedEmployee1,deadline,3,"Started");
+        Task task1 = new Task("task","This is task",12.0,deadline);
+        Task task2 = new Task("task","This is task",12.0,deadline);
+        Task task3 = new Task("task","This is task",12.0,deadline);
+        requirement1.addTask(task1);
+        requirement1.addTask(task2);
+        requirement1.addTask(task3);
+        requirement2.addTask(task1);
+        requirement2.addTask(task2);
+        requirement2.addTask(task3);
+        requirement3.addTask(task1);
+        requirement3.addTask(task2);
+        requirement3.addTask(task3);
+        project1.addRequirement(requirement1);
+        project1.addRequirement(requirement2);
+        project1.addRequirement(requirement3);
+        project1.addTeamMember(assignedEmployee1);
+        project1.addTeamMember(assignedEmployee2);
+        project1.addTeamMember(assignedEmployee3);
+        project1.setScrumMaster(assignedEmployee1);
+        project1.setProductOwner(assignedEmployee2);
+        project1.setProjectCreator(assignedEmployee3);
+        Project project2 = new Project("Project2", "description2", 2);
+        project2.addRequirement(requirement1);
+        project2.addRequirement(requirement2);
+        project2.addRequirement(requirement3);
+        project2.addTeamMember(assignedEmployee1);
+        project2.addTeamMember(assignedEmployee2);
+        project2.addTeamMember(assignedEmployee3);
+        project2.setScrumMaster(assignedEmployee1);
+        project2.setProductOwner(assignedEmployee2);
+        project2.setProjectCreator(assignedEmployee3);
+        Project project3 = new Project("Project3", "description",1);
+        project3.addRequirement(requirement1);
+        project3.addRequirement(requirement2);
+        project3.addRequirement(requirement3);
+        project3.addTeamMember(assignedEmployee1);
+        project3.addTeamMember(assignedEmployee2);
+        project3.addTeamMember(assignedEmployee3);
+        project3.setScrumMaster(assignedEmployee1);
+        project3.setProductOwner(assignedEmployee2);
+        project3.setProjectCreator(assignedEmployee3);
 
         ProjectList projectList = new ProjectList();
-        EmployeeAdapter employee = new EmployeeAdapter("employees.bin");
-        EmployeeList employeeList = new EmployeeList();
+
+        projectList.addProject(project1);
+        projectList.addProject(project2);
+        projectList.addProject(project3);
         ProjectsAdapter projectsAdapter = new ProjectsAdapter("projects.bin");
-
-
-
-        MyTextFileIO mtfio = new MyTextFileIO();
-        String[] projectsArray = null;
-        try
-        {
-            projectsArray = mtfio.readArrayFromFile("projects.txt");
-
-            for(int i = 0; i<projectsArray.length; i++)
-            {
-                String temp = projectsArray[i];
-                String[] tempArr = temp.split(",");
-                String name = tempArr[0];
-                String description = tempArr[1];
-                String statusString = tempArr[2];
-                int status = Integer.parseInt(statusString);
-                String indexString1 = tempArr[3];
-                int index1 = Integer.parseInt(indexString1);
-                String indexString2 = tempArr[4];
-                int index2 = Integer.parseInt(indexString2);
-                String indexString3 = tempArr[5];
-                int index3 = Integer.parseInt(indexString3);
-                projectList.addProject(new Project(name, description, status));
-
-
-
-
-
-
-
-            }
-        }
-        catch (FileNotFoundException e)
-        {
-            System.out.println("File was not found, or could not be opened");
-        }
+        projectsAdapter.saveProjects(projectList);
 
         MyFileIO mfio = new MyFileIO();
-
         try
         {
-            mfio.writeToFile("projects.bin", projectList);
+            mfio.writeToFile("projects.bin",projectList);
         }
         catch (FileNotFoundException e)
         {
