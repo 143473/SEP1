@@ -258,4 +258,16 @@ public class AddTaskGUI
     return allValuesCorrect;
   }
 
+
+  public void clearFields(){
+    nameField.setText("");
+    descriptionField.setText("");
+    estimationField.setText("");
+    dayField.setText("");
+    monthField.setText("");
+    yearField.setText("");
+    statusBox.getSelectionModel().selectFirst();
+    responsibleEmployeeBox.getSelectionModel().clearSelection();
+  }
+
 }

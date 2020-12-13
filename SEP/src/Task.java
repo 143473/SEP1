@@ -77,10 +77,10 @@ public class Task implements Serializable
 
   /**
    * Sets the employee that will be responsible for the task
-   * @param employee
+   * @param responsibleEmployee
    */
-  public void setResponsibleEmployee(AssignedEmployee employee){
-  this.responsibleEmployee = responsibleEmployee;
+  public void setResponsibleEmployee(AssignedEmployee responsibleEmployee){
+    this.responsibleEmployee = responsibleEmployee;
   }
 
   /**

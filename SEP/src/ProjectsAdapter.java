@@ -32,7 +32,6 @@ public class ProjectsAdapter
   public ProjectList getAllProjects()
   {
     ProjectList projects = new ProjectList();
-
     try
     {
       projects = (ProjectList) mfio.readObjectFromFile(fileName);
@@ -52,6 +51,28 @@ public class ProjectsAdapter
     return projects;
   }
 
+  public ArrayList<Requirement> getAllRequirements(Project project)
+  {
+    ProjectList projects = new ProjectList();
+    try
+    {
+      projects = (ProjectList) mfio.readObjectFromFile(fileName);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO Error reading file");
+    }
+    catch (ClassNotFoundException e)
+    {
+      System.out.println("Class Not Found");
+    }
+    return  projects.getProject(project).getRequirements();
+  }
+
 
 
   public void deleteProject (int indexInList){
@@ -67,6 +88,12 @@ public class ProjectsAdapter
   public void deleteRequirement(int projectIndex, int requirementIndex){
     ProjectList projectList = getAllProjects();
     projectList.get(projectIndex).removeRequirement(projectList.get(projectIndex).getRequirements().get(requirementIndex));
+    saveProjects(projectList);
+  }
+
+  public void deleteTask(int projectIndex, int requirementIndex, int taskIndex){
+    ProjectList projectList = getAllProjects();
+    projectList.get(projectIndex).getRequirements().get(requirementIndex).removeTask(projectList.get(projectIndex).getRequirements().get(requirementIndex).getTasks().get(taskIndex));
     saveProjects(projectList);
   }
 
@@ -139,6 +166,16 @@ public class ProjectsAdapter
     if(selectedProject != null){
       if(requirementIndex < selectedProject.getRequirements().size()){
         return selectedProject.getRequirements().get(requirementIndex);
+      }
+    }
+    return null;
+  }
+
+  public Task getSelectedTask(int projectIndex, int requirementIndex, int taskIndex){
+    Requirement selectedRequirement = getSelectedRequirement(projectIndex, requirementIndex);
+    if(selectedRequirement != null){
+      if(taskIndex < selectedRequirement.getTasks().size()){
+        return selectedRequirement.getTasks().get(taskIndex);
       }
     }
     return null;

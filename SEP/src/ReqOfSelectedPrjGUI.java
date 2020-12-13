@@ -49,6 +49,8 @@ public class ReqOfSelectedPrjGUI
   private TableColumn totalHoursColumn;
   private TableColumn responsibleColumn;
 
+  private Project selectedProject;
+
   public ReqOfSelectedPrjGUI(ProjectsAdapter projectsAdapter, SepGUI sepGUI){
 
     listener = new MyActionListener();
@@ -125,12 +127,14 @@ public class ReqOfSelectedPrjGUI
   public void initializeTable()
   {
     requirementsTable.getItems().clear();
-    ProjectList projects = projectsAdapter.getAllProjects();
-    Project project = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem();
-    for (int i = 0; i < project.getRequirements().size(); i++)
-    {
-      requirementsTable.getItems().add(project.getRequirements().get(i));
+    if(selectedProject != null){
+      ArrayList<Requirement> requirements = projectsAdapter.getAllRequirements(selectedProject);
+      for (int i = 0; i < requirements.size(); i++)
+      {
+        requirementsTable.getItems().add(requirements.get(i));
+      }
     }
+
   }
   public boolean callContinueButton(){
     boolean gogo = true;
@@ -155,6 +159,7 @@ public class ReqOfSelectedPrjGUI
     if(gogo)
     {
       projectName.setText(sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem().getName());
+      selectedProject = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem();
     }
     return gogo;
   }

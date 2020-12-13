@@ -154,10 +154,14 @@ public class TasksOfReqOfPrjGUI
   private void initializeTable()
   {
     table.getItems().clear();
-    Requirement requirement = sepGUI.getReqOfSelectedPrjGUI().getRequirementsTable().getSelectionModel().getSelectedItem();
-    for (int i = 0; i < requirement.getTasks().size(); i++)
+
+    Project selectedProject = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem();
+    int selectedRequirementIndex = sepGUI.getReqOfSelectedPrjGUI().getRequirementsTable().getSelectionModel().getSelectedIndex();
+    ArrayList<Task> tasks = projectsAdapter.getAllProjects().getProject(selectedProject).getRequirements().get(selectedRequirementIndex).getTasks();
+
+    for (int i = 0; i < tasks.size(); i++)
     {
-      table.getItems().add(requirement.getTasks().get(i));
+      table.getItems().add(tasks.get(i));
     }
   }
 

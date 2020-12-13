@@ -362,8 +362,8 @@ public class ManageRequirementGUI
         if (!(requirementsTable.getSelectionModel().getSelectedItem() == null))
         {
           Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
-                  "Do you really want to delete project "+requirementsTable.getSelectionModel().getSelectedItem().getName()+"?", ButtonType.YES, ButtonType.NO);
-          alert.setTitle("Delete project");
+                  "Do you really want to delete requirement "+requirementsTable.getSelectionModel().getSelectedItem().getName()+"?", ButtonType.YES, ButtonType.NO);
+          alert.setTitle("Delete requirement");
           alert.setHeaderText(null);
 
           alert.showAndWait();
@@ -385,7 +385,7 @@ public class ManageRequirementGUI
         {
           Alert alert = new Alert(Alert.AlertType.WARNING);
           alert.setHeaderText("Warning");
-          alert.setContentText("No project was chosen!");
+          alert.setContentText("No requirement was chosen!");
           alert.showAndWait();
         }
       }
