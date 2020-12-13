@@ -64,6 +64,12 @@ public class ProjectsAdapter
     saveProjects(projectList);
   }
 
+  public void deleteRequirement(int projectIndex, int requirementIndex){
+    ProjectList projectList = getAllProjects();
+    projectList.get(projectIndex).removeRequirement(projectList.get(projectIndex).getRequirements().get(requirementIndex));
+    saveProjects(projectList);
+  }
+
   /**
    * Use the MyFileIO class to save some projects.
    * @param projects the list of projects that will be saved

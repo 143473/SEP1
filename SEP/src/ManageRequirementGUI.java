@@ -107,8 +107,10 @@ public class ManageRequirementGUI
   spentTimeLabel = new Label("Spent time");
 
   saveButton = new Button("Save");
+  saveButton.setOnAction(listener);
   cancelButton = new Button("Cancel");
   removeButton = new Button("Remove");
+  removeButton.setOnAction(listener);
 
 
     requirementCol = new TableColumn("Requirement name");
@@ -160,7 +162,8 @@ public class ManageRequirementGUI
 
   private void initializeTable(){
     requirementsTable.getItems().clear();
-    ArrayList<Requirement> requirements = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem().getRequirements();
+    int selectedProjectIndex = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedIndex();
+    ArrayList<Requirement> requirements = projectsAdapter.getAllProjects().get(selectedProjectIndex).getRequirements();
 
     System.out.println(requirements);
     for (int i = 0; i < requirements.size(); i++) {
@@ -205,6 +208,7 @@ public class ManageRequirementGUI
         importanceBox.getItems().clear();
 
         importanceBox.getItems().addAll(1, 2, 3);
+        importanceBox.getSelectionModel().select(selectedRequirement.getImportance()-1);
 
         AssignedEmployeeList assignedEmployeeList = projectsAdapter.getAllProjects().get(projectIndex).getAssignedEmployeeList();
         for (int i = 0; i < assignedEmployeeList.size(); i++) {
@@ -225,6 +229,51 @@ public class ManageRequirementGUI
 
   private class MyActionListener implements EventHandler<ActionEvent> {
     public void handle(ActionEvent e) {
+      if(e.getSource() == removeButton){
+        if (!(requirementsTable.getSelectionModel().getSelectedItem() == null))
+        {
+          Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+                  "Do you really want to delete project "+requirementsTable.getSelectionModel().getSelectedItem().getName()+"?", ButtonType.YES, ButtonType.NO);
+          alert.setTitle("Delete project");
+          alert.setHeaderText(null);
+
+          alert.showAndWait();
+          int requirementIndex = requirementsTable.getSelectionModel().getSelectedIndex();
+          int projectIndex = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedIndex();
+          if (alert.getResult() == ButtonType.YES)
+          {
+            projectsAdapter.deleteRequirement(projectIndex, requirementIndex);
+
+
+            id.setText("");
+            name.setText("");
+            userStory.setText("");
+            estimatedTime.setText("");
+            day.setText("");
+            month.setText("");
+            year.setText("");
+            spentTime.setText("");
+            statusBox.getSelectionModel().selectFirst();
+            responsibleEmployeeBox.getSelectionModel().clearSelection();
+            importanceBox.getSelectionModel().selectFirst();
+
+            Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
+            alert2.setHeaderText("Deleting successful");
+            alert2.setContentText("Changes were saved successfully!");
+            alert2.showAndWait();
+
+
+            initializeTable();
+          }
+        }
+        else
+        {
+          Alert alert = new Alert(Alert.AlertType.WARNING);
+          alert.setHeaderText("Warning");
+          alert.setContentText("No project was chosen!");
+          alert.showAndWait();
+        }
+      }
     }
   }
 }
