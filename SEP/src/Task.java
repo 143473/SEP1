@@ -1,5 +1,4 @@
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class Task implements Serializable
 {
@@ -9,7 +8,6 @@ public class Task implements Serializable
   private double estimatedTime;
   private String status;
   private MyDate deadline;
-  private ArrayList<AssignedEmployee> employeeList;
   private AssignedEmployee responsibleEmployee;
   private double spentTime;
   /**
@@ -90,7 +88,7 @@ public class Task implements Serializable
    * @return
    */
   public AssignedEmployee getResponsibleEmployee(){
-  return getResponsibleEmployee();
+  return responsibleEmployee;
   }
 
   /**
@@ -106,9 +104,9 @@ public class Task implements Serializable
    * Gets list of all members that are working on that requirement
    * @return
    */
-  public ArrayList<AssignedEmployee> getWorkingMembers(){
+  /*public ArrayList<AssignedEmployee> getWorkingMembers(){
   return employeeList;
-}
+}*/
 
   /**
    *
@@ -129,7 +127,7 @@ public class Task implements Serializable
             description.equals(other.description) &&
             status.equals(other.status) &&
             deadline.equals(other.deadline) &&
-            employeeList.equals(other.employeeList);
+            responsibleEmployee.equals(other.responsibleEmployee);
   }
 
   public String getName(){
