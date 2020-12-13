@@ -92,7 +92,9 @@ public class AssignTasksGUI3 {
         }
         else
         {
-            titleLabel.setText("HAVE TO FIGURE IT OUT");
+            String projectName = sepGUI.getAssignTasksGUI1().getAssignTasksTable().getSelectionModel().getSelectedItem().getName();
+            String requirementName = sepGUI.getAssignTasksGUI2().getRequirementTable().getSelectionModel().getSelectedItem().toString();
+            titleLabel.setText(projectName+"\\"+requirementName);
             gogo =true;
         }
         return gogo;
