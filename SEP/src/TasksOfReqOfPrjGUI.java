@@ -100,6 +100,7 @@ public class TasksOfReqOfPrjGUI
   }
   public VBox getMainPane()
   {
+    initializeTable();
     return mainPane;
   }
 

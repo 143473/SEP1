@@ -11,18 +11,22 @@ public class Task implements Serializable
   private MyDate deadline;
   private ArrayList<AssignedEmployee> employeeList;
   private AssignedEmployee responsibleEmployee;
+  private double spentTime;
   /**
    * Four-Argument Constructor
    * @param name
    * @param description
    * @param estimatedTime
    */
-  public Task(String name, String description, double estimatedTime, MyDate deadline){
+  public Task(String name, String description, double estimatedTime, MyDate deadline, int id, String status, AssignedEmployee responsibleEmployee){
     this.name = name;
     this.description = description;
     this.estimatedTime = estimatedTime;
     this.responsibleEmployee = responsibleEmployee;
     this.deadline = deadline;
+    this.id = id;
+    this.status = status;
+    spentTime = 0;
   }
 
 
@@ -42,6 +46,10 @@ public class Task implements Serializable
   public double getEstimatedTime()
   {
     return estimatedTime;
+  }
+
+  public double getSpentTime(){
+    return spentTime;
   }
 
   /**
@@ -93,13 +101,6 @@ public class Task implements Serializable
   this.status = status;
   }
 
-  /**
-   * Gets progress status of the task
-   * @return
-   */
-  public String getStatus(){
-  return status;
-  }
 
   /**
    * Gets list of all members that are working on that requirement
@@ -114,7 +115,7 @@ public class Task implements Serializable
    * @return
    */
   public Task copy(){
-    return new Task(name, description, estimatedTime, deadline);
+    return new Task(name, description, estimatedTime, deadline, id, status, responsibleEmployee);
   }
 
   public boolean equals(Object obj) {
@@ -135,7 +136,31 @@ public class Task implements Serializable
     return name;
   }
 
+  public void setName(String name){
+    this.name = name;
+  }
+
+  public void setDescription(String description){
+    this.description = description;
+  }
+
   public String getDescription(){
     return description;
+  }
+
+  public void setId(int id){
+    this.id =id;
+  }
+
+  public int getId(){
+    return id;
+  }
+
+  public void setStatus(String status){
+    this.status = status;
+  }
+
+  public String getStatus(){
+    return status;
   }
 }

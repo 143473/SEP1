@@ -50,7 +50,7 @@ public class ProjectList implements Serializable
     return null;
   }
 
-  public Project get(Project project){
+  public Project getProject(Project project){
     for (int i = 0; i < projects.size(); i++) {
       if(projects.get(i).equals(project)){
         return projects.get(i);

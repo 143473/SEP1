@@ -98,7 +98,7 @@ public class ReqOfSelectedPrjGUI
     importanceColumn.setCellValueFactory(new PropertyValueFactory("importance"));
     deadlineColumn = new TableColumn<Requirement, MyDate>("Deadline");
     deadlineColumn.setCellValueFactory(new PropertyValueFactory("deadline"));
-    statusColumn = new TableColumn<Requirement, ProgressStatus>("Status");
+    statusColumn = new TableColumn<Requirement, String>("Status");
     statusColumn.setCellValueFactory(new PropertyValueFactory("status"));
     totalHoursColumn = new TableColumn("Spent time");
     totalHoursColumn.setCellValueFactory(new PropertyValueFactory("spentTime"));
