@@ -307,6 +307,11 @@ public class SepGUI extends Application
     return projectOverviewGUI;
   }
 
+  public AddTaskGUI getAddTaskGUI()
+  {
+    return addTaskGUI;
+  }
+
   public AssignTasksGUI1 getAssignTasksGUI1()
   {
     return assignTasksGUI1;

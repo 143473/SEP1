@@ -7,7 +7,7 @@ public class Task implements Serializable
   private String name;
   private String description;
   private double estimatedTime;
-  private ProgressStatus status;
+  private String status;
   private MyDate deadline;
   private ArrayList<AssignedEmployee> employeeList;
   private AssignedEmployee responsibleEmployee;
@@ -87,17 +87,17 @@ public class Task implements Serializable
 
   /**
    * Sets progress status of the task
-   * @param progressStatus
+   * @param status
    */
-  public void setProgressStatus(ProgressStatus progressStatus){
-  this.status = progressStatus;
+  public void setProgressStatus(String status){
+  this.status = status;
   }
 
   /**
    * Gets progress status of the task
    * @return
    */
-  public ProgressStatus getProgressStatus(){
+  public String getStatus(){
   return status;
   }
 

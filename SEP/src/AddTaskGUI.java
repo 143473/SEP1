@@ -10,7 +10,8 @@ public class AddTaskGUI
   private ProjectsAdapter projectsAdapter;
   private ProjectList projectList;
   private SepGUI sepGUI;
-  private Requirement currentRequiremnt;
+  private Requirement currentRequirement;
+  private Project project;
 
   private Label title;
 
@@ -21,7 +22,7 @@ public class AddTaskGUI
   private TextField monthField;
   private TextField yearField;
 
-  private ChoiceBox statusBox;
+  private ChoiceBox<String> statusBox;
   private ChoiceBox<AssignedEmployee> responsibleEmployeeBox;
 
   private Label nameLabel;
@@ -46,6 +47,8 @@ public class AddTaskGUI
 
   public AddTaskGUI(ProjectsAdapter projectsAdapter, SepGUI sepGUI){
 
+    this.projectsAdapter = projectsAdapter;
+    this.sepGUI = sepGUI;
     title = new Label("Add Task");
     title.setFont(Font.font("Calibri", FontWeight.BOLD, 20));
 
@@ -114,6 +117,7 @@ public class AddTaskGUI
 
   public VBox getMainPane()
   {
+    initializeResponsibleEmployeeBox();
     return mainPane;
   }
 
@@ -129,16 +133,17 @@ public class AddTaskGUI
   public void setProjectList() {
     projectList = projectsAdapter.getAllProjects();
   }
-  public void initializeCurrentRequirement(){
-    currentRequiremnt = sepGUI.getReqOfSelectedPrjGUI().getRequirementsTable().getSelectionModel().getSelectedItem();
+  /*public void initializeCurrentRequirement(){
+    /*currentRequirement = sepGUI.getReqOfSelectedPrjGUI().getRequirementsTable().getSelectionModel().getSelectedItem();
 
-    title.setText("Task for:  " + currentRequiremnt.getName());
-    initializeResponsibleEmployeeBox();
-  }
+    title.setText("Task for:  " + currentRequirement.getName());
+  }*/
 
   public void initializeResponsibleEmployeeBox(){
+
     responsibleEmployeeBox.getItems().clear();
-    AssignedEmployeeList chosenAssignedEmployees = currentRequiremnt.getWorkingMembers();
+    project = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem();
+    AssignedEmployeeList chosenAssignedEmployees = project.getAssignedEmployeeList();
     for (int i = 0; i < chosenAssignedEmployees.size(); i++) {
       responsibleEmployeeBox.getItems().add(chosenAssignedEmployees.get(i));
       System.out.println(chosenAssignedEmployees.get(i));
@@ -215,7 +220,7 @@ public class AddTaskGUI
                 descriptionField.getText(),
                 Double.parseDouble(estimationField.getText().replaceFirst("^0+(?!$)", "")),
                 deadline);
-        task.setProgressStatus((ProgressStatus) statusBox.getSelectionModel().getSelectedItem());
+        task.setProgressStatus(statusBox.getSelectionModel().getSelectedItem());
 
         if (!deadline.isValidDate()) {
           Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -230,7 +235,7 @@ public class AddTaskGUI
           Requirement requirement = sepGUI.getReqOfSelectedPrjGUI().getRequirementsTable().getSelectionModel().getSelectedItem();
 
           boolean equals = false;
-          for (int i = 0; i < project.getRequirements().size(); i++) {
+          for (int i = 0; i < requirement.getTasks().size(); i++) {
             if(project.getRequirements().get(i).getTasks().get(i).equals(task)){
               equals = true;
               Alert alert = new Alert(Alert.AlertType.WARNING);

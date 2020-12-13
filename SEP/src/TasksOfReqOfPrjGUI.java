@@ -73,24 +73,22 @@ public class TasksOfReqOfPrjGUI
     topButtons = new HBox(5);
     topButtons.getChildren().addAll(add,manage);
 
-    TableColumn idCol = new TableColumn("ID");
+    TableColumn idCol = new TableColumn<Task, Integer>("ID");
     idCol.setCellValueFactory(new PropertyValueFactory("id"));
-    TableColumn nameCol = new TableColumn("Name");
+    TableColumn nameCol = new TableColumn<Task, String>("Name");
     nameCol.setCellValueFactory(new PropertyValueFactory("name"));
-    TableColumn estimationCol = new TableColumn("Estimation");
-    estimationCol.setCellValueFactory(new PropertyValueFactory("estimation"));
-    TableColumn deadlineCol = new TableColumn("Deadline");
+    TableColumn estimationCol = new TableColumn<Task, Integer>("Estimation");
+    estimationCol.setCellValueFactory(new PropertyValueFactory("estimatedTime"));
+    TableColumn deadlineCol = new TableColumn<Task, Integer>("Deadline");
     deadlineCol.setCellValueFactory(new PropertyValueFactory("deadline"));
-    TableColumn statusCol = new TableColumn("Status");
+    TableColumn statusCol = new TableColumn<Task, String>("Status");
     statusCol.setCellValueFactory(new PropertyValueFactory("status"));
-    TableColumn totalhrsCol = new TableColumn("Total Hours");
-    totalhrsCol.setCellValueFactory(new PropertyValueFactory("totalhours"));
-    TableColumn teammembersCol = new TableColumn("Team Members");
-    teammembersCol.setCellValueFactory(new PropertyValueFactory("teammembers"));
-    TableColumn responsibleCol = new TableColumn("Responsible Team Member");
-    responsibleCol.setCellValueFactory(new PropertyValueFactory("responsibleteammember"));
+    TableColumn totalhrsCol = new TableColumn<Task, String>("Spent Time");
+    totalhrsCol.setCellValueFactory(new PropertyValueFactory("spentTime"));
+    TableColumn responsibleCol = new TableColumn<Task, AssignedEmployee>("Responsible Employee");
+    responsibleCol.setCellValueFactory(new PropertyValueFactory("responsibleEmployee"));
 
-    table.getColumns().setAll(idCol, nameCol,estimationCol,deadlineCol,statusCol,totalhrsCol,teammembersCol,responsibleCol);
+    table.getColumns().setAll(idCol, nameCol,estimationCol,deadlineCol,statusCol,totalhrsCol,responsibleCol);
     table.setPrefWidth(450);
     table.setPrefHeight(300);
     table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
@@ -155,7 +153,7 @@ public class TasksOfReqOfPrjGUI
   private void initializeTable()
   {
     table.getItems().clear();
-    Requirement requirement = (Requirement)sepGUI.getReqOfSelectedPrjGUI().getRequirementsTable().getSelectionModel().getSelectedItem();
+    Requirement requirement = sepGUI.getReqOfSelectedPrjGUI().getRequirementsTable().getSelectionModel().getSelectedItem();
     for (int i = 0; i < requirement.getTasks().size(); i++)
     {
       table.getItems().add(requirement.getTasks().get(i));
