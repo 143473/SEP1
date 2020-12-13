@@ -1,9 +1,14 @@
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 
@@ -27,7 +32,7 @@ public class ReqOfSelectedPrjGUI
   private TextField search;
 
   private Label projectLabel;
-  private Label projectName;
+  private Text projectName;
   private Label tableTitle;
   private Label searchLabel;
 
@@ -44,13 +49,15 @@ public class ReqOfSelectedPrjGUI
     add = new Button("Add");
     manage = new Button("Manage");
     search = new TextField();
-    projectName = new Label();
-    projectName.getStyleClass().add("heading");
+    projectLabel = new Label("Project: ");
+    projectLabel.setFont(Font.font("Calibri", FontWeight.BOLD, 20));
+    projectName = new Text();
+    projectName.setFont(Font.font("Calibri", FontWeight.BOLD, FontPosture.ITALIC, 20));
 
     table = new TableView<Requirement>();
 
     projectNamePane = new HBox(5);
-    projectNamePane.getChildren().addAll(projectName);
+    projectNamePane.getChildren().addAll(projectLabel, projectName);
 
     continueButton = new Button("Continue");
     goBackButton = new Button("Go Back");
@@ -70,32 +77,32 @@ public class ReqOfSelectedPrjGUI
     topButtons = new HBox(5);
     topButtons.getChildren().addAll(add,manage);
 
-   /* TableColumn idCol = new TableColumn<Requirement, Integer>("ID");
-    idCol.setCellValueFactory(new PropertyValueFactory("id"));*/
+    TableColumn idCol = new TableColumn<Requirement, Integer>("ID");
+    idCol.setCellValueFactory(new PropertyValueFactory("id"));
     TableColumn nameCol = new TableColumn<Requirement, String>("Name");
     nameCol.setCellValueFactory(new PropertyValueFactory("name"));
     TableColumn userStoryCol = new TableColumn<Requirement, String>("User Story");
     userStoryCol.setCellValueFactory(new PropertyValueFactory("userStory"));
     TableColumn estimationCol = new TableColumn<Requirement, Integer>("Estimated Time");
     estimationCol.setCellValueFactory(new PropertyValueFactory("estimatedTime"));
+    TableColumn imporanceCol = new TableColumn<Requirement, Integer>("Importance");
+    imporanceCol.setCellValueFactory(new PropertyValueFactory("importance"));
     TableColumn deadlineCol = new TableColumn<Requirement, MyDate>("Deadline");
     deadlineCol.setCellValueFactory(new PropertyValueFactory("deadline"));
     TableColumn statusCol = new TableColumn<Requirement, ProgressStatus>("Status");
     statusCol.setCellValueFactory(new PropertyValueFactory("status"));
-    /*TableColumn totalHoursCol = new TableColumn("Total Hours");
-    totalHoursCol.setCellValueFactory(new PropertyValueFactory("totalHours"));
-    TableColumn teammembersCol = new TableColumn("Team Members");
-    teammembersCol.setCellValueFactory(new PropertyValueFactory("teammembers"));*/
-    TableColumn responsibleCol = new TableColumn<Requirement, AssignedEmployee>("Responsible Team Member");
+    TableColumn totalHoursCol = new TableColumn("Spent time");
+    totalHoursCol.setCellValueFactory(new PropertyValueFactory("spentTime"));
+    TableColumn responsibleCol = new TableColumn<Requirement, AssignedEmployee>("Responsible Employee");
     responsibleCol.setCellValueFactory(new PropertyValueFactory("responsibleEmployee"));
 
-    table.getColumns().setAll(nameCol,userStoryCol,estimationCol,deadlineCol,statusCol);
+    table.getColumns().setAll(idCol, nameCol,userStoryCol,statusCol,estimationCol,imporanceCol,deadlineCol,totalHoursCol,responsibleCol);
     table.setPrefWidth(450);
     table.setPrefHeight(300);
     table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
     mainPane = new VBox(5);
-
+    mainPane.setPadding(new Insets(25, 25, 25, 25));
     mainPane.getChildren().addAll(projectNamePane, searchPane,topButtons, tableTitle, table,bottomButtons);
 
 
@@ -104,11 +111,10 @@ public class ReqOfSelectedPrjGUI
   {
     table.getItems().clear();
     ProjectList projects = projectsAdapter.getAllProjects();
-    int index = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedIndex();
-    Project selectedProject = projectsAdapter.getSelectedProject(index);
-    for (int i = 0; i < selectedProject.getRequirements().size(); i++)
+    Project project = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem();
+    for (int i = 0; i < project.getRequirements().size(); i++)
     {
-      table.getItems().add(selectedProject.getRequirements().get(i));
+      table.getItems().add(project.getRequirements().get(i));
     }
   }
   public boolean callContinueButton(){
@@ -141,7 +147,7 @@ public class ReqOfSelectedPrjGUI
     }
   }
 
-  public Label getProjectName()
+  public Text getProjectName()
   {
     return projectName;
   }

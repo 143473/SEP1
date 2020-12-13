@@ -120,7 +120,26 @@ public class TasksOfReqOfPrjGUI
     return manage;
   }
 
-  private class MyActionListener implements EventHandler<ActionEvent> {
+  public boolean callContinueButton(){
+    boolean gogo = true;
+    if(sepGUI.getReqOfSelectedPrjGUI().getTable().getSelectionModel().getSelectedItem()== null)
+    {
+      Alert alert = new Alert(Alert.AlertType.WARNING);
+      alert.setHeaderText("Warning");
+      alert.setContentText("No requirement was chosen!");
+      alert.showAndWait();
+      gogo = false;
+    }
+    else
+    {
+      projectName.setText(sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem().getName());
+      requirementName.setText(sepGUI.getReqOfSelectedPrjGUI().getTable().getSelectionModel().getSelectedItem().toString());
+      gogo =true;
+    }
+    return gogo;
+  }
+
+    private class MyActionListener implements EventHandler<ActionEvent> {
     public void handle(ActionEvent e) {
       if (e.getSource() == searchButton)
       {

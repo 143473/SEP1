@@ -19,6 +19,7 @@ public class AddRequirementGUI
   private TextField month;
   private TextField year;
 
+  private ChoiceBox<Integer> importanceBox;
   private ChoiceBox<String> statusBox;
   private ChoiceBox<AssignedEmployee> responsibleEmployeeBox;
 
@@ -28,6 +29,7 @@ public class AddRequirementGUI
   private Label deadlineLabel;
   private Label statusLabel;
   private Label responsibleEmployeeLabel;
+  private Label importanceLabel;
 
   private Button save;
   private Button cancel;
@@ -38,7 +40,6 @@ public class AddRequirementGUI
   private HBox datePane;
 
   public AddRequirementGUI(ProjectsAdapter projectsAdapter, SepGUI sepGUI){
-
     this.projectsAdapter = projectsAdapter;
     projectList = projectsAdapter.getAllProjects();
     this.sepGUI = sepGUI;
@@ -54,6 +55,11 @@ public class AddRequirementGUI
 
     estimation = new TextField();
     estimatedTimeLabel = new Label("Estimation in hours");
+
+    importanceLabel = new Label("Importance");
+    importanceBox = new ChoiceBox<Integer>();
+    importanceBox.getItems().addAll(1, 2, 3);
+    importanceBox.getSelectionModel().selectFirst();
 
     deadlineLabel = new Label("Deadline");
     day = new TextField();
@@ -94,6 +100,7 @@ public class AddRequirementGUI
     requirementForm.addRow(3,deadlineLabel,datePane);
     requirementForm.addRow(4,statusLabel,statusBox);
     requirementForm.addRow(5,responsibleEmployeeLabel,responsibleEmployeeBox);
+    requirementForm.addRow(6, importanceLabel, importanceBox);
 
     bottomButtons = new HBox(5);
     bottomButtons.getChildren().addAll(save,cancel);
@@ -108,6 +115,7 @@ public class AddRequirementGUI
   public void setProjectList() {
     projectList = projectsAdapter.getAllProjects();
   }
+
   public void initializeCurrentProject(){
     currentProject = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem();
 
@@ -195,10 +203,6 @@ public class AddRequirementGUI
             Integer.parseInt(day.getText().replaceFirst("^0+(?!$)", "")),
             Integer.parseInt(month.getText().replaceFirst("^0+(?!$)", "")),
             Integer.parseInt(year.getText().replaceFirst("^0+(?!$)", "")));
-        requirement = new Requirement(name.getText(), userStory.getText(),
-            Double.parseDouble(estimation.getText().replaceFirst("^0+(?!$)", "")),
-            deadline);
-        requirement.setProgressStatus(statusBox.getSelectionModel().getSelectedItem());
 
         if (!deadline.isValidDate())
         {
@@ -212,6 +216,14 @@ public class AddRequirementGUI
         {
           ProjectList projectList = projectsAdapter.getAllProjects();
           Project project = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem();
+
+          double estimationTime = Double.parseDouble(estimation.getText().replaceFirst("^0+(?!$)", ""));
+
+          requirement = new Requirement(name.getText(), userStory.getText(), estimationTime,
+                 importanceBox.getValue().intValue(), responsibleEmployeeBox.getSelectionModel().getSelectedItem(),
+                  deadline, project.getRequirements().size()+1, statusBox.getValue());
+          requirement.setProgressStatus(statusBox.getSelectionModel().getSelectedItem());
+
 
           boolean equals = false;
           for (int i = 0; i < project.getRequirements().size(); i++) {
@@ -244,7 +256,6 @@ public class AddRequirementGUI
   public VBox getMainPane(){
     initializeCurrentProject();
     return mainPane;
-
   }
 
   public Button getCancel(){
@@ -253,6 +264,7 @@ public class AddRequirementGUI
   public Button getSave(){
     return save;
   }
+
   public void clearFields(){
     name.setText("");
     userStory.setText("");

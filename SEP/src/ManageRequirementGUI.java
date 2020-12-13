@@ -1,10 +1,10 @@
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.geometry.Insets;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 public class ManageRequirementGUI
 {
@@ -16,25 +16,33 @@ public class ManageRequirementGUI
   private TextField day;
   private TextField month;
   private TextField year;
+
   private ChoiceBox status;
   private ChoiceBox responsibleEmployee;
+
+  private TableView<Project> projectsTable;
+  private TableColumn projectCol;
+
   private Label reqname;
   private Label userstorytxt;
   private Label estimatedT;
   private Label deadline;
   private Label statustxt;
   private Label responsibleEmp;
+
   private Button save;
   private Button cancel;
   private Button remove;
+
   private VBox mainPane;
   private HBox bottomButtons;
   private GridPane requirementForm;
   private HBox datePane;
+
   public ManageRequirementGUI(){
 
   title = new Label("Manage Requirements");
-  title.getStyleClass().add("heading");
+  title.setFont(Font.font("Calibri", FontWeight.BOLD, 20));
   name = new TextField();
   userstory = new TextField();
   estimation = new TextField();
@@ -79,6 +87,7 @@ public class ManageRequirementGUI
 
 
     mainPane = new VBox(5);
+    mainPane.setPadding(new Insets(25, 25, 25, 25));;
     mainPane.getChildren().addAll(title,requirementForm,bottomButtons);
 
 

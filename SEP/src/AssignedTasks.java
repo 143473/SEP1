@@ -1,5 +1,4 @@
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * A class representing the AssignedTask of the employee with a first name, last name and country.
@@ -20,7 +19,7 @@ public class AssignedTasks extends Task implements Serializable {
      * @param date the date the task was worked on
      */
     public AssignedTasks(String name, String description, MyDate deadline, double estimatedTime, AssignedEmployee responsibleEmployee, AssignedEmployee assignedEmployee, MyDate date){
-        super(name, description, deadline, estimatedTime, responsibleEmployee);
+        super(name, description, estimatedTime, deadline);
         spentTime = 0;
         this.assignedEmployee = assignedEmployee;
         this.date = date;
