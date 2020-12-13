@@ -227,11 +227,6 @@ public class CreateProjectGUI2
       for (int i = 0; i < teamMembersTable.getItems().size(); i++) {
         chosenEmployees.addEmployee(teamMembersTable.getItems().get(i));
       }
-      /*for (int i = 0; i < employees.size(); i++) {
-        if(chosenEmployees.containsEmployee(employees.get(i))){
-          employees.removeEmployee(employees.get(i));
-        }
-      }*/
       for (int i = 0; i < chosenEmployees.size(); i++)
       {
         employees.removeEmployee(chosenEmployees.get(i));

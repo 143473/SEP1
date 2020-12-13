@@ -72,36 +72,44 @@ public class CreateProjectGUI1
    * @return boolean if all the values are correct, true if they are, false otherwise
    */
   public boolean callContinueButton(){
+    boolean OK = true;
     if(inputName.getText().equals("") || inputName.getText().trim().isEmpty()){
       Alert alert = new Alert(Alert.AlertType.WARNING);
       alert.setHeaderText("Invalid input");
       alert.setContentText("Project name cannot be empty!");
       alert.showAndWait();
-      return false;
+      OK = false;
     }
     else if(inputDescription.getText().equals("") || inputDescription.getText().trim().isEmpty()){
       Alert alert = new Alert(Alert.AlertType.WARNING);
       alert.setHeaderText("Invalid input");
       alert.setContentText("Project description cannot be empty!");
       alert.showAndWait();
-      return false;
+      OK = false;
     }
-    else {
+    if(OK) {
       ProjectList projectList = projectsAdapter.getAllProjects();
       Project newProject = new Project(inputName.getText(), inputDescription.getText());
-      if(!projectList.containsProject(newProject)){
-        projectList.addProject(newProject);
-        projectsAdapter.saveProjects(projectList);
+      boolean contains = false;
+      for (int i = 0; i < projectList.size(); i++) {
+        if(projectList.get(i).getName().equals(newProject.getName())){
+          contains = true;
+        }
       }
-      else{
+      if(contains){
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setHeaderText("Duplicate project");
         alert.setContentText("This project already exists!");
         alert.showAndWait();
-        return false;
+        OK = false;
       }
+      else{
+        projectList.addProject(newProject);
+        projectsAdapter.saveProjects(projectList);
+      }
+
     }
-    return true;
+    return OK;
   }
 
 

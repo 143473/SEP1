@@ -127,33 +127,34 @@ public class ChangeTeamMembersGUI {
 
   public void initializeTeamMembersTable(){
     teamMembersTable.getItems().clear();
+    for (int i = 0; i < employeeList.size(); i++) {
+      teamMembersTable.getItems().add(employeeList.get(i));
+    }
+
+    /*
+    teamMembersTable.getItems().clear();
     AssignedEmployeeList chosenAssignedEmployees = currentProject.getAssignedEmployeeList();
     for (int i = 0; i < chosenAssignedEmployees.size(); i++) {
       teamMembersTable.getItems().add(chosenAssignedEmployees.get(i));
-    }
+    }*/
   }
 
   public void initializeListView()
   {
     employeeListView.getItems().clear();
     EmployeeList employees = employeeAdapter.getAllEmployees();
-    if(currentProject != null){
-      AssignedEmployeeList chosenAssignedEmployees = currentProject.getAssignedEmployeeList();
       EmployeeList chosenEmployees = new EmployeeList();
-      for (int i = 0; i < chosenAssignedEmployees.size(); i++) {
-        chosenEmployees.addEmployee(new Employee(chosenAssignedEmployees.get(i).getFirstName(), chosenAssignedEmployees.get(i).getLastName(),
-                chosenAssignedEmployees.get(i).getDateOfBirth()));
+      for (int i = 0; i < teamMembersTable.getItems().size(); i++) {
+        chosenEmployees.addEmployee(teamMembersTable.getItems().get(i));
       }
-      for (int i = 0; i < employees.size(); i++) {
-        if(chosenEmployees.containsEmployee(employees.get(i))){
-          employees.removeEmployee(employees.get(i));
-        }
+      for (int i = 0; i < chosenEmployees.size(); i++)
+      {
+        employees.removeEmployee(chosenEmployees.get(i));
       }
       for (int i = 0; i < employees.size(); i++)
       {
         employeeListView.getItems().add(employees.get(i));
       }
-    }
   }
 
   public boolean callAdd()
@@ -227,26 +228,44 @@ public class ChangeTeamMembersGUI {
 
           if (alert.getResult() == ButtonType.YES) {
             System.out.println(projectsAdapter.getAllProjects().getProject(currentProject));
-            if (teamMembersTable.getSelectionModel().getSelectedItem().equals(projectsAdapter.getAllProjects().getProject(currentProject).getProductOwner())
-                    || teamMembersTable.getSelectionModel().getSelectedItem().equals(projectsAdapter.getAllProjects().getProject(currentProject).getProjectCreator())
-                    || teamMembersTable.getSelectionModel().getSelectedItem().equals(projectsAdapter.getAllProjects().getProject(currentProject).getScrumMaster())) {
-              Alert alert2 = new Alert(Alert.AlertType.WARNING);
-              alert2.setHeaderText("Warning");
-              alert2.setContentText("You cannot delete an employee with a status!");
-              alert2.showAndWait();
+            if(projectsAdapter.getAllProjects().getProject(currentProject) != null){
+              if (teamMembersTable.getSelectionModel().getSelectedItem().equals(projectsAdapter.getAllProjects().getProject(currentProject).getProductOwner())
+                      || teamMembersTable.getSelectionModel().getSelectedItem().equals(projectsAdapter.getAllProjects().getProject(currentProject).getProjectCreator())
+                      || teamMembersTable.getSelectionModel().getSelectedItem().equals(projectsAdapter.getAllProjects().getProject(currentProject).getScrumMaster())) {
+                Alert alert2 = new Alert(Alert.AlertType.WARNING);
+                alert2.setHeaderText("Warning");
+                alert2.setContentText("You cannot delete an employee with a status!");
+                alert2.showAndWait();
+              }
+              else {
+                ProjectList allProjects = projectsAdapter.getAllProjects();
+                Project changedProject = allProjects.getProject(currentProject);
+                changedProject.removeTeamMember(teamMembersTable.getSelectionModel().getSelectedItem());
+                projectsAdapter.saveProjects(allProjects);
+                currentProject.removeTeamMember(teamMembersTable.getSelectionModel().getSelectedItem());
+
+                initializeTeamMembersTable();
+                initializeListView();
+
+                Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
+                alert2.setHeaderText("Editing successful");
+                alert2.setContentText("Changes were saved successfully!");
+                alert2.showAndWait();
+              }
             }
             else {
               ProjectList allProjects = projectsAdapter.getAllProjects();
               Project changedProject = allProjects.getProject(currentProject);
-              changedProject.removeTeamMember(teamMembersTable.getSelectionModel().getSelectedItem());
+              if(changedProject != null){
+                changedProject.removeTeamMember(teamMembersTable.getSelectionModel().getSelectedItem());
+              }
+
               projectsAdapter.saveProjects(allProjects);
               currentProject.removeTeamMember(teamMembersTable.getSelectionModel().getSelectedItem());
 
               initializeTeamMembersTable();
               initializeListView();
 
-              initializeTeamMembersTable();
-              initializeListView();
               Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
               alert2.setHeaderText("Editing successful");
               alert2.setContentText("Changes were saved successfully!");
@@ -290,6 +309,7 @@ public class ChangeTeamMembersGUI {
     if(OK){
       ProjectList allProjects = projectsAdapter.getAllProjects();
       /*Project changedProject = allProjects.getProject(currentProject);*/
+      System.out.println(currentProject.getName());
       allProjects.removeProject(currentProject.getName());
       allProjects.addProject(currentProject);
       /*System.out.println(currentProject);
