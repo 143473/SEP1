@@ -113,8 +113,8 @@ public class SepGUI extends Application
     assignTasksGUI1 = new AssignTasksGUI1(projectsAdapter);
     assignTasksGUI2 = new AssignTasksGUI2(projectsAdapter,this);
     assignTasksGUI3 = new AssignTasksGUI3(this);
-    assignTasksGUI4 = new AssignTasksGUI4();
-    assignTasksGUI5 = new AssignTasksGUI5();
+    assignTasksGUI4 = new AssignTasksGUI4(this);
+    assignTasksGUI5 = new AssignTasksGUI5(this);
     reportTasksGUI1 = new ReportTasksGUI1(employeeAdapter);
     reportTasksGUI2 = new ReportTasksGUI2(this);
     reportTasksGUI3 = new ReportTasksGUI3();
@@ -320,6 +320,16 @@ public class SepGUI extends Application
   public ReportTasksGUI1 getReportTasksGUI1()
   {
     return reportTasksGUI1;
+  }
+
+  public AssignTasksGUI3 getAssignTasksGUI3()
+  {
+    return assignTasksGUI3;
+  }
+
+  public AssignTasksGUI4 getAssignTasksGUI4()
+  {
+    return assignTasksGUI4;
   }
 
   private class MyActionListener implements EventHandler<ActionEvent>
@@ -583,8 +593,8 @@ public class SepGUI extends Application
       }
       else if (e.getSource() == assignTasksGUI2.getGoBackButton())
       {
-        stackPane.getChildren().clear();
-        stackPane.getChildren().add(assignTasksGUI1.getMainPane());
+          stackPane.getChildren().clear();
+          stackPane.getChildren().add(assignTasksGUI1.getMainPane());
       }
 
         else if (e.getSource() == assignTasksGUI3.getGoBackButton())
@@ -594,8 +604,11 @@ public class SepGUI extends Application
       }
       else if (e.getSource() == assignTasksGUI3.getButtonContinue())
       {
-        stackPane.getChildren().clear();
-        stackPane.getChildren().add(assignTasksGUI4.getMainPane());
+        if(assignTasksGUI4.callContinueButton())
+        {
+          stackPane.getChildren().clear();
+          stackPane.getChildren().add(assignTasksGUI4.getMainPane());
+        }
       }
       else if (e.getSource() == assignTasksGUI4.getGoBackButton())
       {
@@ -609,8 +622,11 @@ public class SepGUI extends Application
       }
       else if (e.getSource() == assignTasksGUI4.getButtonContinue())
       {
-        stackPane.getChildren().clear();
-        stackPane.getChildren().add(assignTasksGUI5.getMainPane());
+        if (assignTasksGUI4.callContinueButton())
+        {
+          stackPane.getChildren().clear();
+          stackPane.getChildren().add(assignTasksGUI5.getMainPane());
+        }
       }
       else if (e.getSource() == assignTasksGUI5.getGoBackButton())
       {

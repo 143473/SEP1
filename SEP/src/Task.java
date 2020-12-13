@@ -80,7 +80,7 @@ public class Task implements Serializable
    * @param employee
    */
   public void setResponsibleEmployee(AssignedEmployee employee){
-  setResponsibleEmployee(employee);
+  this.responsibleEmployee = responsibleEmployee;
   }
 
   /**

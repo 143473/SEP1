@@ -1,4 +1,5 @@
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -17,7 +18,7 @@ public class AssignTasksGUI3 {
     private Label titleLabel;
     private Label tableLabel;
 
-    private TableView tasksTable;
+    private TableView<Task> tasksTable;
     private TableView.TableViewSelectionModel defaultSelectionModel;
     private TableColumn taskNameColumn;
     private TableColumn taskDescriptionColumn;
@@ -38,16 +39,18 @@ public class AssignTasksGUI3 {
         topPane = new HBox(400);
         topPane.getChildren().addAll(titleLabel);
 
-        tableLabel = new Label("Choose a requirement from the list");
+        tableLabel = new Label("Choose a task from the list");
 
         tasksTable = new TableView();
         tasksTable.setPrefHeight(290);
         tasksTable.setTableMenuButtonVisible(true);
 
         taskNameColumn = new TableColumn("Task Name");
+        taskNameColumn.setCellValueFactory(new PropertyValueFactory("name"));
         taskNameColumn.setPrefWidth(460);
 
         taskDescriptionColumn = new TableColumn("Task Description");
+        taskDescriptionColumn.setCellValueFactory(new PropertyValueFactory("description"));
         taskDescriptionColumn.setPrefWidth(500);
 
         taskNameColumn.setReorderable(false);
@@ -59,15 +62,16 @@ public class AssignTasksGUI3 {
         buttonContinue = new Button("Continue");
         goBackButton = new Button("Go back");
 
-        bottomButtons = new HBox(5);
+        bottomButtons = new HBox(8);
         bottomButtons.getChildren().addAll(buttonContinue, goBackButton);
 
-        mainPane = new VBox(10);
-        mainPane.getChildren().addAll(topPane, tasksTable,bottomButtons);
+        mainPane = new VBox(8);
+        mainPane.getChildren().addAll(topPane, tableLabel, tasksTable,bottomButtons);
     }
 
     public VBox getMainPane()
     {
+        initializeTable();
         return mainPane;
     }
 
@@ -80,6 +84,12 @@ public class AssignTasksGUI3 {
     {
         return goBackButton;
     }
+
+    public TableView<Task> getTasksTable()
+    {
+        return tasksTable;
+    }
+
     public boolean callContinueButton(){
         boolean gogo = true;
         if(sepGUI.getAssignTasksGUI2().getRequirementTable().getSelectionModel().getSelectedItem()==null)
@@ -99,4 +109,14 @@ public class AssignTasksGUI3 {
         }
         return gogo;
     }
+    private void initializeTable()
+    {
+        tasksTable.getItems().clear();
+        Requirement requirement = (Requirement)sepGUI.getAssignTasksGUI2().getRequirementTable().getSelectionModel().getSelectedItem();
+        for (int i = 0; i < requirement.getTasks().size(); i++)
+        {
+            tasksTable.getItems().add(requirement.getTasks().get(i));
+        }
+    }
+
 }

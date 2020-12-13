@@ -61,7 +61,7 @@ public class AssignTasksGUI1 {
 
         continueButton = new Button("Continue");
 
-        mainPane = new VBox(5);
+        mainPane = new VBox(8);
         mainPane.getChildren().addAll(topPane, tableLabel,assignTasksTable,continueButton);
     }
 

@@ -37,7 +37,7 @@ public class AssignTasksGUI2 {
         projectName = new Label();
         projectName.getStyleClass().add("heading");
 
-        topPane = new HBox(5);
+        topPane = new HBox(8);
         topPane.getChildren().addAll(projectName);
 
         tableLabel = new Label("Choose a requirement from the list");
@@ -46,10 +46,10 @@ public class AssignTasksGUI2 {
         requirementTable.setPrefHeight(290);
         requirementTable.setTableMenuButtonVisible(true);
 
-        requirementNameColumn = new TableColumn<Requirement, String>("Name");
+        requirementNameColumn = new TableColumn("Name");
         requirementNameColumn.setCellValueFactory(new PropertyValueFactory("name"));
         requirementNameColumn.setPrefWidth(460);
-        requirementDescriptionColumn = new TableColumn<Requirement, String>("User Story");
+        requirementDescriptionColumn = new TableColumn("User Story");
         requirementDescriptionColumn.setCellValueFactory(new PropertyValueFactory("userStory"));
         requirementDescriptionColumn.setPrefWidth(500);
 
@@ -59,11 +59,11 @@ public class AssignTasksGUI2 {
         continueButton = new Button("Continue");
         goBackButton = new Button("Go back");
 
-        bottomButtons = new HBox(5);
+        bottomButtons = new HBox(8);
         bottomButtons.getChildren().addAll(continueButton, goBackButton);
 
-        mainPane = new VBox(10);
-        mainPane.getChildren().addAll(topPane, requirementTable, bottomButtons);
+        mainPane = new VBox(8);
+        mainPane.getChildren().addAll(topPane, tableLabel, requirementTable, bottomButtons);
     }
 
     public TableView getRequirementTable()
