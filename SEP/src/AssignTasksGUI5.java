@@ -171,13 +171,39 @@ public class AssignTasksGUI5 {
                     .getSelectedItem();
                 Task task = sepGUI.getAssignTasksGUI3().getTasksTable().getSelectionModel().getSelectedItem();
                 AssignedTasksList assignedTaskList = assignedTasksAdapter.getAllAssignedTasks();
+                for (int i = 0; i < assignedTaskList.size(); i++)
+                {
+                    if(assignedTaskList.get(i).getAssignedEmployee().equals(assignedEmployee) &&
+                    assignedTaskList.get(i).getDate().equals(dateForTheTask))
+                    {
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setHeaderText("Invalid selection");
+                        alert.setContentText("Employee is already assigned to this task on " + dateForTheTask);
+                        alert.showAndWait();
+                        allValuesCorrect = false;
+                        break;
+                    }
+
+
+                }
+                if(allValuesCorrect ){
                 AssignedTasks assignedTask = new AssignedTasks(task.getName(),
                     task.getDescription(), task.getDeadline(), task.getEstimatedTime(),
                     task.getResponsibleEmployee(), assignedEmployee,
                     dateForTheTask, task.getId(), task.getStatus());
+
                 assignedTaskList.addAssignedTask(assignedTask);
+                System.out.println(assignedTask);
                 assignedTasksAdapter.saveAssignedTasks(assignedTaskList);
-                        /*if(!employeeList.contains(newEmployee)){
+                /*AssignedTasks assignedTask = new AssignedTasks(task.getName(),
+                    task.getDescription(), task.getDeadline(), task.getEstimatedTime(),
+                    task.getResponsibleEmployee(), assignedEmployee,
+                    dateForTheTask, task.getId(), task.getStatus());
+
+                assignedTaskList.addAssignedTask(assignedTask);
+                System.out.println(assignedTask);
+                assignedTasksAdapter.saveAssignedTasks(assignedTaskList);
+                        if(!employeeList.contains(newEmployee)){
                             employeeList.addEmployee(newEmployee);
                             employeeAdapter.saveEmployees(employeeList);
                             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -195,6 +221,13 @@ public class AssignTasksGUI5 {
                 allValuesCorrect = true;
             }
         }
-        return allValuesCorrect;
+
+       } return allValuesCorrect;
     }
-}
+    public void clearFields()
+    {
+        dayField.setText("");
+        monthField.setText("");
+        yearField.setText("");
+    }
+    }
