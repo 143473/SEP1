@@ -65,7 +65,7 @@ public class AssignedEmployee extends Employee implements Serializable {
      * Gets the employee status of the employee
      * @return the status of the employee
      */
-    public int getStatusInt() {
+    public int getStatusNumber() {
         return statusNumber;
     }
 
@@ -79,5 +79,13 @@ public class AssignedEmployee extends Employee implements Serializable {
     public String toString(){
 
         return getFirstName() + " " + getLastName()+ " (" + getStatus()+")";
+    }
+
+    public boolean equals(Object obj){
+        if(!(obj instanceof AssignedEmployee)){
+            return false;
+        }
+        AssignedEmployee temp = (AssignedEmployee) obj;
+        return super.equals(temp) && temp.getStatus().equals(status) && temp.getStatusNumber() == statusNumber;
     }
 }

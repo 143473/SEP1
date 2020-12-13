@@ -159,7 +159,7 @@ public class SepGUI extends Application
     menuBar.getMenus()
         .addAll(fileMenu, projectsMenu, employeesMenu, assignedTasksMenu);
 
-    Font font = Font.font("Courier New", FontWeight.BOLD,  60);
+    Font font = Font.font("Bauhaus", FontWeight.BOLD,  60);
 
     companyName = new Label("ColourIT");
     companyName.setFont(font);

@@ -136,10 +136,19 @@ public class ReqOfSelectedPrjGUI
       alert.showAndWait();
       gogo = false;
     }
-    else
+    if(gogo){
+      if(projectsAdapter.getSelectedProject(sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedIndex()).getAssignedEmployeeList().size() == 0){
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setHeaderText("Warning");
+        alert.setContentText("Chosen project does not have any assigned employees!\nYou have to assign employees before adding requirements!");
+        alert.showAndWait();
+        gogo = false;
+      }
+    }
+
+    if(gogo)
     {
       projectName.setText(sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem().getName());
-      gogo =true;
     }
     return gogo;
   }
@@ -156,7 +165,7 @@ public class ReqOfSelectedPrjGUI
     }
   }
 
-  public TableView<Requirement> getRequirementsTable()
+  public TableView<Requirement> getTable()
   {
     return requirementsTable;
   }

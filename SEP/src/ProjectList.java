@@ -44,7 +44,19 @@ public class ProjectList implements Serializable
   }
 
   public Project get(int index){
-    return projects.get(index);
+    if(index < projects.size()){
+      return projects.get(index);
+    }
+    return null;
+  }
+
+  public Project get(Project project){
+    for (int i = 0; i < projects.size(); i++) {
+      if(projects.get(i).equals(project)){
+        return projects.get(i);
+      }
+    }
+    return null;
   }
 
   public String toString(){

@@ -134,6 +134,7 @@ public class AddRequirementGUI
   }
 
   public boolean callSaveButton(){
+    int projectIndex = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedIndex();
     Requirement requirement;
     MyDate deadline;
     boolean allValuesCorrect = true;
@@ -145,17 +146,41 @@ public class AddRequirementGUI
       alert.showAndWait();
       allValuesCorrect =  false;
     }
-    else if(userStory.getText().equals("") || userStory.getText().trim().isEmpty()){
+    else{
+      for (int i = 0; i < projectsAdapter.getSelectedProject(projectIndex).getRequirements().size(); i++) {
+        if(projectsAdapter.getSelectedProject(projectIndex).getRequirements().get(i).getName().equals(name.getText())){
+          Alert alert = new Alert(Alert.AlertType.WARNING);
+          alert.setHeaderText("Warning");
+          alert.setContentText("This name of requirement for this project already exists!");
+          alert.showAndWait();
+          allValuesCorrect = false;
+        }
+      }
+    }
+
+    if(userStory.getText().equals("") || userStory.getText().trim().isEmpty()){
       Alert alert = new Alert(Alert.AlertType.WARNING);
       alert.setHeaderText("Invalid input");
       alert.setContentText("User story cannot be empty!");
       alert.showAndWait();
       allValuesCorrect = false;
     }
-    else if(estimation.getText().equals("") || estimation.getText().trim().isEmpty()){
+    else{
+      for (int i = 0; i < projectsAdapter.getSelectedProject(projectIndex).getRequirements().size(); i++) {
+        if(projectsAdapter.getSelectedProject(projectIndex).getRequirements().get(i).getUserStory().equals(userStory.getText())){
+          Alert alert = new Alert(Alert.AlertType.WARNING);
+          alert.setHeaderText("Warning");
+          alert.setContentText("This user story for this project already exists!");
+          alert.showAndWait();
+          allValuesCorrect = false;
+        }
+      }
+    }
+
+    if(estimation.getText().equals("") || estimation.getText().trim().isEmpty()){
       Alert alert = new Alert(Alert.AlertType.WARNING);
       alert.setHeaderText("Invalid input");
-      alert.setContentText("User story cannot be empty!");
+      alert.setContentText("Estimation cannot be empty!");
       alert.showAndWait();
       allValuesCorrect = false;
     }
@@ -176,7 +201,7 @@ public class AddRequirementGUI
     if(day.getText().isEmpty() || month.getText().isEmpty() || year.getText().isEmpty()){
       Alert alert = new Alert(Alert.AlertType.WARNING);
       alert.setHeaderText("Invalid input");
-      alert.setContentText("Date of birth cannot be empty!");
+      alert.setContentText("Deadline cannot be empty!");
       alert.showAndWait();
       allValuesCorrect= false;
     }
@@ -230,16 +255,15 @@ public class AddRequirementGUI
             if(project.getRequirements().get(i).equals(requirement)){
               equals = true;
               Alert alert = new Alert(Alert.AlertType.WARNING);
-              alert.setHeaderText("Duplicate project");
-              alert.setContentText("This project already exists!");
+              alert.setHeaderText("Duplicate requirement");
+              alert.setContentText("This requirement already exists!");
               alert.showAndWait();
               allValuesCorrect = false;
             }
           }
           if(!equals){
-            projectList.removeProject(project);
+
             project.addRequirement(requirement);
-            projectList.addProject(project);
             projectsAdapter.saveProjects(projectList);
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
