@@ -126,7 +126,7 @@ public class TasksOfReqOfPrjGUI
     {
       Alert alert = new Alert(Alert.AlertType.WARNING);
       alert.setHeaderText("Warning");
-      alert.setContentText("No requirement was chosen!");
+      alert.setContentText("No task was chosen!");
       alert.showAndWait();
       gogo = false;
     }
