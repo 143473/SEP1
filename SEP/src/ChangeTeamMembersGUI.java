@@ -225,16 +225,17 @@ public class ChangeTeamMembersGUI {
           alert.showAndWait();
 
           if (alert.getResult() == ButtonType.YES) {
-            if (teamMembersTable.getSelectionModel().getSelectedItem().equals(projectsAdapter.getAllProjects().get(currentProject).getProductOwner())
-                    || teamMembersTable.getSelectionModel().getSelectedItem().equals(projectsAdapter.getAllProjects().get(currentProject).getProjectCreator())
-                    || teamMembersTable.getSelectionModel().getSelectedItem().equals(projectsAdapter.getAllProjects().get(currentProject).getScrumMaster())) {
+            if (teamMembersTable.getSelectionModel().getSelectedItem().equals(projectsAdapter.getAllProjects().getProject(currentProject).getProductOwner())
+                    || teamMembersTable.getSelectionModel().getSelectedItem().equals(projectsAdapter.getAllProjects().getProject(currentProject).getProjectCreator())
+                    || teamMembersTable.getSelectionModel().getSelectedItem().equals(projectsAdapter.getAllProjects().getProject(currentProject).getScrumMaster())) {
               Alert alert2 = new Alert(Alert.AlertType.WARNING);
               alert2.setHeaderText("Warning");
               alert2.setContentText("You cannot delete an employee with a status!");
               alert2.showAndWait();
-            } else {
+            }
+            else {
               ProjectList allProjects = projectsAdapter.getAllProjects();
-              Project changedProject = allProjects.get(currentProject);
+              Project changedProject = allProjects.getProject(currentProject);
               changedProject.removeTeamMember(teamMembersTable.getSelectionModel().getSelectedItem());
               projectsAdapter.saveProjects(allProjects);
               currentProject.removeTeamMember(teamMembersTable.getSelectionModel().getSelectedItem());
@@ -285,7 +286,7 @@ public class ChangeTeamMembersGUI {
     }
     if(OK){
       ProjectList allProjects = projectsAdapter.getAllProjects();
-      Project changedProject = allProjects.get(currentProject);
+      Project changedProject = allProjects.getProject(currentProject);
       for (int i = 0; i < teamMembersTable.getItems().size(); i++) {
         if(!changedProject.getAssignedEmployeeList().containsEmployee(teamMembersTable.getItems().get(i))){
           changedProject.addTeamMember(teamMembersTable.getItems().get(i));

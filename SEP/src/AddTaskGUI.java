@@ -133,11 +133,6 @@ public class AddTaskGUI
   public void setProjectList() {
     projectList = projectsAdapter.getAllProjects();
   }
-  /*public void initializeCurrentRequirement(){
-    /*currentRequirement = sepGUI.getReqOfSelectedPrjGUI().getRequirementsTable().getSelectionModel().getSelectedItem();
-
-    title.setText("Task for:  " + currentRequirement.getName());
-  }*/
 
   public void initializeResponsibleEmployeeBox(){
 
@@ -172,7 +167,7 @@ public class AddTaskGUI
     else if(estimationField.getText().equals("") || estimationField.getText().trim().isEmpty()){
       Alert alert = new Alert(Alert.AlertType.WARNING);
       alert.setHeaderText("Invalid input");
-      alert.setContentText("User story cannot be empty!");
+      alert.setContentText("Estimation cannot be empty!");
       alert.showAndWait();
       allValuesCorrect = false;
     }
@@ -216,11 +211,6 @@ public class AddTaskGUI
                 Integer.parseInt(dayField.getText().replaceFirst("^0+(?!$)", "")),
                 Integer.parseInt(monthField.getText().replaceFirst("^0+(?!$)", "")),
                 Integer.parseInt(yearField.getText().replaceFirst("^0+(?!$)", "")));
-        task = new Task(nameField.getText(),
-                descriptionField.getText(),
-                Double.parseDouble(estimationField.getText().replaceFirst("^0+(?!$)", "")),
-                deadline);
-        task.setProgressStatus(statusBox.getSelectionModel().getSelectedItem());
 
         if (!deadline.isValidDate()) {
           Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -234,9 +224,16 @@ public class AddTaskGUI
           Project project = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem();
           Requirement requirement = sepGUI.getReqOfSelectedPrjGUI().getRequirementsTable().getSelectionModel().getSelectedItem();
 
+
+          double estimationTime = Double.parseDouble(estimationField.getText().replaceFirst("^0+(?!$)", ""));
+
+          Task newTask = new Task(nameField.getText(), descriptionField.getText(), estimationTime,
+                  deadline, requirement.getTasks().size()+1, statusBox.getSelectionModel().getSelectedItem(),
+                  responsibleEmployeeBox.getSelectionModel().getSelectedItem());
+
           boolean equals = false;
           for (int i = 0; i < requirement.getTasks().size(); i++) {
-            if(project.getRequirements().get(i).getTasks().get(i).equals(task)){
+            if(project.getRequirements().get(i).getTasks().get(i).equals(newTask)){
               equals = true;
               Alert alert = new Alert(Alert.AlertType.WARNING);
               alert.setHeaderText("Duplicate project");
@@ -246,11 +243,14 @@ public class AddTaskGUI
             }
           }
           if(!equals){
-            projectList.removeProject(project);
-            requirement.addTask(task);
-            project.addRequirement(requirement);
-            projectList.addProject(project);
+
+            requirement.addTask(newTask);
             projectsAdapter.saveProjects(projectList);
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText("Adding successful");
+            alert.setContentText("New task was successfully added to the list!");
+            alert.showAndWait();
           }
         }
       }

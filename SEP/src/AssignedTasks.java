@@ -18,8 +18,8 @@ public class AssignedTasks extends Task implements Serializable {
      * @param assignedEmployee the assigned employee
      * @param date the date the task was worked on
      */
-    public AssignedTasks(String name, String description, MyDate deadline, double estimatedTime, AssignedEmployee responsibleEmployee, AssignedEmployee assignedEmployee, MyDate date){
-        super(name, description, estimatedTime, deadline);
+    public AssignedTasks(String name, String description, MyDate deadline, double estimatedTime, AssignedEmployee responsibleEmployee, AssignedEmployee assignedEmployee, MyDate date, int id, String status){
+        super(name, description, estimatedTime, deadline, id, status, responsibleEmployee);
         spentTime = 0;
         this.assignedEmployee = assignedEmployee;
         this.date = date;
