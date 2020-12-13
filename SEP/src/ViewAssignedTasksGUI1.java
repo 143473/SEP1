@@ -13,6 +13,7 @@ import javafx.scene.layout.VBox;
 public class ViewAssignedTasksGUI1 {
 
     private EmployeeAdapter employeeAdapter;
+    private ProjectsAdapter projectsAdapter;
     private VBox mainPane;
     private HBox topPane;
 
@@ -27,15 +28,16 @@ public class ViewAssignedTasksGUI1 {
 
     private TableView<Employee> allAssignedTasksTable;
     private TableView.TableViewSelectionModel defaultSelectionModel;
-    private TableColumn<Employee, String> firstNameColumn;
-    private TableColumn<Employee, String> lastNameColumn;
-    private TableColumn<Employee, MyDate> birthdayColumn;
+    private TableColumn firstNameColumn;
+    private TableColumn lastNameColumn;
+    private TableColumn birthdayColumn;
 
     private MyActionListener listener;
 
-    public ViewAssignedTasksGUI1(EmployeeAdapter employeeAdapter){
+    public ViewAssignedTasksGUI1(EmployeeAdapter employeeAdapter,ProjectsAdapter projectsAdapter){
 
         listener = new MyActionListener();
+        this.projectsAdapter = projectsAdapter;
         this.employeeAdapter = employeeAdapter;
 
         titleLabel = new Label("View Assigned Tasks");

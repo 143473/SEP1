@@ -1,5 +1,6 @@
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -17,11 +18,13 @@ public class ViewAssignedTasksGUI2 {
 
 
     private Label employeeName;
+    private Label tableLabel;
 
     private ComboBox statusBox;
     private FlowPane comboPane;
 
-    private TableView allAssignedTasksTable;
+    private TableView<AssignedTasks> allAssignedTasksTable;
+    private AssignedTasksAdapter assignedTasksAdapter;
     private TableColumn projectNameColumn;
     private TableColumn requirementIDColumn;
     private TableColumn taskIDColumn;;
@@ -29,12 +32,15 @@ public class ViewAssignedTasksGUI2 {
 
     private Button goBack;
 
-    public ViewAssignedTasksGUI2(SepGUI sepGUI){
+    public ViewAssignedTasksGUI2(SepGUI sepGUI,AssignedTasksAdapter assignedTasksAdapter){
 
+        this.assignedTasksAdapter = assignedTasksAdapter;
         this.sepGUI = sepGUI;
         employeeName = new Label();
         employeeName.getStyleClass().add("heading");
         employeeName.setPrefWidth(700);
+
+        tableLabel = new Label("List of Assigned Tasks");
 
         statusBox = new ComboBox<String>();
         statusBox.getItems().addAll(
@@ -55,16 +61,20 @@ public class ViewAssignedTasksGUI2 {
         allAssignedTasksTable.setPrefHeight(290);
         allAssignedTasksTable.setTableMenuButtonVisible(true);
 
-        projectNameColumn = new TableColumn("Project Name");
+        projectNameColumn = new TableColumn<AssignedTasks, Project>("Project Name");
+        projectNameColumn.setCellValueFactory(new PropertyValueFactory<AssignedTasks, Project>("name"));
         projectNameColumn.setPrefWidth(500);
 
-        requirementIDColumn = new TableColumn("Requirement ID");
+        requirementIDColumn = new TableColumn<AssignedTasks, Requirement>("Requirement ID");
+        projectNameColumn.setCellValueFactory(new PropertyValueFactory<AssignedTasks, Requirement>("name"));
         requirementIDColumn.setPrefWidth(150);
 
         taskIDColumn = new TableColumn("Task ID");
+        projectNameColumn.setCellValueFactory(new PropertyValueFactory<AssignedTasks, Integer>("id"));
         taskIDColumn.setPrefWidth(150);
 
         dateColumn = new TableColumn("Date");
+        projectNameColumn.setCellValueFactory(new PropertyValueFactory<AssignedTasks, MyDate>("date"));
         dateColumn.setPrefWidth(200);
 
         projectNameColumn.setReorderable(false);
@@ -83,18 +93,32 @@ public class ViewAssignedTasksGUI2 {
         hBoxPaneButton.getChildren().addAll(goBack);
 
         mainPane = new VBox(10);
-        mainPane.getChildren().addAll(topPane, allAssignedTasksTable, hBoxPaneButton);
+        mainPane.getChildren().addAll(topPane, tableLabel,allAssignedTasksTable, hBoxPaneButton);
     }
 
     public VBox getMainPane()
     {
+        initializeTable();
         return mainPane;
     }
+    private void initializeTable()
+    {
+        allAssignedTasksTable.getItems().clear();
+        AssignedEmployee assignedEmployee = (AssignedEmployee) sepGUI.getViewAssignedTasksGUI1().getAllAssignedTasksTable()
+            .getSelectionModel().getSelectedItem();
+        AssignedTasksList assignedTasksList = assignedTasksAdapter.getAllTasksOnEmployee(assignedEmployee);
 
+        for (int i = 0; i < assignedTasksList.size(); i++)
+        {
+            allAssignedTasksTable.getItems().add(assignedTasksList.get(i));
+        }
+    }
     public Button getGoBack()
     {
         return goBack;
     }
+
+
     public boolean callContinueButton(){
         boolean gogo = true;
         if(sepGUI.getViewAssignedTasksGUI1().getAllAssignedTasksTable().getSelectionModel().getSelectedItem()== null)

@@ -72,4 +72,10 @@ public class AssignedTasks extends Task implements Serializable {
                 date.equals(other.date) &&
                 assignedEmployee.equals(other.assignedEmployee);
     }
+
+    @Override public String toString()
+    {
+        return "AssignedTasks{" + "spentTime=" + spentTime + ", date=" + date
+            + ", assignedEmployee=" + assignedEmployee + '}';
+    }
 }
