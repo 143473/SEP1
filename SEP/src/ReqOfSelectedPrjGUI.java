@@ -116,6 +116,12 @@ public class ReqOfSelectedPrjGUI
 
 
   }
+
+  public TableView<Requirement> getRequirementsTable()
+  {
+    return requirementsTable;
+  }
+
   public void initializeTable()
   {
     requirementsTable.getItems().clear();
