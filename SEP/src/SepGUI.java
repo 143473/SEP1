@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 /**
@@ -158,9 +159,10 @@ public class SepGUI extends Application
     menuBar.getMenus()
         .addAll(fileMenu, projectsMenu, employeesMenu, assignedTasksMenu);
 
-    Font fontSize = new Font("Courier New", 60);
+    Font font = Font.font("Courier New", FontWeight.BOLD,  60);
+
     companyName = new Label("ColourIT");
-    companyName.setFont(fontSize);
+    companyName.setFont(font);
 
     logo = new Image("vialogoah.gif");
     logoView = new ImageView(logo);
