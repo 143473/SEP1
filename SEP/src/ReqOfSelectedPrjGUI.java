@@ -77,26 +77,26 @@ public class ReqOfSelectedPrjGUI
     topButtons = new HBox(5);
     topButtons.getChildren().addAll(add,manage);
 
-   /* TableColumn idCol = new TableColumn<Requirement, Integer>("ID");
-    idCol.setCellValueFactory(new PropertyValueFactory("id"));*/
+    TableColumn idCol = new TableColumn<Requirement, Integer>("ID");
+    idCol.setCellValueFactory(new PropertyValueFactory("id"));
     TableColumn nameCol = new TableColumn<Requirement, String>("Name");
     nameCol.setCellValueFactory(new PropertyValueFactory("name"));
     TableColumn userStoryCol = new TableColumn<Requirement, String>("User Story");
     userStoryCol.setCellValueFactory(new PropertyValueFactory("userStory"));
     TableColumn estimationCol = new TableColumn<Requirement, Integer>("Estimated Time");
     estimationCol.setCellValueFactory(new PropertyValueFactory("estimatedTime"));
+    TableColumn imporanceCol = new TableColumn<Requirement, Integer>("Importance");
+    imporanceCol.setCellValueFactory(new PropertyValueFactory("importance"));
     TableColumn deadlineCol = new TableColumn<Requirement, MyDate>("Deadline");
     deadlineCol.setCellValueFactory(new PropertyValueFactory("deadline"));
     TableColumn statusCol = new TableColumn<Requirement, ProgressStatus>("Status");
     statusCol.setCellValueFactory(new PropertyValueFactory("status"));
-    /*TableColumn totalHoursCol = new TableColumn("Total Hours");
-    totalHoursCol.setCellValueFactory(new PropertyValueFactory("totalHours"));
-    TableColumn teammembersCol = new TableColumn("Team Members");
-    teammembersCol.setCellValueFactory(new PropertyValueFactory("teammembers"));
-    TableColumn responsibleCol = new TableColumn<Requirement >("Responsible Team Member");
-    responsibleCol.setCellValueFactory(new PropertyValueFactory("responsibleTeamMember"));*/
+    TableColumn totalHoursCol = new TableColumn("Spent time");
+    totalHoursCol.setCellValueFactory(new PropertyValueFactory("spentTime"));
+    TableColumn responsibleCol = new TableColumn<Requirement, AssignedEmployee>("Responsible Employee");
+    responsibleCol.setCellValueFactory(new PropertyValueFactory("responsibleEmployee"));
 
-    table.getColumns().setAll(nameCol,userStoryCol,estimationCol,deadlineCol,statusCol);
+    table.getColumns().setAll(idCol, nameCol,userStoryCol,statusCol,estimationCol,imporanceCol,deadlineCol,totalHoursCol,responsibleCol);
     table.setPrefWidth(450);
     table.setPrefHeight(300);
     table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);

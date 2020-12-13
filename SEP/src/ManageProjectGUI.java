@@ -240,11 +240,6 @@ public class ManageProjectGUI
           int index = projectsTable.getSelectionModel().getSelectedIndex();
           if (alert.getResult() == ButtonType.YES)
           {
-            /*
-            ProjectList allProjects = projectsAdapter.getAllProjects();
-            allProjects.removeProject(getSelectedProject());
-            projectsAdapter.saveProjects(allProjects);*/
-
             projectsAdapter.deleteProject(index);
 
             initializeTable();

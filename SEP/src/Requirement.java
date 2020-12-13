@@ -11,20 +11,11 @@ public class Requirement implements Serializable
   private ArrayList<Task> tasks;
   private MyDate deadline;
   private double spentTime;
-  private AssignedEmployeeList employeeList;
   private AssignedEmployee responsibleEmployee;
 
 
-  /**
-   * Six-argument constructor that also sets the importance of a requirement
-   * @param name
-   * @param userStory
-   * @param estimatedTime
-   * @param importance
-   * @param responsibleEmployee
-   * @param deadline
-   */
-  public Requirement(String name, String userStory, double estimatedTime, int importance, AssignedEmployee responsibleEmployee, MyDate deadline)
+
+  public Requirement(String name, String userStory, double estimatedTime, int importance, AssignedEmployee responsibleEmployee, MyDate deadline, int id, String status)
   {
     this.name = name;
     this.userStory = userStory;
@@ -33,23 +24,22 @@ public class Requirement implements Serializable
     this.responsibleEmployee = responsibleEmployee;
     this.deadline = deadline;
     tasks = new ArrayList<Task>();
+    this.id = id;
+    spentTime = 0;
+    this.status = status;
   }
 
-  /**
-   * Five-parameter constructor that does not set the importance of a requirement(To be set later)
-   * @param name
-   * @param userStory
-   * @param estimatedTime
-   * @param deadline
-   */
-  public Requirement(String name, String userStory, double estimatedTime, MyDate deadline)
+
+  public Requirement(String name, String userStory, double estimatedTime, MyDate deadline, int id)
   {
     this.name = name;
     this.userStory = userStory;
     this.estimatedTime = estimatedTime;
     this.deadline = deadline;
-    importance = 0;
+    importance = 1;
     tasks = new ArrayList<Task>();
+    status = "Not started";
+    spentTime = 0;
   }
 
   public String getName()
@@ -186,7 +176,7 @@ public class Requirement implements Serializable
    */
   public AssignedEmployee getResponsibleEmployee()
   {
-   return getResponsibleEmployee();
+   return responsibleEmployee;
   }
 
   /**
@@ -222,15 +212,6 @@ public class Requirement implements Serializable
   this.tasks.remove(task);
   }
 
-  /**
-   * Gets list of all members that are working on that requirement
-   *
-   * @return
-   */
-  public AssignedEmployeeList getWorkingMembers()
-  {
-  return employeeList;
-  }
 
   /**
    *
@@ -238,12 +219,21 @@ public class Requirement implements Serializable
    */
   public Requirement copy()
   {
-    if(importance!=0){
-      return new Requirement(name, userStory, estimatedTime, importance, getResponsibleEmployee(), deadline);
-    }else return new Requirement(name, userStory, estimatedTime, deadline);
+    if(importance!=1){
+      return new Requirement(name, userStory, estimatedTime, importance, responsibleEmployee, deadline, id, status);
+    }else return new Requirement(name, userStory, estimatedTime, deadline, id);
   }
 
   public ArrayList<Task> getTasks(){
     return tasks;
   }
+
+  public int getId(){
+    return id;
+  }
+
+  public String toString(){
+    return name;
+  }
+
 }

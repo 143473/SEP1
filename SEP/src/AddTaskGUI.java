@@ -1,8 +1,5 @@
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -10,60 +7,100 @@ import javafx.scene.text.FontWeight;
 
 public class AddTaskGUI
 {
+  private ProjectsAdapter projectsAdapter;
+  private ProjectList projectList;
+  private SepGUI sepGUI;
+  private Project currentProject;
+
   private Label title;
-  private TextField name;
-  private TextField estimation;
-  private TextField day;
-  private TextField month;
-  private TextField year;
-  private ChoiceBox status;
-  private ChoiceBox responsibleEmployee;
-  private Label taskname;
-  private Label estimatedT;
+
+  private TextField nameField;
+  private TextField descriptionField;
+  private TextField estimationField;
+  private TextField dayField;
+  private TextField monthField;
+  private TextField yearField;
+
+  private ChoiceBox statusBox;
+  private ChoiceBox responsibleEmployeeBox;
+
+  private Label nameLabel;
+  private Label descriptionLabel;
+  private Label estimationLabel;
   private Label deadline;
-  private Label statustxt;
-  private Label responsibleEmp;
+  private Label statusLabel;
+  private Label responsibleEmployeeLabel;
+
   private Button save;
   private Button cancel;
   private Button remove;
-  private VBox mainPane;
-  private HBox bottomButtons;
 
-  public AddTaskGUI(){
+  private VBox mainPane;
+  private VBox vboxforlabels;
+  private VBox vbox;
+
+  private HBox bottomButtons;
+  private HBox hboxfordate;
+  private HBox hbox;
+
+
+  public AddTaskGUI(ProjectsAdapter projectsAdapter, SepGUI sepGUI){
 
     title = new Label("Add Task");
     title.setFont(Font.font("Calibri", FontWeight.BOLD, 20));
-    name = new TextField();
-    estimation = new TextField();
-    day = new TextField();
-    month = new TextField();
-    year = new TextField();
-    status = new ChoiceBox();
-    responsibleEmployee = new ChoiceBox();
-    taskname = new Label("Name");
-    estimatedT = new Label("Estimation");
+
+    nameLabel = new Label("Name");
+    nameField = new TextField();
+
+    descriptionLabel = new Label("Description");
+    descriptionField = new TextField();
+
+    estimationLabel = new Label("Estimation");
+    estimationField = new TextField();
+
     deadline = new Label("Deadline");
-    statustxt = new Label("Status");
-    responsibleEmp = new Label("Responsible Employee");
+    dayField = new TextField();
+    dayField.setPromptText("dd");
+    dayField.setMaxWidth(40);
+    monthField = new TextField();
+    monthField.setPromptText("mm");
+    monthField.setMaxWidth(40);
+    yearField = new TextField();
+    yearField.setPromptText("yyyy");
+    yearField.setMaxWidth(60);
+
+    statusLabel = new Label("Status");
+    statusBox = new ChoiceBox();
+    ProgressStatus progressStatus = new ProgressStatus();
+    String[] statuses = progressStatus.getStatuses();
+    for (int i = 0; i < statuses.length; i++)
+    {
+      statusBox.getItems().add(statuses[i]);
+    }
+    statusBox.setValue(statuses[progressStatus.getDefaultIndex()]);
+
+    responsibleEmployeeLabel = new Label("Responsible Employee");
+    responsibleEmployeeBox = new ChoiceBox();
+
     save = new Button("Save");
     cancel = new Button("Cancel");
 
-    VBox vboxforlabels = new VBox();
+    vboxforlabels = new VBox();
     vboxforlabels.setSpacing(20);
-    vboxforlabels.getChildren().addAll(taskname,estimatedT,deadline,statustxt,responsibleEmp);
+    vboxforlabels.getChildren().addAll(nameLabel, descriptionLabel, estimationLabel,deadline, statusLabel, responsibleEmployeeLabel);
 
-    HBox hboxfordate = new HBox();
+    hboxfordate = new HBox();
     hboxfordate.setSpacing(5);
-    hboxfordate.getChildren().addAll(day,month,year);
+    hboxfordate.getChildren().addAll(dayField, monthField, yearField);
 
-    VBox vbox = new VBox();
+    vbox = new VBox();
     vbox.setSpacing(10);
-    vbox.getChildren().addAll(name,estimation,hboxfordate,status,responsibleEmployee);
+    vbox.getChildren().addAll(nameField, descriptionField, estimationField,hboxfordate,statusBox, responsibleEmployeeBox);
 
     bottomButtons = new HBox(5);
     bottomButtons.getChildren().addAll(save,cancel);
 
-    HBox hbox = new HBox();
+    hbox = new HBox();
     hbox.setSpacing(20);
     hbox.getChildren().addAll(vboxforlabels,vbox);
 
@@ -74,6 +111,7 @@ public class AddTaskGUI
 
 
   }
+
   public VBox getMainPane()
   {
     return mainPane;
@@ -83,4 +121,136 @@ public class AddTaskGUI
   {
     return cancel;
   }
+
+  public Button getSave(){
+    return save;
+  }
+
+  public void setProjectList() {
+    projectList = projectsAdapter.getAllProjects();
+  }
+  public void initializeCurrentProject(){
+    currentProject = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem();
+
+    title.setText("Requirement for:  " + currentProject.getName());
+    initializeResponsibleEmployeeBox();
+  }
+
+  public void initializeResponsibleEmployeeBox(){
+    responsibleEmployeeBox.getItems().clear();
+    AssignedEmployeeList chosenAssignedEmployees = currentProject.getAssignedEmployeeList();
+    for (int i = 0; i < chosenAssignedEmployees.size(); i++) {
+      responsibleEmployeeBox.getItems().add(chosenAssignedEmployees.get(i));
+      System.out.println(chosenAssignedEmployees.get(i));
+    }
+    responsibleEmployeeBox.getSelectionModel().selectFirst();
+  }
+
+  public boolean callSaveButton(){
+    Task task;
+    MyDate deadline;
+    boolean allValuesCorrect = true;
+    if(nameField.getText().equals("") || nameField.getText().trim().isEmpty()) {
+      Alert alert = new Alert(Alert.AlertType.WARNING);
+      alert.setHeaderText("Invalid input");
+      alert.setContentText("Task name cannot be empty!");
+      alert.showAndWait();
+      allValuesCorrect =  false;
+    }
+    else if(descriptionField.getText().equals("") || descriptionField.getText().trim().isEmpty()){
+      Alert alert = new Alert(Alert.AlertType.WARNING);
+      alert.setHeaderText("Invalid input");
+      alert.setContentText("Task description cannot be empty!");
+      alert.showAndWait();
+      allValuesCorrect = false;
+    }
+    else if(estimationField.getText().equals("") || estimationField.getText().trim().isEmpty()){
+      Alert alert = new Alert(Alert.AlertType.WARNING);
+      alert.setHeaderText("Invalid input");
+      alert.setContentText("User story cannot be empty!");
+      alert.showAndWait();
+      allValuesCorrect = false;
+    }
+    else{
+      try{
+        double estimationTemporary = Double.parseDouble(estimationField.getText());
+      }
+      catch (NumberFormatException nfe) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setHeaderText("Invalid input");
+        alert.setContentText("Value in estimation has to be a number!");
+        alert.showAndWait();
+        allValuesCorrect = false;
+      }
+    }
+
+    if(dayField.getText().isEmpty() || monthField.getText().isEmpty() || yearField.getText().isEmpty()){
+      Alert alert = new Alert(Alert.AlertType.WARNING);
+      alert.setHeaderText("Invalid input");
+      alert.setContentText("Date of birth cannot be empty!");
+      alert.showAndWait();
+      allValuesCorrect= false;
+    }
+    else
+    {
+      try {
+        int temporary = Integer.parseInt(dayField.getText());
+        temporary = Integer.parseInt(monthField.getText());
+        temporary = Integer.parseInt(yearField.getText());
+      }
+      catch (NumberFormatException nfe) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setHeaderText("Invalid input");
+        alert.setContentText("Values in deadline have to be numbers!");
+        alert.showAndWait();
+        allValuesCorrect = false;
+      }
+
+      if (allValuesCorrect) {
+        deadline = new MyDate(
+                Integer.parseInt(dayField.getText().replaceFirst("^0+(?!$)", "")),
+                Integer.parseInt(monthField.getText().replaceFirst("^0+(?!$)", "")),
+                Integer.parseInt(yearField.getText().replaceFirst("^0+(?!$)", "")));
+        task = new Task(nameField.getText(),
+                descriptionField.getText(),
+                Double.parseDouble(estimationField.getText().replaceFirst("^0+(?!$)", "")),
+                deadline);
+        task.setProgressStatus((ProgressStatus) statusBox.getSelectionModel().getSelectedItem());
+
+        if (!deadline.isValidDate()) {
+          Alert alert = new Alert(Alert.AlertType.WARNING);
+          alert.setHeaderText("Invalid input");
+          alert.setContentText("Entered date is not valid!");
+          alert.showAndWait();
+          allValuesCorrect = false;
+        }
+        if (allValuesCorrect) {
+          ProjectList projectList = projectsAdapter.getAllProjects();
+          Project project = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem();
+          Requirement requirement = (Requirement) sepGUI.getReqOfSelectedPrjGUI().getTable().getSelectionModel().getSelectedItem();
+
+          boolean equals = false;
+          for (int i = 0; i < project.getRequirements().size(); i++) {
+            if(project.getRequirements().get(i).getTasks().get(i).equals(task)){
+              equals = true;
+              Alert alert = new Alert(Alert.AlertType.WARNING);
+              alert.setHeaderText("Duplicate project");
+              alert.setContentText("This project already exists!");
+              alert.showAndWait();
+              allValuesCorrect = false;
+            }
+          }
+          if(!equals){
+            projectList.removeProject(project);
+            requirement.addTask(task);
+            project.addRequirement(requirement);
+            projectList.addProject(project);
+            projectsAdapter.saveProjects(projectList);
+          }
+        }
+      }
+    }
+    return allValuesCorrect;
+  }
+
 }
