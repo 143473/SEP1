@@ -38,7 +38,16 @@ public class ReqOfSelectedPrjGUI
 
   private MyActionListener listener;
 
-  private TableView<Requirement> table;
+  private TableView<Requirement> requirementsTable;
+  private TableColumn idColumn;
+  private TableColumn nameColumn;
+  private TableColumn userStoryColumn;
+  private TableColumn estimationColumn;
+  private TableColumn importanceColumn;
+  private TableColumn deadlineColumn;
+  private TableColumn statusColumn;
+  private TableColumn totalHoursColumn;
+  private TableColumn responsibleColumn;
 
   public ReqOfSelectedPrjGUI(ProjectsAdapter projectsAdapter, SepGUI sepGUI){
 
@@ -54,7 +63,7 @@ public class ReqOfSelectedPrjGUI
     projectName = new Text();
     projectName.setFont(Font.font("Calibri", FontWeight.BOLD, FontPosture.ITALIC, 20));
 
-    table = new TableView<Requirement>();
+    requirementsTable = new TableView<Requirement>();
 
     projectNamePane = new HBox(5);
     projectNamePane.getChildren().addAll(projectLabel, projectName);
@@ -77,44 +86,44 @@ public class ReqOfSelectedPrjGUI
     topButtons = new HBox(5);
     topButtons.getChildren().addAll(add,manage);
 
-    TableColumn idCol = new TableColumn<Requirement, Integer>("ID");
-    idCol.setCellValueFactory(new PropertyValueFactory("id"));
-    TableColumn nameCol = new TableColumn<Requirement, String>("Name");
-    nameCol.setCellValueFactory(new PropertyValueFactory("name"));
-    TableColumn userStoryCol = new TableColumn<Requirement, String>("User Story");
-    userStoryCol.setCellValueFactory(new PropertyValueFactory("userStory"));
-    TableColumn estimationCol = new TableColumn<Requirement, Integer>("Estimated Time");
-    estimationCol.setCellValueFactory(new PropertyValueFactory("estimatedTime"));
-    TableColumn imporanceCol = new TableColumn<Requirement, Integer>("Importance");
-    imporanceCol.setCellValueFactory(new PropertyValueFactory("importance"));
-    TableColumn deadlineCol = new TableColumn<Requirement, MyDate>("Deadline");
-    deadlineCol.setCellValueFactory(new PropertyValueFactory("deadline"));
-    TableColumn statusCol = new TableColumn<Requirement, ProgressStatus>("Status");
-    statusCol.setCellValueFactory(new PropertyValueFactory("status"));
-    TableColumn totalHoursCol = new TableColumn("Spent time");
-    totalHoursCol.setCellValueFactory(new PropertyValueFactory("spentTime"));
-    TableColumn responsibleCol = new TableColumn<Requirement, AssignedEmployee>("Responsible Employee");
-    responsibleCol.setCellValueFactory(new PropertyValueFactory("responsibleEmployee"));
+    idColumn = new TableColumn<Requirement, Integer>("ID");
+    idColumn.setCellValueFactory(new PropertyValueFactory("id"));
+    nameColumn = new TableColumn<Requirement, String>("Name");
+    nameColumn.setCellValueFactory(new PropertyValueFactory("name"));
+    userStoryColumn = new TableColumn<Requirement, String>("User Story");
+    userStoryColumn.setCellValueFactory(new PropertyValueFactory("userStory"));
+    estimationColumn = new TableColumn<Requirement, Integer>("Estimated Time");
+    estimationColumn.setCellValueFactory(new PropertyValueFactory("estimatedTime"));
+    importanceColumn = new TableColumn<Requirement, Integer>("Importance");
+    importanceColumn.setCellValueFactory(new PropertyValueFactory("importance"));
+    deadlineColumn = new TableColumn<Requirement, MyDate>("Deadline");
+    deadlineColumn.setCellValueFactory(new PropertyValueFactory("deadline"));
+    statusColumn = new TableColumn<Requirement, ProgressStatus>("Status");
+    statusColumn.setCellValueFactory(new PropertyValueFactory("status"));
+    totalHoursColumn = new TableColumn("Spent time");
+    totalHoursColumn.setCellValueFactory(new PropertyValueFactory("spentTime"));
+    responsibleColumn = new TableColumn<Requirement, AssignedEmployee>("Responsible Employee");
+    responsibleColumn.setCellValueFactory(new PropertyValueFactory("responsibleEmployee"));
 
-    table.getColumns().setAll(idCol, nameCol,userStoryCol,statusCol,estimationCol,imporanceCol,deadlineCol,totalHoursCol,responsibleCol);
-    table.setPrefWidth(450);
-    table.setPrefHeight(300);
-    table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+    requirementsTable.getColumns().setAll(idColumn, nameColumn, userStoryColumn, statusColumn, estimationColumn, importanceColumn, deadlineColumn, totalHoursColumn, responsibleColumn);
+    requirementsTable.setPrefWidth(450);
+    requirementsTable.setPrefHeight(300);
+    requirementsTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
     mainPane = new VBox(5);
     mainPane.setPadding(new Insets(25, 25, 25, 25));
-    mainPane.getChildren().addAll(projectNamePane, searchPane,topButtons, tableTitle, table,bottomButtons);
+    mainPane.getChildren().addAll(projectNamePane, searchPane,topButtons, tableTitle, requirementsTable, bottomButtons);
 
 
   }
   public void initializeTable()
   {
-    table.getItems().clear();
+    requirementsTable.getItems().clear();
     ProjectList projects = projectsAdapter.getAllProjects();
     Project project = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem();
     for (int i = 0; i < project.getRequirements().size(); i++)
     {
-      table.getItems().add(project.getRequirements().get(i));
+      requirementsTable.getItems().add(project.getRequirements().get(i));
     }
   }
   public boolean callContinueButton(){
@@ -141,20 +150,20 @@ public class ReqOfSelectedPrjGUI
   }
 
   private void initializeTable(ArrayList<Requirement> newRequirements){
-    table.getItems().clear();
+    requirementsTable.getItems().clear();
     for (int i = 0; i < newRequirements.size(); i++) {
-      table.getItems().add(newRequirements.get(i));
+      requirementsTable.getItems().add(newRequirements.get(i));
     }
+  }
+
+  public TableView<Requirement> getRequirementsTable()
+  {
+    return requirementsTable;
   }
 
   public Text getProjectName()
   {
     return projectName;
-  }
-
-  public TableView getTable()
-  {
-    return table;
   }
 
   public Button getContinueButton()

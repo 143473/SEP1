@@ -122,7 +122,7 @@ public class TasksOfReqOfPrjGUI
 
   public boolean callContinueButton(){
     boolean gogo = true;
-    if(sepGUI.getReqOfSelectedPrjGUI().getTable().getSelectionModel().getSelectedItem()== null)
+    if(sepGUI.getReqOfSelectedPrjGUI().getRequirementsTable().getSelectionModel().getSelectedItem()== null)
     {
       Alert alert = new Alert(Alert.AlertType.WARNING);
       alert.setHeaderText("Warning");
@@ -133,7 +133,7 @@ public class TasksOfReqOfPrjGUI
     else
     {
       projectName.setText(sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem().getName());
-      requirementName.setText(sepGUI.getReqOfSelectedPrjGUI().getTable().getSelectionModel().getSelectedItem().toString());
+      requirementName.setText(sepGUI.getReqOfSelectedPrjGUI().getRequirementsTable().getSelectionModel().getSelectedItem().toString());
       gogo =true;
     }
     return gogo;
@@ -144,7 +144,7 @@ public class TasksOfReqOfPrjGUI
       if (e.getSource() == searchButton)
       {
         String searchingFor = search.getText();
-        Requirement requirement = (Requirement)sepGUI.getReqOfSelectedPrjGUI().getTable().getSelectionModel().getSelectedItem();
+        Requirement requirement = (Requirement)sepGUI.getReqOfSelectedPrjGUI().getRequirementsTable().getSelectionModel().getSelectedItem();
         ArrayList<Task> tasks = requirement.getTasks();
         ArrayList<Task> chosenTasks = projectsAdapter.getTasksByName(searchingFor, tasks);
         initializeTable(chosenTasks);
@@ -155,7 +155,7 @@ public class TasksOfReqOfPrjGUI
   private void initializeTable()
   {
     table.getItems().clear();
-    Requirement requirement = (Requirement)sepGUI.getReqOfSelectedPrjGUI().getTable().getSelectionModel().getSelectedItem();
+    Requirement requirement = (Requirement)sepGUI.getReqOfSelectedPrjGUI().getRequirementsTable().getSelectionModel().getSelectedItem();
     for (int i = 0; i < requirement.getTasks().size(); i++)
     {
       table.getItems().add(requirement.getTasks().get(i));
