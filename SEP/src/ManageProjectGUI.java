@@ -275,7 +275,8 @@ public class ManageProjectGUI
         }
         ProjectList allProjects = projectsAdapter.getAllProjects();
         for (int i = 0; i < allProjects.size(); i++) {
-          if(allProjects.get(i).getName().equals(nameField.getText())){
+          if(allProjects.get(i).getName().equals(nameField.getText()) &&
+                  !allProjects.get(i).equals(projectsTable.getSelectionModel().getSelectedItem())){
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setHeaderText("Warning");
             alert.setContentText("Project named "+nameField.getText()+" already exists!");
@@ -290,6 +291,14 @@ public class ManageProjectGUI
           Alert alert = new Alert(Alert.AlertType.WARNING);
           alert.setHeaderText("Warning");
           alert.setContentText("One person can be assigned only one status!");
+          alert.showAndWait();
+          OK = false;
+        }
+
+        if(scrumMasterBox.getSelectionModel().isEmpty() || projectCreatorBox.getSelectionModel().isEmpty() || productOwnerBox.getSelectionModel().isEmpty()){
+          Alert alert = new Alert(Alert.AlertType.WARNING);
+          alert.setHeaderText("Warning");
+          alert.setContentText("All statuses have to be assigned!");
           alert.showAndWait();
           OK = false;
         }
