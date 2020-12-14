@@ -117,9 +117,9 @@ public class SepGUI extends Application
     assignTasksGUI3 = new AssignTasksGUI3(this);
     assignTasksGUI4 = new AssignTasksGUI4(this);
     assignTasksGUI5 = new AssignTasksGUI5(this,assignedTasksAdapter);
-    reportTasksGUI1 = new ReportTasksGUI1(employeeAdapter);
-    reportTasksGUI2 = new ReportTasksGUI2(this);
-    reportTasksGUI3 = new ReportTasksGUI3();
+    reportTasksGUI1 = new ReportTasksGUI1(employeeAdapter,assignedTasksAdapter);
+    reportTasksGUI2 = new ReportTasksGUI2(this,assignedTasksAdapter);
+    reportTasksGUI3 = new ReportTasksGUI3(this,assignedTasksAdapter);
     viewAssignedTasksGUI1 = new ViewAssignedTasksGUI1(employeeAdapter,projectsAdapter, assignedTasksAdapter);
     viewAssignedTasksGUI2 = new ViewAssignedTasksGUI2(this,assignedTasksAdapter);
 
@@ -333,6 +333,9 @@ public class SepGUI extends Application
   public AssignTasksGUI4 getAssignTasksGUI4()
   {
     return assignTasksGUI4;
+  }
+  public ReportTasksGUI2 getReportTasksGUI2(){
+    return reportTasksGUI2;
   }
 
   private class MyActionListener implements EventHandler<ActionEvent>
@@ -665,8 +668,11 @@ public class SepGUI extends Application
       }
       else if (e.getSource() == reportTasksGUI2.getContinueButton())
       {
-        stackPane.getChildren().clear();
-        stackPane.getChildren().add(reportTasksGUI3.getMainPane());
+        if(reportTasksGUI2.callContinueButton2())
+        {
+          stackPane.getChildren().clear();
+          stackPane.getChildren().add(reportTasksGUI3.getMainPane());
+        }
       }
       else if (e.getSource() == reportTasksGUI2.getGoBack())
       {
@@ -675,8 +681,11 @@ public class SepGUI extends Application
       }
       else if(e.getSource() == reportTasksGUI3.getReportButton())
       {
-        stackPane.getChildren().clear();
-        stackPane.getChildren().add(reportTasksGUI2.getMainPane());
+        if(reportTasksGUI3.callReportButton())
+        {
+          stackPane.getChildren().clear();
+          stackPane.getChildren().add(reportTasksGUI2.getMainPane());
+        }
       }
       else if (e.getSource() == reportTasksGUI3.getGoBackButton())
       {

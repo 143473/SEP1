@@ -1,7 +1,4 @@
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -12,38 +9,42 @@ import javafx.scene.layout.VBox;
  */
 public class ReportTasksGUI3 {
     private ProjectList projectList;
+    private AssignedTasksAdapter assignedTasksAdapter;
+    private SepGUI sepGUI;
     private VBox mainPane;
     private HBox topPane;
     private HBox bottomButtons;
     private GridPane informationPane;
 
     private Label titleLabel;
-    private Label numberOfHoursLabel;
+    private Label timeSpentLabel;
 
-    private TextField numberOfHoursField;
+    private TextField timeSpentField;
     private CheckBox finishedField;
 
     private Button reportButton;
     private Button goBackButton;
 
-    public ReportTasksGUI3(){
+    public ReportTasksGUI3(SepGUI sepGUI, AssignedTasksAdapter assignedTasksAdapter){
 
+        this.sepGUI = sepGUI;
+        this.assignedTasksAdapter = assignedTasksAdapter;
         titleLabel = new Label("Report a Tasks");
         titleLabel.getStyleClass().add("heading");
 
         topPane = new HBox(500);
         topPane.getChildren().addAll(titleLabel);
 
-        numberOfHoursLabel = new Label("Number of hours:");
-        numberOfHoursField = new TextField();
-        numberOfHoursField.setPromptText("hh:hh");
-        numberOfHoursField.setMaxWidth(60);
+        timeSpentLabel = new Label("Number of hours:");
+        timeSpentField = new TextField();
+        timeSpentField.setPromptText("hh:hh");
+        timeSpentField.setMaxWidth(60);
 
         finishedField = new CheckBox("finished");
 
         informationPane = new GridPane();
-        informationPane.add(numberOfHoursLabel, 0, 0);
-        informationPane.add(numberOfHoursField, 1, 0);
+        informationPane.add(timeSpentLabel, 0, 0);
+        informationPane.add(timeSpentField, 1, 0);
         informationPane.add(finishedField, 0, 1);
         informationPane.setVgap(10);
 
@@ -59,6 +60,47 @@ public class ReportTasksGUI3 {
 
     public void setProjectList(ProjectList projectList){
         this.projectList = projectList;
+    }
+    public boolean callReportButton(){
+        boolean allValuesCorrect = true;
+    if(timeSpentField.getText().equals("") ||timeSpentField.getText().trim().isEmpty()){
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setHeaderText("Invalid input");
+        alert.setContentText("Time spent cannot be empty!");
+        alert.showAndWait();
+        allValuesCorrect = false;
+    }
+    else
+    {
+        try
+        {
+            double timeSpentTemporary = Double.parseDouble(timeSpentField.getText());
+        }
+        catch (NumberFormatException nfe)
+        {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText("Invalid input");
+            alert.setContentText("Value in time spent has to be a number!");
+            alert.showAndWait();
+            allValuesCorrect = false;
+        }
+    }
+    if(allValuesCorrect)
+    {
+        AssignedTasks assignedTasks = sepGUI.getReportTasksGUI2().getAllAssignedTasksTable().getSelectionModel().getSelectedItem();
+        AssignedTasksList assignedTasksList = assignedTasksAdapter.getAllAssignedTasks();
+        assignedTasksList.removeAssignedTask(assignedTasks);
+        double spentTime = Double.parseDouble(timeSpentField.getText().replaceFirst("^0+(?!$)", ""));
+        assignedTasks.setSpentTime(spentTime);
+        if(finishedField.isSelected())
+        {
+            ProgressStatus progressStatus = new ProgressStatus();
+            assignedTasks.setStatus(progressStatus.chooseStatus(2));
+        }
+        assignedTasksList.addAssignedTask(assignedTasks);
+        allValuesCorrect = true;
+    }
+    return allValuesCorrect;
     }
     public VBox getMainPane()
     {

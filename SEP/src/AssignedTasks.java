@@ -102,6 +102,9 @@ public class AssignedTasks extends Task implements Serializable {
     {
         return super.getId();
     }
+    public String getStatus(){
+        return task.getStatus();
+    }
 
     /**
      * Compares time spent, date and assigned employee.
