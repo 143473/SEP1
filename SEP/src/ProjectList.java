@@ -64,7 +64,6 @@ public class ProjectList implements Serializable
   }
 
   public Project getProject(Project project){
-   /* System.out.println(projects.size());*/
     for (int i = 0; i < projects.size(); i++) {
       if(projects.get(i).equals(project)){
         return projects.get(i);

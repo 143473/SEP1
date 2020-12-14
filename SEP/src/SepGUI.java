@@ -85,6 +85,8 @@ public class SepGUI extends Application
 
   private MyActionListener listener;
 
+  private Employee employeeClass;
+
   public void start(Stage parentStage)
   {
     this.parentStage = parentStage;
@@ -92,6 +94,7 @@ public class SepGUI extends Application
     listener = new MyActionListener();
     EmployeeAdapter employeeAdapter = new EmployeeAdapter("employees.bin");
     ProjectsAdapter projectsAdapter = new ProjectsAdapter("projects.bin");
+    //manually added in class Employee
     AssignedTasksAdapter assignedTasksAdapter = new AssignedTasksAdapter("assignedTasks.bin");
 
     createProjectGUI1 = new CreateProjectGUI1(projectsAdapter, this);

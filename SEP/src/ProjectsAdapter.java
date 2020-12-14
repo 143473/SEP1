@@ -215,4 +215,36 @@ public class ProjectsAdapter
     }
     return null;
   }
+
+  /*
+  public EmployeeList getCoworkersOfEmployee(Employee employee){
+    return
+  }
+  */
+
+
+  public ProjectList getProjectsOfEmployee(Employee employee){
+    ProjectList projectsOfEmployee = new ProjectList();
+    ProjectList allProjects = getAllProjects();
+    for (int i = 0; i < allProjects.size(); i++) {
+      if(allProjects.get(i).getAssignedEmployeeList().containsNormalEmployee(employee)){
+        projectsOfEmployee.addProject(allProjects.get(i));
+      }
+    }
+    return projectsOfEmployee;
+  }
+
+  public EmployeeList getCoworkersOfEmployee(Employee employee){
+    ProjectList projectsOfEmployee = getProjectsOfEmployee(employee);
+    EmployeeList coWorkersOfEmployee = new EmployeeList();
+    for (int i = 0; i < projectsOfEmployee.size(); i++) {
+      AssignedEmployeeList assignedEmployeeList = projectsOfEmployee.get(i).getAssignedEmployeeList();
+      for (int j = 0; j < assignedEmployeeList.size(); j++) {
+        if(!coWorkersOfEmployee.containsEmployee(assignedEmployeeList.getNormalEmployeeOnIndex(i)) && !assignedEmployeeList.getNormalEmployeeOnIndex(i).equals(employee)){
+          coWorkersOfEmployee.addEmployee(assignedEmployeeList.getNormalEmployeeOnIndex(i));
+        }
+      }
+    }
+    return coWorkersOfEmployee;
+  }
 }

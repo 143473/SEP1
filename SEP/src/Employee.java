@@ -10,13 +10,15 @@ import java.util.ArrayList;
 public class Employee implements Serializable {
     private String firstName, lastName, status;
     private MyDate dateOfBirth;
-    private ArrayList<Project> projects;
+    private ProjectList projects;
+    private EmployeeList coworkers;
 
     public Employee(){
         firstName = "Jim";
         lastName = "Joe";
         dateOfBirth = new MyDate(1, 1, 1900);
-        projects = new ArrayList<Project>();
+        projects = new ProjectList();
+        coworkers = new EmployeeList();
     }
 
     /**
@@ -29,15 +31,22 @@ public class Employee implements Serializable {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth.copy();
-        projects = new ArrayList<Project>();
+        projects = new ProjectList();
+        coworkers = new EmployeeList();
     }
 
     /**
      * Gets the list of employees he/she ever worked with on the same project
      * @return ArrayList of type String of names of coworkers
      */
-    public ArrayList<String> getCoWorkers(){
-        return null;
+    public EmployeeList getCoworkers(){
+        ProjectsAdapter projectsAdapter = new ProjectsAdapter("projects.bin");
+        return projectsAdapter.getCoworkersOfEmployee(this);
+    }
+
+    public void getCoworkersOfEmployee(){
+        ProjectsAdapter projectsAdapter = new ProjectsAdapter("projects.bin");
+        coworkers = projectsAdapter.getCoworkersOfEmployee(this);
     }
 
     /**
@@ -68,8 +77,17 @@ public class Employee implements Serializable {
      * Gets the list of projects this employee ever worked on
      * @return ArrayList of type Project including the projects he/she worked on
      */
-    public ArrayList<Project> getProjectsWorkedOn(){
-        return null;
+
+    public void getProjectsWorkedOn(){
+        ProjectsAdapter projectsAdapter = new ProjectsAdapter("projects.bin");
+        projects = projectsAdapter.getProjectsOfEmployee(this);
+        System.out.println(projects);
+    }
+
+
+    public ProjectList getProjects(){
+        ProjectsAdapter projectsAdapter = new ProjectsAdapter("projects.bin");
+        return projectsAdapter.getProjectsOfEmployee(this);
     }
 
 
