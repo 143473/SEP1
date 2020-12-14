@@ -144,4 +144,36 @@ public class AssignedTasksAdapter
     }
   }
 
+
+  public EmployeeList getAllAssignedEmployees(){
+    AssignedTasksList assignedTasks = new AssignedTasksList();
+
+    try
+    {
+      assignedTasks = (AssignedTasksList) mfio.readObjectFromFile(fileName);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO Error reading file");
+    }
+    catch (ClassNotFoundException e)
+    {
+      System.out.println("Class Not Found");
+    }
+    EmployeeList assignedEmployees = new EmployeeList();
+    for (int i = 0; i < assignedTasks.size(); i++) {
+      Employee thisEmployee = new Employee(assignedTasks.get(i).getAssignedEmployee().getFirstName(),
+              assignedTasks.get(i).getAssignedEmployee().getLastName(),
+              assignedTasks.get(i).getAssignedEmployee().getDateOfBirth());
+      if(!assignedEmployees.containsEmployee(thisEmployee)){
+        assignedEmployees.addEmployee(thisEmployee);
+      }
+    }
+    return assignedEmployees;
+  }
+
 }

@@ -14,6 +14,7 @@ public class ViewAssignedTasksGUI1 {
 
     private EmployeeAdapter employeeAdapter;
     private ProjectsAdapter projectsAdapter;
+    private AssignedTasksAdapter assignedTasksAdapter;
     private VBox mainPane;
     private HBox topPane;
 
@@ -34,11 +35,12 @@ public class ViewAssignedTasksGUI1 {
 
     private MyActionListener listener;
 
-    public ViewAssignedTasksGUI1(EmployeeAdapter employeeAdapter,ProjectsAdapter projectsAdapter){
+    public ViewAssignedTasksGUI1(EmployeeAdapter employeeAdapter,ProjectsAdapter projectsAdapter, AssignedTasksAdapter assignedTasksAdapter){
 
         listener = new MyActionListener();
         this.projectsAdapter = projectsAdapter;
         this.employeeAdapter = employeeAdapter;
+        this.assignedTasksAdapter = assignedTasksAdapter;
 
         titleLabel = new Label("View Assigned Tasks");
         titleLabel.setPrefWidth(520);
@@ -83,7 +85,7 @@ public class ViewAssignedTasksGUI1 {
 
     private void initializeTable(){
         allAssignedTasksTable.getItems().clear();
-        EmployeeList employees = employeeAdapter.getAllEmployees();
+        EmployeeList employees = assignedTasksAdapter.getAllAssignedEmployees();
 
         for (int i = 0; i < employees.size(); i++) {
             allAssignedTasksTable.getItems().add(employees.get(i));
