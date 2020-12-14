@@ -196,34 +196,6 @@ public class ManageProjectGUI
 
   private class MyActionListener implements EventHandler<ActionEvent> {
     public void handle(ActionEvent e) {
-      if(e.getSource() == saveButton){
-        Project project = projectsTable.getSelectionModel().getSelectedItem();
-        Project selectedProject = projectsAdapter.getSelectedProject(project.getName());
-
-        boolean OK = true;
-
-        if(!nameField.getText().isEmpty()){
-          selectedProject.setName(nameField.getText());
-        }
-        else{
-          Alert alert = new Alert(Alert.AlertType.WARNING);
-          alert.setHeaderText("Warning");
-          alert.setContentText("Name of project cannot be empty!");
-          alert.showAndWait();
-          OK = false;
-        }
-        if(!descriptionField.getText().isEmpty()){
-          selectedProject.setDescription(descriptionField.getText());
-        }
-        else{
-          Alert alert = new Alert(Alert.AlertType.WARNING);
-          alert.setHeaderText("Warning");
-          alert.setContentText("Description of project cannot be empty!");
-          alert.showAndWait();
-          OK = false;
-        }
-
-      }
       if(e.getSource() == removeButton){
         if (!(projectsTable.getSelectionModel().getSelectedItem() == null))
         {
@@ -257,81 +229,91 @@ public class ManageProjectGUI
         }
 
       }
-      else if(e.getSource() == saveButton){
-        boolean OK = true;
-        if(nameField.getText().isEmpty()){
-          Alert alert = new Alert(Alert.AlertType.WARNING);
-          alert.setHeaderText("Warning");
-          alert.setContentText("Project name cannot be empty!");
-          alert.showAndWait();
-          OK = false;
-        }
-        if(descriptionField.getText().isEmpty()){
-          Alert alert = new Alert(Alert.AlertType.WARNING);
-          alert.setHeaderText("Warning");
-          alert.setContentText("Project description cannot be empty!");
-          alert.showAndWait();
-          OK = false;
-        }
-        ProjectList allProjects = projectsAdapter.getAllProjects();
-        for (int i = 0; i < allProjects.size(); i++) {
-          if(allProjects.get(i).getName().equals(nameField.getText()) &&
-                  !allProjects.get(i).equals(projectsTable.getSelectionModel().getSelectedItem())){
+      else if(e.getSource() == saveButton) {
+        if (projectsTable.getSelectionModel().getSelectedItem() != null) {
+          Project project = projectsTable.getSelectionModel().getSelectedItem();
+          Project selectedProject = projectsAdapter.getSelectedProject(project.getName());
+          boolean OK = true;
+          if (nameField.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setHeaderText("Warning");
-            alert.setContentText("Project named "+nameField.getText()+" already exists!");
+            alert.setContentText("Project name cannot be empty!");
             alert.showAndWait();
             OK = false;
           }
-        }
-
-        if(scrumMasterBox.getSelectionModel().getSelectedItem().equals(productOwnerBox.getSelectionModel().getSelectedItem())
-        || scrumMasterBox.getSelectionModel().getSelectedItem().equals(projectCreatorBox.getSelectionModel().getSelectedItem())
-        || productOwnerBox.getSelectionModel().getSelectedItem().equals(projectCreatorBox.getSelectionModel().getSelectedItem())){
-          Alert alert = new Alert(Alert.AlertType.WARNING);
-          alert.setHeaderText("Warning");
-          alert.setContentText("One person can be assigned only one status!");
-          alert.showAndWait();
-          OK = false;
-        }
-
-        if(scrumMasterBox.getSelectionModel().isEmpty() || projectCreatorBox.getSelectionModel().isEmpty() || productOwnerBox.getSelectionModel().isEmpty()){
-          Alert alert = new Alert(Alert.AlertType.WARNING);
-          alert.setHeaderText("Warning");
-          alert.setContentText("All statuses have to be assigned!");
-          alert.showAndWait();
-          OK = false;
-        }
-        if(OK){
-          ProjectList projectList = projectsAdapter.getAllProjects();
-          Project chosenProject = projectList.getProject(projectsTable.getSelectionModel().getSelectedItem());
-
-          chosenProject.setName(nameField.getText());
-          chosenProject.setDescription(descriptionField.getText());
-          chosenProject.setStatus(statusBox.getSelectionModel().getSelectedIndex());
-          chosenProject.setScrumMaster(scrumMasterBox.getSelectionModel().getSelectedItem());
-          chosenProject.setProductOwner(productOwnerBox.getSelectionModel().getSelectedItem());
-          chosenProject.setProjectCreator(projectCreatorBox.getSelectionModel().getSelectedItem());
-
-          //setting the status of to "team member"
-          AssignedEmployeeList assignedEmployeeList = chosenProject.getAssignedEmployeeList();
-          for (int i = 0; i < assignedEmployeeList.size(); i++) {
-            assignedEmployeeList.get(i).setStatus(3);
+          if (descriptionField.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText("Warning");
+            alert.setContentText("Project description cannot be empty!");
+            alert.showAndWait();
+            OK = false;
+          }
+          ProjectList allProjects = projectsAdapter.getAllProjects();
+          for (int i = 0; i < allProjects.size(); i++) {
+            if (allProjects.get(i).getName().equals(nameField.getText()) &&
+                    !allProjects.get(i).equals(projectsTable.getSelectionModel().getSelectedItem())) {
+              Alert alert = new Alert(Alert.AlertType.WARNING);
+              alert.setHeaderText("Warning");
+              alert.setContentText("Project named " + nameField.getText() + " already exists!");
+              alert.showAndWait();
+              OK = false;
+            }
           }
 
-          //setting the status of 3 chosen people
-          chosenProject.getAssignedEmployeeList().get(scrumMasterBox.getSelectionModel().getSelectedIndex()).setStatus(0);
-          chosenProject.getAssignedEmployeeList().get(projectCreatorBox.getSelectionModel().getSelectedIndex()).setStatus(2);
-          chosenProject.getAssignedEmployeeList().get(productOwnerBox.getSelectionModel().getSelectedIndex()).setStatus(1);
+          if (scrumMasterBox.getSelectionModel().getSelectedItem().equals(productOwnerBox.getSelectionModel().getSelectedItem())
+                  || scrumMasterBox.getSelectionModel().getSelectedItem().equals(projectCreatorBox.getSelectionModel().getSelectedItem())
+                  || productOwnerBox.getSelectionModel().getSelectedItem().equals(projectCreatorBox.getSelectionModel().getSelectedItem())) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText("Warning");
+            alert.setContentText("One person can be assigned only one status!");
+            alert.showAndWait();
+            OK = false;
+          }
 
-          projectsAdapter.saveProjects(projectList);
+          if (scrumMasterBox.getSelectionModel().isEmpty() || projectCreatorBox.getSelectionModel().isEmpty() || productOwnerBox.getSelectionModel().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText("Warning");
+            alert.setContentText("All statuses have to be assigned!");
+            alert.showAndWait();
+            OK = false;
+          }
+          if (OK) {
+            ProjectList projectList = projectsAdapter.getAllProjects();
+            Project chosenProject = projectList.getProject(projectsTable.getSelectionModel().getSelectedItem());
 
-          Alert alert = new Alert(Alert.AlertType.INFORMATION);
-          alert.setHeaderText("Editing successful");
-          alert.setContentText("Changes were saved successfully!");
+            chosenProject.setName(nameField.getText());
+            chosenProject.setDescription(descriptionField.getText());
+            chosenProject.setStatus(statusBox.getSelectionModel().getSelectedIndex());
+            chosenProject.setScrumMaster(scrumMasterBox.getSelectionModel().getSelectedItem());
+            chosenProject.setProductOwner(productOwnerBox.getSelectionModel().getSelectedItem());
+            chosenProject.setProjectCreator(projectCreatorBox.getSelectionModel().getSelectedItem());
+
+            //setting the status of to "team member"
+            AssignedEmployeeList assignedEmployeeList = chosenProject.getAssignedEmployeeList();
+            for (int i = 0; i < assignedEmployeeList.size(); i++) {
+              assignedEmployeeList.get(i).setStatus(3);
+            }
+
+            //setting the status of 3 chosen people
+            chosenProject.getAssignedEmployeeList().get(scrumMasterBox.getSelectionModel().getSelectedIndex()).setStatus(0);
+            chosenProject.getAssignedEmployeeList().get(projectCreatorBox.getSelectionModel().getSelectedIndex()).setStatus(2);
+            chosenProject.getAssignedEmployeeList().get(productOwnerBox.getSelectionModel().getSelectedIndex()).setStatus(1);
+
+            projectsAdapter.saveProjects(projectList);
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText("Editing successful");
+            alert.setContentText("Changes were saved successfully!");
+            alert.showAndWait();
+
+            initializeTable();
+          }
+        }
+        else{
+          Alert alert = new Alert(Alert.AlertType.WARNING);
+          alert.setHeaderText("Warning");
+          alert.setContentText("No project was chosen!");
           alert.showAndWait();
-
-          initializeTable();
         }
       }
     }
