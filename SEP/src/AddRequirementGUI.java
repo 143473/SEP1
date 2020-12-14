@@ -246,7 +246,7 @@ public class AddRequirementGUI
 
           requirement = new Requirement(name.getText(), userStory.getText(), estimationTime,
                  importanceBox.getValue().intValue(), responsibleEmployeeBox.getSelectionModel().getSelectedItem(),
-                  deadline, project.getRequirements().size()+1, statusBox.getValue());
+                  deadline, project.getRequirements().size(), statusBox.getValue());
           requirement.setProgressStatus(statusBox.getSelectionModel().getSelectedItem());
           requirement.setProject(project);
           System.out.println(requirement);

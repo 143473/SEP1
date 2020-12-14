@@ -94,7 +94,7 @@ public class ProjectsAdapter
     {
       System.out.println("Class Not Found");
     }
-    return  projects.getProjectByName(nameOfProject).getRequirements().get(indexOfRequirement-1).getTasks();
+    return  projects.getProjectByName(nameOfProject).getRequirements().get(indexOfRequirement).getTasks();
   }
 
   public void deleteProject (int indexInList){

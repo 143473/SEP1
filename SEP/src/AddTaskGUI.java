@@ -228,13 +228,13 @@ public class AddTaskGUI
           double estimationTime = Double.parseDouble(estimationField.getText().replaceFirst("^0+(?!$)", ""));
 
           Task newTask = new Task(nameField.getText(), descriptionField.getText(), estimationTime,
-                  deadline, requirement.getTasks().size()+1, statusBox.getSelectionModel().getSelectedItem(),
+                  deadline, requirement.getTasks().size(), statusBox.getSelectionModel().getSelectedItem(),
                   responsibleEmployeeBox.getSelectionModel().getSelectedItem());
           newTask.setRequirement(requirement);
 
           boolean equals = false;
           for (int i = 0; i < requirement.getTasks().size(); i++) {
-            if(project.getRequirements().get(i).getTasks().get(i).equals(newTask)){
+            if(project.getRequirements().get(requirement.getId()).getTasks().get(i).equals(newTask)){
               equals = true;
               Alert alert = new Alert(Alert.AlertType.WARNING);
               alert.setHeaderText("Duplicate project");
