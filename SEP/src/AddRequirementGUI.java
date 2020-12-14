@@ -249,6 +249,7 @@ public class AddRequirementGUI
                   deadline, project.getRequirements().size()+1, statusBox.getValue());
           requirement.setProgressStatus(statusBox.getSelectionModel().getSelectedItem());
           requirement.setProject(project);
+          System.out.println(requirement);
 
           boolean equals = false;
           for (int i = 0; i < project.getRequirements().size(); i++) {
@@ -263,7 +264,11 @@ public class AddRequirementGUI
           }
           if(!equals){
 
+
+            projectList.removeProject(project.getName());
+
             project.addRequirement(requirement);
+            projectList.addProject(project);
             projectsAdapter.saveProjects(projectList);
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);

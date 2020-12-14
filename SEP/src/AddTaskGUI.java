@@ -244,8 +244,15 @@ public class AddTaskGUI
             }
           }
           if(!equals){
-
+            projectList.removeProject(project.getName());
+            project.removeRequirement(requirement);
+            System.out.println("before "+ requirement.getTasks().size());
             requirement.addTask(newTask);
+            System.out.println("after "+ requirement.getTasks().size());
+            project.addRequirement(requirement);
+            System.out.println(requirement.getTasks());
+            projectList.addProject(project);
+            System.out.println(project.getRequirements().get(0).getTasks());
             projectsAdapter.saveProjects(projectList);
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);

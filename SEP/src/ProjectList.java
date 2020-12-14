@@ -17,6 +17,7 @@ public class ProjectList implements Serializable
      * @param project the Project to add to the list
      */
     public void addProject(Project project){
+      if(!projects.contains(project))
       projects.add(project);
     }
     /**
@@ -31,8 +32,11 @@ public class ProjectList implements Serializable
       for (int i = 0; i < projects.size(); i++)
       {
         if(projects.get(i).getName().equals(name))
+        {
           projects.remove(i);
-        break;
+
+          break;
+        }
       }
     }
 
