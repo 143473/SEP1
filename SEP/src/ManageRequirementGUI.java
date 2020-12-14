@@ -162,8 +162,8 @@ public class ManageRequirementGUI
 
   private void initializeTable(){
     requirementsTable.getItems().clear();
-    int selectedProjectIndex = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedIndex();
-    ArrayList<Requirement> requirements = projectsAdapter.getAllProjects().get(selectedProjectIndex).getRequirements();
+    Project selectedProject = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem();
+    ArrayList<Requirement> requirements = projectsAdapter.getAllProjects().getProject(selectedProject).getRequirements();
 
     System.out.println(requirements);
     for (int i = 0; i < requirements.size(); i++) {
@@ -189,11 +189,11 @@ public class ManageRequirementGUI
     {
 
       Requirement temp = requirementsTable.getSelectionModel().getSelectedItem();
-      int projectIndex = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getFocusedIndex();
-      int requirementIndex = requirementsTable.getSelectionModel().getSelectedIndex();
+      Project project = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem();
+      Requirement mySelectedRequirement = requirementsTable.getSelectionModel().getSelectedItem();
       if (temp != null)
       {
-        Requirement selectedRequirement = projectsAdapter.getSelectedRequirement(projectIndex, requirementIndex);
+        Requirement selectedRequirement = projectsAdapter.getSelectedRequirement(project.getName(), mySelectedRequirement.getId());
         id.setText(String.valueOf(selectedRequirement.getId()));
         name.setText(selectedRequirement.getName());
         userStory.setText(selectedRequirement.getUserStory());
@@ -210,7 +210,7 @@ public class ManageRequirementGUI
         importanceBox.getItems().addAll(1, 2, 3);
         importanceBox.getSelectionModel().select(selectedRequirement.getImportance()-1);
 
-        AssignedEmployeeList assignedEmployeeList = projectsAdapter.getAllProjects().get(projectIndex).getAssignedEmployeeList();
+        AssignedEmployeeList assignedEmployeeList = projectsAdapter.getAllProjects().getProject(project).getAssignedEmployeeList();
         for (int i = 0; i < assignedEmployeeList.size(); i++) {
           if(!responsibleEmployeeBox.getItems().contains(assignedEmployeeList.get(i))){
             responsibleEmployeeBox.getItems().add(assignedEmployeeList.get(i));
@@ -229,10 +229,10 @@ public class ManageRequirementGUI
 
   private class MyActionListener implements EventHandler<ActionEvent> {
     public void handle(ActionEvent e) {
-      int requirementIndex = requirementsTable.getSelectionModel().getSelectedIndex();
-      int projectIndex = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedIndex();
+      Requirement requirement = requirementsTable.getSelectionModel().getSelectedItem();
+      Project project = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem();
       if(e.getSource() == saveButton){
-        Requirement selectedRequirement = projectsAdapter.getSelectedRequirement(projectIndex, requirementIndex);
+        Requirement selectedRequirement = projectsAdapter.getSelectedRequirement(project.getName(), requirement.getId());
 
         boolean OK = true;
 
@@ -244,9 +244,9 @@ public class ManageRequirementGUI
           OK = false;
         }
         else{
-          for (int i = 0; i < projectsAdapter.getSelectedProject(projectIndex).getRequirements().size(); i++) {
-            if(projectsAdapter.getSelectedProject(projectIndex).getRequirements().get(i).getName().equals(name.getText())
-            && !(projectsAdapter.getSelectedProject(projectIndex).getRequirements().get(i).getId() == Integer.parseInt(id.getText()))){
+          for (int i = 0; i < projectsAdapter.getSelectedProject(project.getName()).getRequirements().size(); i++) {
+            if(projectsAdapter.getSelectedProject(project.getName()).getRequirements().get(i).getName().equals(name.getText())
+            && !(projectsAdapter.getSelectedProject(project.getName()).getRequirements().get(i).getId() == Integer.parseInt(id.getText()))){
               Alert alert = new Alert(Alert.AlertType.WARNING);
               alert.setHeaderText("Warning");
               alert.setContentText("This name of requirement for this project already exists!");
@@ -264,9 +264,9 @@ public class ManageRequirementGUI
           OK = false;
         }
         else{
-          for (int i = 0; i < projectsAdapter.getSelectedProject(projectIndex).getRequirements().size(); i++) {
-            if(projectsAdapter.getSelectedProject(projectIndex).getRequirements().get(i).getUserStory().equals(userStory.getText())
-            && !(projectsAdapter.getSelectedProject(projectIndex).getRequirements().get(i).getId() == Integer.parseInt(id.getText()))){
+          for (int i = 0; i < projectsAdapter.getSelectedProject(project.getName()).getRequirements().size(); i++) {
+            if(projectsAdapter.getSelectedProject(project.getName()).getRequirements().get(i).getUserStory().equals(userStory.getText())
+            && !(projectsAdapter.getSelectedProject(project.getName()).getRequirements().get(i).getId() == Integer.parseInt(id.getText()))){
               Alert alert = new Alert(Alert.AlertType.WARNING);
               alert.setHeaderText("Warning");
               alert.setContentText("This user story for this project already exists!");
@@ -336,7 +336,7 @@ public class ManageRequirementGUI
           }
           if(OK){
             ProjectList projectList = projectsAdapter.getAllProjects();
-            Requirement chosenRequirement = projectList.get(projectIndex).getRequirements().get(requirementIndex);
+            Requirement chosenRequirement = projectList.getProject(project).getRequirements().get(requirement.getId());
             chosenRequirement.setName(name.getText());
             chosenRequirement.setUserStory(userStory.getText());
             chosenRequirement.setEstimatedTime(Double.parseDouble(estimatedTime.getText()));
@@ -369,7 +369,7 @@ public class ManageRequirementGUI
           alert.showAndWait();
           if (alert.getResult() == ButtonType.YES)
           {
-            projectsAdapter.deleteRequirement(projectIndex, requirementIndex);
+            projectsAdapter.deleteRequirement(project, requirement.getId());
 
             clearFields();
 

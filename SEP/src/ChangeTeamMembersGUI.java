@@ -117,7 +117,7 @@ public class ChangeTeamMembersGUI {
   }
 
   public void initializeCurrentProject(){
-    currentProject = projectsAdapter.getSelectedProject(sepGUI.getManageProjectGUI().getSelectedIndex());
+    currentProject = projectsAdapter.getSelectedProject(sepGUI.getManageProjectGUI().getSelectedProjectName());
     employeeList = currentProject.getAssignedEmployeeList();
 
     title.setText("Team Members of "+currentProject.getName());
