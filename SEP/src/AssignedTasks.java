@@ -93,6 +93,16 @@ public class AssignedTasks extends Task implements Serializable {
         return project.getName();
     }
 
+    public int getRequirementId()
+    {
+        return requirement.getId();
+    }
+
+    @Override public int getId()
+    {
+        return super.getId();
+    }
+
     /**
      * Compares time spent, date and assigned employee.
      * @param obj the object to compare with
@@ -112,7 +122,8 @@ public class AssignedTasks extends Task implements Serializable {
     @Override public String toString()
     {
         return "AssignedTasks{" + "spentTime=" + spentTime + ", date=" + date
-            + ", assignedEmployee=" + assignedEmployee + '}' + "projectName"+
-            "requirementId="  + super.toString() + getProjectName() + getRequirementId();
+            + ", assignedEmployee=" + assignedEmployee + '}' + super.toString() +
+            "requirementId== " + getRequirementId() + "projectName == " + getProjectName()+
+            "taskId == " + getId();
     }
 }

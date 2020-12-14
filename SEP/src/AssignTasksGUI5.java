@@ -195,6 +195,7 @@ public class AssignTasksGUI5 {
                 assignedTask.setTask(task);
                 assignedTask.setRequirement(requirement);
                 assignedTask.setProject(project);
+                    System.out.println(assignedTask);
 
                 assignedTaskList.addAssignedTask(assignedTask);
                 assignedTasksAdapter.saveAssignedTasks(assignedTaskList);

@@ -61,20 +61,20 @@ public class ViewAssignedTasksGUI2 {
         allAssignedTasksTable.setPrefHeight(290);
         allAssignedTasksTable.setTableMenuButtonVisible(true);
 
-        projectNameColumn = new TableColumn<AssignedTasks, String>("Project Name");
-        projectNameColumn.setCellValueFactory(new PropertyValueFactory<AssignedTasks, String>("projectName"));
+        projectNameColumn = new TableColumn<>("Project Name");
+        projectNameColumn.setCellValueFactory(new PropertyValueFactory<>("projectName"));
         projectNameColumn.setPrefWidth(500);
 
-        requirementIDColumn = new TableColumn<AssignedTasks, Integer>("Requirement ID");
-        projectNameColumn.setCellValueFactory(new PropertyValueFactory<AssignedTasks, Integer>("requirementId"));
+        requirementIDColumn = new TableColumn<>("Requirement ID");
+        requirementIDColumn.setCellValueFactory(new PropertyValueFactory<>("requirementId"));
         requirementIDColumn.setPrefWidth(150);
 
-        taskIDColumn = new TableColumn<AssignedTasks, Integer>("Task ID");
-        projectNameColumn.setCellValueFactory(new PropertyValueFactory<AssignedTasks, Integer>("id"));
+        taskIDColumn = new TableColumn<>("Task ID");
+        taskIDColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         taskIDColumn.setPrefWidth(150);
 
-        dateColumn = new TableColumn<AssignedTasks, MyDate>("Date");
-        projectNameColumn.setCellValueFactory(new PropertyValueFactory<AssignedTasks, MyDate>("date"));
+        dateColumn = new TableColumn<>("Date");
+        dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
         dateColumn.setPrefWidth(200);
 
         allAssignedTasksTable.getColumns().add(projectNameColumn);
