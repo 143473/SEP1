@@ -240,8 +240,8 @@ public class ProjectsAdapter
     for (int i = 0; i < projectsOfEmployee.size(); i++) {
       AssignedEmployeeList assignedEmployeeList = projectsOfEmployee.get(i).getAssignedEmployeeList();
       for (int j = 0; j < assignedEmployeeList.size(); j++) {
-        if(!coWorkersOfEmployee.containsEmployee(assignedEmployeeList.getNormalEmployeeOnIndex(i)) && !assignedEmployeeList.getNormalEmployeeOnIndex(i).equals(employee)){
-          coWorkersOfEmployee.addEmployee(assignedEmployeeList.getNormalEmployeeOnIndex(i));
+        if(!coWorkersOfEmployee.containsEmployee(assignedEmployeeList.getNormalEmployeeOnIndex(j)) && !assignedEmployeeList.getNormalEmployeeOnIndex(j).equals(employee)){
+          coWorkersOfEmployee.addEmployee(assignedEmployeeList.getNormalEmployeeOnIndex(j));
         }
       }
     }
