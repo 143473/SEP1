@@ -96,7 +96,6 @@ public class AssignedTasksAdapter
   public AssignedTasksList getAllTasksOnEmployee (Employee employee)
   {
     AssignedTasksList tasksOnEmployee = new AssignedTasksList();
-
     try
     {
       AssignedTasksList result = (AssignedTasksList)mfio.readObjectFromFile(fileName);

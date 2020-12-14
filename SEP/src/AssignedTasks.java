@@ -76,6 +76,7 @@ public class AssignedTasks extends Task implements Serializable {
     @Override public String toString()
     {
         return "AssignedTasks{" + "spentTime=" + spentTime + ", date=" + date
-            + ", assignedEmployee=" + assignedEmployee + '}'+super.toString();
+            + ", assignedEmployee=" + assignedEmployee + '}' + "projectName"+ getProjectName()+
+            "requirementId=" + getRequirementId() +super.toString();
     }
 }

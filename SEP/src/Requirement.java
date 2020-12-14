@@ -13,6 +13,7 @@ public class Requirement implements Serializable
   private double spentTime;
   private AssignedEmployeeList employeeList;
   private AssignedEmployee responsibleEmployee;
+  private Project project;
 
 
 
@@ -28,6 +29,7 @@ public class Requirement implements Serializable
     this.id = id;
     spentTime = 0;
     this.status = status;
+
   }
 
 
@@ -46,6 +48,16 @@ public class Requirement implements Serializable
   public String getName()
   {
     return name;
+  }
+
+  public void setProject(Project project)
+  {
+    this.project = project;
+  }
+
+  public Project getProject()
+  {
+    return project;
   }
 
   public String getUserStory()

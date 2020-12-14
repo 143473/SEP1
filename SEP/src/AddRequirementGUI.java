@@ -248,7 +248,7 @@ public class AddRequirementGUI
                  importanceBox.getValue().intValue(), responsibleEmployeeBox.getSelectionModel().getSelectedItem(),
                   deadline, project.getRequirements().size()+1, statusBox.getValue());
           requirement.setProgressStatus(statusBox.getSelectionModel().getSelectedItem());
-
+          requirement.setProject(project);
 
           boolean equals = false;
           for (int i = 0; i < project.getRequirements().size(); i++) {
