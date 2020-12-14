@@ -1,9 +1,8 @@
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.Pos;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 /**
@@ -16,28 +15,19 @@ public class ViewAssignedTasksGUI1 {
     private ProjectsAdapter projectsAdapter;
     private AssignedTasksAdapter assignedTasksAdapter;
     private VBox mainPane;
-    private HBox topPane;
 
     private Label titleLabel;
     private Label tableLabel;
 
-    private HBox searchPane;
-    private TextField searchField;
-    private Button searchButton;
-
     private Button continueButton;
 
     private TableView<Employee> allAssignedTasksTable;
-    private TableView.TableViewSelectionModel defaultSelectionModel;
     private TableColumn firstNameColumn;
     private TableColumn lastNameColumn;
     private TableColumn birthdayColumn;
 
-    private MyActionListener listener;
-
     public ViewAssignedTasksGUI1(EmployeeAdapter employeeAdapter,ProjectsAdapter projectsAdapter, AssignedTasksAdapter assignedTasksAdapter){
 
-        listener = new MyActionListener();
         this.projectsAdapter = projectsAdapter;
         this.employeeAdapter = employeeAdapter;
         this.assignedTasksAdapter = assignedTasksAdapter;
@@ -47,18 +37,6 @@ public class ViewAssignedTasksGUI1 {
         titleLabel.getStyleClass().add("heading");
 
         tableLabel = new Label("Choose an employee from the list ");
-
-        searchField = new TextField();
-        searchField.setPromptText("Search by name");
-        searchButton = new Button("Search");
-        searchButton.setOnAction(listener);
-
-        searchPane = new HBox(8);
-        searchPane.getChildren().addAll(searchField, searchButton);
-        searchPane.setAlignment(Pos.BOTTOM_RIGHT);
-
-        topPane = new HBox(250);
-        topPane.getChildren().addAll(titleLabel, searchPane);
 
         allAssignedTasksTable = new TableView();
         allAssignedTasksTable.setPrefHeight(290);
@@ -80,7 +58,7 @@ public class ViewAssignedTasksGUI1 {
         continueButton = new Button("Continue");
 
         mainPane = new VBox(10);
-        mainPane.getChildren().addAll(topPane,tableLabel, allAssignedTasksTable, continueButton);
+        mainPane.getChildren().addAll(titleLabel,tableLabel, allAssignedTasksTable, continueButton);
     }
 
     private void initializeTable(){
@@ -106,17 +84,5 @@ public class ViewAssignedTasksGUI1 {
     {
         return continueButton;
     }
-    private class MyActionListener implements EventHandler<ActionEvent>
-    {
-        public void handle(ActionEvent e) {
-            if (e.getSource() == searchButton) {
-                String searchingFor = searchField.getText();
-                allAssignedTasksTable.getItems().clear();
-                EmployeeList chosenEmployees = employeeAdapter.getEmployeesByName(searchingFor);
-                for (int i = 0; i < chosenEmployees.size(); i++) {
-                    allAssignedTasksTable.getItems().add(chosenEmployees.get(i));
-                }
-            }
-        }
-    }
+
 }

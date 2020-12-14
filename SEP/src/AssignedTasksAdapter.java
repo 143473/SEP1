@@ -102,7 +102,7 @@ public class AssignedTasksAdapter
 
       for (int i = 0; i < result.size(); i++)
       {
-        if (result.get(i).getAssignedEmployee().equals(employee))
+        if (result.get(i).checkIfEmployeeIsAssigned(employee))
         {
           tasksOnEmployee.addAssignedTask(result.get(i));
         }

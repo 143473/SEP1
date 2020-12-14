@@ -27,6 +27,7 @@ public class Task implements Serializable
     this.id = id;
     this.status = status;
     spentTime = 0;
+    this.requirement = null;
   }
 
 
@@ -44,14 +45,14 @@ public class Task implements Serializable
     this.requirement = requirement;
   }
 
-  public Integer getRequirementId()
+  public int getRequirementId()
   {
     return requirement.getId();
   }
-  public String getProjectName()
+  /*public String getProjectName()
   {
     return requirement.getProject().getName();
-  }
+  }*/
 
   /**
    * Gets the estimated time of completing the task

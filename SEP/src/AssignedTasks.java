@@ -9,6 +9,9 @@ public class AssignedTasks extends Task implements Serializable {
     private double spentTime;
     private MyDate date;
     private AssignedEmployee assignedEmployee;
+    private Project project;
+    private Requirement requirement;
+    private Task task;
 
     /**
      * Three-argument constructor.
@@ -23,6 +26,9 @@ public class AssignedTasks extends Task implements Serializable {
         spentTime = 0;
         this.assignedEmployee = assignedEmployee;
         this.date = date;
+        this.project = null;
+        this.requirement = null;
+        this.task = null;
     }
 
     /**
@@ -33,12 +39,22 @@ public class AssignedTasks extends Task implements Serializable {
         return date.copy();
     }
 
+
     /**
      * Gets the employee assigned to the task.
      * @return the employee assigned to the task
      */
+
     public AssignedEmployee getAssignedEmployee(){
         return assignedEmployee.copy();
+    }
+    public boolean checkIfEmployeeIsAssigned(Employee employee){
+        if(getAssignedEmployee().getFirstName().equals(employee.getFirstName())&&
+            getAssignedEmployee().getLastName().equals(employee.getLastName())&&
+                getAssignedEmployee().getDateOfBirth().equals(employee.getDateOfBirth()))
+            return true;
+        else
+            return false;
     }
 
     /**
@@ -55,6 +71,39 @@ public class AssignedTasks extends Task implements Serializable {
      */
     public double getSpentTime() {
         return spentTime;
+    }
+
+    public void setTask(Task task)
+    {
+        this.task = task;
+    }
+
+    public void setRequirement(Requirement requirement)
+    {
+        this.requirement = requirement;
+    }
+
+    public void setProject(Project project)
+    {
+        this.project = project;
+    }
+
+    public String getProjectName()
+    {
+        return project.getName();
+    }
+
+    public int getRequirementId()
+    {
+        return requirement.getId();
+    }
+
+    @Override public int getId()
+    {
+        return super.getId();
+    }
+    public String getStatus(){
+        return task.getStatus();
     }
 
     /**
@@ -76,7 +125,8 @@ public class AssignedTasks extends Task implements Serializable {
     @Override public String toString()
     {
         return "AssignedTasks{" + "spentTime=" + spentTime + ", date=" + date
-            + ", assignedEmployee=" + assignedEmployee + '}' + "projectName"+ getProjectName()+
-            "requirementId=" + getRequirementId() +super.toString();
+            + ", assignedEmployee=" + assignedEmployee + '}' + super.toString() +
+            "requirementId== " + getRequirementId() + "projectName == " + getProjectName()+
+            "taskId == " + getId();
     }
 }

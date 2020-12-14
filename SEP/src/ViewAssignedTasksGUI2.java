@@ -1,7 +1,5 @@
-import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -20,15 +18,13 @@ public class ViewAssignedTasksGUI2 {
     private Label employeeName;
     private Label tableLabel;
 
-    private ComboBox statusBox;
-    private FlowPane comboPane;
-
     private TableView<AssignedTasks> allAssignedTasksTable;
     private AssignedTasksAdapter assignedTasksAdapter;
     private TableColumn projectNameColumn;
     private TableColumn requirementIDColumn;
-    private TableColumn taskIDColumn;;
+    private TableColumn taskIDColumn;
     private TableColumn dateColumn;
+    private TableColumn statusColumn;
 
     private Button goBack;
 
@@ -42,50 +38,38 @@ public class ViewAssignedTasksGUI2 {
 
         tableLabel = new Label("List of Assigned Tasks");
 
-        statusBox = new ComboBox<String>();
-        statusBox.getItems().addAll(
-                "All upcoming",
-                "All"
-        );
-
-        comboPane = new FlowPane();
-        comboPane.setAlignment(Pos.BASELINE_RIGHT);
-        comboPane.setAlignment(Pos.BOTTOM_CENTER);
-        comboPane.setPrefWidth(200);
-        comboPane.getChildren().add(statusBox);
-
         topPane = new HBox(300);
-        topPane.getChildren().addAll(employeeName, comboPane);
+        topPane.getChildren().addAll(employeeName);
 
         allAssignedTasksTable = new TableView();
         allAssignedTasksTable.setPrefHeight(290);
         allAssignedTasksTable.setTableMenuButtonVisible(true);
 
-        projectNameColumn = new TableColumn<AssignedTasks, String>("Project Name");
-        projectNameColumn.setCellValueFactory(new PropertyValueFactory("name"));
-        projectNameColumn.setPrefWidth(500);
+        projectNameColumn = new TableColumn<>("Project Name");
+        projectNameColumn.setCellValueFactory(new PropertyValueFactory<>("projectName"));
+        projectNameColumn.setPrefWidth(200);
 
-        requirementIDColumn = new TableColumn<AssignedTasks, Integer>("Requirement ID");
-        projectNameColumn.setCellValueFactory(new PropertyValueFactory("id"));
+        requirementIDColumn = new TableColumn<>("Requirement ID");
+        requirementIDColumn.setCellValueFactory(new PropertyValueFactory<>("requirementId"));
         requirementIDColumn.setPrefWidth(150);
 
-        taskIDColumn = new TableColumn<AssignedTasks, Integer>("Task ID");
-        projectNameColumn.setCellValueFactory(new PropertyValueFactory("id"));
+        taskIDColumn = new TableColumn<>("Task ID");
+        taskIDColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         taskIDColumn.setPrefWidth(150);
 
-        dateColumn = new TableColumn<AssignedTasks, MyDate>("Date");
-        projectNameColumn.setCellValueFactory(new PropertyValueFactory("date"));
+        dateColumn = new TableColumn<>("Date");
+        dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
         dateColumn.setPrefWidth(200);
 
-        projectNameColumn.setReorderable(false);
-        requirementIDColumn.setReorderable(false);
-        taskIDColumn.setReorderable(false);
-        dateColumn.setReorderable(false);
+        statusColumn = new TableColumn<>("Status");
+        statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
+        statusColumn.setPrefWidth(200);
 
         allAssignedTasksTable.getColumns().add(projectNameColumn);
         allAssignedTasksTable.getColumns().add(requirementIDColumn);
         allAssignedTasksTable.getColumns().add(taskIDColumn);
         allAssignedTasksTable.getColumns().add(dateColumn);
+        allAssignedTasksTable.getColumns().add(statusColumn);
 
         goBack = new Button("Go Back");
 
@@ -110,7 +94,6 @@ public class ViewAssignedTasksGUI2 {
 
         for (int i = 0; i < assignedTasksList.size(); i++)
         {
-            System.out.println(assignedTasksList.get(i));
             allAssignedTasksTable.getItems().add(assignedTasksList.get(i));
         }
     }

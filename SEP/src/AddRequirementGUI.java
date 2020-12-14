@@ -263,9 +263,9 @@ public class AddRequirementGUI
           }
           if(!equals){
 
-
+            System.out.println("before "+ projectList.size());
             projectList.removeProject(project.getName());
-
+            System.out.println("after! " + projectList.size());
             project.addRequirement(requirement);
             projectList.addProject(project);
             projectsAdapter.saveProjects(projectList);
