@@ -192,7 +192,7 @@ public class AssignTasksGUI5 {
                     dateForTheTask, task.getId(), task.getStatus());
 
                 assignedTaskList.addAssignedTask(assignedTask);
-                System.out.println(assignedTask);
+                //System.out.println(assignedTask);
                 assignedTasksAdapter.saveAssignedTasks(assignedTaskList);
                     Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
                     alert2.setHeaderText("Success");
