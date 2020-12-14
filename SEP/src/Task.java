@@ -161,4 +161,12 @@ public class Task implements Serializable
   public String getStatus(){
     return status;
   }
+
+  @Override public String toString()
+  {
+    return "Task{" + "id=" + id + ", name='" + name + '\'' + ", description='"
+        + description + '\'' + ", estimatedTime=" + estimatedTime + ", status='"
+        + status + '\'' + ", deadline=" + deadline + ", responsibleEmployee="
+        + responsibleEmployee + ", spentTime=" + spentTime + '}';
+  }
 }

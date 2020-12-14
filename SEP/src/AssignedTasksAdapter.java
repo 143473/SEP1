@@ -93,7 +93,7 @@ public class AssignedTasksAdapter
    * @param employee the employee to retrieve the assignedTasks for
    * @return an AssignedTasksList object with assignedTasks for the given employee
    */
-  public AssignedTasksList getAllTasksOnEmployee (AssignedEmployee employee)
+  public AssignedTasksList getAllTasksOnEmployee (Employee employee)
   {
     AssignedTasksList tasksOnEmployee = new AssignedTasksList();
 

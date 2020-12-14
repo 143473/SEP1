@@ -106,9 +106,10 @@ public class AssignTasksGUI5 {
             String requirementName = sepGUI.getAssignTasksGUI2().getRequirementTable().getSelectionModel().getSelectedItem().toString();
             String taskName = sepGUI.getAssignTasksGUI3().getTasksTable().getSelectionModel().getSelectedItem().getName();
             taskLabel.setText(projectName + "\\" + requirementName + "\\" + taskName);
-            String employeeName = sepGUI.getAssignTasksGUI4().getAllAssignedTasksTable().getSelectionModel().getSelectedItem().getFirstName() +
+            String employeeName = sepGUI.getAssignTasksGUI4().getAllAssignedTasksTable().getSelectionModel().getSelectedItem().getFirstName() + " "+
                 sepGUI.getAssignTasksGUI4().getAllAssignedTasksTable().getSelectionModel().getSelectedItem().getLastName();
             employeeLabel.setText(employeeName);
+
             gogo =true;
         }
 
@@ -183,8 +184,6 @@ public class AssignTasksGUI5 {
                         allValuesCorrect = false;
                         break;
                     }
-
-
                 }
                 if(allValuesCorrect ){
                 AssignedTasks assignedTask = new AssignedTasks(task.getName(),
@@ -195,6 +194,10 @@ public class AssignTasksGUI5 {
                 assignedTaskList.addAssignedTask(assignedTask);
                 System.out.println(assignedTask);
                 assignedTasksAdapter.saveAssignedTasks(assignedTaskList);
+                    Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
+                    alert2.setHeaderText("Success");
+                    alert2.setContentText("The task was successfully assigned!");
+                    alert2.showAndWait();
                 /*AssignedTasks assignedTask = new AssignedTasks(task.getName(),
                     task.getDescription(), task.getDeadline(), task.getEstimatedTime(),
                     task.getResponsibleEmployee(), assignedEmployee,

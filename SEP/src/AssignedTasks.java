@@ -22,7 +22,7 @@ public class AssignedTasks extends Task implements Serializable {
         super(name, description, estimatedTime, deadline, id, status, responsibleEmployee);
         spentTime = 0;
         this.assignedEmployee = assignedEmployee;
-        this.date = date;
+        this.date = date.copy();
     }
 
     /**
@@ -39,6 +39,10 @@ public class AssignedTasks extends Task implements Serializable {
      */
     public AssignedEmployee getAssignedEmployee(){
         return assignedEmployee.copy();
+    }
+    public String getTaskName(){
+
+        return super.getName();
     }
 
     /**
@@ -75,7 +79,7 @@ public class AssignedTasks extends Task implements Serializable {
 
     @Override public String toString()
     {
-        return "AssignedTasks{" + "spentTime=" + spentTime + ", date=" + date
+        return super.toString() + "AssignedTasks{" + "spentTime=" + spentTime + ", date=" + date
             + ", assignedEmployee=" + assignedEmployee + '}';
     }
 }

@@ -62,15 +62,15 @@ public class ViewAssignedTasksGUI2 {
         allAssignedTasksTable.setTableMenuButtonVisible(true);
 
         projectNameColumn = new TableColumn<AssignedTasks, Project>("Project Name");
-        projectNameColumn.setCellValueFactory(new PropertyValueFactory<AssignedTasks, Project>("name"));
+        projectNameColumn.setCellValueFactory(new PropertyValueFactory<Employee, Project>("projectsWorkedOn"));
         projectNameColumn.setPrefWidth(500);
 
-        requirementIDColumn = new TableColumn<AssignedTasks, Requirement>("Requirement ID");
-        projectNameColumn.setCellValueFactory(new PropertyValueFactory<AssignedTasks, Requirement>("name"));
+        requirementIDColumn = new TableColumn<AssignedTasks, Requirement>("Requirement");
+        projectNameColumn.setCellValueFactory(new PropertyValueFactory<Employee, Requirement>("name"));
         requirementIDColumn.setPrefWidth(150);
 
-        taskIDColumn = new TableColumn("Task ID");
-        projectNameColumn.setCellValueFactory(new PropertyValueFactory<AssignedTasks, Integer>("id"));
+        taskIDColumn = new TableColumn("Task");
+        projectNameColumn.setCellValueFactory(new PropertyValueFactory<Employee, Task>("name"));
         taskIDColumn.setPrefWidth(150);
 
         dateColumn = new TableColumn("Date");
@@ -104,12 +104,13 @@ public class ViewAssignedTasksGUI2 {
     private void initializeTable()
     {
         allAssignedTasksTable.getItems().clear();
-        AssignedEmployee assignedEmployee = (AssignedEmployee) sepGUI.getViewAssignedTasksGUI1().getAllAssignedTasksTable()
+        Employee employee = sepGUI.getViewAssignedTasksGUI1().getAllAssignedTasksTable()
             .getSelectionModel().getSelectedItem();
-        AssignedTasksList assignedTasksList = assignedTasksAdapter.getAllTasksOnEmployee(assignedEmployee);
+        AssignedTasksList assignedTasksList = assignedTasksAdapter.getAllTasksOnEmployee(employee);
 
         for (int i = 0; i < assignedTasksList.size(); i++)
         {
+            System.out.println(assignedTasksList.get(i));
             allAssignedTasksTable.getItems().add(assignedTasksList.get(i));
         }
     }
