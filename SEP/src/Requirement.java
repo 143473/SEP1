@@ -29,6 +29,7 @@ public class Requirement implements Serializable
     this.id = id;
     spentTime = 0;
     this.status = status;
+    this.project = null;
 
   }
 
@@ -43,6 +44,7 @@ public class Requirement implements Serializable
     tasks = new ArrayList<Task>();
     status = "Not started";
     spentTime = 0;
+    this.project = null;
   }
 
   public String getName()

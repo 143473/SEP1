@@ -170,6 +170,8 @@ public class AssignTasksGUI5 {
             {
                 AssignedEmployee assignedEmployee = sepGUI.getAssignTasksGUI4().getAllAssignedTasksTable().getSelectionModel()
                     .getSelectedItem();
+                Project project = sepGUI.getAssignTasksGUI1().getAssignTasksTable().getSelectionModel().getSelectedItem();
+                Requirement requirement = (Requirement) sepGUI.getAssignTasksGUI2().getRequirementTable().getSelectionModel().getSelectedItem();
                 Task task = sepGUI.getAssignTasksGUI3().getTasksTable().getSelectionModel().getSelectedItem();
                 AssignedTasksList assignedTaskList = assignedTasksAdapter.getAllAssignedTasks();
                 for (int i = 0; i < assignedTaskList.size(); i++)
@@ -190,13 +192,15 @@ public class AssignTasksGUI5 {
                     task.getDescription(), task.getDeadline(), task.getEstimatedTime(),
                     task.getResponsibleEmployee(), assignedEmployee,
                     dateForTheTask, task.getId(), task.getStatus());
+                assignedTask.setTask(task);
+                assignedTask.setRequirement(requirement);
+                assignedTask.setProject(project);
 
                 assignedTaskList.addAssignedTask(assignedTask);
-                System.out.println(assignedTask);
                 assignedTasksAdapter.saveAssignedTasks(assignedTaskList);
                     Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
                     alert2.setHeaderText("Success");
-                    alert2.setContentText("The task was successfully assigned!");
+                    alert2.setContentText("The task was successfully added!");
                     alert2.showAndWait();
                 /*AssignedTasks assignedTask = new AssignedTasks(task.getName(),
                     task.getDescription(), task.getDeadline(), task.getEstimatedTime(),
@@ -225,7 +229,8 @@ public class AssignTasksGUI5 {
             }
         }
 
-       } return allValuesCorrect;
+       }
+        return allValuesCorrect;
     }
     public void clearFields()
     {

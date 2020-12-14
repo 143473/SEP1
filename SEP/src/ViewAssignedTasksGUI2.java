@@ -62,25 +62,20 @@ public class ViewAssignedTasksGUI2 {
         allAssignedTasksTable.setTableMenuButtonVisible(true);
 
         projectNameColumn = new TableColumn<AssignedTasks, String>("Project Name");
-        projectNameColumn.setCellValueFactory(new PropertyValueFactory("name"));
+        projectNameColumn.setCellValueFactory(new PropertyValueFactory<AssignedTasks, String>("projectName"));
         projectNameColumn.setPrefWidth(500);
 
         requirementIDColumn = new TableColumn<AssignedTasks, Integer>("Requirement ID");
-        projectNameColumn.setCellValueFactory(new PropertyValueFactory("id"));
+        projectNameColumn.setCellValueFactory(new PropertyValueFactory<AssignedTasks, Integer>("requirementId"));
         requirementIDColumn.setPrefWidth(150);
 
         taskIDColumn = new TableColumn<AssignedTasks, Integer>("Task ID");
-        projectNameColumn.setCellValueFactory(new PropertyValueFactory("id"));
+        projectNameColumn.setCellValueFactory(new PropertyValueFactory<AssignedTasks, Integer>("id"));
         taskIDColumn.setPrefWidth(150);
 
         dateColumn = new TableColumn<AssignedTasks, MyDate>("Date");
-        projectNameColumn.setCellValueFactory(new PropertyValueFactory("date"));
+        projectNameColumn.setCellValueFactory(new PropertyValueFactory<AssignedTasks, MyDate>("date"));
         dateColumn.setPrefWidth(200);
-
-        projectNameColumn.setReorderable(false);
-        requirementIDColumn.setReorderable(false);
-        taskIDColumn.setReorderable(false);
-        dateColumn.setReorderable(false);
 
         allAssignedTasksTable.getColumns().add(projectNameColumn);
         allAssignedTasksTable.getColumns().add(requirementIDColumn);
@@ -110,7 +105,6 @@ public class ViewAssignedTasksGUI2 {
 
         for (int i = 0; i < assignedTasksList.size(); i++)
         {
-            System.out.println(assignedTasksList.get(i));
             allAssignedTasksTable.getItems().add(assignedTasksList.get(i));
         }
     }
