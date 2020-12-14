@@ -19,3 +19,4 @@ Dexter,O'Reilly,1,2,1971
 Tyrion,Lannister,11,6,273
 Anthony Edward,Stark,29,5,1970
 Jack,The Ripper,13,10,1888
+Nanananan,Nunu,14,10,1500

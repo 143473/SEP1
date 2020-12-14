@@ -62,15 +62,15 @@ public class ViewAssignedTasksGUI2 {
         allAssignedTasksTable.setTableMenuButtonVisible(true);
 
         projectNameColumn = new TableColumn<AssignedTasks, Project>("Project Name");
-        projectNameColumn.setCellValueFactory(new PropertyValueFactory<Employee, Project>("projectsWorkedOn"));
+        projectNameColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("projectsWorkedOn"));
         projectNameColumn.setPrefWidth(500);
 
-        requirementIDColumn = new TableColumn<AssignedTasks, Requirement>("Requirement");
+        requirementIDColumn = new TableColumn<AssignedTasks, Requirement>("Requirement ID");
         projectNameColumn.setCellValueFactory(new PropertyValueFactory<Employee, Requirement>("name"));
         requirementIDColumn.setPrefWidth(150);
 
-        taskIDColumn = new TableColumn("Task");
-        projectNameColumn.setCellValueFactory(new PropertyValueFactory<Employee, Task>("name"));
+        taskIDColumn = new TableColumn("Task ID");
+        projectNameColumn.setCellValueFactory(new PropertyValueFactory<AssignedTasks, Integer>("id"));
         taskIDColumn.setPrefWidth(150);
 
         dateColumn = new TableColumn("Date");
@@ -107,6 +107,7 @@ public class ViewAssignedTasksGUI2 {
         Employee employee = sepGUI.getViewAssignedTasksGUI1().getAllAssignedTasksTable()
             .getSelectionModel().getSelectedItem();
         AssignedTasksList assignedTasksList = assignedTasksAdapter.getAllTasksOnEmployee(employee);
+        System.out.println(assignedTasksList);
 
         for (int i = 0; i < assignedTasksList.size(); i++)
         {
