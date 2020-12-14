@@ -146,13 +146,18 @@ public class CreateProjectGUI3
     if(OK){
       Project project = projectList.get(projectList.size()-1);
       AssignedEmployeeList assignedEmployees = projectList.get(projectList.size()-1).getAssignedEmployeeList();
-      project.setScrumMaster(assignedEmployees.get(employeesBox1.getSelectionModel().getSelectedIndex()));
-      project.setProjectCreator(assignedEmployees.get(employeesBox2.getSelectionModel().getSelectedIndex()));
-      project.setProductOwner(assignedEmployees.get(employeesBox3.getSelectionModel().getSelectedIndex()));
+      AssignedEmployee employee1 = assignedEmployees.get(employeesBox1.getSelectionModel().getSelectedIndex());
+      AssignedEmployee employee2 = assignedEmployees.get(employeesBox2.getSelectionModel().getSelectedIndex());
+      AssignedEmployee employee3 = assignedEmployees.get(employeesBox3.getSelectionModel().getSelectedIndex());
 
-      assignedEmployees.get(employeesBox1.getSelectionModel().getSelectedIndex()).setStatus(0);
-      assignedEmployees.get(employeesBox2.getSelectionModel().getSelectedIndex()).setStatus(2);
-      assignedEmployees.get(employeesBox3.getSelectionModel().getSelectedIndex()).setStatus(1);
+      project.setScrumMaster(employee1);
+      project.setProjectCreator(employee2);
+      project.setProductOwner(employee3);
+
+      employee1.setStatus(0);
+      employee2.setStatus(2);
+      employee3.setStatus(1);
+
 
       projectsAdapter.saveProjects(projectList);
 
