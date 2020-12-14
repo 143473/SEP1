@@ -38,6 +38,7 @@ public class ChangeTeamMembersGUI {
 
   private Project currentProject;
   private AssignedEmployeeList employeeList;
+  private ProjectList allProjects;
 
   private MyActionListener listener;
 
@@ -117,7 +118,10 @@ public class ChangeTeamMembersGUI {
   }
 
   public void initializeCurrentProject(){
-    currentProject = projectsAdapter.getSelectedProject(sepGUI.getManageProjectGUI().getSelectedProjectName());
+    allProjects = projectsAdapter.getAllProjects();
+    if(currentProject == null){
+      currentProject = allProjects.getProject(sepGUI.getManageProjectGUI().getSelectedProject());
+    }
     employeeList = currentProject.getAssignedEmployeeList();
 
     title.setText("Team Members of "+currentProject.getName());
@@ -307,11 +311,7 @@ public class ChangeTeamMembersGUI {
       OK = false;
     }
     if(OK){
-      ProjectList allProjects = projectsAdapter.getAllProjects();
-      /*Project changedProject = allProjects.getProject(currentProject);*/
-      System.out.println(currentProject.getName());
-      allProjects.removeProject(currentProject.getName());
-      allProjects.addProject(currentProject);
+      //Project changedProject = allProjects.getProject(currentProject);
       /*System.out.println(currentProject);
       for (int i = 0; i < teamMembersTable.getItems().size(); i++) {
         if(!currentProject.getAssignedEmployeeList().containsEmployee(teamMembersTable.getItems().get(i))){
