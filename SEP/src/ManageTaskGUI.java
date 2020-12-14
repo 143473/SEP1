@@ -173,9 +173,9 @@ public class ManageTaskGUI
 
   private void initializeTable(){
     tasksTable.getItems().clear();
-    int selectedProjectIndex = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedIndex();
-    int selectedRequirementIndex = sepGUI.getReqOfSelectedPrjGUI().getRequirementsTable().getSelectionModel().getSelectedIndex();
-    ArrayList<Task> tasks = projectsAdapter.getSelectedRequirement(selectedProjectIndex, selectedRequirementIndex).getTasks();
+    Project selectedProject = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem();
+    Requirement selectedRequirement = sepGUI.getReqOfSelectedPrjGUI().getRequirementsTable().getSelectionModel().getSelectedItem();
+    ArrayList<Task> tasks = projectsAdapter.getSelectedRequirement(selectedProject.getName(), selectedRequirement.getId()).getTasks();
 
     System.out.println(tasks);
     for (int i = 0; i < tasks.size(); i++) {
@@ -199,13 +199,13 @@ public class ManageTaskGUI
     public void changed(ObservableValue<? extends Task> task, Task oldTask, Task newTask)
     {
       Task temp = tasksTable.getSelectionModel().getSelectedItem();
-      int projectIndex = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedIndex();
-      int requirementIndex = sepGUI.getReqOfSelectedPrjGUI().getRequirementsTable().getSelectionModel().getSelectedIndex();
-      int taskIndex = tasksTable.getSelectionModel().getSelectedIndex();
+      Project project = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem();
+      Requirement requirement = sepGUI.getReqOfSelectedPrjGUI().getRequirementsTable().getSelectionModel().getSelectedItem();
+      Task previouslySelectedTask = tasksTable.getSelectionModel().getSelectedItem();
 
       if (temp != null)
       {
-        Task selectedTask = projectsAdapter.getSelectedTask(projectIndex, requirementIndex, taskIndex);
+        Task selectedTask = projectsAdapter.getSelectedTask(project.getName(), requirement.getId(), previouslySelectedTask.getId());
 
         nameField.setText(selectedTask.getName());
         descriptionField.setText(selectedTask.getDescription());
@@ -219,7 +219,7 @@ public class ManageTaskGUI
         statusBox.getItems().clear();
         responsibleEmployeeBox.getItems().clear();
 
-        AssignedEmployeeList assignedEmployeeList = projectsAdapter.getAllProjects().get(projectIndex).getAssignedEmployeeList();
+        AssignedEmployeeList assignedEmployeeList = projectsAdapter.getAllProjects().getProject(project).getAssignedEmployeeList();
         for (int i = 0; i < assignedEmployeeList.size(); i++) {
           if(!responsibleEmployeeBox.getItems().contains(assignedEmployeeList.get(i))){
             responsibleEmployeeBox.getItems().add(assignedEmployeeList.get(i));
@@ -238,12 +238,12 @@ public class ManageTaskGUI
 
   private class MyActionListener implements EventHandler<ActionEvent> {
     public void handle(ActionEvent e) {
-      int projectIndex = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedIndex();
-      int requirementIndex = sepGUI.getReqOfSelectedPrjGUI().getRequirementsTable().getSelectionModel().getSelectedIndex();
-      int taskIndex = tasksTable.getSelectionModel().getSelectedIndex();
+      Project project = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem();
+      Requirement requirement = sepGUI.getReqOfSelectedPrjGUI().getRequirementsTable().getSelectionModel().getSelectedItem();
+      Task task = tasksTable.getSelectionModel().getSelectedItem();
 
       if(e.getSource() == saveButton){
-        Task selectedTask = projectsAdapter.getSelectedTask(projectIndex, requirementIndex, taskIndex);
+        Task selectedTask = projectsAdapter.getSelectedTask(project.getName(), requirement.getId(), task.getId());
 
         boolean OK = true;
 
@@ -255,9 +255,9 @@ public class ManageTaskGUI
           OK = false;
         }
         else{
-          for (int i = 0; i < projectsAdapter.getSelectedRequirement(projectIndex, requirementIndex).getTasks().size(); i++) {
-            if(projectsAdapter.getSelectedRequirement(projectIndex, requirementIndex).getTasks().get(i).getName().equals(nameField.getText())
-                    && !(projectsAdapter.getSelectedRequirement(projectIndex, requirementIndex).getTasks().get(i).getId() == Integer.parseInt(idField.getText()))){
+          for (int i = 0; i < projectsAdapter.getSelectedRequirement(project.getName(), requirement.getId()).getTasks().size(); i++) {
+            if(projectsAdapter.getSelectedRequirement(project.getName(), requirement.getId()).getTasks().get(i).getName().equals(nameField.getText())
+                    && !(projectsAdapter.getSelectedRequirement(project.getName(), requirement.getId()).getTasks().get(i).getId() == Integer.parseInt(idField.getText()))){
               Alert alert = new Alert(Alert.AlertType.WARNING);
               alert.setHeaderText("Warning");
               alert.setContentText("This name of task for this requirement in this project already exists!");
@@ -275,9 +275,9 @@ public class ManageTaskGUI
           OK = false;
         }
         else{
-          for (int i = 0; i < projectsAdapter.getSelectedRequirement(projectIndex, requirementIndex).getTasks().size(); i++) {
-            if(projectsAdapter.getSelectedRequirement(projectIndex, requirementIndex).getTasks().get(i).getDescription().equals(descriptionField.getText())
-                    && !(projectsAdapter.getSelectedRequirement(projectIndex, requirementIndex).getTasks().get(i).getId() == Integer.parseInt(idField.getText()))){
+          for (int i = 0; i < projectsAdapter.getSelectedRequirement(project.getName(), requirement.getId()).getTasks().size(); i++) {
+            if(projectsAdapter.getSelectedRequirement(project.getName(), requirement.getId()).getTasks().get(i).getDescription().equals(descriptionField.getText())
+                    && !(projectsAdapter.getSelectedRequirement(project.getName(), requirement.getId()).getTasks().get(i).getId() == Integer.parseInt(idField.getText()))){
               Alert alert = new Alert(Alert.AlertType.WARNING);
               alert.setHeaderText("Warning");
               alert.setContentText("This description of task for this requirement in this project already exists!");
@@ -347,7 +347,7 @@ public class ManageTaskGUI
           }
           if(OK){
             ProjectList projectList = projectsAdapter.getAllProjects();
-            Task chosenTask = projectList.get(projectIndex).getRequirements().get(requirementIndex).getTasks().get(taskIndex);
+            Task chosenTask = projectList.getProject(project).getRequirements().get(requirement.getId()).getTasks().get(task.getId());
 
             chosenTask.setName(nameField.getText());
             chosenTask.setDescription(descriptionField.getText());
@@ -378,7 +378,7 @@ public class ManageTaskGUI
           alert.showAndWait();
           if (alert.getResult() == ButtonType.YES)
           {
-            projectsAdapter.deleteTask(projectIndex, requirementIndex, taskIndex);
+            projectsAdapter.deleteTask(project, requirement.getId(), task.getId());
 
             clearFields();
 

@@ -221,35 +221,45 @@ public class AddTaskGUI
         }
         if (allValuesCorrect) {
           ProjectList projectList = projectsAdapter.getAllProjects();
-          Project project = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem();
-          Requirement requirement = sepGUI.getReqOfSelectedPrjGUI().getRequirementsTable().getSelectionModel().getSelectedItem();
+          Project selectedProject = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem();
+          Project project = projectList.getProjectByName(selectedProject.getName());
+          Requirement selectedRequirement = sepGUI.getReqOfSelectedPrjGUI().getRequirementsTable().getSelectionModel().getSelectedItem();
+          Requirement requirement = project.getRequirement(selectedRequirement);
 
 
           double estimationTime = Double.parseDouble(estimationField.getText().replaceFirst("^0+(?!$)", ""));
 
           Task newTask = new Task(nameField.getText(), descriptionField.getText(), estimationTime,
-                  deadline, requirement.getTasks().size()+1, statusBox.getSelectionModel().getSelectedItem(),
+                  deadline, requirement.getTasks().size(), statusBox.getSelectionModel().getSelectedItem(),
                   responsibleEmployeeBox.getSelectionModel().getSelectedItem());
           newTask.setRequirement(requirement);
 
           boolean equals = false;
           for (int i = 0; i < requirement.getTasks().size(); i++) {
-            if(requirement.getTasks().get(i).equals(newTask)){
+            if(project.getRequirements().get(requirement.getId()).getTasks().get(i).equals(newTask)){
               equals = true;
               Alert alert = new Alert(Alert.AlertType.WARNING);
-              alert.setHeaderText("Duplicate project");
-              alert.setContentText("This project already exists!");
+              alert.setHeaderText("Duplicate task");
+              alert.setContentText("This task already exists!");
               alert.showAndWait();
               allValuesCorrect = false;
             }
           }
           if(!equals){
+            requirement.addTask(newTask);
+            /*
             projectList.removeProject(project.getName());
             project.removeRequirement(requirement);
+            System.out.println("before "+ requirement.getTasks().size());
             requirement.addTask(newTask);
+            System.out.println("after "+ requirement.getTasks().size());
             project.addRequirement(requirement);
+            System.out.println(requirement.getTasks());
             projectList.addProject(project);
+            System.out.println(project.getRequirements().get(0).getTasks());
+             */
             projectsAdapter.saveProjects(projectList);
+
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setHeaderText("Adding successful");
             alert.setContentText("New task was successfully added to the list!");

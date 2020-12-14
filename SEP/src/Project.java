@@ -80,6 +80,15 @@ public class Project implements Serializable
     return requirements;
   }
 
+  public Requirement getRequirement(Requirement requirement){
+    for (int i = 0; i < requirements.size(); i++) {
+      if(requirements.get(i).equals(requirement)){
+        return requirements.get(i);
+      }
+    }
+    return null;
+  }
+
   /**
    * Sets the name of a project.
    * @param name name of a project

@@ -161,7 +161,7 @@ public class ReqOfSelectedPrjGUI
       gogo = false;
     }
     if(gogo){
-      if(projectsAdapter.getSelectedProject(sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedIndex()).getAssignedEmployeeList().size() == 0){
+      if(projectsAdapter.getSelectedProject(sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem().getName()).getAssignedEmployeeList().size() == 0){
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setHeaderText("Warning");
         alert.setContentText("Chosen project does not have any assigned employees!\nYou have to assign employees before adding requirements!");

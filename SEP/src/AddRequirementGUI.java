@@ -134,7 +134,7 @@ public class AddRequirementGUI
   }
 
   public boolean callSaveButton(){
-    int projectIndex = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedIndex();
+    Project project = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem();
     Requirement requirement;
     MyDate deadline;
     boolean allValuesCorrect = true;
@@ -147,8 +147,8 @@ public class AddRequirementGUI
       allValuesCorrect =  false;
     }
     else{
-      for (int i = 0; i < projectsAdapter.getSelectedProject(projectIndex).getRequirements().size(); i++) {
-        if(projectsAdapter.getSelectedProject(projectIndex).getRequirements().get(i).getName().equals(name.getText())){
+      for (int i = 0; i < projectsAdapter.getSelectedProject(project.getName()).getRequirements().size(); i++) {
+        if(projectsAdapter.getSelectedProject(project.getName()).getRequirements().get(i).getName().equals(name.getText())){
           Alert alert = new Alert(Alert.AlertType.WARNING);
           alert.setHeaderText("Warning");
           alert.setContentText("This name of requirement for this project already exists!");
@@ -166,8 +166,8 @@ public class AddRequirementGUI
       allValuesCorrect = false;
     }
     else{
-      for (int i = 0; i < projectsAdapter.getSelectedProject(projectIndex).getRequirements().size(); i++) {
-        if(projectsAdapter.getSelectedProject(projectIndex).getRequirements().get(i).getUserStory().equals(userStory.getText())){
+      for (int i = 0; i < projectsAdapter.getSelectedProject(project.getName()).getRequirements().size(); i++) {
+        if(projectsAdapter.getSelectedProject(project.getName()).getRequirements().get(i).getUserStory().equals(userStory.getText())){
           Alert alert = new Alert(Alert.AlertType.WARNING);
           alert.setHeaderText("Warning");
           alert.setContentText("This user story for this project already exists!");
@@ -240,13 +240,12 @@ public class AddRequirementGUI
         if (allValuesCorrect)
         {
           ProjectList projectList = projectsAdapter.getAllProjects();
-          Project project = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem();
 
           double estimationTime = Double.parseDouble(estimation.getText().replaceFirst("^0+(?!$)", ""));
 
           requirement = new Requirement(name.getText(), userStory.getText(), estimationTime,
                  importanceBox.getValue().intValue(), responsibleEmployeeBox.getSelectionModel().getSelectedItem(),
-                  deadline, project.getRequirements().size()+1, statusBox.getValue());
+                  deadline, project.getRequirements().size(), statusBox.getValue());
           requirement.setProgressStatus(statusBox.getSelectionModel().getSelectedItem());
           requirement.setProject(project);
           System.out.println(requirement);

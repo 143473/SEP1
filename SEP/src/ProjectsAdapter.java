@@ -94,28 +94,38 @@ public class ProjectsAdapter
     {
       System.out.println("Class Not Found");
     }
-    return  projects.getProjectByName(nameOfProject).getRequirements().get(indexOfRequirement-1).getTasks();
+    return  projects.getProjectByName(nameOfProject).getRequirements().get(indexOfRequirement).getTasks();
   }
 
-  public void deleteProject (int indexInList){
+  public void deleteProject (String name){
     ProjectList projectList = getAllProjects();
     for (int i = 0; i < projectList.size(); i++) {
-      if(i == indexInList){
+      if(projectList.get(i).getName().equals(name)){
         projectList.removeProject(projectList.get(i));
       }
     }
     saveProjects(projectList);
   }
 
-  public void deleteRequirement(int projectIndex, int requirementIndex){
+  public void deleteProject (Project project){
     ProjectList projectList = getAllProjects();
-    projectList.get(projectIndex).removeRequirement(projectList.get(projectIndex).getRequirements().get(requirementIndex));
+    for (int i = 0; i < projectList.size(); i++) {
+      if(projectList.get(i).equals(project)){
+        projectList.removeProject(projectList.get(i));
+      }
+    }
     saveProjects(projectList);
   }
 
-  public void deleteTask(int projectIndex, int requirementIndex, int taskIndex){
+  public void deleteRequirement(Project project, int requirementIndex){
     ProjectList projectList = getAllProjects();
-    projectList.get(projectIndex).getRequirements().get(requirementIndex).removeTask(projectList.get(projectIndex).getRequirements().get(requirementIndex).getTasks().get(taskIndex));
+    projectList.getProject(project).removeRequirement(projectList.getProject(project).getRequirements().get(requirementIndex));
+    saveProjects(projectList);
+  }
+
+  public void deleteTask(Project project, int requirementIndex, int taskIndex){
+    ProjectList projectList = getAllProjects();
+    projectList.getProject(project).getRequirements().get(requirementIndex).removeTask(projectList.getProject(project).getRequirements().get(requirementIndex).getTasks().get(taskIndex));
     saveProjects(projectList);
   }
 
@@ -176,15 +186,18 @@ public class ProjectsAdapter
     return resultTasks;
   }
 
-  public Project getSelectedProject(int index){
-    if(index < getAllProjects().size()){
-      return getAllProjects().get(index);
+  public Project getSelectedProject(String name){
+    ProjectList allProjects = getAllProjects();
+    for (int i = 0; i < allProjects.size(); i++) {
+      if(allProjects.get(i).getName().equals(name)){
+        return allProjects.get(i);
+      }
     }
     return null;
   }
 
-  public Requirement getSelectedRequirement(int projectIndex, int requirementIndex){
-    Project selectedProject = getSelectedProject(projectIndex);
+  public Requirement getSelectedRequirement(String projectName, int requirementIndex){
+    Project selectedProject = getSelectedProject(projectName);
     if(selectedProject != null){
       if(requirementIndex < selectedProject.getRequirements().size()){
         return selectedProject.getRequirements().get(requirementIndex);
@@ -193,8 +206,8 @@ public class ProjectsAdapter
     return null;
   }
 
-  public Task getSelectedTask(int projectIndex, int requirementIndex, int taskIndex){
-    Requirement selectedRequirement = getSelectedRequirement(projectIndex, requirementIndex);
+  public Task getSelectedTask(String projectName, int requirementIndex, int taskIndex){
+    Requirement selectedRequirement = getSelectedRequirement(projectName, requirementIndex);
     if(selectedRequirement != null){
       if(taskIndex < selectedRequirement.getTasks().size()){
         return selectedRequirement.getTasks().get(taskIndex);

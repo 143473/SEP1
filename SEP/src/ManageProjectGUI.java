@@ -158,10 +158,10 @@ public class ManageProjectGUI
     {
 
       Project temp = projectsTable.getSelectionModel().getSelectedItem();
-      int index = projectsTable.getSelectionModel().getSelectedIndex();
+      Project myChosenProject = projectsTable.getSelectionModel().getSelectedItem();
       if (temp != null)
       {
-        Project selectedProject = projectsAdapter.getSelectedProject(index);
+        Project selectedProject = projectsAdapter.getSelectedProject(myChosenProject.getName());
         nameField.setText(selectedProject.getName());
         descriptionField.setText(selectedProject.getDescription());
         statusBox.setValue(selectedProject.getStatus());
@@ -190,15 +190,15 @@ public class ManageProjectGUI
     return projectsTable.getSelectionModel().getSelectedItem();
   }
 
-  public int getSelectedIndex(){
-    return projectsTable.getSelectionModel().getFocusedIndex();
+  public String getSelectedProjectName(){
+    return projectsTable.getSelectionModel().getSelectedItem().getName();
   }
 
   private class MyActionListener implements EventHandler<ActionEvent> {
     public void handle(ActionEvent e) {
       if(e.getSource() == saveButton){
-        int index = projectsTable.getSelectionModel().getSelectedIndex();
-        Project selectedProject = projectsAdapter.getSelectedProject(index);
+        Project project = projectsTable.getSelectionModel().getSelectedItem();
+        Project selectedProject = projectsAdapter.getSelectedProject(project.getName());
 
         boolean OK = true;
 
@@ -233,10 +233,10 @@ public class ManageProjectGUI
           alert.setHeaderText(null);
 
           alert.showAndWait();
-          int index = projectsTable.getSelectionModel().getSelectedIndex();
+          Project project = projectsTable.getSelectionModel().getSelectedItem();
           if (alert.getResult() == ButtonType.YES)
           {
-            projectsAdapter.deleteProject(index);
+            projectsAdapter.deleteProject(project.getName());
 
             initializeTable();
 
@@ -304,7 +304,7 @@ public class ManageProjectGUI
         }
         if(OK){
           ProjectList projectList = projectsAdapter.getAllProjects();
-          Project chosenProject = projectList.get(projectsTable.getSelectionModel().getSelectedIndex());
+          Project chosenProject = projectList.getProject(projectsTable.getSelectionModel().getSelectedItem());
 
           chosenProject.setName(nameField.getText());
           chosenProject.setDescription(descriptionField.getText());
