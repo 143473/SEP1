@@ -116,6 +116,7 @@ public class ReportTasksGUI3 {
             if (finishedField.isSelected())
             {
                 ProgressStatus progressStatus = new ProgressStatus();
+                assignedTasks.setStatus(progressStatus.chooseStatus(2));
                 task.setStatus(progressStatus.chooseStatus(2));
             }
             System.out.println(assignedTasks);

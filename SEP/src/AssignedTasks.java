@@ -63,6 +63,11 @@ public class AssignedTasks extends Task implements Serializable {
         return task;
     }
 
+    @Override public void setStatus(String status)
+    {
+        super.setStatus(status);
+    }
+
     /**
      * Sets the employee's time spent.
      * @param spentTime what the employee's time spent is
