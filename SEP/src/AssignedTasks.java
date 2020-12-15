@@ -1,3 +1,4 @@
+//updated in class diagram
 import java.io.Serializable;
 
 /**
@@ -61,7 +62,6 @@ public class AssignedTasks extends Task implements Serializable {
     {
         return super.getName();
     }
-
 
     public void setReported(boolean reported)
     {

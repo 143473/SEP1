@@ -1,3 +1,4 @@
+//updated in class diagram
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -23,6 +24,8 @@ public class AssignedTasksList implements Serializable {
     public void addAssignedTask(AssignedTasks assignedTasks){
         this.assignedTasks.add(assignedTasks);
     }
+
+
     public AssignedTasks getAssignedTask(AssignedTasks assignedTask){
         for (int i = 0; i < assignedTasks.size(); i++) {
             if(assignedTasks.get(i).equals(assignedTask)){
