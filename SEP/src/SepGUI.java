@@ -8,8 +8,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 /**
@@ -61,7 +59,6 @@ public class SepGUI extends Application
   private StackPane stackPane;
   private VBox vBox;
 
-  private Label companyName;
   private MenuBar menuBar;
 
   private Image companyLogo;
@@ -166,10 +163,7 @@ public class SepGUI extends Application
     menuBar.getMenus()
         .addAll(fileMenu, projectsMenu, employeesMenu, assignedTasksMenu);
 
-    Font font = Font.font("Bauhaus 93", FontWeight.BOLD,  60);
 
-    /*companyName = new Label("ColourIT");
-    companyName.setFont(font);*/
     companyLogo = new Image("logo.png");
     companyLogoView = new ImageView(companyLogo);
 
