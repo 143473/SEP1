@@ -49,15 +49,15 @@ public class LoadInitialProjectData {
         Project project2 = new Project("Project 2", "Description 2", 2);
         Project project3 = new Project("Project 3", "Description 3",1);
 
-        Requirement requirement1 = new Requirement("Requirement 1", "User story 1",12.0,2,assignedEmployee1,deadline1,0,"Started");
-        Requirement requirement2 = new Requirement("Requirement 2", "User story 2",22.0,1,assignedEmployee5,deadline2,1,"Not started");
-        Requirement requirement3 = new Requirement("Requirement 3", "User story 3",8.0,3,assignedEmployee3,deadline3,2,"Ended");
-        Requirement requirement4 = new Requirement("Requirement 4", "User story 4",18.0,3,assignedEmployee7,deadline5,0,"Approved");
-        Requirement requirement5 = new Requirement("Requirement 5", "User story 5",15.0,1,assignedEmployee10,deadline7,1,"Started");
-        Requirement requirement6 = new Requirement("Requirement 6", "User story 6",12.0,1,assignedEmployee9,deadline1,2,"Started");
-        Requirement requirement7 = new Requirement("Requirement 7", "User story 7",23.0,2,assignedEmployee13,deadline3,0,"Not started");
-        Requirement requirement8 = new Requirement("Requirement 8", "User story 8",34.0,2,assignedEmployee15,deadline2,1,"Rejected");
-        Requirement requirement9 = new Requirement("Requirement 9", "User story 9",42.0,3,assignedEmployee17,deadline6,2,"Ended");
+        Requirement requirement1 = new Requirement("Requirement 1", "User story 1",2,assignedEmployee1,deadline1,0,"Started");
+        Requirement requirement2 = new Requirement("Requirement 2", "User story 2",1,assignedEmployee5,deadline2,1,"Not started");
+        Requirement requirement3 = new Requirement("Requirement 3", "User story 3",3,assignedEmployee3,deadline3,2,"Ended");
+        Requirement requirement4 = new Requirement("Requirement 4", "User story 4",3,assignedEmployee7,deadline5,0,"Approved");
+        Requirement requirement5 = new Requirement("Requirement 5", "User story 5",1,assignedEmployee10,deadline7,1,"Started");
+        Requirement requirement6 = new Requirement("Requirement 6", "User story 6",1,assignedEmployee9,deadline1,2,"Started");
+        Requirement requirement7 = new Requirement("Requirement 7", "User story 7",2,assignedEmployee13,deadline3,0,"Not started");
+        Requirement requirement8 = new Requirement("Requirement 8", "User story 8",2,assignedEmployee15,deadline2,1,"Rejected");
+        Requirement requirement9 = new Requirement("Requirement 9", "User story 9",3,assignedEmployee17,deadline6,2,"Ended");
 
         Task task1 = new Task("task1","This is task 1",2.0,deadline1, 0, "Started", assignedEmployee1);
         Task task2 = new Task("task2","This is task 2",4.0,deadline4, 1, "Not started", assignedEmployee5);

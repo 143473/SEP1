@@ -339,7 +339,7 @@ public class ManageRequirementGUI
             Requirement chosenRequirement = projectList.getProject(project).getRequirements().get(requirement.getId());
             chosenRequirement.setName(name.getText());
             chosenRequirement.setUserStory(userStory.getText());
-            chosenRequirement.setEstimatedTime(Double.parseDouble(estimatedTime.getText()));
+            /*chosenRequirement.setEstimatedTime(Double.parseDouble(estimatedTime.getText()));*/
             chosenRequirement.setDeadline(deadline);
             chosenRequirement.setStatus(statusBox.getSelectionModel().getSelectedItem());
             chosenRequirement.setResponsibleEmployee(responsibleEmployeeBox.getSelectionModel().getSelectedItem());

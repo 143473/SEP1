@@ -17,11 +17,11 @@ public class Requirement implements Serializable
 
 
 
-  public Requirement(String name, String userStory, double estimatedTime, int importance, AssignedEmployee responsibleEmployee, MyDate deadline, int id, String status)
+  public Requirement(String name, String userStory, int importance, AssignedEmployee responsibleEmployee, MyDate deadline, int id, String status)
   {
     this.name = name;
     this.userStory = userStory;
-    this.estimatedTime = estimatedTime;
+    this.estimatedTime = 0;
     this.importance = importance;
     this.responsibleEmployee = responsibleEmployee;
     this.deadline = deadline;
@@ -31,14 +31,15 @@ public class Requirement implements Serializable
     this.status = status;
     this.project = null;
 
+
   }
 
 
-  public Requirement(String name, String userStory, double estimatedTime, MyDate deadline, int id)
+  public Requirement(String name, String userStory,  MyDate deadline, int id)
   {
     this.name = name;
     this.userStory = userStory;
-    this.estimatedTime = estimatedTime;
+    this.estimatedTime = 0;
     this.deadline = deadline;
     importance = 1;
     tasks = new ArrayList<Task>();
@@ -151,11 +152,17 @@ public class Requirement implements Serializable
   /**
    * Sets estimated time that requirement will be finished in
    *
-   * @param estimatedTime
+   *
    */
-  public void setEstimatedTime(double estimatedTime)
+  public double getEstimatedTime()
   {
-    this.estimatedTime = estimatedTime;
+    double sum = 0;
+    for (int i = 0; i < tasks.size(); i++)
+    {
+      sum+= tasks.get(i).getEstimatedTime();
+    }
+    this.estimatedTime = sum;
+    return estimatedTime;
   }
 
   /**
@@ -163,10 +170,7 @@ public class Requirement implements Serializable
    *
    * @return
    */
-  public double getEstimatedTime()
-  {
-    return estimatedTime;
-  }
+
 
   /**
    * Sets deadline for the requirement
@@ -285,8 +289,8 @@ public class Requirement implements Serializable
   public Requirement copy()
   {
     if(importance!=1){
-      return new Requirement(name, userStory, estimatedTime, importance, responsibleEmployee, deadline, id, status);
-    }else return new Requirement(name, userStory, estimatedTime, deadline, id);
+      return new Requirement(name, userStory,  importance, responsibleEmployee, deadline, id, status);
+    }else return new Requirement(name, userStory,  deadline, id);
   }
   public boolean equals(Object obj)
   {

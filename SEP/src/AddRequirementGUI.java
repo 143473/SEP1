@@ -14,7 +14,6 @@ public class AddRequirementGUI
 
   private TextField name;
   private TextField userStory;
-  private TextField estimation;
   private TextField day;
   private TextField month;
   private TextField year;
@@ -25,7 +24,6 @@ public class AddRequirementGUI
 
   private Label nameLabel;
   private Label userStoryLabel;
-  private Label estimatedTimeLabel;
   private Label deadlineLabel;
   private Label statusLabel;
   private Label responsibleEmployeeLabel;
@@ -52,9 +50,6 @@ public class AddRequirementGUI
 
     userStoryLabel = new Label("User Story");
     userStory = new TextField();
-
-    estimation = new TextField();
-    estimatedTimeLabel = new Label("Estimation in hours");
 
     importanceLabel = new Label("Importance");
     importanceBox = new ChoiceBox<Integer>();
@@ -96,7 +91,6 @@ public class AddRequirementGUI
     requirementForm.setVgap(5);
     requirementForm.addRow(0,nameLabel,name);
     requirementForm.addRow(1,userStoryLabel, userStory);
-    requirementForm.addRow(2,estimatedTimeLabel, estimation);
     requirementForm.addRow(3,deadlineLabel,datePane);
     requirementForm.addRow(4,statusLabel,statusBox);
     requirementForm.addRow(5,responsibleEmployeeLabel,responsibleEmployeeBox);
@@ -177,7 +171,7 @@ public class AddRequirementGUI
       }
     }
 
-    if(estimation.getText().equals("") || estimation.getText().trim().isEmpty()){
+    /*if(estimation.getText().equals("") || estimation.getText().trim().isEmpty()){
       Alert alert = new Alert(Alert.AlertType.WARNING);
       alert.setHeaderText("Invalid input");
       alert.setContentText("Estimation cannot be empty!");
@@ -196,7 +190,7 @@ public class AddRequirementGUI
         alert.showAndWait();
         allValuesCorrect = false;
       }
-    }
+    }*/
 
     if(day.getText().isEmpty() || month.getText().isEmpty() || year.getText().isEmpty()){
       Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -241,9 +235,9 @@ public class AddRequirementGUI
         {
           ProjectList projectList = projectsAdapter.getAllProjects();
 
-          double estimationTime = Double.parseDouble(estimation.getText().replaceFirst("^0+(?!$)", ""));
+          /*double estimationTime = Double.parseDouble(estimation.getText().replaceFirst("^0+(?!$)", ""));*/
 
-          requirement = new Requirement(name.getText(), userStory.getText(), estimationTime,
+          requirement = new Requirement(name.getText(), userStory.getText(),
                  importanceBox.getValue().intValue(), responsibleEmployeeBox.getSelectionModel().getSelectedItem(),
                   deadline, project.getRequirements().size(), statusBox.getValue());
           requirement.setProgressStatus(statusBox.getSelectionModel().getSelectedItem());
@@ -296,7 +290,6 @@ public class AddRequirementGUI
   public void clearFields(){
     name.setText("");
     userStory.setText("");
-    estimation.setText("");
     day.setText("");
     month.setText("");
     year.setText("");
