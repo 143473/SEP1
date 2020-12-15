@@ -5,7 +5,7 @@ import javafx.scene.layout.VBox;
 
 /**
  * A GUI tab containing components for displaying a list of requirements.
- * @author Timothy Engkar
+ * @author Timothy Engkar, Claudiu Emanuel Cordunianu
  * @version 1.0
  */
 public class AssignTasksGUI2 {
@@ -19,7 +19,6 @@ public class AssignTasksGUI2 {
     private Label tableLabel;
 
     private TableView<Requirement> requirementTable;
-    private TableView.TableViewSelectionModel defaultSelectionModel;
     private TableColumn requirementNameColumn;
     private TableColumn requirementDescriptionColumn;
 
@@ -28,7 +27,9 @@ public class AssignTasksGUI2 {
 
 
     /**
-     * Constructor initializing the GUI components
+     * 2-argument
+     * @param projectsAdapter
+     * @param sepGUI
      */
     public AssignTasksGUI2(ProjectsAdapter projectsAdapter,SepGUI sepGUI){
 

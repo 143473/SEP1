@@ -8,7 +8,7 @@ import javafx.scene.layout.VBox;
 
 /**
  * A GUI tab containing components for displaying a list of projects.
- * @author Timothy Engkar
+ * @author Timothy Engkar, Claudiu Emanuel Cordunianu
  * @version 1.0
  */
 public class AssignTasksGUI1 {
@@ -28,7 +28,7 @@ public class AssignTasksGUI1 {
     private Button continueButton;
 
     /**
-     * Constructor initializing the GUI components
+     * 1-argument constructor initializing the GUI components
      */
     public AssignTasksGUI1(ProjectsAdapter projectsAdapter){
 
@@ -65,6 +65,9 @@ public class AssignTasksGUI1 {
         mainPane.getChildren().addAll(topPane, tableLabel,assignTasksTable,continueButton);
     }
 
+    /**
+     * Initializes the assignTaskTable with udated values
+     */
     private void initializeTable()
     {
         assignTasksTable.getItems().clear();
@@ -74,38 +77,32 @@ public class AssignTasksGUI1 {
             assignTasksTable.getItems().add(projects.get(i));
         }
     }
+
+    /**
+     * Gets the mainPane and initializes the assignTasksTable
+     * @return VBox mainPane
+     */
     public VBox getMainPane()
     {
         initializeTable();
         return mainPane;
     }
 
+    /**
+     * Gets the continueButton Button
+     * @return Button continueButton
+     */
     public Button getContinueButton()
     {
         return continueButton;
     }
 
+    /**
+     * Gets the assignTasksTable
+     * @return TableView<Project> assignTasksTable
+     */
     public TableView<Project> getAssignTasksTable()
     {
         return assignTasksTable;
     }
-    /*public boolean callContinueButton(){
-    boolean gogo = true;
-    if(projectsTable.getSelectionModel().getSelectedItem()==null)
-    {
-      Alert alert = new Alert(Alert.AlertType.WARNING);
-      alert.setHeaderText("Warning");
-      alert.setContentText("No project was chosen!");
-      alert.showAndWait();
-      gogo = false;
-    }
-    else
-    {
-      String projectName = projectsTable.getSelectionModel().getSelectedItem().getName();
-      System.out.println(projectsTable.getSelectionModel().getSelectedItem().getName());
-      sepGUI.getReqOfSelectedPrjGUI().getProjectName().setText(projectName);
-      gogo =true;
-    }
-    return gogo;
-  }*/
 }
