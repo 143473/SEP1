@@ -29,6 +29,7 @@ public class AssignTasksGUI1 {
 
     /**
      * 1-argument constructor initializing the GUI components
+     * @param projectsAdapter adapter of the projects, requirements and tasks
      */
     public AssignTasksGUI1(ProjectsAdapter projectsAdapter){
 
@@ -66,7 +67,7 @@ public class AssignTasksGUI1 {
     }
 
     /**
-     * Initializes the assignTaskTable with udated values
+     * Initializes the assignTaskTable with updated values
      */
     private void initializeTable()
     {
