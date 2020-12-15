@@ -73,8 +73,6 @@ public class AssignedTasks extends Task implements Serializable {
      */
     public void setSpentTime(double spentTime){
         this.spentTime += spentTime;
-        double time = super.getSpentTime() +spentTime;
-        super.setSpentTime(time);
     }
 
     /**

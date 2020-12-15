@@ -103,7 +103,7 @@ public class ReportTasksGUI3 {
 
         /*Task task = selectedAssignedTask.getTask();*/
 
-        /*Task task = projectsAdapter.getSelectedTask(selectedAssignedTask.getProjectName(),selectedAssignedTask.getRequirementId(),selectedAssignedTask.getId());*/
+        Task task1 = projectsAdapter.getSelectedTask(selectedAssignedTask.getProjectName(),selectedAssignedTask.getRequirementId(),selectedAssignedTask.getId());
 
 
         Project project = projectList.getProjectByName(assignedTasks.getProjectName());
@@ -112,31 +112,32 @@ public class ReportTasksGUI3 {
         Task task = requirement.getTaskByName(assignedTasks.getTask().getName());
             assignedTasks.setSpentTime(spentTime);
         task.setSpentTime(spentTime);
-        assignedTasks.setSpentTime(spentTime);
 
-        if(finishedField.isSelected())
-        {
-            ProgressStatus progressStatus = new ProgressStatus();
+            if (finishedField.isSelected())
+            {
+                ProgressStatus progressStatus = new ProgressStatus();
 
-            task.setProgressStatus(progressStatus.chooseStatus(2));
+                task.setStatus(progressStatus.chooseStatus(2));
 
+            }
+            System.out.println(assignedTasks);
+            assignedTasksList.removeAssignedTask(selectedAssignedTask);
+            assignedTasksAdapter.saveAssignedTasks(assignedTasksList);
+            projectsAdapter.saveProjects(projectList);
+
+            Task task2 = projectsAdapter.getSelectedTask(selectedAssignedTask.getProjectName(),
+                selectedAssignedTask.getRequirementId(), selectedAssignedTask.getId());
+
+            System.out.println(task2);
+
+            Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
+            alert2.setHeaderText("Success");
+            alert2.setContentText("The report was successfully submitted!");
+            alert2.showAndWait();
+
+            allValuesCorrect = true;
         }
-        System.out.println(assignedTasks);
 
-        projectsAdapter.saveProjects(projectList);
-        assignedTasksAdapter.saveAssignedTasks(assignedTasksList);
-        Task task1 = projectsAdapter.getSelectedTask(selectedAssignedTask.getProjectName(),selectedAssignedTask.getRequirementId(),selectedAssignedTask.getId());
-
-        System.out.println(task1);
-
-
-        Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
-        alert2.setHeaderText("Success");
-        alert2.setContentText("The report was successfully submitted!");
-        alert2.showAndWait();
-
-        allValuesCorrect = true;
-    }
     return allValuesCorrect;
     }
     public void clearFields()
