@@ -8,8 +8,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 /**
@@ -61,10 +59,11 @@ public class SepGUI extends Application
   private StackPane stackPane;
   private VBox vBox;
 
-  private Label companyName;
   private MenuBar menuBar;
 
+  private Image companyLogo;
   private Image logo;
+  private ImageView companyLogoView;
   private ImageView logoView;
 
   private Menu projectsMenu;
@@ -90,7 +89,7 @@ public class SepGUI extends Application
   public void start(Stage parentStage)
   {
     this.parentStage = parentStage;
-    parentStage.setTitle("Student File Adapter GUI 4");
+    parentStage.setTitle("ColourIT Project Management");
     listener = new MyActionListener();
     EmployeeAdapter employeeAdapter = new EmployeeAdapter("employees.bin");
     ProjectsAdapter projectsAdapter = new ProjectsAdapter("projects.bin");
@@ -164,16 +163,15 @@ public class SepGUI extends Application
     menuBar.getMenus()
         .addAll(fileMenu, projectsMenu, employeesMenu, assignedTasksMenu);
 
-    Font font = Font.font("Bauhaus", FontWeight.BOLD,  60);
 
-    companyName = new Label("ColourIT");
-    companyName.setFont(font);
+    companyLogo = new Image("logo.png");
+    companyLogoView = new ImageView(companyLogo);
 
     logo = new Image("vialogoah.gif");
     logoView = new ImageView(logo);
 
     vBox = new VBox();
-    vBox.getChildren().addAll(companyName, logoView);
+    vBox.getChildren().addAll(companyLogoView, logoView);
     vBox.setAlignment(Pos.BOTTOM_CENTER);
 
     stackPane = new StackPane();
