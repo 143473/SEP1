@@ -23,6 +23,14 @@ public class AssignedTasksList implements Serializable {
     public void addAssignedTask(AssignedTasks assignedTasks){
         this.assignedTasks.add(assignedTasks);
     }
+    public AssignedTasks getAssignedTask(AssignedTasks assignedTask){
+        for (int i = 0; i < assignedTasks.size(); i++) {
+            if(assignedTasks.get(i).equals(assignedTask)){
+                return assignedTasks.get(i);
+            }
+        }
+        return null;
+    }
 
     /**
      * Removes a Student to the list.

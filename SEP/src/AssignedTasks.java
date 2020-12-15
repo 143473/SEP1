@@ -57,12 +57,24 @@ public class AssignedTasks extends Task implements Serializable {
             return false;
     }
 
+    @Override public void setStatus(String status)
+    {
+        super.setStatus(status);
+    }
+
+    public Task getTask()
+    {
+        return task;
+    }
+
     /**
      * Sets the employee's time spent.
      * @param spentTime what the employee's time spent is
      */
     public void setSpentTime(double spentTime){
-        this.spentTime = spentTime;
+        this.spentTime += spentTime;
+        double time = super.getSpentTime() +spentTime;
+        super.setSpentTime(time);
     }
 
     /**
@@ -96,6 +108,11 @@ public class AssignedTasks extends Task implements Serializable {
     public int getRequirementId()
     {
         return requirement.getId();
+    }
+
+    public Requirement getRequirement()
+    {
+        return requirement;
     }
 
     @Override public int getId()

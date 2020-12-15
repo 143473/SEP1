@@ -116,10 +116,10 @@ public class SepGUI extends Application
     assignTasksGUI2 = new AssignTasksGUI2(projectsAdapter,this);
     assignTasksGUI3 = new AssignTasksGUI3(this);
     assignTasksGUI4 = new AssignTasksGUI4(this);
-    assignTasksGUI5 = new AssignTasksGUI5(this,assignedTasksAdapter);
+    assignTasksGUI5 = new AssignTasksGUI5(this,assignedTasksAdapter,projectsAdapter);
     reportTasksGUI1 = new ReportTasksGUI1(employeeAdapter,assignedTasksAdapter);
     reportTasksGUI2 = new ReportTasksGUI2(this,assignedTasksAdapter);
-    reportTasksGUI3 = new ReportTasksGUI3(this,assignedTasksAdapter);
+    reportTasksGUI3 = new ReportTasksGUI3(this,assignedTasksAdapter,projectsAdapter);
     viewAssignedTasksGUI1 = new ViewAssignedTasksGUI1(employeeAdapter,projectsAdapter, assignedTasksAdapter);
     viewAssignedTasksGUI2 = new ViewAssignedTasksGUI2(this,assignedTasksAdapter);
 

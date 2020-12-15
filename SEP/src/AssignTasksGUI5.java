@@ -14,6 +14,7 @@ import javafx.scene.layout.VBox;
 public class AssignTasksGUI5 {
 
     private AssignedTasksAdapter assignedTasksAdapter;
+    private ProjectsAdapter projectsAdapter;
     private SepGUI sepGUI;
     private VBox mainPane;
 
@@ -38,9 +39,10 @@ public class AssignTasksGUI5 {
     /**
      * Constructor initializing the GUI components
      */
-    public AssignTasksGUI5(SepGUI sepGUI,AssignedTasksAdapter assignedTasksAdapter){
+    public AssignTasksGUI5(SepGUI sepGUI,AssignedTasksAdapter assignedTasksAdapter, ProjectsAdapter projectsAdapter){
 
         this.sepGUI = sepGUI;
+        this.projectsAdapter = projectsAdapter;
         this.assignedTasksAdapter = assignedTasksAdapter;
         titleLabel = new Label("Assign a task");
         titleLabel.getStyleClass().add("heading");
@@ -170,9 +172,9 @@ public class AssignTasksGUI5 {
             {
                 AssignedEmployee assignedEmployee = sepGUI.getAssignTasksGUI4().getAllAssignedTasksTable().getSelectionModel()
                     .getSelectedItem();
-                Project project = sepGUI.getAssignTasksGUI1().getAssignTasksTable().getSelectionModel().getSelectedItem();
-                Requirement requirement = (Requirement) sepGUI.getAssignTasksGUI2().getRequirementTable().getSelectionModel().getSelectedItem();
-                Task task = sepGUI.getAssignTasksGUI3().getTasksTable().getSelectionModel().getSelectedItem();
+                Project selectedProject = sepGUI.getAssignTasksGUI1().getAssignTasksTable().getSelectionModel().getSelectedItem();
+                Requirement selectedRequirement = (Requirement) sepGUI.getAssignTasksGUI2().getRequirementTable().getSelectionModel().getSelectedItem();
+                Task selectedTask = sepGUI.getAssignTasksGUI3().getTasksTable().getSelectionModel().getSelectedItem();
                 AssignedTasksList assignedTaskList = assignedTasksAdapter.getAllAssignedTasks();
                 for (int i = 0; i < assignedTaskList.size(); i++)
                 {
@@ -188,6 +190,11 @@ public class AssignTasksGUI5 {
                     }
                 }
                 if(allValuesCorrect ){
+                    Project project = projectsAdapter.getSelectedProject(selectedProject.getName());
+                    Requirement requirement = projectsAdapter.getSelectedRequirement(
+                        project.getName(), selectedRequirement.getId());
+                    Task task = projectsAdapter.getSelectedTask(
+                        project.getName(), requirement.getId(), selectedTask.getId());
                 AssignedTasks assignedTask = new AssignedTasks(task.getName(),
                     task.getDescription(), task.getDeadline(), task.getEstimatedTime(),
                     task.getResponsibleEmployee(), assignedEmployee,

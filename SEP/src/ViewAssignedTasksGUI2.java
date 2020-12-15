@@ -25,6 +25,7 @@ public class ViewAssignedTasksGUI2 {
     private TableColumn taskIDColumn;
     private TableColumn dateColumn;
     private TableColumn statusColumn;
+    private TableColumn spentTimeColumn;
 
     private Button goBack;
 
@@ -47,29 +48,34 @@ public class ViewAssignedTasksGUI2 {
 
         projectNameColumn = new TableColumn<>("Project Name");
         projectNameColumn.setCellValueFactory(new PropertyValueFactory<>("projectName"));
-        projectNameColumn.setPrefWidth(200);
+        projectNameColumn.setPrefWidth(150);
 
         requirementIDColumn = new TableColumn<>("Requirement ID");
         requirementIDColumn.setCellValueFactory(new PropertyValueFactory<>("requirementId"));
-        requirementIDColumn.setPrefWidth(150);
+        requirementIDColumn.setPrefWidth(100);
 
         taskIDColumn = new TableColumn<>("Task ID");
         taskIDColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        taskIDColumn.setPrefWidth(150);
+        taskIDColumn.setPrefWidth(50);
 
         dateColumn = new TableColumn<>("Date");
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
-        dateColumn.setPrefWidth(200);
+        dateColumn.setPrefWidth(150);
+
+        spentTimeColumn = new TableColumn<>("Spent Time");
+        spentTimeColumn.setCellValueFactory(new PropertyValueFactory<>("spentTime"));
+        spentTimeColumn.setPrefWidth(100);
 
         statusColumn = new TableColumn<>("Status");
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
-        statusColumn.setPrefWidth(200);
+        statusColumn.setPrefWidth(100);
 
         allAssignedTasksTable.getColumns().add(projectNameColumn);
         allAssignedTasksTable.getColumns().add(requirementIDColumn);
         allAssignedTasksTable.getColumns().add(taskIDColumn);
         allAssignedTasksTable.getColumns().add(dateColumn);
         allAssignedTasksTable.getColumns().add(statusColumn);
+        allAssignedTasksTable.getColumns().add(spentTimeColumn);
 
         goBack = new Button("Go Back");
 

@@ -76,7 +76,9 @@ public class ReportTasksGUI2 {
         for (int i = 0; i < assignedTasksList.size(); i++)
         {
             if(!(assignedTasksList.get(i).getStatus().equals("Ended")))
-            allAssignedTasksTable.getItems().add(assignedTasksList.get(i));
+            {
+                allAssignedTasksTable.getItems().add(assignedTasksList.get(i));
+            }
         }
     }
     public VBox getMainPane()

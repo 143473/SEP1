@@ -47,6 +47,8 @@ public class Requirement implements Serializable
     this.project = null;
   }
 
+
+
   public String getName()
   {
     return name;
@@ -126,6 +128,12 @@ public class Requirement implements Serializable
    */
   public double getSpentTime()
   {
+    double sum = 0;
+    for (int i = 0; i < tasks.size(); i++)
+    {
+      sum+= tasks.get(i).getSpentTime();
+    }
+    this.spentTime = sum;
     return spentTime;
   }
 
@@ -179,6 +187,14 @@ public class Requirement implements Serializable
   return deadline;
   }
 
+  public Task getTask(Task task){
+    for (int i = 0; i < tasks.size(); i++) {
+      if(tasks.get(i).equals(task)){
+        return tasks.get(i);
+      }
+    }
+    return null;
+  }
   /**
    * Checks if it is already past the deadline
    *

@@ -40,6 +40,11 @@ public class Task implements Serializable
     this.estimatedTime = estimatedTime;
   }
 
+  public void setSpentTime(double spentTime)
+  {
+    this.spentTime += spentTime;
+  }
+
   public void setRequirement(Requirement requirement)
   {
     this.requirement = requirement;
@@ -49,10 +54,7 @@ public class Task implements Serializable
   {
     return requirement.getId();
   }
-  /*public String getProjectName()
-  {
-    return requirement.getProject().getName();
-  }*/
+
 
   /**
    * Gets the estimated time of completing the task

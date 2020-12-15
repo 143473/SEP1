@@ -232,7 +232,6 @@ public class AddTaskGUI
           Task newTask = new Task(nameField.getText(), descriptionField.getText(), estimationTime,
                   deadline, requirement.getTasks().size(), statusBox.getSelectionModel().getSelectedItem(),
                   responsibleEmployeeBox.getSelectionModel().getSelectedItem());
-          newTask.setRequirement(requirement);
 
           boolean equals = false;
           for (int i = 0; i < requirement.getTasks().size(); i++) {
