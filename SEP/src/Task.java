@@ -10,7 +10,10 @@ public class Task implements Serializable
   private MyDate deadline;
   private AssignedEmployee responsibleEmployee;
   private double spentTime;
+  /*
   private Requirement requirement;
+  private Project project;
+*/
 
   /**
    * Four-Argument Constructor
@@ -27,7 +30,6 @@ public class Task implements Serializable
     this.id = id;
     this.status = status;
     spentTime = 0;
-    this.requirement = null;
   }
 
 
@@ -44,17 +46,24 @@ public class Task implements Serializable
   {
     this.spentTime += spentTime;
   }
+  /*
+    public void setRequirement(Requirement requirement)
+    {
+      this.requirement = requirement    }
+  /*
+    public void setProject(Project project){
+      this.project = project;
+    }
 
-  public void setRequirement(Requirement requirement)
-  {
-    this.requirement = requirement;
-  }
+    public String getProjectName(){
+      return project.getName();
+    }
 
   public int getRequirementId()
   {
     return requirement.getId();
   }
-
+*/
 
   /**
    * Gets the estimated time of completing the task

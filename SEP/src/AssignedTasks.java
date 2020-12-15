@@ -65,6 +65,10 @@ public class AssignedTasks extends Task implements Serializable {
         return task;
     }
 
+    public int getTaskId(){
+        return task.getId();
+    }
+
     public void setReported(boolean reported)
     {
         this.reported = reported;

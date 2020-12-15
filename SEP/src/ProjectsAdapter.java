@@ -125,7 +125,7 @@ public class ProjectsAdapter
 
   public void deleteTask(Project project, int requirementIndex, int taskIndex){
     ProjectList projectList = getAllProjects();
-    projectList.getProject(project).getRequirements().get(requirementIndex).removeTask(projectList.getProject(project).getRequirements().get(requirementIndex).getTasks().get(taskIndex));
+    projectList.getProjectByName(project.getName()).getRequirements().get(requirementIndex).removeTask(projectList.getProjectByName(project.getName()).getRequirements().get(requirementIndex).getTasks().get(taskIndex));
     saveProjects(projectList);
   }
 
