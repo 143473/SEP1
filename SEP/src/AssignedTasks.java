@@ -28,7 +28,6 @@ public class AssignedTasks extends Task implements Serializable {
         this.date = date;
         this.project = null;
         this.requirement = null;
-        /*this.task = null;*/
         reported = false;
     }
 
@@ -63,9 +62,6 @@ public class AssignedTasks extends Task implements Serializable {
         return super.getName();
     }
 
-    public int getTaskId(){
-        return super.getId();
-    }
 
     public void setReported(boolean reported)
     {
