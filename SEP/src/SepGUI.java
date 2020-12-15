@@ -64,7 +64,9 @@ public class SepGUI extends Application
   private Label companyName;
   private MenuBar menuBar;
 
+  private Image companyLogo;
   private Image logo;
+  private ImageView companyLogoView;
   private ImageView logoView;
 
   private Menu projectsMenu;
@@ -90,7 +92,7 @@ public class SepGUI extends Application
   public void start(Stage parentStage)
   {
     this.parentStage = parentStage;
-    parentStage.setTitle("Student File Adapter GUI 4");
+    parentStage.setTitle("ColourIT Project Management");
     listener = new MyActionListener();
     EmployeeAdapter employeeAdapter = new EmployeeAdapter("employees.bin");
     ProjectsAdapter projectsAdapter = new ProjectsAdapter("projects.bin");
@@ -164,16 +166,18 @@ public class SepGUI extends Application
     menuBar.getMenus()
         .addAll(fileMenu, projectsMenu, employeesMenu, assignedTasksMenu);
 
-    Font font = Font.font("Bauhaus", FontWeight.BOLD,  60);
+    Font font = Font.font("Bauhaus 93", FontWeight.BOLD,  60);
 
-    companyName = new Label("ColourIT");
-    companyName.setFont(font);
+    /*companyName = new Label("ColourIT");
+    companyName.setFont(font);*/
+    companyLogo = new Image("logo.png");
+    companyLogoView = new ImageView(companyLogo);
 
     logo = new Image("vialogoah.gif");
     logoView = new ImageView(logo);
 
     vBox = new VBox();
-    vBox.getChildren().addAll(companyName, logoView);
+    vBox.getChildren().addAll(companyLogoView, logoView);
     vBox.setAlignment(Pos.BOTTOM_CENTER);
 
     stackPane = new StackPane();
