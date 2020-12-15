@@ -11,7 +11,9 @@ public class AssignedEmployee extends Employee implements Serializable {
     private String status;
     private int statusNumber;
 
-
+    /**
+     * 0-argument constructor setting the super class Employee
+     */
     public AssignedEmployee(){
         super();
         status = "";
@@ -56,7 +58,7 @@ public class AssignedEmployee extends Employee implements Serializable {
 
     /**
      * Gets the employee status of the employee
-     * @return the status of the employee
+     * @return the status of the employee as String
      */
     public String getStatus() {
         return status;
@@ -64,7 +66,7 @@ public class AssignedEmployee extends Employee implements Serializable {
 
     /**
      * Gets the employee status of the employee
-     * @return the status of the employee
+     * @return the statusNumber of the employee as int
      */
     public int getStatusNumber() {
         return statusNumber;
@@ -78,7 +80,11 @@ public class AssignedEmployee extends Employee implements Serializable {
         return new AssignedEmployee(getFirstName(), getLastName(), getDateOfBirth(), statusNumber);
     }
 
-
+    /**
+     * Checks if the object is equal to another one
+     * @param obj the object we are comparing this Employee to
+     * @return boolean true if those two are the same, false otherwise
+     */
     public boolean equals(Object obj){
         if(!(obj instanceof AssignedEmployee)){
             return false;
@@ -87,8 +93,11 @@ public class AssignedEmployee extends Employee implements Serializable {
         return super.equals(temp) && temp.getStatus().equals(status) && temp.getStatusNumber() == statusNumber;
     }
 
+    /**
+     * Gets the assigned employee information as String stating the first name, last name and status as String
+     * @return String containing the information of this AssignedEmployee
+     */
     public String toString(){
-
         return getFirstName() + " " + getLastName()+ " (" + getStatus()+")";
     }
 }

@@ -2,7 +2,7 @@
 import java.io.Serializable;
 
 /**
- * A class representing the AssignedTask of the employee with a first name, last name and country.
+ * A class representing the AssignedTask of the employee with a first name, last name and country
  * @author Timothy Engkar
  * @version 1.0
  */
@@ -15,7 +15,7 @@ public class AssignedTasks extends Task implements Serializable {
     private boolean reported;
 
     /**
-     * Three-argument constructor.
+     * 3-argument constructor
      * @param name the employee's first name
      * @param description the employee's last name
      * @param responsibleEmployee the responsible employee
@@ -33,8 +33,8 @@ public class AssignedTasks extends Task implements Serializable {
     }
 
     /**
-     * Gets the employee's date working on the task.
-     * @return the date the task was worked on
+     * Gets the employee's date working on the task
+     * @return the date of type MyDate the task was assigned to
      */
     public MyDate getDate(){
         return date.copy();
@@ -45,10 +45,15 @@ public class AssignedTasks extends Task implements Serializable {
      * Gets the employee assigned to the task.
      * @return the employee assigned to the task
      */
-
     public AssignedEmployee getAssignedEmployee(){
         return assignedEmployee.copy();
     }
+
+    /**
+     *
+     * @param employee
+     * @return
+     */
     public boolean checkIfEmployeeIsAssigned(Employee employee){
         if(getAssignedEmployee().getFirstName().equals(employee.getFirstName())&&
             getAssignedEmployee().getLastName().equals(employee.getLastName())&&

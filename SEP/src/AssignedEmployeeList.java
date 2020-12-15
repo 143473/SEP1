@@ -18,7 +18,7 @@ public class AssignedEmployeeList implements Serializable {
   }
 
   /**
-   * Adds an assignedEmployee to the list if he/she is not already there
+   * Adds an assignedEmployee to the list if they are not already there
    * @param assignedEmployee the assignedEmployee to add to the list
    */
 
@@ -29,9 +29,9 @@ public class AssignedEmployeeList implements Serializable {
   }
 
   /**
-   * Checks if ArrayList of assignedEmployee objects contains specific employee
-   * @param assignedEmployee the assignedEmployee we are looking for
-   * @return true if the ArrayList does and false if does not contain the assignedEmployee object
+   * Checks if ArrayList of assignedEmployee objects contains specific employee of type AssignedEmployee
+   * @param assignedEmployee the AssignedEmployee we are looking for
+   * @return true if the ArrayList does and false if does not contain the AssignedEmployee object
    */
   public boolean containsEmployee(AssignedEmployee assignedEmployee){
     if(assignedEmployeeList.contains(assignedEmployee)){
@@ -40,6 +40,11 @@ public class AssignedEmployeeList implements Serializable {
     return false;
   }
 
+  /**
+   * Checks if ArrayList of assignedEmployee objects contains specific employee of type Employee
+   * @param employee the Employee we are looking for
+   * @return true if the ArrayList does and false if does not contain the Employee object
+   */
   public boolean containsNormalEmployee(Employee employee){
     for (int i = 0; i < assignedEmployeeList.size(); i++) {
       if(assignedEmployeeList.get(i).getFirstName().equals(employee.getFirstName())
@@ -51,6 +56,11 @@ public class AssignedEmployeeList implements Serializable {
     return false;
   }
 
+  /**
+   * Gets an Employee object that is in the AssignedEmployeeList on certain index
+   * @param index the int index of the given employee
+   * @return Employee type of the employee at the given index
+   */
   public Employee getNormalEmployeeOnIndex(int index){
     if(index<assignedEmployeeList.size()){
       return new Employee(assignedEmployeeList.get(index).getFirstName(), assignedEmployeeList.get(index).getLastName(), assignedEmployeeList.get(index).getDateOfBirth());
@@ -75,9 +85,9 @@ public class AssignedEmployeeList implements Serializable {
   }
 
   /**
-   * gets the assignedEmployee at this index
-   * @param index the index of the assignedEmployee in the assignedEmployeeList
-   * @return the assignedEmployee object of this index
+   * gets the AssignedEmployee at this index
+   * @param index the index of the AssignedEmployee in the AssignedEmployeeList
+   * @return the AssignedEmployee object of this index
    */
   public AssignedEmployee get(int index){
     if(index < assignedEmployeeList.size()){
@@ -86,6 +96,10 @@ public class AssignedEmployeeList implements Serializable {
     return null;
   }
 
+  /**
+   * Gets the assigned employee list information as String stating all the information about given assigned employee
+   * @return String containing the information of the list of the AssignedEmployees
+   */
   public String toString(){
     String returnStr = "";
     for (int i = 0; i < assignedEmployeeList.size(); i++) {
@@ -96,6 +110,12 @@ public class AssignedEmployeeList implements Serializable {
     }
     return returnStr;
   }
+
+  /**
+   * Checks if the object is equal to another one
+   * @param obj the object we are comparing this AssignedEmployeeList to
+   * @return boolean true if those two are the same, false otherwise
+   */
   public boolean equals(Object obj){
     if(!(obj instanceof AssignedEmployeeList))
       return false;
