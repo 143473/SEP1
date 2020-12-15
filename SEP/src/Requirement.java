@@ -195,6 +195,14 @@ public class Requirement implements Serializable
     }
     return null;
   }
+  public Task getTaskByName(String taskName){
+    for (int i = 0; i < tasks.size(); i++) {
+      if(tasks.get(i).getName().equals(taskName)){
+        return tasks.get(i);
+      }
+    }
+    return null;
+  }
   /**
    * Checks if it is already past the deadline
    *

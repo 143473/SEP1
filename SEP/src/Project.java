@@ -79,10 +79,18 @@ public class Project implements Serializable
   public ArrayList<Requirement> getRequirements(){
     return requirements;
   }
-
   public Requirement getRequirement(Requirement requirement){
+    for (int i = 0; i < requirements.size(); i++)
+    {
+      if(requirements.get(i).equals(requirement))
+        return requirements.get(i);
+    }
+    return null;
+  }
+
+  public Requirement getRequirementByName(String requirementName){
     for (int i = 0; i < requirements.size(); i++) {
-      if(requirements.get(i).equals(requirement)){
+      if(requirements.get(i).getName().equals(requirementName)){
         return requirements.get(i);
       }
     }
