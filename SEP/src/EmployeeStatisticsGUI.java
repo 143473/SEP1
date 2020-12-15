@@ -28,9 +28,10 @@ public class EmployeeStatisticsGUI{
     /*private TableColumn expectedColumn;
     private TableColumn actualColumn;
     private TableColumn productivityColumn;
-    private TableColumn coWorkersColumn;
-    private TableColumn projectsColumn;
-*/
+    */
+    private TableColumn<Employee, EmployeeList> coWorkersColumn;
+    private TableColumn<Employee, ProjectList> projectsColumn;
+
 
     private MyActionListener listener;
     public EmployeeStatisticsGUI(EmployeeAdapter employeeAdapter){
@@ -80,14 +81,17 @@ public class EmployeeStatisticsGUI{
         productivityColumn = new TableColumn("Productivity");
         productivityColumn.setPrefWidth(165);
 
+*/
         coWorkersColumn = new TableColumn("Co workers");
+        coWorkersColumn.setCellValueFactory(new PropertyValueFactory<Employee, EmployeeList>("coworkers"));
         coWorkersColumn.setPrefWidth(165);
 
         projectsColumn = new TableColumn("Projects");
+        projectsColumn.setCellValueFactory(new PropertyValueFactory<Employee, ProjectList>("projects"));
         projectsColumn.setPrefWidth(165);
 
 
-         */
+
         firstNameColumn.setReorderable(false);
         lastNameColumn.setReorderable(false);
         birthdayColumn.setReorderable(false);
@@ -96,24 +100,21 @@ public class EmployeeStatisticsGUI{
         expectedColumn.setReorderable(false);
         actualColumn.setReorderable(false);
         productivityColumn.setReorderable(false);
+        */
         coWorkersColumn.setReorderable(false);
         projectsColumn.setReorderable(false);
 
-
-         */
         allEmployeesTable.getColumns().add(firstNameColumn);
         allEmployeesTable.getColumns().add(lastNameColumn);
         allEmployeesTable.getColumns().add(birthdayColumn);
-
         /*
         allEmployeesTable.getColumns().add(expectedColumn);
         allEmployeesTable.getColumns().add(actualColumn);
         allEmployeesTable.getColumns().add(productivityColumn);
+        */
         allEmployeesTable.getColumns().add(coWorkersColumn);
         allEmployeesTable.getColumns().add(projectsColumn);
 
-
-         */
         mainPane = new VBox(10);
         mainPane.getChildren().addAll(topPane, allEmployeesTable);
     }
@@ -122,6 +123,9 @@ public class EmployeeStatisticsGUI{
         EmployeeList employees = employeeAdapter.getAllEmployees();
 
         for (int i = 0; i < employees.size(); i++) {
+
+            employees.get(i).getProjectsWorkedOn();
+            employees.get(i).getCoworkersOfEmployee();
             allEmployeesTable.getItems().add(employees.get(i));
         }
     }

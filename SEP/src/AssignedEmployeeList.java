@@ -39,6 +39,24 @@ public class AssignedEmployeeList implements Serializable {
     return false;
   }
 
+  public boolean containsNormalEmployee(Employee employee){
+    for (int i = 0; i < assignedEmployeeList.size(); i++) {
+      if(assignedEmployeeList.get(i).getFirstName().equals(employee.getFirstName())
+      && assignedEmployeeList.get(i).getLastName().equals(employee.getLastName())
+      && assignedEmployeeList.get(i).getDateOfBirth().equals(employee.getDateOfBirth())){
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public Employee getNormalEmployeeOnIndex(int index){
+    if(index<assignedEmployeeList.size()){
+      return new Employee(assignedEmployeeList.get(index).getFirstName(), assignedEmployeeList.get(index).getLastName(), assignedEmployeeList.get(index).getDateOfBirth());
+    }
+    return null;
+  }
+
   /**
    * Removes an assignedEmployee from the list
    * @param  assignedEmployee the assignedEmployee to remove from the list
