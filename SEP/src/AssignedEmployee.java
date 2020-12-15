@@ -1,3 +1,4 @@
+// updated in class diagram
 import java.io.Serializable;
 
 /**
@@ -76,10 +77,7 @@ public class AssignedEmployee extends Employee implements Serializable {
     public AssignedEmployee copy(){
         return new AssignedEmployee(getFirstName(), getLastName(), getDateOfBirth(), statusNumber);
     }
-    public String toString(){
 
-        return getFirstName() + " " + getLastName()+ " (" + getStatus()+")";
-    }
 
     public boolean equals(Object obj){
         if(!(obj instanceof AssignedEmployee)){
@@ -87,5 +85,10 @@ public class AssignedEmployee extends Employee implements Serializable {
         }
         AssignedEmployee temp = (AssignedEmployee) obj;
         return super.equals(temp) && temp.getStatus().equals(status) && temp.getStatusNumber() == statusNumber;
+    }
+
+    public String toString(){
+
+        return getFirstName() + " " + getLastName()+ " (" + getStatus()+")";
     }
 }

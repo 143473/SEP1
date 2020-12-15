@@ -109,7 +109,7 @@ public class ReportTasksGUI3 {
         Project project = projectList.getProjectByName(assignedTasks.getProjectName());
         Requirement requirement = project.getRequirementByName(
             assignedTasks.getRequirement().getName());
-        Task task = requirement.getTaskByName(assignedTasks.getTask().getName());
+        Task task = requirement.getTaskByName(assignedTasks.getName());
             assignedTasks.setSpentTime(spentTime);
         task.setSpentTime(spentTime);
 

@@ -199,7 +199,6 @@ public class AssignTasksGUI5 {
                     task.getDescription(), task.getDeadline(), task.getEstimatedTime(),
                     task.getResponsibleEmployee(), assignedEmployee,
                     dateForTheTask, task.getId(), task.getStatus());
-                assignedTask.setTask(task);
                 assignedTask.setRequirement(requirement);
                 assignedTask.setProject(project);
                     System.out.println(assignedTask);
