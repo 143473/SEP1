@@ -25,9 +25,6 @@ public class EmployeeStatisticsGUI{
     private TableColumn<Employee, String> firstNameColumn;
     private TableColumn<Employee, String> lastNameColumn;
     private TableColumn<Employee, MyDate> birthdayColumn;
-    private TableColumn<Employee, Double> expectedColumn;
-    private TableColumn<Employee, Double> actualColumn;
-    private TableColumn<Employee, String> productivityColumn;
     private TableColumn<Employee, EmployeeList> coWorkersColumn;
     private TableColumn<Employee, ProjectList> projectsColumn;
 
@@ -70,19 +67,6 @@ public class EmployeeStatisticsGUI{
         birthdayColumn.setCellValueFactory(new PropertyValueFactory<Employee, MyDate>("dateOfBirth"));
         birthdayColumn.setPrefWidth(165);
 
-        expectedColumn = new TableColumn("Expected number of hours");
-        expectedColumn.setCellValueFactory(new PropertyValueFactory<Employee, Double>("hoursExpected"));
-        expectedColumn.setPrefWidth(165);
-
-        actualColumn = new TableColumn("Actual number of hours");
-        actualColumn.setCellValueFactory(new PropertyValueFactory<Employee, Double>("hoursWorked"));
-        //<Employee, Double>
-        actualColumn.setPrefWidth(165);
-
-        productivityColumn = new TableColumn("Productivity");
-        productivityColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("productivity"));
-        productivityColumn.setPrefWidth(165);
-
         coWorkersColumn = new TableColumn("Co workers");
         coWorkersColumn.setCellValueFactory(new PropertyValueFactory<Employee, EmployeeList>("coworkers"));
         coWorkersColumn.setPrefWidth(165);
@@ -97,18 +81,12 @@ public class EmployeeStatisticsGUI{
         lastNameColumn.setReorderable(false);
         birthdayColumn.setReorderable(false);
         birthdayColumn.setSortable(false);
-        expectedColumn.setReorderable(false);
-        actualColumn.setReorderable(false);
-        productivityColumn.setReorderable(false);
         coWorkersColumn.setReorderable(false);
         projectsColumn.setReorderable(false);
 
         allEmployeesTable.getColumns().add(firstNameColumn);
         allEmployeesTable.getColumns().add(lastNameColumn);
         allEmployeesTable.getColumns().add(birthdayColumn);
-        allEmployeesTable.getColumns().add(expectedColumn);
-        allEmployeesTable.getColumns().add(actualColumn);
-        allEmployeesTable.getColumns().add(productivityColumn);
         allEmployeesTable.getColumns().add(coWorkersColumn);
         allEmployeesTable.getColumns().add(projectsColumn);
 
@@ -120,9 +98,6 @@ public class EmployeeStatisticsGUI{
         EmployeeList employees = employeeAdapter.getAllEmployees();
 
         for (int i = 0; i < employees.size(); i++) {
-            employees.get(i).getHoursExpectedOfEmployee();
-            //employees.get(i).getHoursWorkedOfEmployee();
-            employees.get(i).getProductivityOfEmployee();
             employees.get(i).getProjectsWorkedOn();
             employees.get(i).getCoworkersOfEmployee();
             allEmployeesTable.getItems().add(employees.get(i));
