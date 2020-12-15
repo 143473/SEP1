@@ -51,7 +51,7 @@ public class ManageProjectGUI
   private MyListListener listListener;
 
   /**
-   * 3-argument constructor initializing the GUI components
+   * 1-argument constructor initializing the GUI components
    * @param projectsAdapter adapter of the projects, requirements and tasks
    */
   public ManageProjectGUI(ProjectsAdapter projectsAdapter){

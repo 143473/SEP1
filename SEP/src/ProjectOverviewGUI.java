@@ -7,6 +7,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
 
+/**
+ * Class for managing the requirement information
+ * @author Marketa Lapcikova, Claudiu Emanuel Cordunianu
+ * @version 1.0
+ */
 public class ProjectOverviewGUI
 {
   private ProjectsAdapter projectsAdapter;
@@ -37,6 +42,11 @@ public class ProjectOverviewGUI
   private HBox topButtons;
   private HBox bottomButtons;
 
+  /**
+   * 2-argument constructor initializing the GUI components
+   * @param projectsAdapter adapter of the projects, requirements and tasks
+   * @param sepGUI the main GUI where all the other GUIs are connected
+   */
   public ProjectOverviewGUI(ProjectsAdapter projectsAdapter,SepGUI sepGUI){
     this.projectsAdapter = projectsAdapter;
 
@@ -93,14 +103,22 @@ public class ProjectOverviewGUI
     mainPane = new VBox(8);
     mainPane.getChildren().addAll(topPane,tableTitle, projectsTable,bottomButtons);
   }
+
+  /**
+   * Initializes the projectsTable and updates the values
+   */
   private void initializeTable(){
     projectsTable.getItems().clear();
     ProjectList projects = projectsAdapter.getAllProjects();
     for (int i = 0; i < projects.size(); i++) {
       projectsTable.getItems().add(projects.get(i));
     }
-
   }
+
+  /**
+   * Initializes the projectsTable with a new ProjectList
+   * @param newProjects ProjectList of new projects to initialize the projectsTable with
+   */
   private void initializeTable(ProjectList newProjects){
     projectsTable.getItems().clear();
     for (int i = 0; i < newProjects.size(); i++) {
@@ -108,77 +126,60 @@ public class ProjectOverviewGUI
     }
   }
 
+  /**
+   * Initializes the projectsTable and gets the mainPane
+   * @return VBox mainPane
+   */
   public VBox getMainPane()
   {
     initializeTable();
     return mainPane;
   }
 
+  /**
+   * Gets the projectsTable
+   * @return TableView<Project> projectsTable
+   */
   public TableView<Project> getProjectsTable()
   {
     return projectsTable;
   }
 
+  /**
+   * Gets the manage Button
+   * @return Button manage
+   */
   public Button getManage()
   {
     return manage;
   }
 
-  /*public boolean callContinueButton(){
-    boolean gogo = true;
-    if(projectsTable.getSelectionModel().getSelectedItem()==null)
-    {
-      Alert alert = new Alert(Alert.AlertType.WARNING);
-      alert.setHeaderText("Warning");
-      alert.setContentText("No project was chosen!");
-      alert.showAndWait();
-      gogo = false;
-    }
-    else
-    {
-      String projectName = projectsTable.getSelectionModel().getSelectedItem().getName();
-      System.out.println(projectsTable.getSelectionModel().getSelectedItem().getName());
-      sepGUI.getReqOfSelectedPrjGUI().getProjectName().setText(projectName);
-      gogo =true;
-    }
-    return gogo;
-  }*/
-
+  /**
+   * Gets the add Button
+   * @return Button add
+   */
   public Button getAdd()
   {
     return add;
   }
 
+  /**
+   * Gets the continueButton Button
+   * @return Button continueButton
+   */
   public Button getContinueButton()
   {
     return continueButton;
   }
-  private void setCellFactory() {
 
-    Callback<TableColumn, TableCell> cellFactory = new Callback<TableColumn, TableCell>() {
-      @Override
-      public TableCell call(TableColumn param) {
-        final TableCell cell = new TableCell() {
-          private Text text;
-
-          @Override
-          public void updateItem(Object item, boolean empty) {
-            super.updateItem(item, empty);
-            if (!isEmpty()) {
-              text = new Text(item.toString());
-              text.setWrappingWidth(330);
-              setGraphic(text);
-            }
-          }
-        };
-        return cell;
-      }
-    };
-
-    teamMemberCol.setCellFactory(cellFactory);
-    descriptionCol.setCellFactory(cellFactory);
-  }
+  /**
+   * Handles the actions in this class
+   */
   private class MyActionListener implements EventHandler<ActionEvent> {
+    /**
+     * Handles the actions of this class
+     * @param e event that happens
+     */
     public void handle(ActionEvent e) {
       if (e.getSource() == searchButton)
       {

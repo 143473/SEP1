@@ -37,7 +37,7 @@ public class EmployeeStatisticsGUI{
     private MyActionListener listener;
 
     /**
-     * 3-argument constructor initializing the GUI components
+     * 1-argument constructor initializing the GUI components
      * @param employeeAdapter adapter of the employees
      */
     public EmployeeStatisticsGUI(EmployeeAdapter employeeAdapter){

@@ -10,6 +10,11 @@ import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
 
+/**
+ * Class for managing the requirement information
+ * @author Marketa Lapcikova
+ * @version 1.0
+ */
 public class ManageTaskGUI
 {
   private ProjectsAdapter projectsAdapter;
@@ -60,6 +65,11 @@ public class ManageTaskGUI
   private MyListListener listListener;
   private MyActionListener listener;
 
+  /**
+   * 2-argument constructor initializing the GUI components
+   * @param projectsAdapter adapter of the projects, requirements and tasks
+   * @param sepGUI the main GUI where all the other GUIs are connected
+   */
   public ManageTaskGUI(ProjectsAdapter projectsAdapter, SepGUI sepGUI){
 
     listener = new MyActionListener();
@@ -156,21 +166,30 @@ public class ManageTaskGUI
     mainPane.setSpacing(10);
     mainPane.setPadding(new Insets(25, 25, 25, 25));;
     mainPane.getChildren().addAll(title,mainContent,bottomButtons);
-
-
-
   }
+
+  /**
+   * Initializes the tasksTable and gets the mainPane
+   * @return VBox mainPane
+   */
   public VBox getMainPane()
   {
     initializeTable();
     return mainPane;
   }
 
+  /**
+   * Gets the cancelButton Button
+   * @return Button cancelButton
+   */
   public Button getCancel()
   {
     return cancelButton;
   }
 
+  /**
+   * Initializes the tasksTable
+   */
   private void initializeTable(){
     tasksTable.getItems().clear();
     Project selectedProject = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem();
@@ -183,6 +202,9 @@ public class ManageTaskGUI
     }
   }
 
+  /**
+   * Clears all the fields, sets the textFields to empty and clears the choice in choiceBoxes
+   */
   public void clearFields(){
     nameField.setText("");
     descriptionField.setText("");
@@ -195,7 +217,16 @@ public class ManageTaskGUI
     responsibleEmployeeBox.getSelectionModel().clearSelection();
   }
 
+  /**
+   * List Listener to the changes
+   */
   private class MyListListener implements ChangeListener<Task> {
+    /**
+     * Method what happens when any changes in the ListView occure
+     * @param task task object as the observable value
+     * @param oldTask Task type previous project who was being clicked at
+     * @param newTask Task type new project who was being clicked at
+     */
     public void changed(ObservableValue<? extends Task> task, Task oldTask, Task newTask)
     {
       Task temp = tasksTable.getSelectionModel().getSelectedItem();
@@ -236,7 +267,14 @@ public class ManageTaskGUI
     }
   }
 
+  /**
+   * Handles the actions in this class
+   */
   private class MyActionListener implements EventHandler<ActionEvent> {
+    /**
+     * Handles the actions of this class
+     * @param e event that happens
+     */
     public void handle(ActionEvent e) {
       Project project = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem();
       Requirement requirement = sepGUI.getReqOfSelectedPrjGUI().getRequirementsTable().getSelectionModel().getSelectedItem();
