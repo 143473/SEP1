@@ -26,7 +26,7 @@ public class AssignedTasks extends Task implements Serializable {
         super(name, description, estimatedTime, deadline, id, status, responsibleEmployee);
         spentTime = 0;
         this.assignedEmployee = assignedEmployee;
-        this.date = date;
+        this.date = date.copy();
         this.project = null;
         this.requirement = null;
         reported = false;

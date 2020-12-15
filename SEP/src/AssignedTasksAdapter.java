@@ -15,6 +15,7 @@ public class AssignedTasksAdapter
 
   /**
    * 1-argument constructor setting the file name.
+   *
    * @param fileName the name and path of the file where AssignedTasks will be saved and retrieved
    */
 
@@ -26,6 +27,7 @@ public class AssignedTasksAdapter
 
   /**
    * Uses the MyFileIO class to retrieve an AssignedTasksList object with all AssignedTasks.
+   *
    * @return an AssignedTasksList object with all stored assignedTasks
    */
 
@@ -54,15 +56,16 @@ public class AssignedTasksAdapter
 
   /**
    * Use the MyFileIO class to retrieve all assignedTasks for a given employee.
+   *
    * @param employee the employee to retrieve the assignedTasks for
    * @return an AssignedTasksList object with assignedTasks for the given employee
    */
-  public AssignedTasksList getAllTasksOnEmployee (Employee employee)
+  public AssignedTasksList getAllTasksOnEmployee(Employee employee)
   {
     AssignedTasksList tasksOnEmployee = new AssignedTasksList();
     try
     {
-      AssignedTasksList result = (AssignedTasksList)mfio.readObjectFromFile(fileName);
+      AssignedTasksList result = (AssignedTasksList) mfio.readObjectFromFile(fileName);
 
       for (int i = 0; i < result.size(); i++)
       {
@@ -89,6 +92,7 @@ public class AssignedTasksAdapter
 
   /**
    * Use the MyFileIO class to save some assignedTasks.
+   *
    * @param assignedTasks the list of assignedTasks that will be saved
    */
 
@@ -108,8 +112,8 @@ public class AssignedTasksAdapter
     }
   }
 
-
-  public EmployeeList getAllAssignedEmployees(){
+  public EmployeeList getAllAssignedEmployees()
+  {
     AssignedTasksList assignedTasks = new AssignedTasksList();
 
     try
@@ -129,32 +133,40 @@ public class AssignedTasksAdapter
       System.out.println("Class Not Found");
     }
     EmployeeList assignedEmployees = new EmployeeList();
-    for (int i = 0; i < assignedTasks.size(); i++) {
-      Employee thisEmployee = new Employee(assignedTasks.get(i).getAssignedEmployee().getFirstName(),
-              assignedTasks.get(i).getAssignedEmployee().getLastName(),
-              assignedTasks.get(i).getAssignedEmployee().getDateOfBirth());
-      if(!assignedEmployees.containsEmployee(thisEmployee)){
+    for (int i = 0; i < assignedTasks.size(); i++)
+    {
+      Employee thisEmployee = new Employee(
+          assignedTasks.get(i).getAssignedEmployee().getFirstName(),
+          assignedTasks.get(i).getAssignedEmployee().getLastName(),
+          assignedTasks.get(i).getAssignedEmployee().getDateOfBirth());
+      if (!assignedEmployees.containsEmployee(thisEmployee))
+      {
         assignedEmployees.addEmployee(thisEmployee);
       }
     }
     return assignedEmployees;
   }
 
-  public double getTotalEstimatedTimeOnEmployee(Employee employee){
+  public double getTotalEstimatedTimeOnEmployee(Employee employee)
+  {
     AssignedTasksList allAssignedTasks = getAllAssignedTasks();
     AssignedTasksList allEndedTasks = new AssignedTasksList();
-    for (int i = 0; i < allAssignedTasks.size(); i++) {
-      if(allAssignedTasks.get(i).getStatus().equals("Ended") ||
-              allAssignedTasks.get(i).getStatus().equals("Approved") ||
-              allAssignedTasks.get(i).getStatus().equals("Rejected")){
+    for (int i = 0; i < allAssignedTasks.size(); i++)
+    {
+      if (allAssignedTasks.get(i).getStatus().equals("Ended")
+          || allAssignedTasks.get(i).getStatus().equals("Approved")
+          || allAssignedTasks.get(i).getStatus().equals("Rejected"))
+      {
         allEndedTasks.addAssignedTask(allAssignedTasks.get(i));
       }
     }
     double totalEstimatedTime = 0;
-    for (int i = 0; i < allEndedTasks.size(); i++) {
-      if(allEndedTasks.get(i).getAssignedEmployee().getFirstName().equals(employee.getFirstName()) &&
-              allEndedTasks.get(i).getAssignedEmployee().getLastName().equals(employee.getLastName()) &&
-              allEndedTasks.get(i).getAssignedEmployee().getDateOfBirth().equals(employee.getDateOfBirth())){
+    for (int i = 0; i < allEndedTasks.size(); i++)
+    {
+      if (allEndedTasks.get(i).getAssignedEmployee().getFirstName().equals(employee.getFirstName()) && allEndedTasks.get(i)
+          .getAssignedEmployee().getLastName().equals(employee.getLastName())
+          && allEndedTasks.get(i).getAssignedEmployee().getDateOfBirth().equals(employee.getDateOfBirth()))
+      {
         totalEstimatedTime += allEndedTasks.get(i).getEstimatedTime();
       }
     }
