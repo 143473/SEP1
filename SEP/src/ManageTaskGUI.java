@@ -219,7 +219,7 @@ public class ManageTaskGUI
         statusBox.getItems().clear();
         responsibleEmployeeBox.getItems().clear();
 
-        AssignedEmployeeList assignedEmployeeList = projectsAdapter.getAllProjects().getProject(project).getAssignedEmployeeList();
+        AssignedEmployeeList assignedEmployeeList = projectsAdapter.getAllProjects().getProjectByName(project.getName()).getAssignedEmployeeList();
         for (int i = 0; i < assignedEmployeeList.size(); i++) {
           if(!responsibleEmployeeBox.getItems().contains(assignedEmployeeList.get(i))){
             responsibleEmployeeBox.getItems().add(assignedEmployeeList.get(i));
@@ -347,7 +347,7 @@ public class ManageTaskGUI
           }
           if(OK){
             ProjectList projectList = projectsAdapter.getAllProjects();
-            Task chosenTask = projectList.getProject(project).getRequirements().get(requirement.getId()).getTasks().get(task.getId());
+            Task chosenTask = projectList.getProjectByName(project.getName()).getRequirements().get(requirement.getId()).getTasks().get(task.getId());
 
             chosenTask.setName(nameField.getText());
             chosenTask.setDescription(descriptionField.getText());

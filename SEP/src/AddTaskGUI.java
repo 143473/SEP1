@@ -224,7 +224,7 @@ public class AddTaskGUI
           Project selectedProject = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem();
           Project project = projectList.getProjectByName(selectedProject.getName());
           Requirement selectedRequirement = sepGUI.getReqOfSelectedPrjGUI().getRequirementsTable().getSelectionModel().getSelectedItem();
-          Requirement requirement = project.getRequirement(selectedRequirement);
+          Requirement requirement = project.getRequirementByName(selectedRequirement.getName());
 
 
           double estimationTime = Double.parseDouble(estimationField.getText().replaceFirst("^0+(?!$)", ""));
@@ -232,7 +232,12 @@ public class AddTaskGUI
           Task newTask = new Task(nameField.getText(), descriptionField.getText(), estimationTime,
                   deadline, requirement.getTasks().size(), statusBox.getSelectionModel().getSelectedItem(),
                   responsibleEmployeeBox.getSelectionModel().getSelectedItem());
+          /*
+          newTask.setProject(project);
+          newTask.setRequirement(requirement);
 
+
+           */
           boolean equals = false;
           for (int i = 0; i < requirement.getTasks().size(); i++) {
             if(project.getRequirements().get(requirement.getId()).getTasks().get(i).equals(newTask)){

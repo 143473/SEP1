@@ -27,21 +27,21 @@ public class LoadInitialProjectData {
 
         EmployeeAdapter employeeAdapter = new EmployeeAdapter("employees.bin");
         EmployeeList allEmployees = employeeAdapter.getAllEmployees();
-        AssignedEmployee assignedEmployee1 = new AssignedEmployee(allEmployees.get(0).getFirstName(), allEmployees.get(0).getLastName(), allEmployees.get(0).getDateOfBirth(), 0);
-        AssignedEmployee assignedEmployee2 = new AssignedEmployee(allEmployees.get(1).getFirstName(), allEmployees.get(1).getLastName(), allEmployees.get(1).getDateOfBirth(), 1);
-        AssignedEmployee assignedEmployee3 = new AssignedEmployee(allEmployees.get(2).getFirstName(), allEmployees.get(2).getLastName(), allEmployees.get(2).getDateOfBirth(), 2);
+        AssignedEmployee assignedEmployee1 = new AssignedEmployee(allEmployees.get(0).getFirstName(), allEmployees.get(0).getLastName(), allEmployees.get(0).getDateOfBirth(), 2);
+        AssignedEmployee assignedEmployee2 = new AssignedEmployee(allEmployees.get(1).getFirstName(), allEmployees.get(1).getLastName(), allEmployees.get(1).getDateOfBirth(), 3);
+        AssignedEmployee assignedEmployee3 = new AssignedEmployee(allEmployees.get(2).getFirstName(), allEmployees.get(2).getLastName(), allEmployees.get(2).getDateOfBirth(), 0);
         AssignedEmployee assignedEmployee4 = new AssignedEmployee(allEmployees.get(3).getFirstName(), allEmployees.get(3).getLastName(), allEmployees.get(3).getDateOfBirth(), 3);
-        AssignedEmployee assignedEmployee5 = new AssignedEmployee(allEmployees.get(4).getFirstName(), allEmployees.get(4).getLastName(), allEmployees.get(4).getDateOfBirth(), 0);
-        AssignedEmployee assignedEmployee6 = new AssignedEmployee(allEmployees.get(5).getFirstName(), allEmployees.get(5).getLastName(), allEmployees.get(5).getDateOfBirth(), 1);
-        AssignedEmployee assignedEmployee7 = new AssignedEmployee(allEmployees.get(6).getFirstName(), allEmployees.get(6).getLastName(), allEmployees.get(6).getDateOfBirth(), 2);
-        AssignedEmployee assignedEmployee8 = new AssignedEmployee(allEmployees.get(7).getFirstName(), allEmployees.get(7).getLastName(), allEmployees.get(7).getDateOfBirth(), 3);
-        AssignedEmployee assignedEmployee9 = new AssignedEmployee(allEmployees.get(8).getFirstName(), allEmployees.get(8).getLastName(), allEmployees.get(8).getDateOfBirth(), 0);
-        AssignedEmployee assignedEmployee10 = new AssignedEmployee(allEmployees.get(9).getFirstName(), allEmployees.get(9).getLastName(), allEmployees.get(9).getDateOfBirth(), 1);
+        AssignedEmployee assignedEmployee5 = new AssignedEmployee(allEmployees.get(4).getFirstName(), allEmployees.get(4).getLastName(), allEmployees.get(4).getDateOfBirth(), 1);
+        AssignedEmployee assignedEmployee6 = new AssignedEmployee(allEmployees.get(5).getFirstName(), allEmployees.get(5).getLastName(), allEmployees.get(5).getDateOfBirth(), 3);
+        AssignedEmployee assignedEmployee7 = new AssignedEmployee(allEmployees.get(6).getFirstName(), allEmployees.get(6).getLastName(), allEmployees.get(6).getDateOfBirth(), 3);
+        AssignedEmployee assignedEmployee8 = new AssignedEmployee(allEmployees.get(7).getFirstName(), allEmployees.get(7).getLastName(), allEmployees.get(7).getDateOfBirth(), 1);
+        AssignedEmployee assignedEmployee9 = new AssignedEmployee(allEmployees.get(8).getFirstName(), allEmployees.get(8).getLastName(), allEmployees.get(8).getDateOfBirth(), 3);
+        AssignedEmployee assignedEmployee10 = new AssignedEmployee(allEmployees.get(9).getFirstName(), allEmployees.get(9).getLastName(), allEmployees.get(9).getDateOfBirth(), 0);
         AssignedEmployee assignedEmployee11 = new AssignedEmployee(allEmployees.get(10).getFirstName(), allEmployees.get(10).getLastName(), allEmployees.get(10).getDateOfBirth(), 2);
         AssignedEmployee assignedEmployee12 = new AssignedEmployee(allEmployees.get(11).getFirstName(), allEmployees.get(11).getLastName(), allEmployees.get(11).getDateOfBirth(), 3);
-        AssignedEmployee assignedEmployee13 = new AssignedEmployee(allEmployees.get(12).getFirstName(), allEmployees.get(12).getLastName(), allEmployees.get(12).getDateOfBirth(), 3);
-        AssignedEmployee assignedEmployee14 = new AssignedEmployee(allEmployees.get(13).getFirstName(), allEmployees.get(13).getLastName(), allEmployees.get(13).getDateOfBirth(), 3);
-        AssignedEmployee assignedEmployee15 = new AssignedEmployee(allEmployees.get(14).getFirstName(), allEmployees.get(14).getLastName(), allEmployees.get(14).getDateOfBirth(), 3);
+        AssignedEmployee assignedEmployee13 = new AssignedEmployee(allEmployees.get(12).getFirstName(), allEmployees.get(12).getLastName(), allEmployees.get(12).getDateOfBirth(), 0);
+        AssignedEmployee assignedEmployee14 = new AssignedEmployee(allEmployees.get(13).getFirstName(), allEmployees.get(13).getLastName(), allEmployees.get(13).getDateOfBirth(), 2);
+        AssignedEmployee assignedEmployee15 = new AssignedEmployee(allEmployees.get(14).getFirstName(), allEmployees.get(14).getLastName(), allEmployees.get(14).getDateOfBirth(), 1);
         AssignedEmployee assignedEmployee16 = new AssignedEmployee(allEmployees.get(15).getFirstName(), allEmployees.get(15).getLastName(), allEmployees.get(15).getDateOfBirth(), 3);
         AssignedEmployee assignedEmployee17 = new AssignedEmployee(allEmployees.get(16).getFirstName(), allEmployees.get(16).getLastName(), allEmployees.get(16).getDateOfBirth(), 3);
 

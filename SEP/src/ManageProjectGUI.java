@@ -177,11 +177,23 @@ public class ManageProjectGUI
             productOwnerBox.getItems().add(assignedEmployees.get(i));
             projectCreatorBox.getItems().add(assignedEmployees.get(i));
           }
-
         }
-        scrumMasterBox.getSelectionModel().select(selectedProject.getScrumMaster());
+        for (int i = 0; i < assignedEmployees.size(); i++) {
+          if(assignedEmployees.get(i).getStatus().equals("Scrum Master")){
+            scrumMasterBox.getSelectionModel().select(assignedEmployees.get(i));
+          }
+          if(assignedEmployees.get(i).getStatus().equals("Product Owner")){
+            productOwnerBox.getSelectionModel().select(assignedEmployees.get(i));
+          }
+          if(assignedEmployees.get(i).getStatus().equals("Project Creator")){
+            projectCreatorBox.getSelectionModel().select(assignedEmployees.get(i));
+          }
+        }
+        /*
         productOwnerBox.getSelectionModel().select(selectedProject.getProductOwner());
         projectCreatorBox.getSelectionModel().select(selectedProject.getProjectCreator());
+
+         */
       }
     }
   }
@@ -251,7 +263,7 @@ public class ManageProjectGUI
           ProjectList allProjects = projectsAdapter.getAllProjects();
           for (int i = 0; i < allProjects.size(); i++) {
             if (allProjects.get(i).getName().equals(nameField.getText()) &&
-                    !allProjects.get(i).equals(projectsTable.getSelectionModel().getSelectedItem())) {
+                    i !=(projectsTable.getSelectionModel().getSelectedIndex())) {
               Alert alert = new Alert(Alert.AlertType.WARNING);
               alert.setHeaderText("Warning");
               alert.setContentText("Project named " + nameField.getText() + " already exists!");
@@ -279,14 +291,7 @@ public class ManageProjectGUI
           }
           if (OK) {
             ProjectList projectList = projectsAdapter.getAllProjects();
-            Project chosenProject = projectList.getProject(projectsTable.getSelectionModel().getSelectedItem());
-
-            chosenProject.setName(nameField.getText());
-            chosenProject.setDescription(descriptionField.getText());
-            chosenProject.setStatus(statusBox.getSelectionModel().getSelectedIndex());
-            chosenProject.setScrumMaster(scrumMasterBox.getSelectionModel().getSelectedItem());
-            chosenProject.setProductOwner(productOwnerBox.getSelectionModel().getSelectedItem());
-            chosenProject.setProjectCreator(projectCreatorBox.getSelectionModel().getSelectedItem());
+            Project chosenProject = projectList.getProjectByName(projectsTable.getSelectionModel().getSelectedItem().getName());
 
             //setting the status of to "team member"
             AssignedEmployeeList assignedEmployeeList = chosenProject.getAssignedEmployeeList();
@@ -298,6 +303,22 @@ public class ManageProjectGUI
             chosenProject.getAssignedEmployeeList().get(scrumMasterBox.getSelectionModel().getSelectedIndex()).setStatus(0);
             chosenProject.getAssignedEmployeeList().get(projectCreatorBox.getSelectionModel().getSelectedIndex()).setStatus(2);
             chosenProject.getAssignedEmployeeList().get(productOwnerBox.getSelectionModel().getSelectedIndex()).setStatus(1);
+
+            /*
+            chosenProject.setName(nameField.getText());
+            chosenProject.setDescription(descriptionField.getText());
+            chosenProject.setStatus(statusBox.getSelectionModel().getSelectedIndex());
+            chosenProject.setScrumMaster(scrumMasterBox.getSelectionModel().getSelectedItem());
+            chosenProject.setProductOwner(productOwnerBox.getSelectionModel().getSelectedItem());
+            chosenProject.setProjectCreator(projectCreatorBox.getSelectionModel().getSelectedItem());
+             */
+
+            chosenProject.setName(nameField.getText());
+            chosenProject.setDescription(descriptionField.getText());
+            chosenProject.setStatus(statusBox.getSelectionModel().getSelectedIndex());
+            chosenProject.setScrumMaster(new AssignedEmployee(scrumMasterBox.getSelectionModel().getSelectedItem().getFirstName(), scrumMasterBox.getSelectionModel().getSelectedItem().getLastName(), scrumMasterBox.getSelectionModel().getSelectedItem().getDateOfBirth(),0));
+            chosenProject.setProductOwner(new AssignedEmployee(productOwnerBox.getSelectionModel().getSelectedItem().getFirstName(), productOwnerBox.getSelectionModel().getSelectedItem().getLastName(), productOwnerBox.getSelectionModel().getSelectedItem().getDateOfBirth(),0));
+            chosenProject.setProjectCreator(new AssignedEmployee(projectCreatorBox.getSelectionModel().getSelectedItem().getFirstName(), projectCreatorBox.getSelectionModel().getSelectedItem().getLastName(), projectCreatorBox.getSelectionModel().getSelectedItem().getDateOfBirth(),0));
 
             projectsAdapter.saveProjects(projectList);
 

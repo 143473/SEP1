@@ -21,7 +21,6 @@ public class ManageRequirementGUI
   private TextField id;
   private TextField name;
   private TextField userStory;
-  private TextField estimatedTime;
   private TextField day;
   private TextField month;
   private TextField year;
@@ -37,7 +36,6 @@ public class ManageRequirementGUI
   private Label idLabel;
   private Label nameLabel;
   private Label userStoryLabel;
-  private Label estimatedTimeLabel;
   private Label deadlineLabel;
   private Label statusLabel;
   private Label responsibleEmployeeLabel;
@@ -75,7 +73,6 @@ public class ManageRequirementGUI
   id.setDisable(true);
   name = new TextField();
   userStory = new TextField();
-  estimatedTime= new TextField();
   spentTime = new TextField();
   spentTime.setDisable(true);
 
@@ -99,7 +96,6 @@ public class ManageRequirementGUI
   idLabel = new Label("Id");
   nameLabel = new Label("Name");
   userStoryLabel = new Label("User Story");
-  estimatedTimeLabel = new Label("Estimation in hours");
   deadlineLabel = new Label("Deadline");
   statusLabel = new Label("Status");
   responsibleEmployeeLabel = new Label("Responsible Employee");
@@ -131,12 +127,11 @@ public class ManageRequirementGUI
   requirementForm.addRow(0, idLabel, id);
   requirementForm.addRow(1, nameLabel, name);
   requirementForm.addRow(2, userStoryLabel, userStory);
-  requirementForm.addRow(3, estimatedTimeLabel, estimatedTime);
-  requirementForm.addRow(4, deadlineLabel, datePane);
-  requirementForm.addRow(5, statusLabel, statusBox);
-  requirementForm.addRow(6, responsibleEmployeeLabel, responsibleEmployeeBox);
-  requirementForm.addRow(7, importanceLabel, importanceBox);
-  requirementForm.addRow(8, spentTimeLabel, spentTime);
+  requirementForm.addRow(3, deadlineLabel, datePane);
+  requirementForm.addRow(4, statusLabel, statusBox);
+  requirementForm.addRow(5, responsibleEmployeeLabel, responsibleEmployeeBox);
+  requirementForm.addRow(6, importanceLabel, importanceBox);
+  requirementForm.addRow(7, spentTimeLabel, spentTime);
 
   mainContent = new HBox(10);
   mainContent.getChildren().addAll(requirementForm, requirementsTable);
@@ -163,7 +158,7 @@ public class ManageRequirementGUI
   private void initializeTable(){
     requirementsTable.getItems().clear();
     Project selectedProject = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem();
-    ArrayList<Requirement> requirements = projectsAdapter.getAllProjects().getProject(selectedProject).getRequirements();
+    ArrayList<Requirement> requirements = projectsAdapter.getAllProjects().getProjectByName(selectedProject.getName()).getRequirements();
 
     System.out.println(requirements);
     for (int i = 0; i < requirements.size(); i++) {
@@ -175,7 +170,6 @@ public class ManageRequirementGUI
     id.setText("");
     name.setText("");
     userStory.setText("");
-    estimatedTime.setText("");
     day.setText("");
     month.setText("");
     year.setText("");
@@ -197,7 +191,6 @@ public class ManageRequirementGUI
         id.setText(String.valueOf(selectedRequirement.getId()));
         name.setText(selectedRequirement.getName());
         userStory.setText(selectedRequirement.getUserStory());
-        estimatedTime.setText(String.valueOf(selectedRequirement.getEstimatedTime()));
         day.setText(String.valueOf(selectedRequirement.getDeadline().getDay()));
         month.setText(String.valueOf(selectedRequirement.getDeadline().getMonth()));
         year.setText(String.valueOf(selectedRequirement.getDeadline().getYear()));
@@ -210,7 +203,7 @@ public class ManageRequirementGUI
         importanceBox.getItems().addAll(1, 2, 3);
         importanceBox.getSelectionModel().select(selectedRequirement.getImportance()-1);
 
-        AssignedEmployeeList assignedEmployeeList = projectsAdapter.getAllProjects().getProject(project).getAssignedEmployeeList();
+        AssignedEmployeeList assignedEmployeeList = projectsAdapter.getAllProjects().getProjectByName(project.getName()).getAssignedEmployeeList();
         for (int i = 0; i < assignedEmployeeList.size(); i++) {
           if(!responsibleEmployeeBox.getItems().contains(assignedEmployeeList.get(i))){
             responsibleEmployeeBox.getItems().add(assignedEmployeeList.get(i));
@@ -276,26 +269,6 @@ public class ManageRequirementGUI
           }
         }
 
-        if(estimatedTime.getText().trim().isEmpty()){
-          Alert alert = new Alert(Alert.AlertType.WARNING);
-          alert.setHeaderText("Warning");
-          alert.setContentText("Estimated time cannot be empty!");
-          alert.showAndWait();
-          OK = false;
-        }
-        else{
-          try{
-            double estimationTemporary = Double.parseDouble(estimatedTime.getText());
-          }
-          catch (NumberFormatException nfe)
-          {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setHeaderText("Invalid input");
-            alert.setContentText("Value in estimated time has to be a number!");
-            alert.showAndWait();
-            OK = false;
-          }
-        }
         if(day.getText().isEmpty() || month.getText().isEmpty() || year.getText().isEmpty()){
           Alert alert = new Alert(Alert.AlertType.WARNING);
           alert.setHeaderText("Invalid input");
@@ -336,7 +309,7 @@ public class ManageRequirementGUI
           }
           if(OK){
             ProjectList projectList = projectsAdapter.getAllProjects();
-            Requirement chosenRequirement = projectList.getProject(project).getRequirements().get(requirement.getId());
+            Requirement chosenRequirement = projectList.getProjectByName(project.getName()).getRequirements().get(requirement.getId());
             chosenRequirement.setName(name.getText());
             chosenRequirement.setUserStory(userStory.getText());
             chosenRequirement.setDeadline(deadline);

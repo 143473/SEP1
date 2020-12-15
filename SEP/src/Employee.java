@@ -12,6 +12,8 @@ public class Employee implements Serializable {
     private MyDate dateOfBirth;
     private ProjectList projects;
     private EmployeeList coworkers;
+    private double hoursWorked, hoursExpected;
+    private String productivity;
 
     public Employee(){
         firstName = "Jim";
@@ -19,6 +21,9 @@ public class Employee implements Serializable {
         dateOfBirth = new MyDate(1, 1, 1900);
         projects = new ProjectList();
         coworkers = new EmployeeList();
+        hoursWorked = 0;
+        hoursExpected = 0;
+        productivity = "";
     }
 
     /**
@@ -33,6 +38,9 @@ public class Employee implements Serializable {
         this.dateOfBirth = dateOfBirth.copy();
         projects = new ProjectList();
         coworkers = new EmployeeList();
+        hoursWorked = 0;
+        hoursExpected = 0;
+        productivity = "";
     }
 
     /**
@@ -53,24 +61,45 @@ public class Employee implements Serializable {
      * Gets the ratio between the employees estimated and spent time on his/her tasks
      * @return number of type double being 1 if the estimated and spent time are equal
      */
-    public double getProductivity(){
-        return 0;
+    public void getProductivityOfEmployee(){
+        if(hoursWorked != 0){
+            double productivityRatio = hoursExpected/hoursWorked;
+            productivity = Math.round(productivityRatio*100) + "%";
+        }
+        else{
+            productivity = "";
+        }
+
     }
 
-    /**
-     * Gets the number equal to total time spent on doing tasks
-     * @return number of hours spent on tasks
-     */
-    public double getTotalSpentTime(){
-        return 0;
+    public String getProductivity(){
+        if(hoursWorked != 0){
+            double productivityRatio = hoursExpected/hoursWorked;
+            return Math.round(productivityRatio*100) + "%";
+        }
+        return "";
     }
 
-    /**
-     * Gets the number equal to total time estimated on doing tasks
-     * @return number of hours estimated on tasks
-     */
-    public double getTotalEstimatedTime(){
-        return 0;
+/*
+    public double getHoursWorked(){
+        AssignedTasksAdapter assignedTasksAdapter = new AssignedTasksAdapter("assignedTasks.bin");
+        return assignedTasksAdapter.getTotalWorkedTimeOnEmployee(this);
+    }
+
+    public void getHoursWorkedOfEmployee(){
+        AssignedTasksAdapter assignedTasksAdapter = new AssignedTasksAdapter("assignedTasks.bin");
+        hoursWorked = assignedTasksAdapter.getTotalWorkedTimeOnEmployee(this);
+    }
+*/
+
+    public double getHoursExpected(){
+        AssignedTasksAdapter assignedTasksAdapter = new AssignedTasksAdapter("assignedTasks.bin");
+        return assignedTasksAdapter.getTotalEstimatedTimeOnEmployee(this);
+    }
+
+    public void getHoursExpectedOfEmployee(){
+        AssignedTasksAdapter assignedTasksAdapter = new AssignedTasksAdapter("assignedTasks.bin");
+        hoursExpected = assignedTasksAdapter.getTotalEstimatedTimeOnEmployee(this);
     }
 
     /**
@@ -81,7 +110,6 @@ public class Employee implements Serializable {
     public void getProjectsWorkedOn(){
         ProjectsAdapter projectsAdapter = new ProjectsAdapter("projects.bin");
         projects = projectsAdapter.getProjectsOfEmployee(this);
-        System.out.println(projects);
     }
 
 
