@@ -11,7 +11,6 @@ public class AssignedTasks extends Task implements Serializable {
     private AssignedEmployee assignedEmployee;
     private Project project;
     private Requirement requirement;
-    private Task task;
     private boolean reported;
 
     /**
@@ -29,7 +28,6 @@ public class AssignedTasks extends Task implements Serializable {
         this.date = date;
         this.project = null;
         this.requirement = null;
-        this.task = null;
         reported = false;
     }
 
@@ -59,15 +57,11 @@ public class AssignedTasks extends Task implements Serializable {
             return false;
     }
 
-
-    public Task getTask()
+    @Override public String getName()
     {
-        return task;
+        return super.getName();
     }
 
-    public int getTaskId(){
-        return task.getId();
-    }
 
     public void setReported(boolean reported)
     {
@@ -96,11 +90,6 @@ public class AssignedTasks extends Task implements Serializable {
      */
     public double getSpentTime() {
         return spentTime;
-    }
-
-    public void setTask(Task task)
-    {
-        this.task = task;
     }
 
     public void setRequirement(Requirement requirement)
