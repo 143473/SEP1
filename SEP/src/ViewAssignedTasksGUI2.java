@@ -80,8 +80,6 @@ public class ViewAssignedTasksGUI2 {
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
         statusColumn.setPrefWidth(100);
 
-
-
         allAssignedTasksTable.getColumns().add(projectNameColumn);
         allAssignedTasksTable.getColumns().add(requirementIDColumn);
         allAssignedTasksTable.getColumns().add(taskIDColumn);

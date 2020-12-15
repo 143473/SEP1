@@ -12,6 +12,7 @@ public class AssignedTasks extends Task implements Serializable {
     private Project project;
     private Requirement requirement;
     private Task task;
+    private boolean reported;
 
     /**
      * Three-argument constructor.
@@ -29,6 +30,7 @@ public class AssignedTasks extends Task implements Serializable {
         this.project = null;
         this.requirement = null;
         this.task = null;
+        reported = false;
     }
 
     /**
@@ -61,6 +63,14 @@ public class AssignedTasks extends Task implements Serializable {
     public Task getTask()
     {
         return task;
+    }
+
+    public void setReported(boolean reported)
+    {
+        this.reported = reported;
+    }
+    public boolean getReported(){
+        return this.reported;
     }
 
     @Override public void setStatus(String status)
@@ -144,6 +154,6 @@ public class AssignedTasks extends Task implements Serializable {
         return "AssignedTasks{" + "spentTime=" + spentTime + ", date=" + date
             + ", assignedEmployee=" + assignedEmployee + '}' + super.toString() +
             "requirementId== " + getRequirementId() + "projectName == " + getProjectName()+
-            "taskId == " + getId();
+            "taskId == " + getId() + getReported();
     }
 }

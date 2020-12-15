@@ -119,6 +119,7 @@ public class ReportTasksGUI3 {
                 assignedTasks.setStatus(progressStatus.chooseStatus(2));
                 task.setStatus(progressStatus.chooseStatus(2));
             }
+            assignedTasks.setReported(true);
             System.out.println(assignedTasks);
             assignedTasksList.removeAssignedTask(selectedAssignedTask);
             assignedTasksAdapter.saveAssignedTasks(assignedTasksList);
@@ -143,7 +144,6 @@ public class ReportTasksGUI3 {
     {
         timeSpentField.setText("");
         finishedField.setSelected(false);
-
     }
     public VBox getMainPane()
     {
