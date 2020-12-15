@@ -1,3 +1,4 @@
+//update in class diagram
 import java.io.Serializable;
 
 public class Task implements Serializable
@@ -10,10 +11,6 @@ public class Task implements Serializable
   private MyDate deadline;
   private AssignedEmployee responsibleEmployee;
   private double spentTime;
-  /*
-  private Requirement requirement;
-  private Project project;
-*/
 
   /**
    * Four-Argument Constructor
@@ -46,24 +43,6 @@ public class Task implements Serializable
   {
     this.spentTime += spentTime;
   }
-  /*
-    public void setRequirement(Requirement requirement)
-    {
-      this.requirement = requirement    }
-  /*
-    public void setProject(Project project){
-      this.project = project;
-    }
-
-    public String getProjectName(){
-      return project.getName();
-    }
-
-  public int getRequirementId()
-  {
-    return requirement.getId();
-  }
-*/
 
   /**
    * Gets the estimated time of completing the task
@@ -99,9 +78,6 @@ public class Task implements Serializable
    * @param deadline
    * @return
    */
-  public boolean isPastDeadline(MyDate deadline){
-  return false;
-  }
 
   /**
    * Sets the employee that will be responsible for the task
@@ -127,14 +103,6 @@ public class Task implements Serializable
   this.status = status;
   }
 
-
-  /**
-   * Gets list of all members that are working on that requirement
-   * @return
-   */
-  /*public ArrayList<AssignedEmployee> getWorkingMembers(){
-  return employeeList;
-}*/
 
   /**
    *
