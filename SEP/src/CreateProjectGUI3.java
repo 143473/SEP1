@@ -11,7 +11,7 @@ import javafx.scene.layout.VBox;
 /**
  * The 3rd part of the project creation user interface, that allows for
  * setting the status for the employees
- * @author Claudiu Cordunianu
+ * @author Claudiu Emanuel Cordunianu, Marketa Lapcikova
  * @version 1.0
  */
 public class CreateProjectGUI3
@@ -19,8 +19,6 @@ public class CreateProjectGUI3
   private EmployeeAdapter employeeAdapter;
   private ProjectsAdapter projectsAdapter;
   private SepGUI sepGUI;
-
-  private MyActionListener listener;
 
   private ProjectList projectList;
   private GridPane gridPane;
@@ -39,10 +37,14 @@ public class CreateProjectGUI3
   private Button finishButton;
   private Button goBackButton;
 
+  /**
+   * 3-argument constructor initializing the GUI components
+   * @param projectsAdapter adapter of the projects, requirements and tasks
+   * @param employeeAdapter adapter of the employees
+   * @param sepGUI the main GUI where all the other GUIs are connected
+   */
   public CreateProjectGUI3(EmployeeAdapter employeeAdapter, ProjectsAdapter projectsAdapter, SepGUI sepGUI){
     projectList = projectsAdapter.getAllProjects();
-
-    listener = new MyActionListener();
 
     this.employeeAdapter = employeeAdapter;
     this.projectsAdapter = projectsAdapter;
@@ -74,63 +76,75 @@ public class CreateProjectGUI3
     mainPane.getChildren().addAll(title, gridPane, hBoxPane);
   }
 
+  /**
+   * Gets the mainPane of the GUI
+   * @return VBox mainPane
+   */
   public VBox getMainPane()
   {
     return mainPane;
   }
 
+  /**
+   * Gets the employeeBox2
+   * @return ComboBox employeesBox2
+   */
   public ComboBox getEmployeesBox2()
   {
     return employeesBox2;
   }
 
+  /**
+   * Gets the employeeBox1
+   * @return ComboBox employeesBox1
+   */
   public ComboBox getEmployeesBox1()
   {
     return employeesBox1;
   }
 
+  /**
+   * Gets the employeeBox3
+   * @return ComboBox employeesBox3
+   */
   public ComboBox getEmployeesBox3()
   {
     return employeesBox3;
   }
 
+  /**
+   * Gets the finishButton Button
+   * @return Button finishButton
+   */
   public Button getFinishButton()
   {
     return finishButton;
   }
 
+  /**
+   * Gets the goBackButton Button
+   * @return Button goBackButton
+   */
   public Button getGoBackButton()
   {
     return goBackButton;
   }
 
+  /**
+   * Sets the projectList to all projects
+   */
   public void setProjectList()
   {
     this.projectList = projectsAdapter.getAllProjects();
     if (projectList.size() > 0) {
       Project project = projectList.get(projectList.size()-1);
-
-
-      /*ArrayList<AssignedEmployee> employeeList = project.getAssignedEmployees();
-
-
-      for (int i = 0; i < employeeList.size(); i++) {
-        employeesBox1.getItems().add(employeeList.get(i));
-      }
-      employeesBox2 = new ComboBox();
-      for (int i = 0; i < employeeList.size(); i++) {
-        employeesBox2.getItems().add(employeeList.get(i));
-      }
-      employeesBox3 = new ComboBox();
-      for (int i = 0; i < employeeList.size(); i++) {
-        employeesBox3.getItems().add(employeeList.get(i));
-      }
-      gridPane.addRow(0, scrumMaster, employeesBox1);
-      gridPane.addRow(1, projectCreator, employeesBox2);
-      gridPane.addRow(2, productOwner, employeesBox3);*/
-
     }
   }
+
+  /**
+   * Checks the validity of entered data after the finish Button is called
+   * @return boolean true if all the input data is correct, otherwise false
+   */
   public boolean callFinishButton(){
     boolean OK = true;
 
@@ -168,16 +182,5 @@ public class CreateProjectGUI3
     }
     return OK;
 
-  }
-
-  private class MyActionListener implements EventHandler<ActionEvent>
-  {
-    public void handle(ActionEvent e)
-    {
-      if (e.getSource() == finishButton){
-
-      }
-
-    }
   }
 }

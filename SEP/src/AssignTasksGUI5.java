@@ -8,7 +8,7 @@ import javafx.scene.layout.VBox;
 
 /**
  * A GUI tab containing components for displaying a list of tasks.
- * @author Timothy Engkar
+ * @author Timothy Engkar, Claudiu Emanuel Cordunianu
  * @version 1.0
  */
 public class AssignTasksGUI5 {
@@ -37,7 +37,10 @@ public class AssignTasksGUI5 {
 
 
     /**
-     * Constructor initializing the GUI components
+     * 3-argument constructor initializing the GUI components
+     * @param projectsAdapter adapter of the projects, requirements and tasks
+     * @param assignedTasksAdapter adapter of the assigned tasks
+     * @param sepGUI the main GUI where all the other GUIs are connected
      */
     public AssignTasksGUI5(SepGUI sepGUI,AssignedTasksAdapter assignedTasksAdapter, ProjectsAdapter projectsAdapter){
 
@@ -69,8 +72,6 @@ public class AssignTasksGUI5 {
         informationPane = new GridPane();
         informationPane.setVgap(8);
         informationPane.addRow(0,dayLabel,dayPane);
-        /*informationPane.add(dayLabel, 0, 2);
-        informationPane.add(dayPane, 1, 2);*/
         informationPane.setVgap(8);
 
         assignButton = new Button("Assign");
@@ -83,15 +84,28 @@ public class AssignTasksGUI5 {
         mainPane.getChildren().addAll(titleLabel, taskLabel, employeeLabel, informationPane, bottomButtons);
     }
 
+    /**
+     * Gets the mainPane
+     * @return VBox mainPane
+     */
     public VBox getMainPane()
     {
         return mainPane;
     }
 
+    /**
+     * Gets the goBackButton Button
+     * @return Button goBackButton
+     */
     public Button getGoBackButton()
     {
         return goBackButton;
     }
+
+    /**
+     * Checks the validity of entered data after the continue Button is called
+     * @return boolean true if all the input data is correct, otherwise false
+     */
     public boolean callContinueButton(){
         boolean gogo = true;
         if(sepGUI.getAssignTasksGUI4().getAllAssignedTasksTable().getSelectionModel().getSelectedItem() == null)
@@ -118,11 +132,19 @@ public class AssignTasksGUI5 {
         return gogo;
     }
 
+    /**
+     * Gets the assignButton Button
+     * @return Button assignButton
+     */
     public Button getAssignButton()
     {
         return assignButton;
     }
 
+    /**
+     * Checks the validity of entered data after the assign Button is called
+     * @return boolean true if all the input data is correct, otherwise false
+     */
     public boolean callAssignButton()
     {
         boolean allValuesCorrect = true;
@@ -209,29 +231,7 @@ public class AssignTasksGUI5 {
                     alert2.setHeaderText("Success");
                     alert2.setContentText("The task was successfully added!");
                     alert2.showAndWait();
-                /*AssignedTasks assignedTask = new AssignedTasks(task.getName(),
-                    task.getDescription(), task.getDeadline(), task.getEstimatedTime(),
-                    task.getResponsibleEmployee(), assignedEmployee,
-                    dateForTheTask, task.getId(), task.getStatus());
 
-                assignedTaskList.addAssignedTask(assignedTask);
-                System.out.println(assignedTask);
-                assignedTasksAdapter.saveAssignedTasks(assignedTaskList);
-                        if(!employeeList.contains(newEmployee)){
-                            employeeList.addEmployee(newEmployee);
-                            employeeAdapter.saveEmployees(employeeList);
-                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                            alert.setHeaderText("Message");
-                            alert.setContentText("New employee was successfully added!");
-                            alert.showAndWait();
-                        }
-
-                        else{
-                            Alert alert = new Alert(Alert.AlertType.WARNING);
-                            alert.setHeaderText("Duplicate employee");
-                            alert.setContentText("This employee is already in the list!");
-                            alert.showAndWait();
-                        }*/
                 allValuesCorrect = true;
             }
         }
@@ -239,10 +239,14 @@ public class AssignTasksGUI5 {
        }
         return allValuesCorrect;
     }
+
+    /**
+     * Clears all the fields, sets the textFields to empty
+     */
     public void clearFields()
     {
         dayField.setText("");
         monthField.setText("");
         yearField.setText("");
     }
-    }
+}

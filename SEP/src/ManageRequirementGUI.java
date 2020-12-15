@@ -13,9 +13,13 @@ import javafx.scene.text.FontWeight;
 
 import java.util.ArrayList;
 
+/**
+ * Class for managing the requirement information
+ * @author Marketa Lapcikova
+ * @version 1.0
+ */
 public class ManageRequirementGUI
 {
-
   private Label title;
 
   private TextField id;
@@ -58,6 +62,11 @@ public class ManageRequirementGUI
   private MyListListener listListener;
   private MyActionListener listener;
 
+  /**
+   * 2-argument constructor initializing the GUI components
+   * @param projectsAdapter adapter of the projects, requirements and tasks
+   * @param sepGUI the main GUI where all the other GUIs are connected
+   */
   public ManageRequirementGUI(ProjectsAdapter projectsAdapter, SepGUI sepGUI){
 
     listListener = new MyListListener();
@@ -144,17 +153,29 @@ public class ManageRequirementGUI
     mainPane.getChildren().addAll(title,mainContent,bottomButtons);
 
 }
+
+  /**
+   * Gets the mainPane and initializes the requirementsTable
+   * @return VBox mainPane
+   */
   public VBox getMainPane()
   {
     initializeTable();
     return mainPane;
   }
 
+  /**
+   * Gets the cancelButton Button
+   * @return Button cancelButton
+   */
   public Button getCancel()
   {
     return cancelButton;
   }
 
+  /**
+   * Initializes the requirementsTable with updated values
+   */
   private void initializeTable(){
     requirementsTable.getItems().clear();
     Project selectedProject = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem();
@@ -166,6 +187,9 @@ public class ManageRequirementGUI
     }
   }
 
+  /**
+   * Clears all the fields, sets the textFields to empty and clears the choice in choiceBoxes
+   */
   public void clearFields(){
     id.setText("");
     name.setText("");
@@ -178,7 +202,17 @@ public class ManageRequirementGUI
     responsibleEmployeeBox.getSelectionModel().clearSelection();
     importanceBox.getSelectionModel().selectFirst();
   }
+
+  /**
+   * List Listener to the changes
+   */
   private class MyListListener implements ChangeListener<Requirement> {
+    /**
+     * Method what happens when any changes in the ListView occure
+     * @param requirement requirement object as the observable value
+     * @param oldRequirement Requirement type previous project who was being clicked at
+     * @param newRequirement Requirement type new project who was being clicked at
+     */
     public void changed(ObservableValue<? extends Requirement> requirement, Requirement oldRequirement, Requirement newRequirement)
     {
 
@@ -220,7 +254,14 @@ public class ManageRequirementGUI
     }
   }
 
+  /**
+   * Handles the actions in this class
+   */
   private class MyActionListener implements EventHandler<ActionEvent> {
+    /**
+     * Handles the actions of this class
+     * @param e event that happens
+     */
     public void handle(ActionEvent e) {
       Requirement requirement = requirementsTable.getSelectionModel().getSelectedItem();
       Project project = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem();

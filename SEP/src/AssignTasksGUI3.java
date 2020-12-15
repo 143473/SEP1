@@ -5,7 +5,7 @@ import javafx.scene.layout.VBox;
 
 /**
  * A GUI tab containing components for displaying a list of tasks.
- * @author Timothy Engkar
+ * @author Timothy Johan Engkar, Claudiu Emanuel Cordunianu
  * @version 1.0
  */
 public class AssignTasksGUI3 {
@@ -28,7 +28,8 @@ public class AssignTasksGUI3 {
 
 
     /**
-     * Constructor initializing the GUI components
+     * 2-argument constructor initializing the GUI components
+     * @param sepGUI the main GUI where all the other GUIs are connected
      */
     public AssignTasksGUI3(SepGUI sepGUI){
 
@@ -69,27 +70,47 @@ public class AssignTasksGUI3 {
         mainPane.getChildren().addAll(topPane, tableLabel, tasksTable,bottomButtons);
     }
 
+    /**
+     * Initializes the table and gets the mainPane
+     * @return VBox mainPane
+     */
     public VBox getMainPane()
     {
         initializeTable();
         return mainPane;
     }
 
+    /**
+     * Gets the buttonContinue Button
+     * @return Button continueButton
+     */
     public Button getButtonContinue()
     {
         return buttonContinue;
     }
 
+    /**
+     * Gets the goBackButton Button
+     * @return Button goBackButton
+     */
     public Button getGoBackButton()
     {
         return goBackButton;
     }
 
+    /**
+     * Gets the tasksTable TableView<Task>
+     * @return TableView<Task> tasksTable
+     */
     public TableView<Task> getTasksTable()
     {
         return tasksTable;
     }
 
+    /**
+     * Checks the validity of entered data after the continue Button is called
+     * @return boolean true if all the input data is correct, otherwise false
+     */
     public boolean callContinueButton(){
         boolean gogo = true;
         if(sepGUI.getAssignTasksGUI2().getRequirementTable().getSelectionModel().getSelectedItem()==null)
@@ -109,6 +130,10 @@ public class AssignTasksGUI3 {
         }
         return gogo;
     }
+
+    /**
+     * Initializes the tasksTable with updated values
+     */
     private void initializeTable()
     {
         tasksTable.getItems().clear();

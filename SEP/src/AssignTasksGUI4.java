@@ -5,7 +5,7 @@ import javafx.scene.layout.VBox;
 
 /**
  * A GUI tab containing components for displaying a list of assigned employees.
- * @author Timothy Engkar
+ * @author Timothy Johan Engkar, Claudiu Emanuel Cordunianu
  * @version 1.0
  */
 public class AssignTasksGUI4 {
@@ -28,7 +28,8 @@ public class AssignTasksGUI4 {
     private Button goBackButton;
 
     /**
-     * Constructor initializing the GUI components
+     * 1-argument constructor initializing the GUI components
+     * @param sepGUI the main GUI where all the other GUIs are connected
      */
     public AssignTasksGUI4(SepGUI sepGUI){
 
@@ -67,26 +68,46 @@ public class AssignTasksGUI4 {
         mainPane.getChildren().addAll(topPane, tableLabel, allAssignedTasksTable, bottomButtons);
     }
 
+    /**
+     * Gets the mainPane and initializes the allAssignedTasksTable
+     * @return VBox mainPane
+     */
     public VBox getMainPane()
     {
         initializeTable();
         return mainPane;
     }
 
+    /**
+     * Gets the allAssignedTasksTable
+     * @return TableView allAssignedTasksTable
+     */
     public TableView<AssignedEmployee> getAllAssignedTasksTable()
     {
         return allAssignedTasksTable;
     }
 
+    /**
+     * Gets the buttonContinue Button
+     * @return Button buttonContinue
+     */
     public Button getButtonContinue()
     {
         return buttonContinue;
     }
 
+    /**
+     * Gets the goBackButton Button
+     * @return Button goBackButton
+     */
     public Button getGoBackButton()
     {
         return goBackButton;
     }
+
+    /**
+     * Initializes the allAssignedTasksTable with updated values
+     */
     private void initializeTable(){
         allAssignedTasksTable.getItems().clear();
         Project project = sepGUI.getAssignTasksGUI1().getAssignTasksTable().getSelectionModel().getSelectedItem();
@@ -94,6 +115,11 @@ public class AssignTasksGUI4 {
             allAssignedTasksTable.getItems().add(project.getAssignedEmployeeList().get(i));
         }
     }
+
+    /**
+     * Checks the validity of entered data after the continue Button is called
+     * @return boolean true if all the input data is correct, otherwise false
+     */
     public boolean callContinueButton(){
         boolean gogo = true;
         if(sepGUI.getAssignTasksGUI3().getTasksTable().getSelectionModel().getSelectedItem()==null)
@@ -112,8 +138,6 @@ public class AssignTasksGUI4 {
             titleLabel.setText(projectName + "\\" + requirementName + "\\" + taskName);
             gogo =true;
         }
-
         return gogo;
     }
-
 }

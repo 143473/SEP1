@@ -7,6 +7,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+/**
+ * Class for showing the full list of employees and their statistics
+ * @author Marketa Lapcikova
+ * @version 1.0
+ */
 public class EmployeeStatisticsGUI{
     private EmployeeAdapter employeeAdapter;
 
@@ -30,6 +35,11 @@ public class EmployeeStatisticsGUI{
 
 
     private MyActionListener listener;
+
+    /**
+     * 1-argument constructor initializing the GUI components
+     * @param employeeAdapter adapter of the employees
+     */
     public EmployeeStatisticsGUI(EmployeeAdapter employeeAdapter){
         this.employeeAdapter = employeeAdapter;
 
@@ -75,8 +85,6 @@ public class EmployeeStatisticsGUI{
         projectsColumn.setCellValueFactory(new PropertyValueFactory<Employee, ProjectList>("projects"));
         projectsColumn.setPrefWidth(165);
 
-
-
         firstNameColumn.setReorderable(false);
         lastNameColumn.setReorderable(false);
         birthdayColumn.setReorderable(false);
@@ -93,6 +101,10 @@ public class EmployeeStatisticsGUI{
         mainPane = new VBox(10);
         mainPane.getChildren().addAll(topPane, allEmployeesTable);
     }
+
+    /**
+     * Initializes the allEmployeesTable and updates the values in it
+     */
     private void initializeTable(){
         allEmployeesTable.getItems().clear();
         EmployeeList employees = employeeAdapter.getAllEmployees();
@@ -104,12 +116,23 @@ public class EmployeeStatisticsGUI{
         }
     }
 
+    /**
+     * Initializes the allEmployeesTable and gets the mainPane
+     * @return VBox mainPane
+     */
     public VBox getMainPane(){
         initializeTable();
         return mainPane;
     }
 
+    /**
+     * Handles the actions in this class
+     */
     private class MyActionListener implements EventHandler<ActionEvent> {
+        /**
+         * Handles the actions of this class
+         * @param e event that happens
+         */
         public void handle(ActionEvent e) {
             if (e.getSource() == searchButton) {
                 String searchingFor = searchField.getText();

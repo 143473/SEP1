@@ -12,6 +12,11 @@ import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 
+/**
+ * Class for the overview and managing the requirements of selected project
+ * @author Claudiu Emanuel Cordunianu, Timothy Johan Engkar, Bartosz Juliusz Ochedzan, Marketa Lapcikova
+ * @version 1.0
+ */
 public class ReqOfSelectedPrjGUI
 {
   private ProjectsAdapter projectsAdapter;
@@ -51,6 +56,11 @@ public class ReqOfSelectedPrjGUI
 
   private Project selectedProject;
 
+  /**
+   * 3-argument constructor initializing the GUI components
+   * @param sepGUI the main GUI where all the other GUIs are connected
+   * @param projectsAdapter adapter of the projects, requirements and tasks
+   */
   public ReqOfSelectedPrjGUI(ProjectsAdapter projectsAdapter, SepGUI sepGUI){
 
     listener = new MyActionListener();
@@ -119,28 +129,22 @@ public class ReqOfSelectedPrjGUI
 
   }
 
+  /**
+   * Gets the requirementsTable
+   * @return TableView<Requirement> requirementsTable
+   */
   public TableView<Requirement> getRequirementsTable()
   {
     return requirementsTable;
   }
 
+  /**
+   * Initializes the requirementsTable
+   */
   public void initializeTable()
   {
-    //does not initialize right when Cancel adding a new requirement, keeps old requirements
-    //initialized right after going back to projects and then requirements
-    /*requirementsTable.getItems().clear();
-    Project selectedProject = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem();
-    for (int i = 0; i < selectedProject.getRequirements().size(); i++)
-    {
-      requirementsTable.getItems().add(selectedProject.getRequirements().get(i));
-    }*/
-
-    //should work and update requirements even when going back from adding a req Cancel
-    //throws a NullPointerException
-
     requirementsTable.getItems().clear();
     if(selectedProject != null){
-      /*ArrayList<Requirement> requirements = projectsAdapter.getAllRequirements(selectedProject.getName());*/
       ArrayList<Requirement> requirements = selectedProject.getRequirements();
       System.out.println(requirements.size());
       for (int i = 0; i < requirements.size(); i++)
@@ -148,8 +152,12 @@ public class ReqOfSelectedPrjGUI
         requirementsTable.getItems().add(requirements.get(i));
       }
     }
-
   }
+
+  /**
+   * Checks the validity of entered data after the change team members Button is called
+   * @return boolean true if all the input data is correct, otherwise false
+   */
   public boolean callContinueButton(){
     boolean gogo = true;
     if(sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem()== null)

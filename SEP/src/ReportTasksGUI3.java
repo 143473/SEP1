@@ -4,7 +4,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 /**
- * @author Timothy Engkar
+ * Class for reporting the assigned tasks
+ * @author Claudiu Emanuel Cordunianu, Timothy Johan Engkar
  * @version 1.0
  */
 public class ReportTasksGUI3 {
@@ -27,6 +28,12 @@ public class ReportTasksGUI3 {
     private Button reportButton;
     private Button goBackButton;
 
+    /**
+     * 3-argument constructor initializing the GUI components
+     * @param sepGUI the main GUI where all the other GUIs are connected
+     * @param assignedTasksAdapter adapter of the assigned tasks
+     * @param projectsAdapter adapter of the projects, requirements and tasks
+     */
     public ReportTasksGUI3(SepGUI sepGUI, AssignedTasksAdapter assignedTasksAdapter, ProjectsAdapter projectsAdapter){
 
         this.sepGUI = sepGUI;
@@ -61,9 +68,18 @@ public class ReportTasksGUI3 {
         mainPane.getChildren().addAll(titleLabel, informationPane, bottomButtons);
     }
 
+    /**
+     * Sets the projectList ProjectList
+     * @param projectList list of projects
+     */
     public void setProjectList(ProjectList projectList){
         this.projectList = projectList;
     }
+
+    /**
+     * Checks the validity of entered data after the report Button is called
+     * @return boolean true if all the input data is correct, otherwise false
+     */
     public boolean callReportButton(){
         boolean allValuesCorrect = true;
     if(timeSpentField.getText().equals("") ||timeSpentField.getText().trim().isEmpty()){
@@ -95,16 +111,7 @@ public class ReportTasksGUI3 {
        AssignedTasksList assignedTasksList = assignedTasksAdapter.getAllAssignedTasks();
         projectList = projectsAdapter.getAllProjects();
         AssignedTasks assignedTasks = assignedTasksList.getAssignedTask(selectedAssignedTask);
-        /*Project project = projectsAdapter.getSelectedProject(assignedTasks.getProjectName());
-        Requirement requirement = projectsAdapter.getSelectedRequirement(
-            project.getName(), assignedTasks.getRequirementId());
-        Task task = projectsAdapter.getSelectedTask(
-            project.getName(), requirement.getId(), assignedTasks.getId());*/
-
-        /*Task task = selectedAssignedTask.getTask();*/
-
         Task task1 = projectsAdapter.getSelectedTask(selectedAssignedTask.getProjectName(),selectedAssignedTask.getRequirementId(),selectedAssignedTask.getId());
-
 
         Project project = projectList.getProjectByName(assignedTasks.getProjectName());
         Requirement requirement = project.getRequirementByName(
@@ -140,21 +147,39 @@ public class ReportTasksGUI3 {
 
     return allValuesCorrect;
     }
+
+    /**
+     * Clears all the fields, sets the textFields to empty and clears the choice in choiceBoxes
+     */
     public void clearFields()
     {
         timeSpentField.setText("");
         finishedField.setSelected(false);
     }
+
+    /**
+     * Gets the mainPane and clears all fields
+     * @return VBox mainPane
+     */
     public VBox getMainPane()
     {
         clearFields();
         return mainPane;
     }
 
+    /**
+     * Gets the goBackButton Button
+     * @return Button goBackButton
+     */
     public Button getGoBackButton()
     {
         return goBackButton;
     }
+
+    /**
+     * Gets the reportButton Button
+     * @return Button reportButton
+     */
     public Button getReportButton(){
         return reportButton;
     }

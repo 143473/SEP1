@@ -5,6 +5,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 
+/**
+ * Class for reporting the assigned tasks
+ * @author Claudiu Emanuel Cordunianu
+ * @version 1.0
+ */
 public class ReportTasksGUI1 {
 
     private EmployeeAdapter employeeAdapter;
@@ -23,7 +28,11 @@ public class ReportTasksGUI1 {
     private TableColumn<Employee, String> lastNameColumn;
     private TableColumn<Employee, MyDate> birthdayColumn;
 
-
+    /**
+     * 2-argument constructor initializing the GUI components
+     * @param employeeAdapter adapter of the employees
+     * @param assignedTasksAdapter adapter of the assigned tasks
+     */
     public ReportTasksGUI1(EmployeeAdapter employeeAdapter, AssignedTasksAdapter assignedTasksAdapter)
     {
         this.assignedTasksAdapter = assignedTasksAdapter;
@@ -61,7 +70,9 @@ public class ReportTasksGUI1 {
         mainPane.getChildren().addAll(titleLabel, tableLabel, allAssignedTasksTable,continueButton);
     }
 
-
+    /**
+     * Initializes the allAssignedTasksTable with updated values
+     */
     private void initializeTable(){
         allAssignedTasksTable.getItems().clear();
         EmployeeList employees = assignedTasksAdapter.getAllAssignedEmployees();
@@ -71,18 +82,29 @@ public class ReportTasksGUI1 {
         }
     }
 
+    /**
+     * Gets allAssignedTasksTable TableView<Employee>
+     * @return TableView<Employee> TableView<Employee>
+     */
     public TableView<Employee> getAllAssignedTasksTable()
     {
         return allAssignedTasksTable;
     }
 
+    /**
+     * Gets the mainPane and initializes the allAssignedTasksTable
+     * @return VBox mainPane
+     */
     public VBox getMainPane()
     {
         initializeTable();
         return mainPane;
     }
 
-
+    /**
+     * Gets the continueButton Button
+     * @return Button continueButton
+     */
     public Button getContinueButton()
     {
         return continueButton;

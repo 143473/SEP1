@@ -27,9 +27,9 @@ public class AssignTasksGUI2 {
 
 
     /**
-     * 2-argument
-     * @param projectsAdapter
-     * @param sepGUI
+     * 2-argument constructor initializing the GUI components
+     * @param projectsAdapter adapter of the projects, requirements and tasks
+     * @param sepGUI the main GUI where all the other GUIs are connected
      */
     public AssignTasksGUI2(ProjectsAdapter projectsAdapter,SepGUI sepGUI){
 
@@ -67,10 +67,18 @@ public class AssignTasksGUI2 {
         mainPane.getChildren().addAll(topPane, tableLabel, requirementTable, bottomButtons);
     }
 
+    /**
+     * Gets the requirementTable
+     * @return TableView requirementTable
+     */
     public TableView getRequirementTable()
     {
         return requirementTable;
     }
+
+    /**
+     * Initializes the requirementTable with updated values
+     */
     private void initializeTable()
     {
         requirementTable.getItems().clear();
@@ -81,26 +89,47 @@ public class AssignTasksGUI2 {
         }
     }
 
+    /**
+     * Gets the mainPane and initializes the requirementTable
+     * @return VBox mainPane
+     */
     public VBox getMainPane()
     {
         initializeTable();
         return mainPane;
     }
 
+    /**
+     * Gets the projectName Label
+     * @return Label projectName
+     */
     public Label getProjectName()
     {
         return projectName;
     }
 
+    /**
+     * Gets the continueButton Button
+     * @return Button continueButton
+     */
     public Button getContinueButton()
     {
         return continueButton;
     }
 
+    /**
+     * Gets the goBackButton Button
+     * @return Button goBackButton
+     */
     public Button getGoBackButton()
     {
         return goBackButton;
     }
+
+    /**
+     * Checks the validity of entered data after the continue Button is called
+     * @return boolean true if all the input data is correct, otherwise false
+     */
     public boolean callContinueButton(){
     boolean gogo = true;
     if(sepGUI.getAssignTasksGUI1().getAssignTasksTable().getSelectionModel().getSelectedItem()==null)

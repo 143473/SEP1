@@ -42,6 +42,11 @@ public class AddRequirementGUI
   private GridPane requirementForm;
   private HBox datePane;
 
+  /**
+   * 2-argument constructor initializing all the parts of the GUI
+   * @param projectsAdapter adapter of projects, requirements and tasks
+   * @param sepGUI the main GUI where all the other GUIs are connected
+   */
   public AddRequirementGUI(ProjectsAdapter projectsAdapter, SepGUI sepGUI){
     this.projectsAdapter = projectsAdapter;
     projectList = projectsAdapter.getAllProjects();

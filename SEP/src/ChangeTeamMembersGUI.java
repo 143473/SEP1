@@ -6,7 +6,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 /**
- *  A class handling changing the team members
+ *  A class handling changing the team members of project
  *  * @author Marketa Lapcikova
  *  * @version 1.0
  */
@@ -43,8 +43,10 @@ public class ChangeTeamMembersGUI {
   private MyActionListener listener;
 
   /**
-   *  2-argument constructor initializing all the parts of the GUI
-   *
+   * 3-argument constructor initializing the GUI components
+   * @param projectsAdapter adapter of the projects, requirements and tasks
+   * @param employeeAdapter adapter of the employees
+   * @param sepGUI the main GUI where all the other GUIs are connected
    */
   public ChangeTeamMembersGUI(EmployeeAdapter employeeAdapter, ProjectsAdapter projectsAdapter, SepGUI sepGUI)
   {
@@ -91,16 +93,15 @@ public class ChangeTeamMembersGUI {
 
   /**
    * Gets the main pane of the class
-   * @return VBox Main pane
+   * @return VBox mainPane
    */
   public VBox getMainPane()
   {
-
     return mainPane;
   }
 
   /**
-   * Gets the button Cancel of type Button
+   * Gets the saveButton Button
    * @return Button saveButton
    */
   public Button getSave()
@@ -109,14 +110,17 @@ public class ChangeTeamMembersGUI {
   }
 
   /**
-   * Gets the button Add of type Button
-   * @return Button addButtons
+   * Gets the addButton Button
+   * @return Button addButton
    */
   public Button getAddButton()
   {
     return addButton;
   }
 
+  /**
+   * Initializes the listViews and sets the text of the title to current project
+   */
   public void initializeCurrentProject(){
     allProjects = projectsAdapter.getAllProjects();
     currentProject = allProjects.getProjectByName(sepGUI.getManageProjectGUI().getSelectedProject().getName());
@@ -128,20 +132,19 @@ public class ChangeTeamMembersGUI {
     initializeListView();
   }
 
+  /**
+   * Initializes the teamMembersTable with updated values
+   */
   public void initializeTeamMembersTable(){
     teamMembersTable.getItems().clear();
     for (int i = 0; i < employeeList.size(); i++) {
       teamMembersTable.getItems().add(employeeList.get(i));
     }
-
-    /*
-    teamMembersTable.getItems().clear();
-    AssignedEmployeeList chosenAssignedEmployees = currentProject.getAssignedEmployeeList();
-    for (int i = 0; i < chosenAssignedEmployees.size(); i++) {
-      teamMembersTable.getItems().add(chosenAssignedEmployees.get(i));
-    }*/
   }
 
+  /**
+   * Initializes the employeeListView with updated information
+   */
   public void initializeListView()
   {
     employeeListView.getItems().clear();
@@ -160,6 +163,10 @@ public class ChangeTeamMembersGUI {
       }
   }
 
+  /**
+   * Checks the validity of entered data after the add Button is called
+   * @return boolean true if all the input data is correct, otherwise false
+   */
   public boolean callAdd()
   {
     boolean OK = true;
@@ -182,14 +189,25 @@ public class ChangeTeamMembersGUI {
     return OK;
   }
 
+  /**
+   * Gets the newWindowPane and initializes the ListView
+   * @return VBox newWindowPane
+   */
   public VBox getNewWindowPane()
   {
     initializeListView();
     return newWindowPane;
   }
 
+  /**
+   * Handles the actions in this class
+   */
   private class MyActionListener implements EventHandler<ActionEvent>
   {
+    /**
+     * Handles the actions of this class
+     * @param e event that happens
+     */
     public void handle(ActionEvent e)
     {
       Employee temp = employeeListView.getSelectionModel().getSelectedItem();
@@ -287,11 +305,19 @@ public class ChangeTeamMembersGUI {
     }
   }
 
+  /**
+   * Gets the add Button
+   * @return Button add
+   */
   public Button getAdd()
   {
     return add;
   }
 
+  /**
+   * Checks the validity of entered data after the save Button is called
+   * @return boolean true if all the input data is correct, otherwise false
+   */
   public boolean callSaveButton(){
     boolean OK = true;
     System.out.println("asdadad");
@@ -310,13 +336,6 @@ public class ChangeTeamMembersGUI {
       OK = false;
     }
     if(OK){
-      //Project changedProject = allProjects.getProject(currentProject);
-      /*System.out.println(currentProject);
-      for (int i = 0; i < teamMembersTable.getItems().size(); i++) {
-        if(!currentProject.getAssignedEmployeeList().containsEmployee(teamMembersTable.getItems().get(i))){
-          currentProject.addTeamMember(teamMembersTable.getItems().get(i));
-        }
-      }*/
       projectsAdapter.saveProjects(allProjects);
 
       initializeTeamMembersTable();
@@ -328,5 +347,4 @@ public class ChangeTeamMembersGUI {
     }
     return OK;
   }
-
 }
