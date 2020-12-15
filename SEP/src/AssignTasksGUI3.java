@@ -115,8 +115,10 @@ public class AssignTasksGUI3 {
         Requirement requirement = (Requirement)sepGUI.getAssignTasksGUI2().getRequirementTable().getSelectionModel().getSelectedItem();
         for (int i = 0; i < requirement.getTasks().size(); i++)
         {
-            tasksTable.getItems().add(requirement.getTasks().get(i));
+            if(requirement.getTasks().get(i).getStatus().equals("Started"))
+            {
+                tasksTable.getItems().add(requirement.getTasks().get(i));
+            }
         }
     }
-
 }

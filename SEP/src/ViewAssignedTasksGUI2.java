@@ -26,6 +26,8 @@ public class ViewAssignedTasksGUI2 {
     private TableColumn dateColumn;
     private TableColumn statusColumn;
     private TableColumn spentTimeColumn;
+    private TableColumn estimateTimeColumn;
+    private TableColumn deadLineColumn;
 
     private Button goBack;
 
@@ -62,20 +64,33 @@ public class ViewAssignedTasksGUI2 {
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
         dateColumn.setPrefWidth(150);
 
+        estimateTimeColumn = new TableColumn<>("Estimated Time");
+        estimateTimeColumn.setCellValueFactory(new PropertyValueFactory<>("estimatedTime"));
+        estimateTimeColumn.setPrefWidth(100);
+
         spentTimeColumn = new TableColumn<>("Spent Time");
         spentTimeColumn.setCellValueFactory(new PropertyValueFactory<>("spentTime"));
         spentTimeColumn.setPrefWidth(100);
+
+        deadLineColumn = new TableColumn<>("Deadline");
+        deadLineColumn.setCellValueFactory(new PropertyValueFactory<>("deadline"));
+        deadLineColumn.setPrefWidth(100);
 
         statusColumn = new TableColumn<>("Status");
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
         statusColumn.setPrefWidth(100);
 
+
+
         allAssignedTasksTable.getColumns().add(projectNameColumn);
         allAssignedTasksTable.getColumns().add(requirementIDColumn);
         allAssignedTasksTable.getColumns().add(taskIDColumn);
         allAssignedTasksTable.getColumns().add(dateColumn);
-        allAssignedTasksTable.getColumns().add(statusColumn);
+        allAssignedTasksTable.getColumns().add(estimateTimeColumn);
         allAssignedTasksTable.getColumns().add(spentTimeColumn);
+        allAssignedTasksTable.getColumns().add(deadLineColumn);
+        allAssignedTasksTable.getColumns().add(statusColumn);
+
 
         goBack = new Button("Go Back");
 

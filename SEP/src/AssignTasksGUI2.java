@@ -76,7 +76,7 @@ public class AssignTasksGUI2 {
         Project selectedProject = sepGUI.getAssignTasksGUI1().getAssignTasksTable().getSelectionModel().getSelectedItem();
         for (int i = 0; i < selectedProject.getRequirements().size(); i++)
         {
-            requirementTable.getItems().add(selectedProject.getRequirements().get(i));
+                requirementTable.getItems().add(selectedProject.getRequirements().get(i));
         }
     }
 

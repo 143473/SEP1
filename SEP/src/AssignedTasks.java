@@ -57,10 +57,6 @@ public class AssignedTasks extends Task implements Serializable {
             return false;
     }
 
-    @Override public void setStatus(String status)
-    {
-        super.setStatus(status);
-    }
 
     public Task getTask()
     {
@@ -117,8 +113,9 @@ public class AssignedTasks extends Task implements Serializable {
     {
         return super.getId();
     }
+
     public String getStatus(){
-        return task.getStatus();
+        return super.getStatus();
     }
 
     /**
