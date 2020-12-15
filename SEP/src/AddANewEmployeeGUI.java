@@ -94,7 +94,7 @@ public class AddANewEmployeeGUI{
 
     /**
      * Gets the main pane of the class
-     * @return VBox main pane
+     * @return VBox mainPane
      */
     public VBox getMainPane(){
         return mainPane;
@@ -185,7 +185,4 @@ public class AddANewEmployeeGUI{
             }
         }
     }
-
-
-
 }

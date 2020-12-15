@@ -163,7 +163,7 @@ public class EditRemoveEmployeeGUI{
 
             }
             if(e.getSource() == removeButton){
-                if(!employeeListView.getSelectionModel().getSelectedItem().equals("-")) {
+                if(employeeListView.getSelectionModel().getSelectedItem() != null) {
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
                             "Do you really want to delete employee " + firstNameField.getText() + " " + lastNameField.getText() + " (" + dayField.getText() + "/" + monthField.getText() + "/" + yearField.getText() + ")?",
                             ButtonType.YES,

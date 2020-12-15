@@ -5,6 +5,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
+/**
+ *  A class handling adding a new employee
+ *  * @author Timothy Johan Engkar, Marketa Lapcikova, Claudiu Emanuel Cordunianu
+ *  * @version 1.0
+ */
 public class AddTaskGUI
 {
   private ProjectsAdapter projectsAdapter;
@@ -44,7 +49,11 @@ public class AddTaskGUI
   private HBox hboxfordate;
   private HBox hbox;
 
-
+  /**
+   * 2-argument constructor initializing all the parts of the GUI
+   * @param projectsAdapter adapter of projects, requirements and tasks
+   * @param sepGUI the main GUI where all the other GUIs are connected
+   */
   public AddTaskGUI(ProjectsAdapter projectsAdapter, SepGUI sepGUI){
 
     this.projectsAdapter = projectsAdapter;
@@ -115,25 +124,43 @@ public class AddTaskGUI
 
   }
 
+  /**
+   * Initializes the responsibleEmployeeBox and gets the mainPane
+   * @return VBox mainPane
+   */
   public VBox getMainPane()
   {
     initializeResponsibleEmployeeBox();
     return mainPane;
   }
 
+  /**
+   * Gets the cancel Button
+   * @return Button cancel
+   */
   public Button getCancel()
   {
     return cancel;
   }
 
+  /**
+   * Gets the save Button
+   * @return Button save
+   */
   public Button getSave(){
     return save;
   }
 
+  /**
+   * Sets the projectList to all projects
+   */
   public void setProjectList() {
     projectList = projectsAdapter.getAllProjects();
   }
 
+  /**
+   * Initializes responsibleEmployeeBox, updates the values
+   */
   public void initializeResponsibleEmployeeBox(){
 
     responsibleEmployeeBox.getItems().clear();
@@ -146,6 +173,10 @@ public class AddTaskGUI
     responsibleEmployeeBox.getSelectionModel().selectFirst();
   }
 
+  /**
+   * Checks the validity of entered data after the save Button is called
+   * @return boolean true if all the input data is correct, otherwise false
+   */
   public boolean callSaveButton(){
     Task task;
     MyDate deadline;
@@ -232,12 +263,7 @@ public class AddTaskGUI
           Task newTask = new Task(nameField.getText(), descriptionField.getText(), estimationTime,
                   deadline, requirement.getTasks().size(), statusBox.getSelectionModel().getSelectedItem(),
                   responsibleEmployeeBox.getSelectionModel().getSelectedItem());
-          /*
-          newTask.setProject(project);
-          newTask.setRequirement(requirement);
 
-
-           */
           boolean equals = false;
           for (int i = 0; i < requirement.getTasks().size(); i++) {
             if(project.getRequirements().get(requirement.getId()).getTasks().get(i).equals(newTask)){
@@ -251,17 +277,7 @@ public class AddTaskGUI
           }
           if(!equals){
             requirement.addTask(newTask);
-            /*
-            projectList.removeProject(project.getName());
-            project.removeRequirement(requirement);
-            System.out.println("before "+ requirement.getTasks().size());
-            requirement.addTask(newTask);
-            System.out.println("after "+ requirement.getTasks().size());
-            project.addRequirement(requirement);
-            System.out.println(requirement.getTasks());
-            projectList.addProject(project);
-            System.out.println(project.getRequirements().get(0).getTasks());
-             */
+
             projectsAdapter.saveProjects(projectList);
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -275,7 +291,9 @@ public class AddTaskGUI
     return allValuesCorrect;
   }
 
-
+  /**
+   * Clears all the fields, sets the textFields to empty and clears the choice in choiceBoxes
+   */
   public void clearFields(){
     nameField.setText("");
     descriptionField.setText("");
@@ -286,5 +304,4 @@ public class AddTaskGUI
     statusBox.getSelectionModel().selectFirst();
     responsibleEmployeeBox.getSelectionModel().clearSelection();
   }
-
 }

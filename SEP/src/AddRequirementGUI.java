@@ -2,6 +2,11 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+/**
+ *  A class handling adding a new employee
+ *  * @author Timothy Johan Engkar, Marketa Lapcikova, Claudiu Emanuel Cordunianu
+ *  * @version 1.0
+ */
 
 public class AddRequirementGUI
 {
@@ -106,10 +111,16 @@ public class AddRequirementGUI
 
   }
 
+  /**
+   * Sets the projectList to all projects
+   */
   public void setProjectList() {
     projectList = projectsAdapter.getAllProjects();
   }
 
+  /**
+   * Initializes the current project in the ResponsibleEmployeeBox
+   */
   public void initializeCurrentProject(){
     currentProject = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem();
 
@@ -117,6 +128,9 @@ public class AddRequirementGUI
     initializeResponsibleEmployeeBox();
   }
 
+  /**
+   * Initializes ResponsibleEmployeeBox
+   */
   public void initializeResponsibleEmployeeBox(){
     responsibleEmployeeBox.getItems().clear();
     AssignedEmployeeList chosenAssignedEmployees = currentProject.getAssignedEmployeeList();
@@ -127,6 +141,10 @@ public class AddRequirementGUI
     responsibleEmployeeBox.getSelectionModel().selectFirst();
   }
 
+  /**
+   * Checks the validity of entered data after the save Button is called
+   * @return boolean true if all the input data is correct, otherwise false
+   */
   public boolean callSaveButton(){
     Project project = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem();
     Requirement requirement;
@@ -170,27 +188,6 @@ public class AddRequirementGUI
         }
       }
     }
-
-    /*if(estimation.getText().equals("") || estimation.getText().trim().isEmpty()){
-      Alert alert = new Alert(Alert.AlertType.WARNING);
-      alert.setHeaderText("Invalid input");
-      alert.setContentText("Estimation cannot be empty!");
-      alert.showAndWait();
-      allValuesCorrect = false;
-    }
-    else{
-      try{
-        double estimationTemporary = Double.parseDouble(estimation.getText());
-      }
-      catch (NumberFormatException nfe)
-      {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setHeaderText("Invalid input");
-        alert.setContentText("Value in estimation has to be a number!");
-        alert.showAndWait();
-        allValuesCorrect = false;
-      }
-    }*/
 
     if(day.getText().isEmpty() || month.getText().isEmpty() || year.getText().isEmpty()){
       Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -275,18 +272,34 @@ public class AddRequirementGUI
     return allValuesCorrect;
   }
 
+  /**
+   * Initializes the currentProject and gets the mainPane of the GUI
+   * @return VBox mainPane with all the elements of the GUI AddRequirement
+   */
   public VBox getMainPane(){
     initializeCurrentProject();
     return mainPane;
   }
 
+  /**
+   * Gets the cancel Button
+   * @return Button cancel
+   */
   public Button getCancel(){
     return cancel;
   }
+
+  /**
+   * Gets the save Button
+   * @return Button save
+   */
   public Button getSave(){
     return save;
   }
 
+  /**
+   * Clears all the fields, sets the textFields to empty and clears the choice in choiceBoxes
+   */
   public void clearFields(){
     name.setText("");
     userStory.setText("");
