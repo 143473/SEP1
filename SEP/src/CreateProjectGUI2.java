@@ -8,9 +8,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 /**
- * The 2nd part of the project creation user interface, that allows for
+ * The 2nd part of the project creation user interface, that allows
  * setting the status of the project and choosing the team members.
- * @author Claudiu Cordunianu
+ * @author Claudiu Emanuel Cordunianu, Marketa Lapcikova
  * @version 1.0
  */
 public class CreateProjectGUI2
@@ -28,7 +28,6 @@ public class CreateProjectGUI2
   private VBox newWindowPane;
   private HBox statusPane;
   private HBox searchPane;
-  private HBox topButtonsPane;
   private GridPane searchStatusPane;
 
   private ProjectList projectList;
@@ -52,6 +51,12 @@ public class CreateProjectGUI2
   private Button add;
   private Button removeButton;
 
+  /**
+   * 3-argument constructor initializing the GUI components
+   * @param projectsAdapter adapter of the projects, requirements and tasks
+   * @param employeeAdapter adapter of the employees
+   * @param sepGUI the main GUI where all the other GUIs are connected
+   */
   public CreateProjectGUI2(EmployeeAdapter employeeAdapter, ProjectsAdapter projectsAdapter, SepGUI sepGUI)
   {
     employeeList = new EmployeeList();
@@ -124,8 +129,15 @@ public class CreateProjectGUI2
     newWindowPane.getStyleClass().add("window");
   }
 
+  /**
+   * Handles the actions in this class
+   */
   private class MyActionListener implements EventHandler<ActionEvent>
   {
+    /**
+     * Handles the actions of this class
+     * @param e event that happens
+     */
     public void handle(ActionEvent e)
     {
       Employee temp = employeeListView.getSelectionModel().getSelectedItem();
@@ -141,11 +153,7 @@ public class CreateProjectGUI2
           }
         }
         employeeListOfRemainingEmployees = employeeAdapter.getAllEmployees();
-        /*for (int i = 0; i < employeeListOfRemainingEmployees.size(); i++) {
-          if(addedEmployees.containsEmployee(employeeListOfRemainingEmployees.get(i))){
-            employeeListOfRemainingEmployees.removeEmployee(employeeListOfRemainingEmployees.get(i));
-          }
-        }*/
+
         for (int i = 0; i < addedEmployees.size(); i++)
         {
           employeeListOfRemainingEmployees.removeEmployee(addedEmployees.get(i));
@@ -190,7 +198,10 @@ public class CreateProjectGUI2
       }
     }
   }
-
+    /**
+     * Checks the validity of entered data after the add Button is called
+     * @return boolean true if all the input data is correct, otherwise false
+     */
     public boolean callAdd()
     {
       boolean OK = true;
@@ -213,14 +224,19 @@ public class CreateProjectGUI2
       return OK;
     }
 
-    public void setProjectList()
+  /**
+   * Sets the projectList to all projects
+   */
+  public void setProjectList()
     {
       this.projectList = projectsAdapter.getAllProjects();
     }
 
-    public void initializeListView()
+  /**
+   * Initializes the employeeListView
+   */
+  public void initializeListView()
     {
-      System.out.println("aasdasd");
       employeeListView.getItems().clear();
       EmployeeList employees = employeeAdapter.getAllEmployees();
       EmployeeList chosenEmployees = new EmployeeList();
@@ -237,7 +253,10 @@ public class CreateProjectGUI2
       }
     }
 
-    public void initializeTeamMembersTable(){
+  /**
+   * Initializes the teamMembersTable
+   */
+  public void initializeTeamMembersTable(){
       teamMembersTable.getItems().clear();
       for (int i = 0; i < employeeList.size(); i++) {
         teamMembersTable.getItems().add(employeeList.get(i));
@@ -246,8 +265,7 @@ public class CreateProjectGUI2
 
     /**
      * Method for getting the second part of Create Project GUI, to be used in mainGUI
-     *
-     * @return Returns the main pane
+     * @return the VBox mainPane
      */
     public VBox getMainPane()
     {
@@ -255,9 +273,8 @@ public class CreateProjectGUI2
     }
 
     /**
-     * Method for getting the go back button of this class
-     *
-     * @return Returns the go back button
+     * Method for getting the goBackButton Button of this class
+     * @return the goBackButton Button
      */
     public Button getGoBackButton()
     {
@@ -265,41 +282,47 @@ public class CreateProjectGUI2
     }
 
     /**
-     * Method for getting the continue button of this class
-     *
-     * @return Returns the continue button
+     * Method for getting the continueButton Button of this class
+     * @return  the continueButton Button
      */
-
     public Button getContinueButton()
     {
       return continueButton;
     }
 
-    public Button getAddTeamMember()
+  /**
+   * Gets the addTeamMember Button
+   * @return addTeamMember Button
+   */
+  public Button getAddTeamMember()
     {
       return addTeamMember;
     }
 
-    public VBox getNewWindowPane()
+  /**
+   * Gets the newWindowPane for the pop-up window of employee members
+   * @return VBox newWindowPane
+   */
+  public VBox getNewWindowPane()
     {
       initializeListView();
       return newWindowPane;
     }
 
-    private class MyListListener implements ChangeListener<Employee>
-    {
-      public void changed(ObservableValue<? extends Employee> employee, Employee oldEmployee, Employee newEmployee)
-      {
-
-      }
-    }
-
-    public Button getAdd()
+  /**
+   * Gets the add Button
+   * @return add Button
+   */
+  public Button getAdd()
     {
       return add;
     }
 
-    public boolean callContinueButton()
+  /**
+   * Checks the validity of entered data after the continue Button is called
+   * @return boolean true if all the input data is correct, otherwise false
+   */
+  public boolean callContinueButton()
     {
       boolean allValuesCorrect = true;
       if (teamMembersTable.getItems().isEmpty())
@@ -328,7 +351,12 @@ public class CreateProjectGUI2
 
       return allValuesCorrect;
     }
-    public void getTeamMembersToBox(EmployeeList employeeList)
+
+  /**
+   * Gets the team members from the employeeList to the box
+   * @param employeeList list of employees of EmployeeList that go to the selection box
+   */
+  public void getTeamMembersToBox(EmployeeList employeeList)
     {
       sepGUI.getCreateProjectGUI3().getEmployeesBox1().getItems().clear();
       sepGUI.getCreateProjectGUI3().getEmployeesBox2().getItems().clear();
@@ -353,11 +381,18 @@ public class CreateProjectGUI2
       sepGUI.getCreateProjectGUI3().getEmployeesBox3().getSelectionModel().select(0);
     }
 
+  /**
+   * Gets the employeeList EmployeeList
+   * @return employeeList EmployeeList
+   */
   public EmployeeList getEmployeeList()
   {
     return employeeList;
   }
 
+  /**
+   * Clears all the fields, sets the textFields to empty and clears the choice in choiceBoxes
+   */
   public void clearFields(){
       statusBox.getSelectionModel().select(0);
       initializeTeamMembersTable();

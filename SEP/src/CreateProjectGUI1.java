@@ -8,7 +8,7 @@ import javafx.scene.layout.VBox;
 /**
  * The 1st part of the project creation user interface, that allows for
  * setting up the project name and project description.
- * @author Claudiu Cordunianu, Timothy Engkar, Marketa Lapcikova
+ * @author Claudiu Emanuel Cordunianu, Timothy Johan Engkar, Marketa Lapcikova
  * @version 1.0
  */
 public class CreateProjectGUI1
@@ -29,10 +29,10 @@ public class CreateProjectGUI1
 
 
   /**
-   * 2-argument constructor setting the file name.
-   * @param projectsAdapter
+   * 3-argument constructor initializing the GUI components
+   * @param projectsAdapter adapter of the projects, requirements and tasks
+   * @param sepGUI the main GUI where all the other GUIs are connected
    */
-
   public CreateProjectGUI1(ProjectsAdapter projectsAdapter, SepGUI sepGUI) {
     this.projectsAdapter = projectsAdapter;
     this.sepGUI = sepGUI;
@@ -60,7 +60,7 @@ public class CreateProjectGUI1
   }
   /**
    * Method for getting the first part of Create Project GUI, to be used in mainGUI
-   * @return Returns the main pane
+   * @return VBox mainPane
    */
   public VBox getMainPane()
   {
@@ -114,7 +114,7 @@ public class CreateProjectGUI1
 
 
   /**
-   *Gets the continue button
+   *Gets the continue Button
    * @return Button of the continueButton
    */
   public Button getButtonContinue()
@@ -122,6 +122,9 @@ public class CreateProjectGUI1
     return buttonContinue;
   }
 
+  /**
+   * Clears all the fields, sets the textFields to empty
+   */
   public void clearFields(){
     inputName.setText("");
     inputDescription.setText("");

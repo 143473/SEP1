@@ -49,7 +49,7 @@ public class EditRemoveEmployeeGUI{
 
     /**
      *  1-argument constructor initializing all the parts of the GUI
-     * @param employeeAdapter adapter of this class
+     * @param employeeAdapter adapter of employees
      */
     public EditRemoveEmployeeGUI(EmployeeAdapter employeeAdapter) {
         this.employeeAdapter = employeeAdapter;
@@ -185,7 +185,6 @@ public class EditRemoveEmployeeGUI{
                         alert2.setContentText("Changes were saved successfully!");
                         alert2.showAndWait();
                         initializeListView();
-                        //clear fields
                     }
                 }
                 else{
@@ -212,7 +211,7 @@ public class EditRemoveEmployeeGUI{
 
     /**
      * Gets mainPane from the GUI and initializes the ListView
-     * @return VBox main Pane
+     * @return VBox mainPane
      */
     public VBox getMainPane(){
         initializeListView();
@@ -246,7 +245,6 @@ public class EditRemoveEmployeeGUI{
                 monthField.setText(Integer.toString(selectedEmployee.getMonthOfBirth()));
                 yearField.setText(Integer.toString(selectedEmployee.getYearOfBirth()));
             }
-
         }
     }
 }

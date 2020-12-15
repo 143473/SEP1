@@ -8,6 +8,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+/**
+ * Class for managing the project information
+ * @author Marketa Lapcikova
+ * @version 1.0
+ */
 public class ManageProjectGUI
 {
   private ProjectsAdapter projectsAdapter;
@@ -45,6 +50,10 @@ public class ManageProjectGUI
   private MyActionListener listener;
   private MyListListener listListener;
 
+  /**
+   * 3-argument constructor initializing the GUI components
+   * @param projectsAdapter adapter of the projects, requirements and tasks
+   */
   public ManageProjectGUI(ProjectsAdapter projectsAdapter){
     this.projectsAdapter = projectsAdapter;
 
@@ -110,10 +119,11 @@ public class ManageProjectGUI
     mainPane = new VBox(20);
     mainPane.setSpacing(10);
     mainPane.getChildren().addAll(title,hbox);
-
-
-
   }
+
+  /**
+   * Initializes the projectsTable
+   */
   private void initializeTable(){
     projectsTable.getItems().clear();
     ProjectList projects = projectsAdapter.getAllProjects();
@@ -123,22 +133,38 @@ public class ManageProjectGUI
     }
   }
 
+  /**
+   * Initializes the projectsTable and gets the mainPane
+   * @return VBox mainPane
+   */
   public VBox getMainPane()
   {
     initializeTable();
     return mainPane;
   }
 
+  /**
+   * Gets the cancelButton Button
+   * @return Button cancelButton
+   */
   public Button getCancel()
   {
     return cancelButton;
   }
 
+  /**
+   * Gets the saveButton Button
+   * @return Button saveButton
+   */
   public Button getSave()
   {
     return saveButton;
   }
 
+  /**
+   * Gets the manageTeamMembersButton Button
+   * @return Button manageTeamMembersButton
+   */
   public Button getManageTeamMembers()
   {
     return manageTeamMembersButton;
@@ -189,24 +215,34 @@ public class ManageProjectGUI
             projectCreatorBox.getSelectionModel().select(assignedEmployees.get(i));
           }
         }
-        /*
-        productOwnerBox.getSelectionModel().select(selectedProject.getProductOwner());
-        projectCreatorBox.getSelectionModel().select(selectedProject.getProjectCreator());
-
-         */
       }
     }
   }
 
+  /**
+   * Gets the selected project from the projectsTable
+   * @return Project selected project
+   */
   public Project getSelectedProject(){
     return projectsTable.getSelectionModel().getSelectedItem();
   }
 
+  /**
+   * Gets the selected project name from the projectsTable
+   * @return String selected project name
+   */
   public String getSelectedProjectName(){
     return projectsTable.getSelectionModel().getSelectedItem().getName();
   }
 
+  /**
+   * Handles the actions in this class
+   */
   private class MyActionListener implements EventHandler<ActionEvent> {
+    /**
+     * Handles the actions of this class
+     * @param e event that happens
+     */
     public void handle(ActionEvent e) {
       if(e.getSource() == removeButton){
         if (!(projectsTable.getSelectionModel().getSelectedItem() == null))
@@ -304,15 +340,6 @@ public class ManageProjectGUI
             chosenProject.getAssignedEmployeeList().get(projectCreatorBox.getSelectionModel().getSelectedIndex()).setStatus(2);
             chosenProject.getAssignedEmployeeList().get(productOwnerBox.getSelectionModel().getSelectedIndex()).setStatus(1);
 
-            /*
-            chosenProject.setName(nameField.getText());
-            chosenProject.setDescription(descriptionField.getText());
-            chosenProject.setStatus(statusBox.getSelectionModel().getSelectedIndex());
-            chosenProject.setScrumMaster(scrumMasterBox.getSelectionModel().getSelectedItem());
-            chosenProject.setProductOwner(productOwnerBox.getSelectionModel().getSelectedItem());
-            chosenProject.setProjectCreator(projectCreatorBox.getSelectionModel().getSelectedItem());
-             */
-
             chosenProject.setName(nameField.getText());
             chosenProject.setDescription(descriptionField.getText());
             chosenProject.setStatus(statusBox.getSelectionModel().getSelectedIndex());
@@ -339,7 +366,10 @@ public class ManageProjectGUI
       }
     }
   }
-
+  /**
+   * Checks the validity of entered data after the change team members Button is called
+   * @return boolean true if all the input data is correct, otherwise false
+   */
   public boolean callChangeTeamMembers(){
     boolean OK = true;
     if(projectsTable.getSelectionModel().getSelectedItem() == null){
@@ -352,6 +382,9 @@ public class ManageProjectGUI
     return OK;
   }
 
+  /**
+   * Clears all the fields, sets the textFields to empty and clears the choice in choiceBoxes
+   */
   public void clearFields(){
     nameField.setText("");
     descriptionField.setText("");
