@@ -12,8 +12,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 /**
  *  A class handling the main application
- *  * @author Claudiu Corduianu
- *  * @version 1.0
+ *  @author Claudiu Corduianu
+ *  @version 1.0
  */
 
 public class SepGUI extends Application
@@ -86,6 +86,10 @@ public class SepGUI extends Application
 
   private Employee employeeClass;
 
+  /**
+   * Starts the main application
+   * @param parentStage main Stage of the application
+   */
   public void start(Stage parentStage)
   {
     this.parentStage = parentStage;
@@ -189,7 +193,6 @@ public class SepGUI extends Application
     parentStage.show();
 
     // Pop -up window with full list of employees
-    // New window (Stage)
     newWindow = new Stage();
     newWindow.setTitle("Choose Employee");
     scene = new Scene(createProjectGUI2.getNewWindowPane());
@@ -275,75 +278,139 @@ public class SepGUI extends Application
     viewAssignedTasksGUI2.getGoBack().setOnAction(listener);
   }
 
+  /**
+   * Gets the assignTasksGUI2
+   * @return AssignTasksGUI2 assignTasksGUI2
+   */
   public AssignTasksGUI2 getAssignTasksGUI2()
   {
     return assignTasksGUI2;
   }
 
+  /**
+   * Gets the createProjectGUI2
+   * @return CreateProjectGUI2 createProjectGUI2
+   */
   public CreateProjectGUI2 getCreateProjectGUI2(){
     return createProjectGUI2;
   }
+
+  /**
+   * Gets the createProjectGUI3
+   * @return CreateProjectGUI3 createProjectGUI3
+   */
   public CreateProjectGUI3 getCreateProjectGUI3(){
     return createProjectGUI3;
   }
 
+  /**
+   * Gets the manageProjectGUI
+   * @return ManageProjectGUI manageProjectGUI
+   */
   public ManageProjectGUI getManageProjectGUI(){
     return manageProjectGUI;
   }
 
+  /**
+   * Gets the reqOfSelectedPrjGUI
+   * @return ReqOfSelectedPrjGUI reqOfSelectedPrjGUI
+   */
   public ReqOfSelectedPrjGUI getReqOfSelectedPrjGUI()
   {
     return reqOfSelectedPrjGUI;
   }
 
+  /**
+   * Gets the tasksOfReqOfPrjGUI
+   * @return TasksOfReqOfPrjGUI tasksOfReqOfPrjGUI
+   */
   public TasksOfReqOfPrjGUI getTasksOfReqOfPrjGUI()
   {
     return tasksOfReqOfPrjGUI;
   }
 
+  /**
+   * Gets the viewAssignedTasksGUI1
+   * @return ViewAssignedTasksGUI1 viewAssignedTasksGUI1
+   */
   public ViewAssignedTasksGUI1 getViewAssignedTasksGUI1()
   {
     return viewAssignedTasksGUI1;
   }
 
+  /**
+   * Gets the projectOverviewGUI
+   * @return ProjectOverviewGUI projectOverviewGUI
+   */
   public ProjectOverviewGUI getProjectOverviewGUI()
   {
     return projectOverviewGUI;
   }
 
+  /**
+   * Gets the addTaskGUI
+   * @return AddTaskGUI addTaskGUI
+   */
   public AddTaskGUI getAddTaskGUI()
   {
     return addTaskGUI;
   }
 
+  /**
+   * Gets the assignTasksGUI1
+   * @return AssignTasksGUI1 assignTasksGUI1
+   */
   public AssignTasksGUI1 getAssignTasksGUI1()
   {
     return assignTasksGUI1;
   }
 
+  /**
+   * Gets the reportTasksGUI1
+   * @return ReportTasksGUI1 reportTasksGUI1
+   */
   public ReportTasksGUI1 getReportTasksGUI1()
   {
     return reportTasksGUI1;
   }
 
+  /**
+   * Gets the assignTasksGUI3
+   * @return AssignTasksGUI3 assignTasksGUI3
+   */
   public AssignTasksGUI3 getAssignTasksGUI3()
   {
     return assignTasksGUI3;
   }
 
+  /**
+   * Gets the assignTasksGUI4
+   * @return AssignTasksGUI4 assignTasksGUI4
+   */
   public AssignTasksGUI4 getAssignTasksGUI4()
   {
     return assignTasksGUI4;
   }
+
+  /**
+   * Gets the reportTasksGUI2
+   * @return ReportTasksGUI2 reportTasksGUI2
+   */
   public ReportTasksGUI2 getReportTasksGUI2(){
     return reportTasksGUI2;
   }
 
+  /**
+   * Handles the actions in this class
+   */
   private class MyActionListener implements EventHandler<ActionEvent>
   {
+    /**
+     * Handles the actions of this class
+     * @param e event that happens
+     */
     public void handle(ActionEvent e)
     {
-
       if (e.getSource() == homeMenuItem)
       {
         stackPane.getChildren().clear();
@@ -734,5 +801,3 @@ public class SepGUI extends Application
       }
     }
 }
-
-

@@ -4,7 +4,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 /**
- * @author Timothy Engkar
+ * Class for the overview of the assigned tasks to see all the employees
+ * @author Claudiu Emanuel Cordunianu, Timothy Johan Engkar
  * @version 1.0
  */
 public class ViewAssignedTasksGUI2 {
@@ -31,6 +32,11 @@ public class ViewAssignedTasksGUI2 {
 
     private Button goBack;
 
+    /**
+     * 2-argument constructor initializing the GUI components
+     * @param assignedTasksAdapter adapter of the assigned tasks
+     * @param sepGUI the main GUI where all the other GUIs are connected
+     */
     public ViewAssignedTasksGUI2(SepGUI sepGUI,AssignedTasksAdapter assignedTasksAdapter){
 
         this.assignedTasksAdapter = assignedTasksAdapter;
@@ -89,7 +95,6 @@ public class ViewAssignedTasksGUI2 {
         allAssignedTasksTable.getColumns().add(deadLineColumn);
         allAssignedTasksTable.getColumns().add(statusColumn);
 
-
         goBack = new Button("Go Back");
 
         hBoxPaneButton = new HBox();
@@ -99,11 +104,19 @@ public class ViewAssignedTasksGUI2 {
         mainPane.getChildren().addAll(topPane, tableLabel,allAssignedTasksTable, hBoxPaneButton);
     }
 
+    /**
+     * Gets the mainPane and initializes the allAssignedTasksTable
+     * @return VBox mainPane
+     */
     public VBox getMainPane()
     {
         initializeTable();
         return mainPane;
     }
+
+    /**
+     * Intializes the allAssignedTasksTable with updated values
+     */
     private void initializeTable()
     {
         allAssignedTasksTable.getItems().clear();
@@ -116,12 +129,20 @@ public class ViewAssignedTasksGUI2 {
             allAssignedTasksTable.getItems().add(assignedTasksList.get(i));
         }
     }
+
+    /**
+     * Gets the goBack Button
+     * @return Button goBack
+     */
     public Button getGoBack()
     {
         return goBack;
     }
 
-
+    /**
+     * Checks the validity of entered data after the continue Button is called
+     * @return boolean true if all the input data is correct, otherwise false
+     */
     public boolean callContinueButton(){
         boolean gogo = true;
         if(sepGUI.getViewAssignedTasksGUI1().getAllAssignedTasksTable().getSelectionModel().getSelectedItem()== null)

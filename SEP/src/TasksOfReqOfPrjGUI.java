@@ -8,6 +8,11 @@ import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
 
+/**
+ * Class for the overview and managing the tasks of the selected requirements of selected project
+ * @author Claudiu Emanuel Cordunianu, Timothy Johan Engkar, Bartosz Juliusz Ochedzan, Marketa Lapcikova
+ * @version 1.0
+ */
 public class TasksOfReqOfPrjGUI
 {
   private MyActionListener listener;
@@ -39,6 +44,11 @@ public class TasksOfReqOfPrjGUI
   private Project selectedProject;
   private Requirement selectedRequirement;
 
+  /**
+   * 2-argument constructor initializing the GUI components
+   * @param sepGUI the main GUI where all the other GUIs are connected
+   * @param projectsAdapter adapter of the projects, requirements and tasks
+   */
   public TasksOfReqOfPrjGUI(ProjectsAdapter projectsAdapter, SepGUI sepGUI){
 
     listener = new MyActionListener();
@@ -98,30 +108,49 @@ public class TasksOfReqOfPrjGUI
 
     mainPane = new VBox(5);
     mainPane.getChildren().addAll(projectRequirementPane,searchPane,topButtons,tableTitle, table,goBackButton);
-
-
   }
+
+  /**
+   * Gets the mainPane and initializes the table
+   * @return
+   */
   public VBox getMainPane()
   {
     initializeTable();
     return mainPane;
   }
 
+  /**
+   * Gets the goBackButton Button
+   * @return Button goBackButton
+   */
   public Button getGoBackButton()
   {
     return goBackButton;
   }
 
+  /**
+   * Gets the add Button
+   * @return Button add
+   */
   public Button getAdd()
   {
     return add;
   }
 
+  /**
+   * Gets the manage Button
+   * @return Button manage
+   */
   public Button getManage()
   {
     return manage;
   }
 
+  /**
+   * Checks the validity of entered data after the continue Button is called
+   * @return boolean true if all the input data is correct, otherwise false
+   */
   public boolean callContinueButton(){
     boolean gogo = true;
     if(sepGUI.getReqOfSelectedPrjGUI().getRequirementsTable().getSelectionModel().getSelectedItem()== null)
@@ -143,7 +172,14 @@ public class TasksOfReqOfPrjGUI
     return gogo;
   }
 
+  /**
+   * Handles the actions in this class
+   */
     private class MyActionListener implements EventHandler<ActionEvent> {
+    /**
+     * Handles the actions of this class
+     * @param e event that happens
+     */
     public void handle(ActionEvent e) {
       if (e.getSource() == searchButton)
       {
@@ -156,21 +192,11 @@ public class TasksOfReqOfPrjGUI
     }
   }
 
+  /**
+   * Initializes the table
+   */
   private void initializeTable()
   {
-    //does not initialize right when Cancel adding a new requirement, keeps old requirements
-    //initialized right after going back to projects and then requirements
-    /*
-    table.getItems().clear();
-    Requirement selectedRequirement = sepGUI.getReqOfSelectedPrjGUI().getRequirementsTable().getSelectionModel().getSelectedItem();
-    for (int i = 0; i < selectedRequirement.getTasks().size(); i++)
-    {
-      table.getItems().add(selectedRequirement.getTasks().get(i));
-    }
-*/
-    //should work and update requirements even when going back from adding a req Cancel
-    //throws a NullPointerException
-
     table.getItems().clear();
     if(selectedProject != null && selectedRequirement != null){
       ArrayList<Task> tasks = projectsAdapter.getAllTasks(selectedProject.getName(), selectedRequirement.getId());
@@ -180,6 +206,10 @@ public class TasksOfReqOfPrjGUI
     }
   }
 
+  /**
+   * Initializes the table with new tasks
+   * @param newTasks new tasks for the table to be initialized with
+   */
   private void initializeTable(ArrayList<Task> newTasks){
     table.getItems().clear();
     for (int i = 0; i < newTasks.size(); i++) {

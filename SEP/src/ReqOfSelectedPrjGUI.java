@@ -57,7 +57,7 @@ public class ReqOfSelectedPrjGUI
   private Project selectedProject;
 
   /**
-   * 3-argument constructor initializing the GUI components
+   * 2-argument constructor initializing the GUI components
    * @param sepGUI the main GUI where all the other GUIs are connected
    * @param projectsAdapter adapter of the projects, requirements and tasks
    */
@@ -155,7 +155,7 @@ public class ReqOfSelectedPrjGUI
   }
 
   /**
-   * Checks the validity of entered data after the change team members Button is called
+   * Checks the validity of entered data after the continue Button is called
    * @return boolean true if all the input data is correct, otherwise false
    */
   public boolean callContinueButton(){
@@ -185,12 +185,21 @@ public class ReqOfSelectedPrjGUI
     }
     return gogo;
   }
+
+  /**
+   * Gets the mainPane and initializes the requirementsTable
+   * @return VBox mainPane
+   */
   public VBox getMainPane()
   {
     initializeTable();
     return mainPane;
   }
 
+  /**
+   * Initializes the requirementsTable with newRequirements data
+   * @param newRequirements new requirements to be put into the requirementsTable
+   */
   private void initializeTable(ArrayList<Requirement> newRequirements){
     requirementsTable.getItems().clear();
     for (int i = 0; i < newRequirements.size(); i++) {
@@ -198,37 +207,68 @@ public class ReqOfSelectedPrjGUI
     }
   }
 
+  /**
+   * Gets the TableView<Requirement> requirementsTable
+   * @return requirementsTable TableView<Requirement>
+   */
   public TableView<Requirement> getTable()
   {
     return requirementsTable;
   }
 
+  /**
+   * Gets the projectName the name of the project
+   * @return projectName
+   */
   public Text getProjectName()
   {
     return projectName;
   }
 
+  /**
+   * Gets the continueButton Button
+   * @return Button continueButton
+   */
   public Button getContinueButton()
   {
     return continueButton;
   }
 
+  /**
+   * Gets the add Button
+   * @return Button add
+   */
   public Button getAdd()
   {
     return add;
   }
 
+  /**
+   * Gets the manage Button
+   * @return Button manage
+   */
   public Button getManage()
   {
     return manage;
   }
 
+  /**
+   * Gets the goBackButton Button
+   * @return Button goBackButton
+   */
   public Button getGoBackButton()
   {
     return goBackButton;
   }
 
+  /**
+   * Handles the actions in this class
+   */
   private class MyActionListener implements EventHandler<ActionEvent> {
+    /**
+     * Handles the actions of this class
+     * @param e event that happens
+     */
     public void handle(ActionEvent e) {
       if (e.getSource() == searchButton)
       {

@@ -6,7 +6,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 
 /**
- * @author Timothy Engkar
+ * Class for the overview of the assigned tasks to see all the employees
+ * @author Claudiu Emanuel Cordunianu, Timothy Johan Engkar
  * @version 1.0
  */
 public class ViewAssignedTasksGUI1 {
@@ -26,6 +27,12 @@ public class ViewAssignedTasksGUI1 {
     private TableColumn lastNameColumn;
     private TableColumn birthdayColumn;
 
+    /**
+     * 3-argument constructor initializing the GUI components
+     * @param projectsAdapter adapter of the projects, requirements and tasks
+     * @param employeeAdapter adapter of the employees
+     * @param assignedTasksAdapter adapter of the assigned tasks
+     */
     public ViewAssignedTasksGUI1(EmployeeAdapter employeeAdapter,ProjectsAdapter projectsAdapter, AssignedTasksAdapter assignedTasksAdapter){
 
         this.projectsAdapter = projectsAdapter;
@@ -61,6 +68,9 @@ public class ViewAssignedTasksGUI1 {
         mainPane.getChildren().addAll(titleLabel,tableLabel, allAssignedTasksTable, continueButton);
     }
 
+    /**
+     * Intializes the allAssignedTasksTable with updated values
+     */
     private void initializeTable(){
         allAssignedTasksTable.getItems().clear();
         EmployeeList employees = assignedTasksAdapter.getAllAssignedEmployees();
@@ -69,17 +79,30 @@ public class ViewAssignedTasksGUI1 {
             allAssignedTasksTable.getItems().add(employees.get(i));
         }
     }
+
+    /**
+     * Gets the mainPane and initializes the allAssignedTasksTable
+     * @return VBox mainPane
+     */
     public VBox getMainPane()
     {
         initializeTable();
         return mainPane;
     }
 
+    /**
+     * Gets the allAssignedTasksTable TableView<Employee>
+     * @return TableView<Employee> allAssignedTasksTable
+     */
     public TableView<Employee> getAllAssignedTasksTable()
     {
         return allAssignedTasksTable;
     }
 
+    /**
+     * Gets the continueButton Button
+     * @return Button continueButton
+     */
     public Button getContinueButton()
     {
         return continueButton;
