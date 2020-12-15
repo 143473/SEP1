@@ -1,3 +1,4 @@
+//updated in class diagram
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -20,22 +21,7 @@ public class Project implements Serializable
   private AssignedEmployee projectCreator;
   private AssignedEmployee productOwner;
 
-  /*
-  public Project(){
-    name = "";
-    description = "";
-    requirements = new ArrayList<Requirement>();
-    assignedEmployeeList = new AssignedEmployeeList();
-    ProgressStatus progressStatus = new ProgressStatus();
-    status = progressStatus.chooseStatus(0);
-    statusNumber = 0;
-    scrumMaster = new AssignedEmployee();
-    projectCreator = new AssignedEmployee();
-    productOwner = new AssignedEmployee();
-  }
-*/
-
-  /**
+    /**
    * Three-argument constructor.
    * @param name
    * @param description
@@ -66,15 +52,6 @@ public class Project implements Serializable
     scrumMaster = new AssignedEmployee();
   }
 
-  public boolean equals(Object obj){
-    if(!(obj instanceof Project)){
-      return false;
-    }
-    Project temp = (Project) obj;
-    return temp.getName().equals(name) && temp.getDescription().equals(description) && temp.getStatus().equals(status) &&
-            temp.getStatusNumber() == statusNumber && temp.getRequirements().equals(requirements) && temp.getAssignedEmployeeList().equals(assignedEmployeeList)
-            && temp.getProductOwner().equals(productOwner) && temp.getScrumMaster().equals(scrumMaster) && getProjectCreator().equals(projectCreator);
-  }
 
   public ArrayList<Requirement> getRequirements(){
     return requirements;
@@ -131,14 +108,6 @@ public class Project implements Serializable
   public String getDescription()
   {
     return description;
-  }
-
-  /**
-   * Checks if project contains any assigned tasks
-   * @return true if contains, false if not
-   */
-  public boolean isAssignedTask(){
-return false;
   }
 
   /**
@@ -227,5 +196,14 @@ return false;
   }
   public String toString(){
     return getName();
+  }
+  public boolean equals(Object obj){
+    if(!(obj instanceof Project)){
+      return false;
+    }
+    Project temp = (Project) obj;
+    return temp.getName().equals(name) && temp.getDescription().equals(description) && temp.getStatus().equals(status) &&
+        temp.getStatusNumber() == statusNumber && temp.getRequirements().equals(requirements) && temp.getAssignedEmployeeList().equals(assignedEmployeeList)
+        && temp.getProductOwner().equals(productOwner) && temp.getScrumMaster().equals(scrumMaster) && getProjectCreator().equals(projectCreator);
   }
 }

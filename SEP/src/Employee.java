@@ -1,5 +1,5 @@
+//updated in class diagram
 import java.io.Serializable;
-import java.util.ArrayList;
 
 /**
  * A class containing information about employee
@@ -13,7 +13,7 @@ public class Employee implements Serializable {
     private ProjectList projects;
     private EmployeeList coworkers;
     private double hoursWorked, hoursExpected;
-    private String productivity;
+
 
     public Employee(){
         firstName = "Jim";
@@ -23,7 +23,7 @@ public class Employee implements Serializable {
         coworkers = new EmployeeList();
         hoursWorked = 0;
         hoursExpected = 0;
-        productivity = "";
+
     }
 
     /**
@@ -40,7 +40,6 @@ public class Employee implements Serializable {
         coworkers = new EmployeeList();
         hoursWorked = 0;
         hoursExpected = 0;
-        productivity = "";
     }
 
     /**
@@ -55,51 +54,6 @@ public class Employee implements Serializable {
     public void getCoworkersOfEmployee(){
         ProjectsAdapter projectsAdapter = new ProjectsAdapter("projects.bin");
         coworkers = projectsAdapter.getCoworkersOfEmployee(this);
-    }
-
-    /**
-     * Gets the ratio between the employees estimated and spent time on his/her tasks
-     * @return number of type double being 1 if the estimated and spent time are equal
-     */
-    public void getProductivityOfEmployee(){
-        if(hoursWorked != 0){
-            double productivityRatio = hoursExpected/hoursWorked;
-            productivity = Math.round(productivityRatio*100) + "%";
-        }
-        else{
-            productivity = "";
-        }
-
-    }
-
-    public String getProductivity(){
-        if(hoursWorked != 0){
-            double productivityRatio = hoursExpected/hoursWorked;
-            return Math.round(productivityRatio*100) + "%";
-        }
-        return "";
-    }
-
-/*
-    public double getHoursWorked(){
-        AssignedTasksAdapter assignedTasksAdapter = new AssignedTasksAdapter("assignedTasks.bin");
-        return assignedTasksAdapter.getTotalWorkedTimeOnEmployee(this);
-    }
-
-    public void getHoursWorkedOfEmployee(){
-        AssignedTasksAdapter assignedTasksAdapter = new AssignedTasksAdapter("assignedTasks.bin");
-        hoursWorked = assignedTasksAdapter.getTotalWorkedTimeOnEmployee(this);
-    }
-*/
-
-    public double getHoursExpected(){
-        AssignedTasksAdapter assignedTasksAdapter = new AssignedTasksAdapter("assignedTasks.bin");
-        return assignedTasksAdapter.getTotalEstimatedTimeOnEmployee(this);
-    }
-
-    public void getHoursExpectedOfEmployee(){
-        AssignedTasksAdapter assignedTasksAdapter = new AssignedTasksAdapter("assignedTasks.bin");
-        hoursExpected = assignedTasksAdapter.getTotalEstimatedTimeOnEmployee(this);
     }
 
     /**

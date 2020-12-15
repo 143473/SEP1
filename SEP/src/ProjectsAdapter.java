@@ -1,3 +1,4 @@
+//updated in class diagram
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -215,12 +216,6 @@ public class ProjectsAdapter
     }
     return null;
   }
-
-  /*
-  public EmployeeList getCoworkersOfEmployee(Employee employee){
-    return
-  }
-  */
 
 
   public ProjectList getProjectsOfEmployee(Employee employee){

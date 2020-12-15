@@ -1,3 +1,4 @@
+//updated in class diagram
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -139,15 +140,6 @@ public class Requirement implements Serializable
     return spentTime;
   }
 
-  /**
-   * Checks if any task has been assigned to this requirement
-   *
-   * @return true if it is, false if it is not
-   */
-  public boolean isAssignedTask()
-  {
-  return false;
-  }
 
   /**
    * Sets estimated time that requirement will be finished in
@@ -207,16 +199,6 @@ public class Requirement implements Serializable
       }
     }
     return null;
-  }
-  /**
-   * Checks if it is already past the deadline
-   *
-   * @param deadline deadline that was set
-   * @return true if it is, false if it is not
-   */
-  public boolean isPastDeadline(MyDate deadline)
-  {
-  return false;
   }
 
   /**
