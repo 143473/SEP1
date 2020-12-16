@@ -56,7 +56,7 @@ public class TasksOfReqOfPrjGUI
 
     projectRequirementName = new Label();
     projectRequirementName.getStyleClass().add("heading");
-    projectRequirementName.prefWidth(810);
+    projectRequirementName.prefWidth(500);
 
     table = new TableView();
 
