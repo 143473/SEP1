@@ -1,9 +1,6 @@
-import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 
 /**
  *  A class handling adding a new employee
@@ -58,8 +55,8 @@ public class AddTaskGUI
 
     this.projectsAdapter = projectsAdapter;
     this.sepGUI = sepGUI;
-    title = new Label("Add Task");
-    title.setFont(Font.font("Calibri", FontWeight.BOLD, 20));
+    title = new Label();
+    title.getStyleClass().add("heading");
 
     nameLabel = new Label("Name");
     nameField = new TextField();
@@ -97,28 +94,23 @@ public class AddTaskGUI
     save = new Button("Save");
     cancel = new Button("Cancel");
 
-    vboxforlabels = new VBox();
-    vboxforlabels.setSpacing(20);
+    vboxforlabels = new VBox(8);
     vboxforlabels.getChildren().addAll(nameLabel, descriptionLabel, estimationLabel,deadline, statusLabel, responsibleEmployeeLabel);
 
     hboxfordate = new HBox();
     hboxfordate.setSpacing(5);
     hboxfordate.getChildren().addAll(dayField, monthField, yearField);
 
-    vbox = new VBox();
-    vbox.setSpacing(10);
+    vbox = new VBox(8);
     vbox.getChildren().addAll(nameField, descriptionField, estimationField,hboxfordate,statusBox, responsibleEmployeeBox);
 
-    bottomButtons = new HBox(5);
+    bottomButtons = new HBox(8);
     bottomButtons.getChildren().addAll(save,cancel);
 
-    hbox = new HBox();
-    hbox.setSpacing(20);
+    hbox = new HBox(8);
     hbox.getChildren().addAll(vboxforlabels,vbox);
 
-    mainPane = new VBox(20);
-    mainPane.setSpacing(10);
-    mainPane.setPadding(new Insets(25, 25, 25, 25));;
+    mainPane = new VBox(8);
     mainPane.getChildren().addAll(title,hbox,bottomButtons);
 
 
@@ -130,8 +122,17 @@ public class AddTaskGUI
    */
   public VBox getMainPane()
   {
-    initializeResponsibleEmployeeBox();
+    initializeCurrentRequirement();
     return mainPane;
+  }
+  /**
+   * Initializes the current project in the ResponsibleEmployeeBox
+   */
+  public void initializeCurrentRequirement(){
+    currentRequirement = sepGUI.getReqOfSelectedPrjGUI().getRequirementsTable().getSelectionModel().getSelectedItem();
+
+    title.setText("Task for:  " + currentRequirement.getName());
+    initializeResponsibleEmployeeBox();
   }
 
   /**

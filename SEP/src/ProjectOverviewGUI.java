@@ -4,8 +4,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
-import javafx.util.Callback;
 
 /**
  * Class for managing the requirement information
@@ -28,7 +26,6 @@ public class ProjectOverviewGUI
 
   private Label title;
   private Label tableTitle;
-  private Label searchLabel;
 
   private TableView<Project> projectsTable;
   private TableColumn nameCol;
@@ -71,7 +68,7 @@ public class ProjectOverviewGUI
     searchPane = new HBox(8);
     searchPane.getChildren().addAll(search,searchButton);
 
-    topPane = new HBox(530);
+    topPane = new HBox(543);
     topPane.getChildren().addAll(title,searchPane);
 
     topButtons = new HBox(8);

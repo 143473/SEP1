@@ -2,7 +2,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -20,7 +19,9 @@ public class TasksOfReqOfPrjGUI
   private VBox mainPane;
   private HBox searchPane;
   private HBox topButtons;
-  private GridPane projectRequirementPane;
+  private HBox projectRequirementPane;
+  private HBox allBottomButtons;
+  private HBox topPane;
 
   private Button add;
   private Button manage;
@@ -31,10 +32,7 @@ public class TasksOfReqOfPrjGUI
 
   private Label projectName;
   private Label requirementName;
-  private Label projectLabel;
-  private Label requirementLabel;
   private Label tableTitle;
-  private Label searchLabel;
 
   private TableView table;
 
@@ -58,56 +56,65 @@ public class TasksOfReqOfPrjGUI
     add = new Button("Add");
     manage = new Button("Manage");
 
-    projectLabel = new Label("Project:");
-    projectLabel.getStyleClass().add("heading");
     projectName = new Label();
-    requirementLabel = new Label("Requirement:");
-    requirementLabel.getStyleClass().add("heading");
+    projectName.getStyleClass().add("heading");
+    projectName.prefWidth(300);
     requirementName = new Label();
+    requirementName.getStyleClass().add("heading");
+    requirementName.prefWidth(300);
 
     table = new TableView();
 
     goBackButton = new Button("Go Back");
 
-    projectRequirementPane = new GridPane();
-    projectRequirementPane.setHgap(5);
-    projectRequirementPane.addRow(0,projectLabel, projectName);
-    projectRequirementPane.addRow(1,requirementLabel,requirementName);
+    projectRequirementPane = new HBox(8);
+    projectRequirementPane.getChildren().addAll(projectName, requirementName);
 
     tableTitle = new Label("List of tasks");
 
-    searchLabel = new Label("Search for a task: ");
     search = new TextField();
+    search.setPromptText("Search by name");
     searchButton = new Button("Search");
     searchButton.setOnAction(listener);
-    searchPane = new HBox(5);
-    searchPane.getChildren().addAll(searchLabel,search,searchButton);
+    searchPane = new HBox(8);
+    searchPane.getChildren().addAll(search,searchButton);
 
-    topButtons = new HBox(5);
+    topPane = new HBox(430);
+    topPane.getChildren().addAll(projectRequirementPane,searchPane);
+
+    topButtons = new HBox(8);
     topButtons.getChildren().addAll(add,manage);
+
+    allBottomButtons = new HBox(810);
+    allBottomButtons.getChildren().addAll(topButtons, goBackButton);
 
     TableColumn idCol = new TableColumn<Task, Integer>("ID");
     idCol.setCellValueFactory(new PropertyValueFactory("id"));
+    idCol.setPrefWidth(50);
     TableColumn nameCol = new TableColumn<Task, String>("Name");
     nameCol.setCellValueFactory(new PropertyValueFactory("name"));
+    nameCol.setPrefWidth(100);
     TableColumn estimationCol = new TableColumn<Task, Integer>("Estimation");
     estimationCol.setCellValueFactory(new PropertyValueFactory("estimatedTime"));
+    estimationCol.setPrefWidth(100);
     TableColumn deadlineCol = new TableColumn<Task, Integer>("Deadline");
     deadlineCol.setCellValueFactory(new PropertyValueFactory("deadline"));
+    deadlineCol.setPrefWidth(100);
     TableColumn statusCol = new TableColumn<Task, String>("Status");
     statusCol.setCellValueFactory(new PropertyValueFactory("status"));
+    statusCol.setPrefWidth(70);
     TableColumn totalhrsCol = new TableColumn<Task, String>("Spent Time");
     totalhrsCol.setCellValueFactory(new PropertyValueFactory("spentTime"));
+    totalhrsCol.setPrefWidth(100);
     TableColumn responsibleCol = new TableColumn<Task, AssignedEmployee>("Responsible Employee");
     responsibleCol.setCellValueFactory(new PropertyValueFactory("responsibleEmployee"));
 
-    table.getColumns().setAll(idCol, nameCol,estimationCol,deadlineCol,statusCol,totalhrsCol,responsibleCol);
-    table.setPrefWidth(450);
-    table.setPrefHeight(300);
-    table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+    table.getColumns().setAll(idCol, nameCol,statusCol,estimationCol,deadlineCol,totalhrsCol,responsibleCol);
+    table.setPrefHeight(290);
 
-    mainPane = new VBox(5);
-    mainPane.getChildren().addAll(projectRequirementPane,searchPane,topButtons,tableTitle, table,goBackButton);
+
+    mainPane = new VBox(8);
+    mainPane.getChildren().addAll(topPane,tableTitle, table,allBottomButtons);
   }
 
   /**
@@ -157,13 +164,13 @@ public class TasksOfReqOfPrjGUI
     {
       Alert alert = new Alert(Alert.AlertType.WARNING);
       alert.setHeaderText("Warning");
-      alert.setContentText("No requirement was chosen!");
+      alert.setContentText("No task was chosen!");
       alert.showAndWait();
       gogo = false;
     }
     else
     {
-      projectName.setText(sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem().getName());
+      projectName.setText(sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem().getName()+"\\");
       requirementName.setText(sepGUI.getReqOfSelectedPrjGUI().getRequirementsTable().getSelectionModel().getSelectedItem().toString());
       selectedProject = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem();
       selectedRequirement= sepGUI.getReqOfSelectedPrjGUI().getRequirementsTable().getSelectionModel().getSelectedItem();

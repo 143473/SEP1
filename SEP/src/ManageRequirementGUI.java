@@ -2,14 +2,11 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 
 import java.util.ArrayList;
 
@@ -76,7 +73,8 @@ public class ManageRequirementGUI
     this.sepGUI = sepGUI;
 
   title = new Label("Manage Requirements");
-  title.setFont(Font.font("Calibri", FontWeight.BOLD, 20));
+
+  title.getStyleClass().add("heading");
 
   id = new TextField();
   id.setDisable(true);
@@ -95,7 +93,7 @@ public class ManageRequirementGUI
   year.setPromptText("yyyy");
   year.setMaxWidth(60);
 
-  datePane = new HBox(5);
+  datePane = new HBox(8);
   datePane.getChildren().addAll(day,month,year);
 
   statusBox = new ChoiceBox<String>();
@@ -126,13 +124,12 @@ public class ManageRequirementGUI
     requirementsTable.getColumns().setAll(requirementCol);
     requirementsTable.setPrefWidth(450);
     requirementsTable.setPrefHeight(300);
-    requirementsTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     requirementsTable.getSelectionModel().selectedItemProperty().addListener(listListener);
 
 
   requirementForm = new GridPane();
-  requirementForm.setHgap(5);
-  requirementForm.setVgap(5);
+  requirementForm.setHgap(8);
+  requirementForm.setVgap(8);
   requirementForm.addRow(0, idLabel, id);
   requirementForm.addRow(1, nameLabel, name);
   requirementForm.addRow(2, userStoryLabel, userStory);
@@ -142,14 +139,13 @@ public class ManageRequirementGUI
   requirementForm.addRow(6, importanceLabel, importanceBox);
   requirementForm.addRow(7, spentTimeLabel, spentTime);
 
-  mainContent = new HBox(10);
+  mainContent = new HBox(8);
   mainContent.getChildren().addAll(requirementForm, requirementsTable);
 
-    bottomButtons = new HBox(5);
+    bottomButtons = new HBox(8);
     bottomButtons.getChildren().addAll(saveButton,cancelButton,removeButton);
 
-    mainPane = new VBox(5);
-    mainPane.setPadding(new Insets(25, 25, 25, 25));;
+    mainPane = new VBox(8);
     mainPane.getChildren().addAll(title,mainContent,bottomButtons);
 
 }
