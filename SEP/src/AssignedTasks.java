@@ -50,9 +50,9 @@ public class AssignedTasks extends Task implements Serializable {
     }
 
     /**
-     *
-     * @param employee
-     * @return
+     * Checks whether the Employee given is assigned this task
+     * @param employee the Employee who is or is not assigned a task
+     * @return boolean true if they are, false if they are not assigned any task
      */
     public boolean checkIfEmployeeIsAssigned(Employee employee){
         if(getAssignedEmployee().getFirstName().equals(employee.getFirstName())&&
@@ -63,26 +63,43 @@ public class AssignedTasks extends Task implements Serializable {
             return false;
     }
 
+    /**
+     * Gets the name of task
+     * @return name of the task as String
+     */
     @Override public String getName()
     {
         return super.getName();
     }
 
+    /**
+     * Sets the boolean parameter of the assigned task reported to false or true
+     * @param reported boolean value whether the task is supposed to be set to reported or not
+     */
     public void setReported(boolean reported)
     {
         this.reported = reported;
     }
+
+    /**
+     * Gets the boolean value whether this assigned task is reported or not
+     * @return boolean true if the assigned task is reported, false otherwise
+     */
     public boolean getReported(){
         return this.reported;
     }
 
+    /**
+     * Sets the status of the superclass Employee to sent value in String
+     * @param status the status of the task as a String
+     */
     @Override public void setStatus(String status)
     {
         super.setStatus(status);
     }
 
     /**
-     * Sets the employee's time spent.
+     * Sets the employee's time spent
      * @param spentTime what the employee's time spent is
      */
     public void setSpentTime(double spentTime){
@@ -90,43 +107,71 @@ public class AssignedTasks extends Task implements Serializable {
     }
 
     /**
-     * Gets the employee's time spent working.
-     * @return the student's time spent working
+     * Gets the employee's time spent working
+     * @return the employee's time spent working
      */
     public double getSpentTime() {
         return spentTime;
     }
 
+    /**
+     * Sets the requirement of this assigned task of type Requirement to given value
+     * @param requirement the requirement of the Assigned task of type Requirement
+     */
     public void setRequirement(Requirement requirement)
     {
         this.requirement = requirement;
     }
 
+    /**
+     * Sets the project of this assigned task of type Project to given value
+     * @param project the project of the Assigned task of type Project
+     */
     public void setProject(Project project)
     {
         this.project = project;
     }
 
+    /**
+     * Gets the name of the project of the assigned task as a String
+     * @return the name of the project of the assigned task as a String
+     */
     public String getProjectName()
     {
         return project.getName();
     }
 
+    /**
+     * Gets the id of the requirement of the assigned task as an int
+     * @return the id of the requirement of the assigned task as an int
+     */
     public int getRequirementId()
     {
         return requirement.getId();
     }
 
+    /**
+     * Gets the  requirement of the assigned task as a Requirement
+     * @return the requirement of the assigned task as a Requirement
+     */
     public Requirement getRequirement()
     {
         return requirement;
     }
 
+    /**
+     * Gets the id of the superclass, Task
+     * @return id of the Task of Assigned task as int
+     */
     @Override public int getId()
     {
         return super.getId();
     }
 
+    /**
+     * Gets the status of the superclass, Task
+     * @return status of the Task of Assigned task as String
+     */
     public String getStatus(){
         return super.getStatus();
     }
@@ -134,7 +179,7 @@ public class AssignedTasks extends Task implements Serializable {
     /**
      * Compares time spent, date and assigned employee.
      * @param obj the object to compare with
-     * @return true if the given object is equal to this student
+     * @return true if the given object is equal to this AssignedTask
      */
     public boolean equals(Object obj) {
         if (!(obj instanceof AssignedTasks)){
@@ -147,6 +192,10 @@ public class AssignedTasks extends Task implements Serializable {
                 assignedEmployee.equals(other.assignedEmployee);
     }
 
+    /**
+     * Gets the information about this AssignedTask as a String
+     * @return information about this AssignedTask as a String
+     */
     @Override public String toString()
     {
         return "AssignedTasks{" + "spentTime=" + spentTime + ", date=" + date

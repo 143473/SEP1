@@ -9,7 +9,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 /**
- * A class responsible for reading and writing binary files.
+ * A class responsible for reading and writing to binary files
  * @author Claudiu Cordunianu
  * @version 1.0 
  */

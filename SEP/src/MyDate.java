@@ -14,10 +14,10 @@ public class MyDate implements Serializable
   private int year;
 
   /**
-   * Three-argument constructor.
-   * @param day
-   * @param month
-   * @param year
+   * 3-argument constructor initializing all the fields
+   * @param day the day of the date as int
+   * @param month the month of the date as int
+   * @param year the year of the date as int
    *
    */
   public MyDate(int day, int month, int year){
@@ -52,7 +52,7 @@ public class MyDate implements Serializable
 
   /**
    * Shows date
-   * @return shows date in that format
+   * @return the date in given format as String
    */
   public String toString()
   {
@@ -61,14 +61,14 @@ public class MyDate implements Serializable
 
   /**
    * Copies date so it can be used across classes
-   * @return copies date
+   * @return copy of the MyDate object date
    */
   public MyDate copy(){
   return new MyDate(day,month,year);
   }
 
   /**
-   * Checks if the date is at least 15 years back from now
+   * Checks if the date is at least 15 years back from today's date
    * @return true if it is at least 15 years back from now, false otherwise
    */
   public boolean is15Years(){
@@ -107,8 +107,8 @@ public class MyDate implements Serializable
   }
 
   /**
-   * Compares this MyDate object to another one
-   * @param obj other MyDate object for comparison
+   * Compares this MyDate object to another object
+   * @param obj other  object we are comparing to
    * @return boolean true if those objects equal, false otherwise
    */
   public boolean equals(Object obj){
@@ -170,10 +170,9 @@ public class MyDate implements Serializable
   }
 
   /**
-   * Checks if the date of the MyDate object exists, makes sense
+   * Checks if the date of the MyDate object exists in the calendar, the date makes sense
    * @return boolean true if it is valid, false otherwise
    */
-
   public boolean isValidDate(){
     if((month < 1)||(month > 12)){
       return false;

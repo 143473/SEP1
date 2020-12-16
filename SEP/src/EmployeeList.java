@@ -18,7 +18,7 @@ public class EmployeeList implements Serializable {
     }
 
     /**
-     * Adds an Employee to the list if he/she is not already there
+     * Adds an Employee to the list if they are not already there
      * @param employee the employee to add to the list
      */
     public void addEmployee(Employee employee){
@@ -66,6 +66,12 @@ public class EmployeeList implements Serializable {
         }
         return null;
     }
+
+    /**
+     * Compares the EmployeeList with another object
+     * @param obj the object we are comparing this EmployeeList to
+     * @return true if the two objects are equal, false if otherwise
+     */
     public boolean equals(Object obj){
         if(!(obj instanceof EmployeeList))
             return false;
@@ -73,6 +79,10 @@ public class EmployeeList implements Serializable {
         return employeeList.equals(temp.employeeList);
     }
 
+    /**
+     * Gets the employeeList information in the String format
+     * @return String information of the employeeList stating information about all the employees in the employeeList
+     */
     public String toString(){
         String returnStr = "";
         for (int i = 0; i < employeeList.size(); i++) {
@@ -80,6 +90,4 @@ public class EmployeeList implements Serializable {
         }
         return returnStr;
     }
-
-
 }

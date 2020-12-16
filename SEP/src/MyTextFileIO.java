@@ -5,22 +5,42 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * A class responsible for reading and writing to text files
+ * @author Marketa Lapcikova
+ * @version 1.0
+ */
 public class MyTextFileIO
 {
-    // Writes the given string to a file with the given file name
+    /**
+     * Writes the given string to a file with the given file name
+     * @param fileName the name and path of the file to append to
+     * @param str the String to write to the file
+     * @throws FileNotFoundException if the file with fileName is not found
+     */
     public void writeToFile(String fileName, String str) throws FileNotFoundException
     {
         write(fileName, str, false);
     }
 
-    // Appends the given string to a file with the given file name
+    /**
+     * Appends the given string to a file with the given file name
+     * @param fileName the name and path of the file to append to
+     * @param str the String to append to the file
+     * @throws FileNotFoundException if the file with fileName is not found
+     */
     public void appendToFile(String fileName, String str) throws FileNotFoundException
     {
         write(fileName, str, true);
     }
 
-    // writeToFile and appendToFile are almost identical - only the boolean in the constructor
-    // of the FileOutputStream differs. So I made this private method that both methods call
+    /**
+     * Method being called by both writeToFile and appendToFile to write to the file
+     * @param fileName the name and path of the file to write to
+     * @param str  the String to write to the file
+     * @param append the boolean indicating whether to append or not
+     * @throws FileNotFoundException  if the file with fileName is not found
+     */
     private void write(String fileName, String str, boolean append) throws FileNotFoundException
     {
         PrintWriter writeToFile = null;
@@ -40,20 +60,35 @@ public class MyTextFileIO
         }
     }
 
-    // Writes the strings in the given array to a file with the given file name
+    /**
+     * Writes the given string array to a file with the given file name
+     * @param fileName the name and path of the file to append to
+     * @param strs the String array to write to the file
+     * @throws FileNotFoundException if the file with fileName is not found
+     */
     public void writeToFile(String fileName, String[] strs) throws FileNotFoundException
     {
         write(fileName, strs, false);
     }
 
-    // Appends the strings in the given array to a file with the given file name
+    /**
+     * Appends the given string array to a file with the given file name
+     * @param fileName the name and path of the file to append to
+     * @param strs the String array to append to the file
+     * @throws FileNotFoundException if the file with fileName is not found
+     */
     public void appendToFile(String fileName, String[] strs) throws FileNotFoundException
     {
         write(fileName, strs, true);
     }
 
-    // Again the writeToFile and appendToFile with arrays are almost identical.
-    // So I made this private method that both methods call
+    /**
+     * Method being called by both writeToFile and appendToFile to write to the file
+     * @param fileName the name and path of the file to write to
+     * @param strs  the String array to write to the file
+     * @param append the boolean indicating whether to append or not
+     * @throws FileNotFoundException if the file with fileName is not found
+     */
     private void write(String fileName, String[] strs, boolean append) throws FileNotFoundException
     {
         PrintWriter writeToFile = null;
@@ -77,11 +112,20 @@ public class MyTextFileIO
         }
     }
 
+    /**
+     * Creates a new folder
+     * @param fileName the name and path of the file to create
+     */
     public void createANewFolder(String fileName){
 
     }
 
-    // Reads the first line from the file with the given file name and returns it as a String
+    /**
+     * Reads the first line from the file with the given file name and returns it as a String
+     * @param fileName fileName the name and path of the file to read from
+     * @return first line from the file as String
+     * @throws FileNotFoundException if the file with fileName is not found
+     */
     public String readStringFromFile(String fileName) throws FileNotFoundException
     {
         Scanner readFromFile = null;
@@ -103,7 +147,14 @@ public class MyTextFileIO
         return str;
     }
 
-    // Reads all lines from the file with the given file name and returns it as a String[]
+
+
+    /**
+     * Reads all lines from the file with the given file name and returns it as a String[]
+     * @param fileName  fileName the name and path of the file to read from
+     * @return all lines from the file as String array
+     * @throws FileNotFoundException if the file with fileName is not found
+     */
     public String[] readArrayFromFile(String fileName) throws FileNotFoundException
     {
         Scanner readFromFile = null;

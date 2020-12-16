@@ -3,7 +3,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * A class containing a list of AssignedTask objects.
+ * A class containing a list of AssignedTask objects
  * @author Timothy Engkar
  * @version 1.0
  */
@@ -11,19 +11,25 @@ public class AssignedTasksList implements Serializable {
     private ArrayList<AssignedTasks> assignedTasks;
 
     /**
-     * No-argument constructor initializing the AssignedTasksList.
+     * No-argument constructor initializing the AssignedTasksList
      */
     public AssignedTasksList(){
         assignedTasks = new ArrayList<AssignedTasks>();
     }
 
     /**
-     * Adds an AssignedTask to the list.
+     * Adds an AssignedTask to the list
      * @param assignedTasks the assignedTask to add to the list
      */
     public void addAssignedTask(AssignedTasks assignedTasks){
         this.assignedTasks.add(assignedTasks);
     }
+
+    /**
+     * Gets the AssignedTasks from this AssignedTasksList
+     * @param assignedTask the assignedTask we want to get from the AssignedTaskList
+     * @return AssignedTask from the AssignedTaskList that is equal to the one given or null if there is none
+     */
     public AssignedTasks getAssignedTask(AssignedTasks assignedTask){
         for (int i = 0; i < assignedTasks.size(); i++) {
             if(assignedTasks.get(i).equals(assignedTask)){
@@ -34,7 +40,7 @@ public class AssignedTasksList implements Serializable {
     }
 
     /**
-     * Removes a Student to the list.
+     * Removes an AssignedTask from the list
      * @param assignedTasks the assignedTask to remove to the list
      */
     public void removeAssignedTask(AssignedTasks assignedTasks){

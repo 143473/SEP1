@@ -14,10 +14,9 @@ public class EmployeeAdapter
   private String fileName;
 
   /**
-   * 1-argument constructor setting the file name.
+   * 1-argument constructor setting the file name
    * @param fileName the name and path of the file where employees will be saved and retrieved
    */
-
   public EmployeeAdapter(String fileName)
   {
     this.fileName = fileName;
@@ -25,13 +24,12 @@ public class EmployeeAdapter
   }
 
   /**
-   * Uses the MyFileIO class to retrieve an EmployeesList object with all employees.
+   * Uses the MyFileIO class to retrieve an EmployeesList object with all employees
    * @return a EmployeesList object with all stored employees.
    * @throws FileNotFoundException exception thrown when the file is not found
    * @throws IOException exception thrown when there is problem with input or output
    * @throws ClassNotFoundException exception thrown when the class is not found
    */
-
   public EmployeeList getAllEmployees()
   {
     EmployeeList employees = new EmployeeList();
@@ -61,7 +59,6 @@ public class EmployeeAdapter
    * @throws FileNotFoundException exception thrown when the file is not found
    * @throws IOException exception thrown when there is problem with input or output
    */
-
   public void saveEmployees(EmployeeList employees)
   {
     try
@@ -97,6 +94,11 @@ public class EmployeeAdapter
     return resultEmployees;
   }
 
+  /**
+   * Gets the EmployeeList of all employees whose first or last name contains the String in the parameter converted to small letters
+   * @param searchingFor the String that the method is looking for in the name
+   * @return EmployeeList of all employees with this String included in their name
+   */
   public EmployeeList getEmployeesByName(String searchingFor){
     EmployeeList allEmployees = getAllEmployees();
     EmployeeList resultEmployees = new EmployeeList();
@@ -156,6 +158,4 @@ public class EmployeeAdapter
     }
     return null;
   }
-
-
 }

@@ -14,7 +14,9 @@ public class Employee implements Serializable {
     private EmployeeList coworkers;
     private double hoursWorked, hoursExpected;
 
-
+    /**
+     * 0-argument constructor initializing all the fields of Employee
+     */
     public Employee(){
         firstName = "Jim";
         lastName = "Joe";
@@ -23,7 +25,6 @@ public class Employee implements Serializable {
         coworkers = new EmployeeList();
         hoursWorked = 0;
         hoursExpected = 0;
-
     }
 
     /**
@@ -44,34 +45,37 @@ public class Employee implements Serializable {
 
     /**
      * Gets the list of employees he/she ever worked with on the same project
-     * @return ArrayList of type String of names of coworkers
+     * @return EmployeeList of names of coworkers
      */
     public EmployeeList getCoworkers(){
         ProjectsAdapter projectsAdapter = new ProjectsAdapter("projects.bin");
         return projectsAdapter.getCoworkersOfEmployee(this);
     }
 
+    /**
+     * Saves the coworkers of this employee to the field coworkers using the projects adapter
+     */
     public void getCoworkersOfEmployee(){
         ProjectsAdapter projectsAdapter = new ProjectsAdapter("projects.bin");
         coworkers = projectsAdapter.getCoworkersOfEmployee(this);
     }
 
     /**
-     * Gets the list of projects this employee ever worked on
-     * @return ArrayList of type Project including the projects he/she worked on
+     * Saves the projects this employee has ever been assigned to into the projects field
      */
-
     public void getProjectsWorkedOn(){
         ProjectsAdapter projectsAdapter = new ProjectsAdapter("projects.bin");
         projects = projectsAdapter.getProjectsOfEmployee(this);
     }
 
-
+    /**
+     * Gets the projects this employee has ever been assigned to
+     * @return ProjectList of all projects this employee has ever been assigned to
+     */
     public ProjectList getProjects(){
         ProjectsAdapter projectsAdapter = new ProjectsAdapter("projects.bin");
         return projectsAdapter.getProjectsOfEmployee(this);
     }
-
 
     /**
      * Sets first name(s) of the employee in case of change
