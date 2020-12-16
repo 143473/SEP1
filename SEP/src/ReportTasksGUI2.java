@@ -124,8 +124,8 @@ public class ReportTasksGUI2 {
     }
 
     /**
-     * Gets allAssignedTasksTable TableView<AssignedTasks>
-     * @return TableView<AssignedTasks> allAssignedTasksTable
+     * Gets allAssignedTasksTable TableView
+     * @return TableView allAssignedTasksTable
      */
     public TableView<AssignedTasks> getAllAssignedTasksTable()
     {

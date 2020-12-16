@@ -131,7 +131,7 @@ public class ReqOfSelectedPrjGUI
 
   /**
    * Gets the requirementsTable
-   * @return TableView<Requirement> requirementsTable
+   * @return TableView requirementsTable
    */
   public TableView<Requirement> getRequirementsTable()
   {
@@ -207,8 +207,8 @@ public class ReqOfSelectedPrjGUI
   }
 
   /**
-   * Gets the TableView<Requirement> requirementsTable
-   * @return requirementsTable TableView<Requirement>
+   * Gets the TableView requirementsTable
+   * @return requirementsTable TableView
    */
   public TableView<Requirement> getTable()
   {

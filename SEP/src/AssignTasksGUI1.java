@@ -100,7 +100,7 @@ public class AssignTasksGUI1 {
 
     /**
      * Gets the assignTasksTable
-     * @return TableView<Project> assignTasksTable
+     * @return TableView assignTasksTable
      */
     public TableView<Project> getAssignTasksTable()
     {

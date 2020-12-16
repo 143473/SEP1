@@ -51,8 +51,8 @@ public class ProjectsAdapter
   }
 
   /**
-   * Uses the MyFileIO class to retrieve an ArrayList<Requirement> object with all requirements of given project
-   * @return an ArrayList<Requirement> object with all stored requirements of given project
+   * Uses the MyFileIO class to retrieve an ArrayList object with all requirements of given project
+   * @return an ArrayList object with all stored requirements of given project
    * @param name String type of name of the desired project
    */
   public ArrayList<Requirement> getAllRequirements(String name)
@@ -78,10 +78,10 @@ public class ProjectsAdapter
   }
 
   /**
-   * Uses the MyFileIO class to retrieve an ArrayList<Task> object with all tasks of given project and requirement
+   * Uses the MyFileIO class to retrieve an ArrayList object with all tasks of given project and requirement
    * @param nameOfProject String name of the desired project
    * @param indexOfRequirement int index of the desired requirement
-   * @return ArrayList<Task> object with all the tasks of the requirement of given project
+   * @return ArrayList object with all the tasks of the requirement of given project
    */
   public ArrayList<Task> getAllTasks(String nameOfProject, int indexOfRequirement)
   {
@@ -195,10 +195,10 @@ public class ProjectsAdapter
   }
 
   /**
-   * Gets all the requirements as ArrayList<Requirement> which name includes the String we are searching for, no mater the lower or upper case
+   * Gets all the requirements as ArrayList which name includes the String we are searching for, no mater the lower or upper case
    * @param searchingFor String we are searching for
-   * @param requirements the ArrayList<Requirement> we are searching in
-   * @return ArrayList<Requirement> of requirements which name includes given String
+   * @param requirements the ArrayList we are searching in
+   * @return ArrayList of requirements which name includes given String
    */
   public ArrayList<Requirement> getRequirementsByName(String searchingFor, ArrayList<Requirement> requirements){
     ArrayList<Requirement> resultRequirements = new ArrayList<Requirement>();
@@ -214,10 +214,10 @@ public class ProjectsAdapter
 
 
   /**
-   * Gets all the tasks as ArrayList<Task> which name includes the String we are searching for, no mater the lower or upper case
+   * Gets all the tasks as ArrayList which name includes the String we are searching for, no mater the lower or upper case
    * @param searchingFor String we are searching for
-   * @param tasks the ArrayList<Task> we are searching in
-   * @return ArrayList<Task> of tasks which name includes given String
+   * @param tasks the ArrayList we are searching in
+   * @return ArrayList of tasks which name includes given String
    */
   public ArrayList<Task> getTasksByName(String searchingFor, ArrayList<Task> tasks){
     ArrayList<Task> resultTasks = new ArrayList<Task>();
