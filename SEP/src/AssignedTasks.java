@@ -63,15 +63,6 @@ public class AssignedTasks extends Task implements Serializable {
     }
 
     /**
-     * Gets the name of task
-     * @return name of the task as String
-     */
-    @Override public String getName()
-    {
-        return super.getName();
-    }
-
-    /**
      * Sets the boolean parameter of the assigned task reported to false or true
      * @param reported boolean value whether the task is supposed to be set to reported or not
      */
@@ -86,15 +77,6 @@ public class AssignedTasks extends Task implements Serializable {
      */
     public boolean getReported(){
         return this.reported;
-    }
-
-    /**
-     * Sets the status of the superclass Employee to sent value in String
-     * @param status the status of the task as a String
-     */
-    @Override public void setStatus(String status)
-    {
-        super.setStatus(status);
     }
 
     /**
@@ -157,16 +139,6 @@ public class AssignedTasks extends Task implements Serializable {
     {
         return requirement;
     }
-
-    /**
-     * Gets the id of the superclass, Task
-     * @return id of the Task of Assigned task as int
-     */
-    @Override public int getId()
-    {
-        return super.getId();
-    }
-
     /**
      * Gets the status of the superclass, Task
      * @return status of the Task of Assigned task as String
@@ -195,7 +167,8 @@ public class AssignedTasks extends Task implements Serializable {
      * Gets the information about this AssignedTask as a String
      * @return information about this AssignedTask as a String
      */
-    @Override public String toString()
+
+     public String toString()
     {
         return "AssignedTasks{" + "spentTime=" + spentTime + ", date=" + date
             + ", assignedEmployee=" + assignedEmployee + '}' + super.toString() +
