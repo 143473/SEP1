@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projects>
+    <project>
+        <requirement>
+            <name>Requirement 1</name>
+            <status>Started</status>
+        </requirement>
+    </project>
+    <project>
+        <requirement>
+            <name>Requirement 2</name>
+            <status>Not started</status>
+        </requirement>
+    </project>
+    <project>
+        <requirement>
+            <name>Requirement 3</name>
+            <status>Ended</status>
+        </requirement>
+    </project>
+</projects>
