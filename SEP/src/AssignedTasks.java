@@ -45,7 +45,7 @@ public class AssignedTasks extends Task implements Serializable {
      * @return the employee assigned to the task
      */
     public AssignedEmployee getAssignedEmployee(){
-        return assignedEmployee.copy();
+        return assignedEmployee;
     }
 
     /**
