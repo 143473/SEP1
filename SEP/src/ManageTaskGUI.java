@@ -196,7 +196,6 @@ public class ManageTaskGUI
     Requirement selectedRequirement = sepGUI.getReqOfSelectedPrjGUI().getRequirementsTable().getSelectionModel().getSelectedItem();
     ArrayList<Task> tasks = projectsAdapter.getSelectedRequirement(selectedProject.getName(), selectedRequirement.getId()).getTasks();
 
-    System.out.println(tasks);
     for (int i = 0; i < tasks.size(); i++) {
       tasksTable.getItems().add(tasks.get(i));
     }

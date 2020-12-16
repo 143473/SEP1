@@ -1,4 +1,3 @@
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.*;
@@ -248,7 +247,6 @@ public class ChangeTeamMembersGUI {
           alert.showAndWait();
 
           if (alert.getResult() == ButtonType.YES) {
-            System.out.println(projectsAdapter.getAllProjects().getProject(currentProject));
             if(projectsAdapter.getAllProjects().getProject(currentProject) != null){
               if (teamMembersTable.getSelectionModel().getSelectedItem().equals(projectsAdapter.getAllProjects().getProject(currentProject).getProductOwner())
                       || teamMembersTable.getSelectionModel().getSelectedItem().equals(projectsAdapter.getAllProjects().getProject(currentProject).getProjectCreator())
@@ -320,7 +318,6 @@ public class ChangeTeamMembersGUI {
    */
   public boolean callSaveButton(){
     boolean OK = true;
-    System.out.println("asdadad");
     if(teamMembersTable.getItems().isEmpty()){
       Alert alert = new Alert(Alert.AlertType.WARNING);
       alert.setHeaderText("Warning");

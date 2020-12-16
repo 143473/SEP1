@@ -181,7 +181,6 @@ public class ManageRequirementGUI
     Project selectedProject = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem();
     ArrayList<Requirement> requirements = projectsAdapter.getAllProjects().getProjectByName(selectedProject.getName()).getRequirements();
 
-    System.out.println(requirements);
     for (int i = 0; i < requirements.size(); i++) {
       requirementsTable.getItems().add(requirements.get(i));
     }

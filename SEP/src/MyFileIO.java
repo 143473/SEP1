@@ -1,4 +1,3 @@
-//updated in class diagram
 import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

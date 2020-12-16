@@ -223,7 +223,6 @@ public class AssignTasksGUI5 {
                     dateForTheTask, task.getId(), task.getStatus());
                 assignedTask.setRequirement(requirement);
                 assignedTask.setProject(project);
-                    System.out.println(assignedTask);
 
                 assignedTaskList.addAssignedTask(assignedTask);
                 assignedTasksAdapter.saveAssignedTasks(assignedTaskList);

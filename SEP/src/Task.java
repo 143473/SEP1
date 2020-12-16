@@ -1,4 +1,3 @@
-//update in class diagram
 import java.io.Serializable;
 
 /**

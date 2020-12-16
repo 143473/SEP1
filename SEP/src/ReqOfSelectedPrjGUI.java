@@ -146,7 +146,6 @@ public class ReqOfSelectedPrjGUI
     requirementsTable.getItems().clear();
     if(selectedProject != null){
       ArrayList<Requirement> requirements = selectedProject.getRequirements();
-      System.out.println(requirements.size());
       for (int i = 0; i < requirements.size(); i++)
       {
         requirementsTable.getItems().add(requirements.get(i));

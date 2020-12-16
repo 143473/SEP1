@@ -1,4 +1,3 @@
-//updated in class diagram
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -124,11 +123,9 @@ public class EmployeeAdapter
   {
     Employee changedEmployee = new Employee(firstName, lastName, birthday);
     EmployeeList employees = getAllEmployees();
-    System.out.println(employees.get(indexInList));
 
     employees.removeEmployee(employees.get(indexInList));
     employees.addEmployee(changedEmployee);
-    System.out.println(firstName);
 
     saveEmployees(employees);
   }

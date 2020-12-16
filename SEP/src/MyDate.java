@@ -1,4 +1,3 @@
-//updated in class diagram
 import java.io.Serializable;
 import java.util.GregorianCalendar;
 

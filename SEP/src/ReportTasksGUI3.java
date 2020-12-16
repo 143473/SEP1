@@ -127,15 +127,12 @@ public class ReportTasksGUI3 {
                 task.setStatus(progressStatus.chooseStatus(2));
             }
             assignedTasks.setReported(true);
-            System.out.println(assignedTasks);
             assignedTasksList.removeAssignedTask(selectedAssignedTask);
             assignedTasksAdapter.saveAssignedTasks(assignedTasksList);
             projectsAdapter.saveProjects(projectList);
 
             Task task2 = projectsAdapter.getSelectedTask(selectedAssignedTask.getProjectName(),
                 selectedAssignedTask.getRequirementId(), selectedAssignedTask.getId());
-
-            System.out.println(task2);
 
             Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
             alert2.setHeaderText("Success");

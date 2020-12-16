@@ -141,7 +141,6 @@ public class AddRequirementGUI
     AssignedEmployeeList chosenAssignedEmployees = currentProject.getAssignedEmployeeList();
     for (int i = 0; i < chosenAssignedEmployees.size(); i++) {
       responsibleEmployeeBox.getItems().add(chosenAssignedEmployees.get(i));
-      System.out.println(chosenAssignedEmployees.get(i));
     }
     responsibleEmployeeBox.getSelectionModel().selectFirst();
   }
@@ -244,7 +243,6 @@ public class AddRequirementGUI
                   deadline, project.getRequirements().size(), statusBox.getValue());
           requirement.setProgressStatus(statusBox.getSelectionModel().getSelectedItem());
           requirement.setProject(project);
-          System.out.println(requirement);
 
           boolean equals = false;
           for (int i = 0; i < project.getRequirements().size(); i++) {
@@ -258,10 +256,7 @@ public class AddRequirementGUI
             }
           }
           if(!equals){
-
-            System.out.println("before "+ projectList.size());
             projectList.removeProject(project.getName());
-            System.out.println("after! " + projectList.size());
             project.addRequirement(requirement);
             projectList.addProject(project);
             projectsAdapter.saveProjects(projectList);

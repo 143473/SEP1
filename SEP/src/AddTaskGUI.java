@@ -168,7 +168,6 @@ public class AddTaskGUI
     AssignedEmployeeList chosenAssignedEmployees = project.getAssignedEmployeeList();
     for (int i = 0; i < chosenAssignedEmployees.size(); i++) {
       responsibleEmployeeBox.getItems().add(chosenAssignedEmployees.get(i));
-      System.out.println(chosenAssignedEmployees.get(i));
     }
     responsibleEmployeeBox.getSelectionModel().selectFirst();
   }
