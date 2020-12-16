@@ -56,7 +56,7 @@ public class TasksOfReqOfPrjGUI
 
     projectRequirementName = new Label();
     projectRequirementName.getStyleClass().add("heading");
-    projectRequirementName.prefWidth(500);
+    projectRequirementName.setPrefWidth(700);
 
     table = new TableView();
 
@@ -71,7 +71,7 @@ public class TasksOfReqOfPrjGUI
     searchPane = new HBox(8);
     searchPane.getChildren().addAll(search,searchButton);
 
-    topPane = new HBox(455);
+    topPane = new HBox(65);
     topPane.getChildren().addAll(projectRequirementName,searchPane);
 
     topButtons = new HBox(8);
