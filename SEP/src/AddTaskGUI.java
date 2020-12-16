@@ -94,7 +94,7 @@ public class AddTaskGUI
     save = new Button("Save");
     cancel = new Button("Cancel");
 
-    vboxforlabels = new VBox(8);
+    vboxforlabels = new VBox(17);
     vboxforlabels.getChildren().addAll(nameLabel, descriptionLabel, estimationLabel,deadline, statusLabel, responsibleEmployeeLabel);
 
     hboxfordate = new HBox();

@@ -139,7 +139,7 @@ public class ManageTaskGUI
     removeButton = new Button("Remove");
     removeButton.setOnAction(listener);
 
-    vboxforlabels = new VBox(8);
+    vboxforlabels = new VBox(17);
     vboxforlabels.getChildren().addAll(nameLabel, descriptionLabel, estimationLabel, spentTimeLabel, deadlineLabel, idLabel, statusLabel, responsibleEmployeeLabel);
 
     hboxfordate = new HBox();
