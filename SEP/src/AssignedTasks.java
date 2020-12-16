@@ -17,9 +17,13 @@ public class AssignedTasks extends Task implements Serializable {
      * 3-argument constructor
      * @param name the employee's first name
      * @param description the employee's last name
+     * @param deadline deadline of the task
+     * @param estimatedTime estimated time of the task
      * @param responsibleEmployee the responsible employee
      * @param assignedEmployee the assigned employee
      * @param date the date the task was worked on
+     * @param id id of the task
+     * @param status status of the task
      */
     public AssignedTasks(String name, String description, MyDate deadline, double estimatedTime, AssignedEmployee responsibleEmployee, AssignedEmployee assignedEmployee, MyDate date, int id, String status){
         super(name, description, estimatedTime, deadline, id, status, responsibleEmployee);

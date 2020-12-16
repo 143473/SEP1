@@ -186,7 +186,7 @@ public class Requirement implements Serializable
 
   /**
    * Gets the estimated time for this requirement, thus sum of all estimated times of tasks belonging to this requirement
-   * @return
+   * @return double type of estimated time for this requirement
    */
   public double getEstimatedTime()
   {
@@ -328,7 +328,7 @@ public class Requirement implements Serializable
 
   /**
    * Gets all the tasks belonging to this requirement
-   * @return ArrayList<Task> of all tasks of this requirement
+   * @return ArrayList of all tasks of this requirement
    */
   public ArrayList<Task> getTasks(){
     return tasks;

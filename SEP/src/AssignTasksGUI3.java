@@ -99,8 +99,8 @@ public class AssignTasksGUI3 {
     }
 
     /**
-     * Gets the tasksTable TableView<Task>
-     * @return TableView<Task> tasksTable
+     * Gets the tasksTable TableView
+     * @return TableView tasksTable
      */
     public TableView<Task> getTasksTable()
     {

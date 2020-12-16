@@ -58,8 +58,8 @@ public class Project implements Serializable
   }
 
   /**
-   * Gets all the requirements of the project as ArrayList<Requirement>
-   * @return ArrayList<Requirement> of all requirements for this project
+   * Gets all the requirements of the project as ArrayList
+   * @return ArrayList of all requirements for this project
    */
   public ArrayList<Requirement> getRequirements(){
     return requirements;

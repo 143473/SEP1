@@ -111,7 +111,7 @@ public class TasksOfReqOfPrjGUI
 
   /**
    * Gets the mainPane and initializes the table
-   * @return
+   * @return VBox mainPane
    */
   public VBox getMainPane()
   {

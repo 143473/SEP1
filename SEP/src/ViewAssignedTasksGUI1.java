@@ -91,8 +91,8 @@ public class ViewAssignedTasksGUI1 {
     }
 
     /**
-     * Gets the allAssignedTasksTable TableView<Employee>
-     * @return TableView<Employee> allAssignedTasksTable
+     * Gets the allAssignedTasksTable TableView
+     * @return TableView allAssignedTasksTable
      */
     public TableView<Employee> getAllAssignedTasksTable()
     {
