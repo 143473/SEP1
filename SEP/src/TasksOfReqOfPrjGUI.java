@@ -19,7 +19,6 @@ public class TasksOfReqOfPrjGUI
   private VBox mainPane;
   private HBox searchPane;
   private HBox topButtons;
-  private HBox projectRequirementPane;
   private HBox allBottomButtons;
   private HBox topPane;
 
@@ -30,8 +29,7 @@ public class TasksOfReqOfPrjGUI
 
   private TextField search;
 
-  private Label projectName;
-  private Label requirementName;
+  private Label projectRequirementName;
   private Label tableTitle;
 
   private TableView table;
@@ -56,19 +54,13 @@ public class TasksOfReqOfPrjGUI
     add = new Button("Add");
     manage = new Button("Manage");
 
-    projectName = new Label();
-    projectName.getStyleClass().add("heading");
-    projectName.prefWidth(300);
-    requirementName = new Label();
-    requirementName.getStyleClass().add("heading");
-    requirementName.prefWidth(300);
+    projectRequirementName = new Label();
+    projectRequirementName.getStyleClass().add("heading");
+    projectRequirementName.prefWidth(810);
 
     table = new TableView();
 
     goBackButton = new Button("Go Back");
-
-    projectRequirementPane = new HBox(8);
-    projectRequirementPane.getChildren().addAll(projectName, requirementName);
 
     tableTitle = new Label("List of tasks");
 
@@ -79,8 +71,8 @@ public class TasksOfReqOfPrjGUI
     searchPane = new HBox(8);
     searchPane.getChildren().addAll(search,searchButton);
 
-    topPane = new HBox(430);
-    topPane.getChildren().addAll(projectRequirementPane,searchPane);
+    topPane = new HBox(455);
+    topPane.getChildren().addAll(projectRequirementName,searchPane);
 
     topButtons = new HBox(8);
     topButtons.getChildren().addAll(add,manage);
@@ -170,8 +162,9 @@ public class TasksOfReqOfPrjGUI
     }
     else
     {
-      projectName.setText(sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem().getName()+"\\");
-      requirementName.setText(sepGUI.getReqOfSelectedPrjGUI().getRequirementsTable().getSelectionModel().getSelectedItem().toString());
+      String projectName = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem().getName();
+      String requirementName = sepGUI.getReqOfSelectedPrjGUI().getRequirementsTable().getSelectionModel().getSelectedItem().getName();
+      projectRequirementName.setText(projectName + "\\"+ requirementName);
       selectedProject = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem();
       selectedRequirement= sepGUI.getReqOfSelectedPrjGUI().getRequirementsTable().getSelectionModel().getSelectedItem();
       gogo =true;
