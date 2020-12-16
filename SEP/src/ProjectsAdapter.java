@@ -15,7 +15,7 @@ public class ProjectsAdapter
   private String fileName;
 
   /**
-   * 1-argument constructor setting the file name.
+   * 1-argument constructor setting the file name
    * @param fileName the name and path of the file where projects will be saved and retrieved
    */
 
@@ -26,10 +26,9 @@ public class ProjectsAdapter
   }
 
   /**
-   * Uses the MyFileIO class to retrieve a ProjectsList object with all Projects.
+   * Uses the MyFileIO class to retrieve a ProjectsList object with all Projects
    * @return a ProjectsList object with all stored projects
    */
-
   public ProjectList getAllProjects()
   {
     ProjectList projects = new ProjectList();
@@ -52,7 +51,11 @@ public class ProjectsAdapter
     return projects;
   }
 
-
+  /**
+   * Uses the MyFileIO class to retrieve an ArrayList<Requirement> object with all requirements of given project
+   * @return an ArrayList<Requirement> object with all stored requirements of given project
+   * @param name String type of name of the desired project
+   */
   public ArrayList<Requirement> getAllRequirements(String name)
   {
     ProjectList projects = new ProjectList();
@@ -75,7 +78,12 @@ public class ProjectsAdapter
     return  projects.getProjectByName(name).getRequirements();
   }
 
-
+  /**
+   * Uses the MyFileIO class to retrieve an ArrayList<Task> object with all tasks of given project and requirement
+   * @param nameOfProject String name of the desired project
+   * @param indexOfRequirement int index of the desired requirement
+   * @return ArrayList<Task> object with all the tasks of the requirement of given project
+   */
   public ArrayList<Task> getAllTasks(String nameOfProject, int indexOfRequirement)
   {
     ProjectList projects = new ProjectList();
@@ -98,6 +106,10 @@ public class ProjectsAdapter
     return  projects.getProjectByName(nameOfProject).getRequirements().get(indexOfRequirement).getTasks();
   }
 
+  /**
+   * Deletes a given project from the project list and saves it
+   * @param name String type of name of project we want to delete
+   */
   public void deleteProject (String name){
     ProjectList projectList = getAllProjects();
     for (int i = 0; i < projectList.size(); i++) {
@@ -108,6 +120,10 @@ public class ProjectsAdapter
     saveProjects(projectList);
   }
 
+  /**
+   * Deletes a given project from the project list and saves it
+   * @param project Project type of prject we want to delete
+   */
   public void deleteProject (Project project){
     ProjectList projectList = getAllProjects();
     for (int i = 0; i < projectList.size(); i++) {
@@ -118,12 +134,23 @@ public class ProjectsAdapter
     saveProjects(projectList);
   }
 
+  /**
+   * Deletes desired requirement from the desired project and saves it
+   * @param project Project type of project we want the requirement to be deleted from
+   * @param requirementIndex the index of desired requirement
+   */
   public void deleteRequirement(Project project, int requirementIndex){
     ProjectList projectList = getAllProjects();
     projectList.getProject(project).removeRequirement(projectList.getProject(project).getRequirements().get(requirementIndex));
     saveProjects(projectList);
   }
 
+  /**
+   * Deletes desired task from the desired requirement of project and saves it
+   * @param project Project type of project we want the task to be deleted from
+   * @param requirementIndex  the index of desired requirement
+   * @param taskIndex  the index of desired task
+   */
   public void deleteTask(Project project, int requirementIndex, int taskIndex){
     ProjectList projectList = getAllProjects();
     projectList.getProjectByName(project.getName()).getRequirements().get(requirementIndex).removeTask(projectList.getProjectByName(project.getName()).getRequirements().get(requirementIndex).getTasks().get(taskIndex));
@@ -131,10 +158,9 @@ public class ProjectsAdapter
   }
 
   /**
-   * Use the MyFileIO class to save some projects.
+   * Use the MyFileIO class to save some projects
    * @param projects the list of projects that will be saved
    */
-
   public void saveProjects(ProjectList projects)
   {
     try
@@ -151,6 +177,12 @@ public class ProjectsAdapter
     }
   }
 
+  /**
+   * Gets all the projects as ProjectList which name includes the String we are searching for, no mater the lower or upper case
+   * @param searchingFor String we are searching for
+   * @param projectList the ProjectList we are searching in
+   * @return ProjectList of projects which name includes given String
+   */
   public ProjectList getProjectsByName(String searchingFor, ProjectList projectList){
     ProjectList resultProjects = new ProjectList();
 
@@ -163,6 +195,12 @@ public class ProjectsAdapter
     return resultProjects;
   }
 
+  /**
+   * Gets all the requirements as ArrayList<Requirement> which name includes the String we are searching for, no mater the lower or upper case
+   * @param searchingFor String we are searching for
+   * @param requirements the ArrayList<Requirement> we are searching in
+   * @return ArrayList<Requirement> of requirements which name includes given String
+   */
   public ArrayList<Requirement> getRequirementsByName(String searchingFor, ArrayList<Requirement> requirements){
     ArrayList<Requirement> resultRequirements = new ArrayList<Requirement>();
 
@@ -175,6 +213,13 @@ public class ProjectsAdapter
     return resultRequirements;
   }
 
+
+  /**
+   * Gets all the tasks as ArrayList<Task> which name includes the String we are searching for, no mater the lower or upper case
+   * @param searchingFor String we are searching for
+   * @param tasks the ArrayList<Task> we are searching in
+   * @return ArrayList<Task> of tasks which name includes given String
+   */
   public ArrayList<Task> getTasksByName(String searchingFor, ArrayList<Task> tasks){
     ArrayList<Task> resultTasks = new ArrayList<Task>();
 
@@ -187,6 +232,11 @@ public class ProjectsAdapter
     return resultTasks;
   }
 
+  /**
+   * Gets the desired project which name corresponds to the desired one
+   * @param name String type of name of project we want to get
+   * @return Project type of desired project from the ProjectList
+   */
   public Project getSelectedProject(String name){
     ProjectList allProjects = getAllProjects();
     for (int i = 0; i < allProjects.size(); i++) {
@@ -197,6 +247,12 @@ public class ProjectsAdapter
     return null;
   }
 
+  /**
+   * Gets the desired requirement which index corresponds to the desired one from a given project
+   * @param projectName String type of name of project we want to get the requirement from
+   * @param requirementIndex int type of index of the requirement
+   * @return Requirement type of desired requirement from the given Project from the ProjectList
+   */
   public Requirement getSelectedRequirement(String projectName, int requirementIndex){
     Project selectedProject = getSelectedProject(projectName);
     if(selectedProject != null){
@@ -207,6 +263,13 @@ public class ProjectsAdapter
     return null;
   }
 
+  /**
+   * Gets the desired task which index corresponds to the desired one from a given requirement and given project
+   * @param projectName String type of name of project we want to get the task from
+   * @param requirementIndex int type of index of the requirement we want ot get the task from
+   * @param taskIndex int type of index of the task
+   * @return Task type of desired task from the given Requirement from the Project from the ProjectList
+   */
   public Task getSelectedTask(String projectName, int requirementIndex, int taskIndex){
     Requirement selectedRequirement = getSelectedRequirement(projectName, requirementIndex);
     if(selectedRequirement != null){
@@ -217,7 +280,11 @@ public class ProjectsAdapter
     return null;
   }
 
-
+  /**
+   * Gets all the projects the given employee has been part of
+   * @param employee Employee type of desired employee whose projects we want to get
+   * @return ProjectList of projects the given employee has ever been part of
+   */
   public ProjectList getProjectsOfEmployee(Employee employee){
     ProjectList projectsOfEmployee = new ProjectList();
     ProjectList allProjects = getAllProjects();
@@ -229,6 +296,11 @@ public class ProjectsAdapter
     return projectsOfEmployee;
   }
 
+  /**
+   * Gets all the coworkets the given employee has been working on the same project with
+   * @param employee Employee type of desired employee whose coworkers we want to get
+   * @return EmployeeList of employees the given employee has ever been working on the same project with
+   */
   public EmployeeList getCoworkersOfEmployee(Employee employee){
     ProjectList projectsOfEmployee = getProjectsOfEmployee(employee);
     EmployeeList coWorkersOfEmployee = new EmployeeList();

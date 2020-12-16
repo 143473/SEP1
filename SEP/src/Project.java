@@ -3,7 +3,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * A class that creates a Project with a name and a description
+ * A class that creates and handles a Project
  * @author Bartosz Emanuel Ochedzan, Marketa Lapcikova, Timothy Johan Engkar
  * @version 1.0
  */
