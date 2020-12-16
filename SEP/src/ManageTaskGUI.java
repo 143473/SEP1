@@ -2,7 +2,6 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
@@ -140,31 +139,27 @@ public class ManageTaskGUI
     removeButton = new Button("Remove");
     removeButton.setOnAction(listener);
 
-    vboxforlabels = new VBox();
-    vboxforlabels.setSpacing(20);
+    vboxforlabels = new VBox(8);
     vboxforlabels.getChildren().addAll(nameLabel, descriptionLabel, estimationLabel, spentTimeLabel, deadlineLabel, idLabel, statusLabel, responsibleEmployeeLabel);
 
     hboxfordate = new HBox();
     hboxfordate.setSpacing(5);
     hboxfordate.getChildren().addAll(dayField, monthField, yearField);
 
-    vbox = new VBox();
-    vbox.setSpacing(10);
+    vbox = new VBox(8);
     vbox.getChildren().addAll(nameField, descriptionField, estimationField, spentTimeField, hboxfordate, idField, statusBox, responsibleEmployeeBox);
 
-    bottomButtons = new HBox(5);
+    bottomButtons = new HBox(8);
     bottomButtons.getChildren().addAll(saveButton,cancelButton,removeButton);
 
-    hbox = new HBox();
-    hbox.setSpacing(20);
+    hbox = new HBox(8);
     hbox.getChildren().addAll(vboxforlabels,vbox);
 
-    mainContent = new HBox(20);
+    mainContent = new HBox(8);
     mainContent.getChildren().addAll(hbox, tasksTable);
 
-    mainPane = new VBox(20);
-    mainPane.setSpacing(10);
-    mainPane.setPadding(new Insets(25, 25, 25, 25));;
+    mainPane = new VBox(8);
+
     mainPane.getChildren().addAll(title,mainContent,bottomButtons);
   }
 
@@ -399,7 +394,7 @@ public class ManageTaskGUI
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setHeaderText("Managing successful");
-            alert.setContentText("Requirement was successfully edited!");
+            alert.setContentText("Task was successfully edited!");
             alert.showAndWait();
           }
         }

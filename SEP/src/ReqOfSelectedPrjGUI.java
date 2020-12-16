@@ -1,14 +1,9 @@
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 
@@ -25,8 +20,9 @@ public class ReqOfSelectedPrjGUI
   private VBox mainPane;
   private HBox searchPane;
   private HBox topButtons;
-  private HBox projectNamePane;
   private HBox bottomButtons;
+  private HBox topPane;
+  private HBox bottomTopButtons;
 
   private Button add;
   private Button manage;
@@ -36,10 +32,8 @@ public class ReqOfSelectedPrjGUI
 
   private TextField search;
 
-  private Label projectLabel;
-  private Text projectName;
+  private Label projectName;
   private Label tableTitle;
-  private Label searchLabel;
 
   private MyActionListener listener;
 
@@ -70,61 +64,67 @@ public class ReqOfSelectedPrjGUI
     add = new Button("Add");
     manage = new Button("Manage");
     search = new TextField();
-    projectLabel = new Label("Project: ");
-    projectLabel.setFont(Font.font("Calibri", FontWeight.BOLD, 20));
-    projectName = new Text();
-    projectName.setFont(Font.font("Calibri", FontWeight.BOLD, FontPosture.ITALIC, 20));
+    projectName = new Label();
+    projectName.getStyleClass().add("heading");
 
     requirementsTable = new TableView<Requirement>();
-
-    projectNamePane = new HBox(5);
-    projectNamePane.getChildren().addAll(projectLabel, projectName);
 
     continueButton = new Button("Continue");
     goBackButton = new Button("Go Back");
 
-    bottomButtons = new HBox(5);
-    bottomButtons.getChildren().addAll(continueButton, goBackButton);
+    bottomButtons = new HBox(8);
+    bottomButtons.getChildren().addAll(goBackButton, continueButton);
 
     tableTitle = new Label("Choose a requirement from the list");
 
-    searchLabel = new Label("Search for a requirement");
     search = new TextField();
+    search.setPromptText("Search by name");
     searchButton = new Button("Search");
     searchButton.setOnAction(listener);
-    searchPane = new HBox(5);
-    searchPane.getChildren().addAll(searchLabel,search,searchButton);
+    searchPane = new HBox(8);
+    searchPane.getChildren().addAll(search,searchButton);
 
-    topButtons = new HBox(5);
+    topButtons = new HBox(8);
     topButtons.getChildren().addAll(add,manage);
+
+    topPane = new HBox(650);
+    topPane.getChildren().addAll(projectName,searchPane);
 
     idColumn = new TableColumn<Requirement, Integer>("ID");
     idColumn.setCellValueFactory(new PropertyValueFactory("id"));
+    idColumn.setPrefWidth(50);
     nameColumn = new TableColumn<Requirement, String>("Name");
+    nameColumn.setPrefWidth(100);
     nameColumn.setCellValueFactory(new PropertyValueFactory("name"));
     userStoryColumn = new TableColumn<Requirement, String>("User Story");
     userStoryColumn.setCellValueFactory(new PropertyValueFactory("userStory"));
+    userStoryColumn.setPrefWidth(100);
     estimationColumn = new TableColumn<Requirement, Integer>("Estimated Time");
     estimationColumn.setCellValueFactory(new PropertyValueFactory("estimatedTime"));
+    estimationColumn.setPrefWidth(100);
     importanceColumn = new TableColumn<Requirement, Integer>("Importance");
     importanceColumn.setCellValueFactory(new PropertyValueFactory("importance"));
+    importanceColumn.setPrefWidth(100);
     deadlineColumn = new TableColumn<Requirement, MyDate>("Deadline");
     deadlineColumn.setCellValueFactory(new PropertyValueFactory("deadline"));
+    deadlineColumn.setPrefWidth(100);
     statusColumn = new TableColumn<Requirement, String>("Status");
     statusColumn.setCellValueFactory(new PropertyValueFactory("status"));
+    statusColumn.setPrefWidth(70);
     totalHoursColumn = new TableColumn("Spent time");
     totalHoursColumn.setCellValueFactory(new PropertyValueFactory("spentTime"));
+    totalHoursColumn.setPrefWidth(100);
     responsibleColumn = new TableColumn<Requirement, AssignedEmployee>("Responsible Employee");
     responsibleColumn.setCellValueFactory(new PropertyValueFactory("responsibleEmployee"));
 
     requirementsTable.getColumns().setAll(idColumn, nameColumn, userStoryColumn, statusColumn, estimationColumn, importanceColumn, deadlineColumn, totalHoursColumn, responsibleColumn);
-    requirementsTable.setPrefWidth(450);
-    requirementsTable.setPrefHeight(300);
-    requirementsTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+    requirementsTable.setPrefHeight(290);
 
-    mainPane = new VBox(5);
-    mainPane.setPadding(new Insets(25, 25, 25, 25));
-    mainPane.getChildren().addAll(projectNamePane, searchPane,topButtons, tableTitle, requirementsTable, bottomButtons);
+    bottomTopButtons = new HBox(740);
+    bottomTopButtons.getChildren().addAll(topButtons, bottomButtons);
+
+    mainPane = new VBox(8);
+    mainPane.getChildren().addAll(topPane, tableTitle, requirementsTable, bottomTopButtons);
 
 
   }
@@ -220,7 +220,7 @@ public class ReqOfSelectedPrjGUI
    * Gets the projectName the name of the project
    * @return projectName
    */
-  public Text getProjectName()
+  public Label getProjectName()
   {
     return projectName;
   }

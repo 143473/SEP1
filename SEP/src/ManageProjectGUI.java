@@ -46,6 +46,7 @@ public class ManageProjectGUI
   private VBox vbox;
   private VBox vbox2;
   private HBox hbox;
+  private HBox bottomButtons;
 
   private MyActionListener listener;
   private MyListListener listListener;
@@ -60,7 +61,7 @@ public class ManageProjectGUI
     listListener = new MyListListener();
     listener = new MyActionListener();
 
-    title = new Label("Manage Project");
+    title = new Label("Manage Projects");
     title.getStyleClass().add("heading");
     projectNameLabel = new Label("Project name");
     projectDescriptionLabel = new Label("Project description");
@@ -111,14 +112,17 @@ public class ManageProjectGUI
     vbox2 = new VBox();
     vbox2.setSpacing(10);
     vbox2.setAlignment(Pos.BOTTOM_RIGHT);
-    vbox2.getChildren().addAll(projectsTable, saveButton,cancelButton,removeButton);
+    vbox2.getChildren().addAll(projectsTable);
+
+    bottomButtons = new HBox(8);
+    bottomButtons.getChildren().addAll(saveButton,cancelButton,removeButton);
 
     hbox = new HBox(10);
     hbox.getChildren().addAll(vboxlabels,vbox, vbox2);
 
     mainPane = new VBox(20);
     mainPane.setSpacing(10);
-    mainPane.getChildren().addAll(title,hbox);
+    mainPane.getChildren().addAll(title,hbox,bottomButtons);
   }
 
   /**
