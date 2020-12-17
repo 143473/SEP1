@@ -361,6 +361,7 @@ public class ManageRequirementGUI
               alert.setHeaderText("Managing successful");
               alert.setContentText("Requirement was successfully edited!");
               alert.showAndWait();
+              clearFields();
             }
           }
         }

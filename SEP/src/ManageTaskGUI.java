@@ -275,128 +275,139 @@ public class ManageTaskGUI
       Task task = tasksTable.getSelectionModel().getSelectedItem();
 
       if(e.getSource() == saveButton){
-        Task selectedTask = projectsAdapter.getSelectedTask(project.getName(), requirement.getId(), task.getId());
+        if(task != null){
+          Task selectedTask = projectsAdapter.getSelectedTask(project.getName(), requirement.getId(), task.getId());
 
-        boolean OK = true;
+          boolean OK = true;
 
-        if(nameField.getText().trim().isEmpty()){
-          Alert alert = new Alert(Alert.AlertType.WARNING);
-          alert.setHeaderText("Warning");
-          alert.setContentText("Name of task cannot be empty!");
-          alert.showAndWait();
-          OK = false;
-        }
-        else{
-          for (int i = 0; i < projectsAdapter.getSelectedRequirement(project.getName(), requirement.getId()).getTasks().size(); i++) {
-            if(projectsAdapter.getSelectedRequirement(project.getName(), requirement.getId()).getTasks().get(i).getName().equals(nameField.getText())
-                    && !(projectsAdapter.getSelectedRequirement(project.getName(), requirement.getId()).getTasks().get(i).getId() == Integer.parseInt(idField.getText()))){
+          if(nameField.getText().trim().isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText("Warning");
+            alert.setContentText("Name of task cannot be empty!");
+            alert.showAndWait();
+            OK = false;
+          }
+          else{
+            for (int i = 0; i < projectsAdapter.getSelectedRequirement(project.getName(), requirement.getId()).getTasks().size(); i++) {
+              if(projectsAdapter.getSelectedRequirement(project.getName(), requirement.getId()).getTasks().get(i).getName().equals(nameField.getText())
+                      && !(projectsAdapter.getSelectedRequirement(project.getName(), requirement.getId()).getTasks().get(i).getId() == Integer.parseInt(idField.getText()))){
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setHeaderText("Warning");
+                alert.setContentText("This name of task for this requirement in this project already exists!");
+                alert.showAndWait();
+                OK = false;
+              }
+            }
+          }
+
+          if(descriptionField.getText().trim().isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText("Warning");
+            alert.setContentText("Description cannot be empty!");
+            alert.showAndWait();
+            OK = false;
+          }
+          else{
+            for (int i = 0; i < projectsAdapter.getSelectedRequirement(project.getName(), requirement.getId()).getTasks().size(); i++) {
+              if(projectsAdapter.getSelectedRequirement(project.getName(), requirement.getId()).getTasks().get(i).getDescription().equals(descriptionField.getText())
+                      && !(projectsAdapter.getSelectedRequirement(project.getName(), requirement.getId()).getTasks().get(i).getId() == Integer.parseInt(idField.getText()))){
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setHeaderText("Warning");
+                alert.setContentText("This description of task for this requirement in this project already exists!");
+                alert.showAndWait();
+                OK = false;
+              }
+            }
+          }
+
+          if(estimationField.getText().trim().isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText("Warning");
+            alert.setContentText("Estimated time cannot be empty!");
+            alert.showAndWait();
+            OK = false;
+          }
+          else{
+            try{
+              double estimationTemporary = Double.parseDouble(estimationField.getText());
+            }
+            catch (NumberFormatException nfe)
+            {
               Alert alert = new Alert(Alert.AlertType.WARNING);
-              alert.setHeaderText("Warning");
-              alert.setContentText("This name of task for this requirement in this project already exists!");
+              alert.setHeaderText("Invalid input");
+              alert.setContentText("Value in estimated time has to be a number!");
               alert.showAndWait();
               OK = false;
             }
           }
-        }
-
-        if(descriptionField.getText().trim().isEmpty()){
-          Alert alert = new Alert(Alert.AlertType.WARNING);
-          alert.setHeaderText("Warning");
-          alert.setContentText("Description cannot be empty!");
-          alert.showAndWait();
-          OK = false;
-        }
-        else{
-          for (int i = 0; i < projectsAdapter.getSelectedRequirement(project.getName(), requirement.getId()).getTasks().size(); i++) {
-            if(projectsAdapter.getSelectedRequirement(project.getName(), requirement.getId()).getTasks().get(i).getDescription().equals(descriptionField.getText())
-                    && !(projectsAdapter.getSelectedRequirement(project.getName(), requirement.getId()).getTasks().get(i).getId() == Integer.parseInt(idField.getText()))){
+          if(dayField.getText().isEmpty() || monthField.getText().isEmpty() || yearField.getText().isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText("Invalid input");
+            alert.setContentText("Deadline cannot be empty!");
+            alert.showAndWait();
+            OK= false;
+          }
+          else
+          {
+            try
+            {
+              int temporary = Integer.parseInt(dayField.getText());
+              temporary = Integer.parseInt(monthField.getText());
+              temporary = Integer.parseInt(yearField.getText());
+            }
+            catch (NumberFormatException nfe)
+            {
               Alert alert = new Alert(Alert.AlertType.WARNING);
-              alert.setHeaderText("Warning");
-              alert.setContentText("This description of task for this requirement in this project already exists!");
+              alert.setHeaderText("Invalid input");
+              alert.setContentText("Values in deadline have to be numbers!");
               alert.showAndWait();
               OK = false;
             }
-          }
-        }
-
-        if(estimationField.getText().trim().isEmpty()){
-          Alert alert = new Alert(Alert.AlertType.WARNING);
-          alert.setHeaderText("Warning");
-          alert.setContentText("Estimated time cannot be empty!");
-          alert.showAndWait();
-          OK = false;
-        }
-        else{
-          try{
-            double estimationTemporary = Double.parseDouble(estimationField.getText());
-          }
-          catch (NumberFormatException nfe)
-          {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setHeaderText("Invalid input");
-            alert.setContentText("Value in estimated time has to be a number!");
-            alert.showAndWait();
-            OK = false;
-          }
-        }
-        if(dayField.getText().isEmpty() || monthField.getText().isEmpty() || yearField.getText().isEmpty()){
-          Alert alert = new Alert(Alert.AlertType.WARNING);
-          alert.setHeaderText("Invalid input");
-          alert.setContentText("Deadline cannot be empty!");
-          alert.showAndWait();
-          OK= false;
-        }
-        else
-        {
-          try
-          {
-            int temporary = Integer.parseInt(dayField.getText());
-            temporary = Integer.parseInt(monthField.getText());
-            temporary = Integer.parseInt(yearField.getText());
-          }
-          catch (NumberFormatException nfe)
-          {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setHeaderText("Invalid input");
-            alert.setContentText("Values in deadline have to be numbers!");
-            alert.showAndWait();
-            OK = false;
-          }
-        }
-        if(OK){
-          MyDate deadline = new MyDate(
-                  Integer.parseInt(dayField.getText().replaceFirst("^0+(?!$)", "")),
-                  Integer.parseInt(monthField.getText().replaceFirst("^0+(?!$)", "")),
-                  Integer.parseInt(yearField.getText().replaceFirst("^0+(?!$)", "")));
-
-          if (!deadline.isValidDate())
-          {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setHeaderText("Invalid input");
-            alert.setContentText("Entered date is not valid!");
-            alert.showAndWait();
-            OK = false;
           }
           if(OK){
-            ProjectList projectList = projectsAdapter.getAllProjects();
-            Task chosenTask = projectList.getProjectByName(project.getName()).getRequirements().get(requirement.getId()).getTasks().get(task.getId());
+            MyDate deadline = new MyDate(
+                    Integer.parseInt(dayField.getText().replaceFirst("^0+(?!$)", "")),
+                    Integer.parseInt(monthField.getText().replaceFirst("^0+(?!$)", "")),
+                    Integer.parseInt(yearField.getText().replaceFirst("^0+(?!$)", "")));
 
-            chosenTask.setName(nameField.getText());
-            chosenTask.setDescription(descriptionField.getText());
-            chosenTask.setEstimatedTime(Double.parseDouble(estimationField.getText()));
-            chosenTask.setDeadline(deadline);
-            chosenTask.setStatus(statusBox.getSelectionModel().getSelectedItem());
-            chosenTask.setResponsibleEmployee(responsibleEmployeeBox.getSelectionModel().getSelectedItem());
-            projectsAdapter.saveProjects(projectList);
+            if (!deadline.isValidDate())
+            {
+              Alert alert = new Alert(Alert.AlertType.WARNING);
+              alert.setHeaderText("Invalid input");
+              alert.setContentText("Entered date is not valid!");
+              alert.showAndWait();
+              OK = false;
+            }
+            if(OK){
+              ProjectList projectList = projectsAdapter.getAllProjects();
+              Task chosenTask = projectList.getProjectByName(project.getName()).getRequirements().get(requirement.getId()).getTasks().get(task.getId());
 
-            initializeTable();
+              chosenTask.setName(nameField.getText());
+              chosenTask.setDescription(descriptionField.getText());
+              chosenTask.setEstimatedTime(Double.parseDouble(estimationField.getText()));
+              chosenTask.setDeadline(deadline);
+              chosenTask.setStatus(statusBox.getSelectionModel().getSelectedItem());
+              chosenTask.setResponsibleEmployee(responsibleEmployeeBox.getSelectionModel().getSelectedItem());
+              projectsAdapter.saveProjects(projectList);
 
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setHeaderText("Managing successful");
-            alert.setContentText("Task was successfully edited!");
-            alert.showAndWait();
+              initializeTable();
+
+              Alert alert = new Alert(Alert.AlertType.INFORMATION);
+              alert.setHeaderText("Managing successful");
+              alert.setContentText("Task was successfully edited!");
+              alert.showAndWait();
+
+              clearFields();
+            }
           }
         }
+        else{
+          Alert alert = new Alert(Alert.AlertType.WARNING);
+          alert.setHeaderText("Warning");
+          alert.setContentText("No task was chosen!");
+          alert.showAndWait();
+        }
+
 
       }
       if(e.getSource() == removeButton){

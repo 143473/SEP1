@@ -359,6 +359,8 @@ public class ManageProjectGUI
             alert.showAndWait();
 
             initializeTable();
+
+            clearFields();
           }
         }
         else{
