@@ -124,6 +124,7 @@ public class ManageRequirementGUI
     requirementsTable.getColumns().setAll(requirementCol);
     requirementsTable.setPrefWidth(450);
     requirementsTable.setPrefHeight(300);
+    requirementsTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     requirementsTable.getSelectionModel().selectedItemProperty().addListener(listListener);
 
 

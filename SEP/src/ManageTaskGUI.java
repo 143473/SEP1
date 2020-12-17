@@ -122,7 +122,7 @@ public class ManageTaskGUI
     responsibleEmployeeBox = new ChoiceBox<AssignedEmployee>();
 
 
-    taskCol = new TableColumn("Requirement name");
+    taskCol = new TableColumn("Task Name");
     taskCol.setCellValueFactory(new PropertyValueFactory("name"));
 
     tasksTable = new TableView<Task>();

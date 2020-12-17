@@ -15,7 +15,6 @@ public class ViewAssignedTasksGUI2 {
     private HBox topPane;
     private HBox hBoxPaneButton;
 
-
     private Label employeeName;
     private Label tableLabel;
 
