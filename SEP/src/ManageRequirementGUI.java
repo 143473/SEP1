@@ -262,113 +262,118 @@ public class ManageRequirementGUI
       Requirement requirement = requirementsTable.getSelectionModel().getSelectedItem();
       Project project = sepGUI.getProjectOverviewGUI().getProjectsTable().getSelectionModel().getSelectedItem();
       if(e.getSource() == saveButton){
-        Requirement selectedRequirement = projectsAdapter.getSelectedRequirement(project.getName(), requirement.getId());
+        if(requirement != null){
+          Requirement selectedRequirement = projectsAdapter.getSelectedRequirement(project.getName(), requirement.getId());
 
-        boolean OK = true;
+          boolean OK = true;
 
-        if(name.getText().trim().isEmpty()){
-          Alert alert = new Alert(Alert.AlertType.WARNING);
-          alert.setHeaderText("Warning");
-          alert.setContentText("Name of requirement cannot be empty!");
-          alert.showAndWait();
-          OK = false;
-        }
-        else{
-          for (int i = 0; i < projectsAdapter.getSelectedProject(project.getName()).getRequirements().size(); i++) {
-            if(projectsAdapter.getSelectedProject(project.getName()).getRequirements().get(i).getName().equals(name.getText())
-            && !(projectsAdapter.getSelectedProject(project.getName()).getRequirements().get(i).getId() == Integer.parseInt(id.getText()))){
-              Alert alert = new Alert(Alert.AlertType.WARNING);
-              alert.setHeaderText("Warning");
-              alert.setContentText("This name of requirement for this project already exists!");
-              alert.showAndWait();
-              OK = false;
-            }
-          }
-        }
-
-        if(userStory.getText().trim().isEmpty()){
-          Alert alert = new Alert(Alert.AlertType.WARNING);
-          alert.setHeaderText("Warning");
-          alert.setContentText("User story cannot be empty!");
-          alert.showAndWait();
-          OK = false;
-        }
-        else{
-          for (int i = 0; i < projectsAdapter.getSelectedProject(project.getName()).getRequirements().size(); i++) {
-            if(projectsAdapter.getSelectedProject(project.getName()).getRequirements().get(i).getUserStory().equals(userStory.getText())
-            && !(projectsAdapter.getSelectedProject(project.getName()).getRequirements().get(i).getId() == Integer.parseInt(id.getText()))){
-              Alert alert = new Alert(Alert.AlertType.WARNING);
-              alert.setHeaderText("Warning");
-              alert.setContentText("This user story for this project already exists!");
-              alert.showAndWait();
-              OK = false;
-            }
-          }
-        }
-
-        if(day.getText().isEmpty() || month.getText().isEmpty() || year.getText().isEmpty()){
-          Alert alert = new Alert(Alert.AlertType.WARNING);
-          alert.setHeaderText("Invalid input");
-          alert.setContentText("Deadline cannot be empty!");
-          alert.showAndWait();
-          OK= false;
-        }
-        else
-        {
-          try
-          {
-            int temporary = Integer.parseInt(day.getText());
-            temporary = Integer.parseInt(month.getText());
-            temporary = Integer.parseInt(year.getText());
-          }
-          catch (NumberFormatException nfe)
-          {
+          if(name.getText().trim().isEmpty()){
             Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setHeaderText("Invalid input");
-            alert.setContentText("Values in deadline have to be numbers!");
+            alert.setHeaderText("Warning");
+            alert.setContentText("Name of requirement cannot be empty!");
             alert.showAndWait();
             OK = false;
           }
-        }
-        if(OK){
-          MyDate deadline = new MyDate(
-            Integer.parseInt(day.getText().replaceFirst("^0+(?!$)", "")),
-            Integer.parseInt(month.getText().replaceFirst("^0+(?!$)", "")),
-            Integer.parseInt(year.getText().replaceFirst("^0+(?!$)", "")));
+          else{
+            for (int i = 0; i < projectsAdapter.getSelectedProject(project.getName()).getRequirements().size(); i++) {
+              if(projectsAdapter.getSelectedProject(project.getName()).getRequirements().get(i).getName().equals(name.getText())
+                      && !(projectsAdapter.getSelectedProject(project.getName()).getRequirements().get(i).getId() == Integer.parseInt(id.getText()))){
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setHeaderText("Warning");
+                alert.setContentText("This name of requirement for this project already exists!");
+                alert.showAndWait();
+                OK = false;
+              }
+            }
+          }
 
-          if (!deadline.isValidDate())
-          {
+          if(userStory.getText().trim().isEmpty()){
             Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setHeaderText("Invalid input");
-            alert.setContentText("Entered date is not valid!");
+            alert.setHeaderText("Warning");
+            alert.setContentText("User story cannot be empty!");
             alert.showAndWait();
             OK = false;
+          }
+          else{
+            for (int i = 0; i < projectsAdapter.getSelectedProject(project.getName()).getRequirements().size(); i++) {
+              if(projectsAdapter.getSelectedProject(project.getName()).getRequirements().get(i).getUserStory().equals(userStory.getText())
+                      && !(projectsAdapter.getSelectedProject(project.getName()).getRequirements().get(i).getId() == Integer.parseInt(id.getText()))){
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setHeaderText("Warning");
+                alert.setContentText("This user story for this project already exists!");
+                alert.showAndWait();
+                OK = false;
+              }
+            }
+          }
+
+          if(day.getText().isEmpty() || month.getText().isEmpty() || year.getText().isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText("Invalid input");
+            alert.setContentText("Deadline cannot be empty!");
+            alert.showAndWait();
+            OK= false;
+          }
+          else
+          {
+            try
+            {
+              int temporary = Integer.parseInt(day.getText());
+              temporary = Integer.parseInt(month.getText());
+              temporary = Integer.parseInt(year.getText());
+            }
+            catch (NumberFormatException nfe)
+            {
+              Alert alert = new Alert(Alert.AlertType.WARNING);
+              alert.setHeaderText("Invalid input");
+              alert.setContentText("Values in deadline have to be numbers!");
+              alert.showAndWait();
+              OK = false;
+            }
           }
           if(OK){
-            ProjectList projectList = projectsAdapter.getAllProjects();
-            Requirement chosenRequirement = projectList.getProjectByName(project.getName()).getRequirements().get(requirement.getId());
-            chosenRequirement.setName(name.getText());
-            chosenRequirement.setUserStory(userStory.getText());
-            chosenRequirement.setDeadline(deadline);
-            chosenRequirement.setStatus(statusBox.getSelectionModel().getSelectedItem());
-            chosenRequirement.setResponsibleEmployee(responsibleEmployeeBox.getSelectionModel().getSelectedItem());
-            chosenRequirement.setImportance(importanceBox.getSelectionModel().getSelectedIndex()+1);
-            projectsAdapter.saveProjects(projectList);
+            MyDate deadline = new MyDate(
+                    Integer.parseInt(day.getText().replaceFirst("^0+(?!$)", "")),
+                    Integer.parseInt(month.getText().replaceFirst("^0+(?!$)", "")),
+                    Integer.parseInt(year.getText().replaceFirst("^0+(?!$)", "")));
 
-            initializeTable();
+            if (!deadline.isValidDate())
+            {
+              Alert alert = new Alert(Alert.AlertType.WARNING);
+              alert.setHeaderText("Invalid input");
+              alert.setContentText("Entered date is not valid!");
+              alert.showAndWait();
+              OK = false;
+            }
+            if(OK){
+              ProjectList projectList = projectsAdapter.getAllProjects();
+              Requirement chosenRequirement = projectList.getProjectByName(project.getName()).getRequirements().get(requirement.getId());
+              chosenRequirement.setName(name.getText());
+              chosenRequirement.setUserStory(userStory.getText());
+              chosenRequirement.setDeadline(deadline);
+              chosenRequirement.setStatus(statusBox.getSelectionModel().getSelectedItem());
+              chosenRequirement.setResponsibleEmployee(responsibleEmployeeBox.getSelectionModel().getSelectedItem());
+              chosenRequirement.setImportance(importanceBox.getSelectionModel().getSelectedIndex()+1);
+              projectsAdapter.saveProjects(projectList);
 
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setHeaderText("Managing successful");
-            alert.setContentText("Requirement was successfully edited!");
-            alert.showAndWait();
+              initializeTable();
 
-
+              Alert alert = new Alert(Alert.AlertType.INFORMATION);
+              alert.setHeaderText("Managing successful");
+              alert.setContentText("Requirement was successfully edited!");
+              alert.showAndWait();
+            }
           }
         }
-
+        else{
+          Alert alert = new Alert(Alert.AlertType.WARNING);
+          alert.setHeaderText("Warning");
+          alert.setContentText("No requirement was chosen!");
+          alert.showAndWait();
+        }
       }
       if(e.getSource() == removeButton){
-        if (!(requirementsTable.getSelectionModel().getSelectedItem() == null))
+        if (!(requirement == null))
         {
           Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
                   "Do you really want to delete requirement "+requirementsTable.getSelectionModel().getSelectedItem().getName()+"?", ButtonType.YES, ButtonType.NO);
