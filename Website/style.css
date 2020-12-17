@@ -347,7 +347,7 @@ footer a {
 .fa-twitter:hover {
     color: #F2490C;
     transition-duration: 0.4s;
-
+    text-decoration: none;
 }
 
 /*CAROUSEL*/

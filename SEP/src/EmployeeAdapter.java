@@ -25,9 +25,6 @@ public class EmployeeAdapter
   /**
    * Uses the MyFileIO class to retrieve an EmployeesList object with all employees
    * @return a EmployeesList object with all stored employees.
-   * @throws FileNotFoundException exception thrown when the file is not found
-   * @throws IOException exception thrown when there is problem with input or output
-   * @throws ClassNotFoundException exception thrown when the class is not found
    */
   public EmployeeList getAllEmployees()
   {
@@ -55,8 +52,6 @@ public class EmployeeAdapter
   /**
    * Use the MyFileIO class to save some employees.
    * @param employees the list of employees that will be saved
-   * @throws FileNotFoundException exception thrown when the file is not found
-   * @throws IOException exception thrown when there is problem with input or output
    */
   public void saveEmployees(EmployeeList employees)
   {
@@ -77,6 +72,7 @@ public class EmployeeAdapter
   /**
    * Gets the EmployeeList of employees whose name contain the String searchingFor
    * @param searchingFor String of characters we need to look for in the names of employees
+   * @param employeeList list of employees we are searching in
    * @return EmployeeList of employees whose name contains the String searchingFor
    */
   public EmployeeList getEmployeesByName(String searchingFor, EmployeeList employeeList){

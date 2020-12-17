@@ -83,8 +83,8 @@ public class ReportTasksGUI1 {
     }
 
     /**
-     * Gets allAssignedTasksTable TableView<Employee>
-     * @return TableView<Employee> TableView<Employee>
+     * Gets allAssignedTasksTable TableView
+     * @return TableView allAssignedTasksTable
      */
     public TableView<Employee> getAllAssignedTasksTable()
     {

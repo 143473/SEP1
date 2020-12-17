@@ -10,9 +10,7 @@ public class LoadInitialEmployeesData {
 
     /**
      * Starts the program
-     * @param args comment line arguments
-     * @throws FileNotFoundException exception when file is not found
-     * @throws IOException exceptions happening during input or output
+     * @param args comment line argument
      */
     public static void main(String[] args)
     {

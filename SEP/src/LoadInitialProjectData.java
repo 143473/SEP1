@@ -12,8 +12,6 @@ public class LoadInitialProjectData {
     /**
      * Starts the program
      * @param args comment line arguments
-     * @throws FileNotFoundException exception when file is not found
-     * @throws IOException exceptions happening during input or output
      */
     public static void main(String[] args)
     {   MyDate deadline1 = new MyDate(12,9,2020);

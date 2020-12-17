@@ -135,7 +135,7 @@ public class ProjectOverviewGUI
 
   /**
    * Gets the projectsTable
-   * @return TableView<Project> projectsTable
+   * @return TableView projectsTable
    */
   public TableView<Project> getProjectsTable()
   {
