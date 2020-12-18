@@ -186,15 +186,13 @@ public class ManageProjectGUI
      */
     public void changed(ObservableValue<? extends Project> project, Project oldProject, Project newProject)
     {
-
-      Project temp = projectsTable.getSelectionModel().getSelectedItem();
       Project myChosenProject = projectsTable.getSelectionModel().getSelectedItem();
-      if (temp != null)
+      if (myChosenProject != null)
       {
         Project selectedProject = projectsAdapter.getSelectedProject(myChosenProject.getName());
         nameField.setText(selectedProject.getName());
         descriptionField.setText(selectedProject.getDescription());
-        statusBox.setValue(selectedProject.getStatus());
+        statusBox.getSelectionModel().select(selectedProject.getStatus());
         AssignedEmployeeList assignedEmployees = selectedProject.getAssignedEmployeeList();
         scrumMasterBox.getItems().clear();
         productOwnerBox.getItems().clear();
@@ -252,11 +250,13 @@ public class ManageProjectGUI
         if (!(projectsTable.getSelectionModel().getSelectedItem() == null))
         {
           Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
-                  "Do you really want to delete project "+projectsTable.getSelectionModel().getSelectedItem().getName()+"?", ButtonType.YES, ButtonType.NO);
+                  "Do you really want to delete project "+
+                          projectsTable.getSelectionModel().getSelectedItem().getName()+"?",
+                  ButtonType.YES, ButtonType.NO);
           alert.setTitle("Delete project");
           alert.setHeaderText(null);
-
           alert.showAndWait();
+
           Project project = projectsTable.getSelectionModel().getSelectedItem();
           if (alert.getResult() == ButtonType.YES)
           {

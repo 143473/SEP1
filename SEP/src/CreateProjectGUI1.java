@@ -27,6 +27,8 @@ public class CreateProjectGUI1
 
   private Button buttonContinue;
 
+  private boolean goingBack;
+  private String previousProjectName;
 
   /**
    * 3-argument constructor initializing the GUI components
@@ -91,9 +93,18 @@ public class CreateProjectGUI1
       ProjectList projectList = projectsAdapter.getAllProjects();
       Project newProject = new Project(inputName.getText(), inputDescription.getText());
       boolean contains = false;
-      for (int i = 0; i < projectList.size(); i++) {
-        if(projectList.get(i).getName().equals(newProject.getName())){
-          contains = true;
+      if(!goingBack){
+        for (int i = 0; i < projectList.size(); i++) {
+          if(projectList.get(i).getName().equals(newProject.getName())){
+            contains = true;
+          }
+        }
+      }
+      else{
+        for (int i = 0; i < projectList.size()-1; i++) {
+          if(projectList.get(i).getName().equals(newProject.getName())){
+            contains = true;
+          }
         }
       }
       if(contains){
@@ -104,8 +115,17 @@ public class CreateProjectGUI1
         OK = false;
       }
       else{
-        projectList.addProject(newProject);
-        projectsAdapter.saveProjects(projectList);
+        if(!goingBack){
+          projectList.addProject(newProject);
+          projectsAdapter.saveProjects(projectList);
+        }
+        else{
+          Project previousProject = projectList.getProjectByName(previousProjectName);
+          previousProject.setName(inputName.getText());
+          previousProject.setDescription(inputDescription.getText());
+          projectsAdapter.saveProjects(projectList);
+        }
+
       }
 
     }
@@ -128,5 +148,22 @@ public class CreateProjectGUI1
   public void clearFields(){
     inputName.setText("");
     inputDescription.setText("");
+  }
+
+  /**
+   * Sets variable goingBack to true and previousProjectName to be able to indicate
+   * whether the going back button from CreateProjectGUI2 has been pressed
+   */
+  public void goingBack(String previousProjectName){
+    goingBack = true;
+    this.previousProjectName = previousProjectName;
+  }
+
+  /**
+   * Gets the entered name of project
+   * @return String type of inputed name
+   */
+  public String getNameOfProject(){
+    return inputName.getText();
   }
 }
