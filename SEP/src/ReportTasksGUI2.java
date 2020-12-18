@@ -69,7 +69,7 @@ public class ReportTasksGUI2 {
         goBack = new Button("Go Back");
         continueButton = new Button("Continue");
 
-        hBoxPaneButton = new HBox();
+        hBoxPaneButton = new HBox(8);
         hBoxPaneButton.getChildren().addAll(continueButton, goBack);
 
         mainPane = new VBox(10);
